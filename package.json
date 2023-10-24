@@ -1,0 +1,24 @@
+{
+    "name": "com.tank.gframework",
+    "displayName": "GFramework",
+    "version": "0.0.1-preview",
+    "unity": "2020.3",
+    "description": "unity3d resources management system.",
+    "author": {
+        "name": "GFramework",
+        "url": "https://github.com/gengch3633/GFramework"
+    },
+    "samples": [
+        {
+            "displayName": "GFramework Sample",
+            "description": "GFramework runtime sample.",
+            "path": "Samples/GFramework Sample"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gengch3633/GFramework.git"
+    },
+    "relatedPackages": {},
+    "dependencies": {}
+}
