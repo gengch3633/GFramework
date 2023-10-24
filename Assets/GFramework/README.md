@@ -15,3 +15,6 @@
 4. git subtree split
 5. git tag 1.0.1 upm
 6. git push origin upm --tags
+
+通过Git URL 添加包
+打开Package Manager Window (menu: Window > Package Manager), 选择 "Add package from git URL...", 在文本框中输入以下链接: https://github.com/gengch3633/GFramework.git#1.0.0
