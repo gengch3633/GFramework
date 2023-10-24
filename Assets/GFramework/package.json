@@ -20,5 +20,7 @@
         "url": "https://github.com/gengch3633/GFramework.git"
     },
     "relatedPackages": {},
-    "dependencies": {}
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "13.0.3"
+    },
 }
