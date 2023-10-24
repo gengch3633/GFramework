@@ -4,3 +4,14 @@
 
 更多信息请了解官方主页：https://github.com/tuyoogame/YooAsset
 
+**发布UPM包**
+1. git subtree split --prefix=Assets/GFramework --branch upm
+2. git tag 1.0.0 upm
+3. git push origin upm --tags
+
+**版本更新**
+**package.json 更新版本信息**
+
+4. git subtree split
+5. git tag 1.0.1 upm
+6. git push origin upm --tags
