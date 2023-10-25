@@ -1,6 +1,10 @@
+//#define USE_FIREBASE
+
+#if USE_FIREBASE
 using Firebase;
 using Firebase.Extensions;
 using Firebase.RemoteConfig;
+#endif
 using Framework;
 using System;
 using System.Collections.Generic;
@@ -42,6 +46,7 @@ namespace GameFramework
 
         private void InitSdk()
         {
+#if USE_FIREBASE
             if (!firebaseInitialized)
             {
                 if(IsTypeLogEnabled()) Debug.LogError($"==> [FirebaseSystem] InitSdk 1");
@@ -57,8 +62,13 @@ namespace GameFramework
                 });
                 if(IsTypeLogEnabled()) Debug.LogError($"==> [FirebaseSystem] InitSdk 2");
             }
+#else
+            firebaseInitialized = true;
+#endif
+
         }
 
+#if USE_FIREBASE
         private void InitFirebaseRemoteConfig()
         {
             try
@@ -134,6 +144,9 @@ namespace GameFramework
                     break;
             }
         }
+        
+#endif
     }
+
 }
 
