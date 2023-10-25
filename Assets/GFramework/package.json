@@ -1,7 +1,7 @@
 {
     "name": "com.tank.gframework",
     "displayName": "GFramework",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "unity": "2020.3",
     "description": "unity3d resources management system.",
     "author": {
