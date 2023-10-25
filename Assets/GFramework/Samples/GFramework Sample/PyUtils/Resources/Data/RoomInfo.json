@@ -1,0 +1,758 @@
+[
+    {
+        "roomId": 1,
+        "roomName": "ROOKIE",
+        "unlockLevel": 0,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 50
+    },
+    {
+        "roomId": 2,
+        "roomName": "ROOKIE",
+        "unlockLevel": 1,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 30,
+        "coinCount": 50
+    },
+    {
+        "roomId": 3,
+        "roomName": "ROOKIE",
+        "unlockLevel": 2,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 30,
+        "coinCount": 50
+    },
+    {
+        "roomId": 4,
+        "roomName": "ROOKIE",
+        "unlockLevel": 3,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 100
+    },
+    {
+        "roomId": 5,
+        "roomName": "ROOKIE",
+        "unlockLevel": 4,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 30,
+        "coinCount": 100
+    },
+    {
+        "roomId": 6,
+        "roomName": "ROOKIE",
+        "unlockLevel": 5,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 30,
+        "coinCount": 100
+    },
+    {
+        "roomId": 7,
+        "roomName": "NEWBIE",
+        "unlockLevel": 6,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 200
+    },
+    {
+        "roomId": 8,
+        "roomName": "NEWBIE",
+        "unlockLevel": 7,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 40,
+        "coinCount": 200
+    },
+    {
+        "roomId": 9,
+        "roomName": "NEWBIE",
+        "unlockLevel": 8,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 50,
+        "coinCount": 200
+    },
+    {
+        "roomId": 10,
+        "roomName": "NEWBIE",
+        "unlockLevel": 9,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 500
+    },
+    {
+        "roomId": 11,
+        "roomName": "NEWBIE",
+        "unlockLevel": 10,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 40,
+        "coinCount": 500
+    },
+    {
+        "roomId": 12,
+        "roomName": "NEWBIE",
+        "unlockLevel": 11,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 50,
+        "coinCount": 500
+    },
+    {
+        "roomId": 13,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 12,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 200
+    },
+    {
+        "roomId": 14,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 12,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 200
+    },
+    {
+        "roomId": 15,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 12,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 200
+    },
+    {
+        "roomId": 16,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 13,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 500
+    },
+    {
+        "roomId": 17,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 13,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 500
+    },
+    {
+        "roomId": 18,
+        "roomName": "GIN ONLY",
+        "unlockLevel": 13,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 500
+    },
+    {
+        "roomId": 19,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 14,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 20,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 14,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 21,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 14,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 22,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 16,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 23,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 16,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 24,
+        "roomName": "EXPERIENCED",
+        "unlockLevel": 16,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 25,
+        "roomName": "JOKER",
+        "unlockLevel": 17,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 26,
+        "roomName": "JOKER",
+        "unlockLevel": 17,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 27,
+        "roomName": "JOKER",
+        "unlockLevel": 17,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 1000
+    },
+    {
+        "roomId": 28,
+        "roomName": "JOKER",
+        "unlockLevel": 18,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 29,
+        "roomName": "JOKER",
+        "unlockLevel": 18,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 30,
+        "roomName": "JOKER",
+        "unlockLevel": 18,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 2000
+    },
+    {
+        "roomId": 31,
+        "roomName": "EXPERT",
+        "unlockLevel": 19,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 32,
+        "roomName": "EXPERT",
+        "unlockLevel": 19,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 33,
+        "roomName": "EXPERT",
+        "unlockLevel": 19,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 34,
+        "roomName": "EXPERT",
+        "unlockLevel": 22,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 35,
+        "roomName": "EXPERT",
+        "unlockLevel": 22,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 36,
+        "roomName": "EXPERT",
+        "unlockLevel": 22,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 37,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 23,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 38,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 23,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 39,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 23,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 4000
+    },
+    {
+        "roomId": 40,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 24,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 41,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 24,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 42,
+        "roomName": "OKLAHOMA GIN",
+        "unlockLevel": 24,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 8000
+    },
+    {
+        "roomId": 43,
+        "roomName": "EXPERT",
+        "unlockLevel": 25,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 44,
+        "roomName": "EXPERT",
+        "unlockLevel": 25,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 45,
+        "roomName": "EXPERT",
+        "unlockLevel": 25,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 46,
+        "roomName": "EXPERT",
+        "unlockLevel": 28,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 47,
+        "roomName": "EXPERT",
+        "unlockLevel": 28,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 48,
+        "roomName": "EXPERT",
+        "unlockLevel": 28,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 49,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 29,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 50,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 29,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 51,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 29,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 15000
+    },
+    {
+        "roomId": 52,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 30,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 53,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 30,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 54,
+        "roomName": "TEDESCO GIN",
+        "unlockLevel": 30,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 30000
+    },
+    {
+        "roomId": 55,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 31,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 50000
+    },
+    {
+        "roomId": 56,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 31,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 50000
+    },
+    {
+        "roomId": 57,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 31,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 50000
+    },
+    {
+        "roomId": 58,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 34,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 80000
+    },
+    {
+        "roomId": 59,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 34,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 80000
+    },
+    {
+        "roomId": 60,
+        "roomName": "HIGH ROLLER",
+        "unlockLevel": 34,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 80000
+    },
+    {
+        "roomId": 61,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 37,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 100000
+    },
+    {
+        "roomId": 62,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 37,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 100000
+    },
+    {
+        "roomId": 63,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 37,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 100000
+    },
+    {
+        "roomId": 64,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 40,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 150000
+    },
+    {
+        "roomId": 65,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 40,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 150000
+    },
+    {
+        "roomId": 66,
+        "roomName": "MILLIONAIRE",
+        "unlockLevel": 40,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 150000
+    },
+    {
+        "roomId": 67,
+        "roomName": "BANKER",
+        "unlockLevel": 43,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 200000
+    },
+    {
+        "roomId": 68,
+        "roomName": "BANKER",
+        "unlockLevel": 43,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 200000
+    },
+    {
+        "roomId": 69,
+        "roomName": "BANKER",
+        "unlockLevel": 43,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 200000
+    },
+    {
+        "roomId": 70,
+        "roomName": "BANKER",
+        "unlockLevel": 46,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 300000
+    },
+    {
+        "roomId": 71,
+        "roomName": "BANKER",
+        "unlockLevel": 46,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 300000
+    },
+    {
+        "roomId": 72,
+        "roomName": "BANKER",
+        "unlockLevel": 46,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 300000
+    },
+    {
+        "roomId": 73,
+        "roomName": "TYCOON",
+        "unlockLevel": 49,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 500000
+    },
+    {
+        "roomId": 74,
+        "roomName": "TYCOON",
+        "unlockLevel": 49,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 500000
+    },
+    {
+        "roomId": 75,
+        "roomName": "TYCOON",
+        "unlockLevel": 49,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 500000
+    },
+    {
+        "roomId": 76,
+        "roomName": "TYCOON",
+        "unlockLevel": 52,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 700000
+    },
+    {
+        "roomId": 77,
+        "roomName": "TYCOON",
+        "unlockLevel": 52,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 700000
+    },
+    {
+        "roomId": 78,
+        "roomName": "TYCOON",
+        "unlockLevel": 52,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 700000
+    },
+    {
+        "roomId": 79,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 55,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 1000000
+    },
+    {
+        "roomId": 80,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 55,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 1000000
+    },
+    {
+        "roomId": 81,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 55,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 1000000
+    },
+    {
+        "roomId": 82,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 58,
+        "multiplier": 1,
+        "starCount": 1,
+        "pointCount": 30,
+        "coinCount": 2000000
+    },
+    {
+        "roomId": 83,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 58,
+        "multiplier": 2,
+        "starCount": 2,
+        "pointCount": 50,
+        "coinCount": 2000000
+    },
+    {
+        "roomId": 84,
+        "roomName": "BILLIONAIRE",
+        "unlockLevel": 58,
+        "multiplier": 4,
+        "starCount": 3,
+        "pointCount": 100,
+        "coinCount": 2000000
+    }
+]

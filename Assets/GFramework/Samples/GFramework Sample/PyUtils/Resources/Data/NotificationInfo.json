@@ -1,0 +1,74 @@
+[
+    {
+        "notificationId": 1,
+        "notificationType": "TaskFinish",
+        "notificationTitle": "You have 1 unclaimed gift.",
+        "notificationContent": "Go to dailies to get it."
+    },
+    {
+        "notificationId": 2,
+        "notificationType": "TaskFinish",
+        "notificationTitle": "Have you claimed it yet?",
+        "notificationContent": "Go to dailies to get it. Hurry now!"
+    },
+    {
+        "notificationId": 3,
+        "notificationType": "TaskNearFinish",
+        "notificationTitle": "Big rewards around the corner!",
+        "notificationContent": "Play one more game to claim them!"
+    },
+    {
+        "notificationId": 4,
+        "notificationType": "NeverPlayGame",
+        "notificationTitle": "Fun Game",
+        "notificationContent": "You never played {0} today. Why not play it NOW?"
+    },
+    {
+        "notificationId": 5,
+        "notificationType": "Normal",
+        "notificationTitle": "Pass more levels to get extra bonus!",
+        "notificationContent": "Pass more levels to get extra bonus!"
+    },
+    {
+        "notificationId": 6,
+        "notificationType": "Normal",
+        "notificationTitle": "Collect your rewards quickly!",
+        "notificationContent": "Collect your rewards quickly!"
+    },
+    {
+        "notificationId": 7,
+        "notificationType": "Normal",
+        "notificationTitle": "You've been chosen by {0}",
+        "notificationContent": "You've been chosen by {0}"
+    },
+    {
+        "notificationId": 8,
+        "notificationType": "Normal",
+        "notificationTitle": "Make good use of it will bring you surprising result!",
+        "notificationContent": "Make good use of it will bring you surprising result!"
+    },
+    {
+        "notificationId": 9,
+        "notificationType": "Normal",
+        "notificationTitle": "Let's play {0} Now, relax yourself :)",
+        "notificationContent": "Let's play {0} Now, relax yourself :)"
+    },
+    {
+        "notificationId": 10,
+        "notificationType": "Normal",
+        "notificationTitle": "Your friends are palying word game. Join them right now",
+        "notificationContent": "Your friends are palying word game. Join them right now"
+    },
+    {
+        "notificationId": 11,
+        "notificationType": "Normal",
+        "notificationTitle": "Watch out! A hot-air balloon is coming with gift :)",
+        "notificationContent": "Watch out! A hot-air balloon is coming with gift :)"
+    },
+    {
+        "notificationId": 12,
+        "notificationType": "Normal",
+        "notificationTitle": "Play {0} for extra diamonds & coins, available now",
+        "notificationContent": "Play {0} for extra diamonds & coins, available now"
+    }
+]

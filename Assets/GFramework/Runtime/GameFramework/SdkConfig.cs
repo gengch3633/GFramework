@@ -2,7 +2,8 @@ namespace GameFramework
 {
     public class SdkConfig
     {
-        public bool isTestAds;
+        public int id;
+        public bool isTest;
         public string supportEmail;
         public string privacyPage;
         public string appsFlyerKey;

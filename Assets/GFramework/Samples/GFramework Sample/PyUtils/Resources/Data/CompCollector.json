@@ -1,0 +1,152 @@
+[
+    {
+        "componentName": "Button",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Button",
+        "actionName": "addListener",
+        "actionString": "{btnName1}.onClick.AddListener(On{btnName2}Click);"
+    },
+    {
+        "componentName": "Button",
+        "actionName": "removeListener",
+        "actionString": "{btnName1}.onClick.RemoveListener(On{btnName2}Click);"
+    },
+    {
+        "componentName": "Button",
+        "actionName": "clickMethod",
+        "actionString": "private void On{btnName2}Click(){}"
+    },
+    {
+        "componentName": "Button",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "Toggle",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Toggle",
+        "actionName": "addListener",
+        "actionString": "{btnName1}.onValueChanged.AddListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "Toggle",
+        "actionName": "removeListener",
+        "actionString": "{btnName1}.onValueChanged.RemoveListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "Toggle",
+        "actionName": "clickMethod",
+        "actionString": "private void On{btnName2}Changed(bool value){}"
+    },
+    {
+        "componentName": "Toggle",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "TMP_InputField",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "TMP_InputField",
+        "actionName": "addListener",
+        "actionString": "{btnName1}.onEndEdit.AddListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "TMP_InputField",
+        "actionName": "removeListener",
+        "actionString": "{btnName1}.onEndEdit.RemoveListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "TMP_InputField",
+        "actionName": "clickMethod",
+        "actionString": "private void On{btnName2}Changed(string value){}"
+    },
+    {
+        "componentName": "TMP_InputField",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "InputField",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "InputField",
+        "actionName": "addListener",
+        "actionString": "{btnName1}.onEndEdit.AddListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "InputField",
+        "actionName": "removeListener",
+        "actionString": "{btnName1}.onEndEdit.RemoveListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "InputField",
+        "actionName": "clickMethod",
+        "actionString": "private void On{btnName2}Changed(string value){}"
+    },
+    {
+        "componentName": "InputField",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "Text",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Text",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "TextMeshProUGUI",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "TextMeshProUGUI",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "Image",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Image",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "ScrollRect",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "ScrollRect",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "ParticleSystem",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "ParticleSystem",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    }
+]

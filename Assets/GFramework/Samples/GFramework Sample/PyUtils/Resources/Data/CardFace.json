@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "themeType": "CardFace",
+        "themeId": 3001,
+        "resourcePath": "cardface_0"
+    },
+    {
+        "id": 1,
+        "themeType": "CardFace",
+        "themeId": 3002,
+        "resourcePath": "cardface_1"
+    },
+    {
+        "id": 2,
+        "themeType": "CardFace",
+        "themeId": 3003,
+        "resourcePath": "cardface_2"
+    },
+    {
+        "id": 3,
+        "themeType": "CardFace",
+        "themeId": 3004,
+        "resourcePath": "cardface_3"
+    }
+]

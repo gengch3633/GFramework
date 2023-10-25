@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "themeType": "Background",
+        "themeId": 1001,
+        "resourcePath": "theme_set_bg_0"
+    },
+    {
+        "id": 1,
+        "themeType": "Background",
+        "themeId": 1002,
+        "resourcePath": "theme_set_bg_1"
+    },
+    {
+        "id": 2,
+        "themeType": "Background",
+        "themeId": 1003,
+        "resourcePath": "theme_set_bg_2"
+    }
+]

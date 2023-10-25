@@ -1,0 +1,107 @@
+[
+    {
+        "level": 1,
+        "titleName": "Beginner",
+        "levelUpExp": 110
+    },
+    {
+        "level": 2,
+        "titleName": "Recruit",
+        "levelUpExp": 140
+    },
+    {
+        "level": 3,
+        "titleName": "Enthusiast",
+        "levelUpExp": 210
+    },
+    {
+        "level": 4,
+        "titleName": "Apprentice",
+        "levelUpExp": 235
+    },
+    {
+        "level": 5,
+        "titleName": "Graduate",
+        "levelUpExp": 280
+    },
+    {
+        "level": 6,
+        "titleName": "Aficionado",
+        "levelUpExp": 420
+    },
+    {
+        "level": 7,
+        "titleName": "Talented",
+        "levelUpExp": 470
+    },
+    {
+        "level": 8,
+        "titleName": "Skilled",
+        "levelUpExp": 560
+    },
+    {
+        "level": 9,
+        "titleName": "Seasoned",
+        "levelUpExp": 840
+    },
+    {
+        "level": 10,
+        "titleName": "Specialist",
+        "levelUpExp": 1050
+    },
+    {
+        "level": 11,
+        "titleName": "Expert",
+        "levelUpExp": 1400
+    },
+    {
+        "level": 12,
+        "titleName": "Veteran",
+        "levelUpExp": 2100
+    },
+    {
+        "level": 13,
+        "titleName": "Pro",
+        "levelUpExp": 3450
+    },
+    {
+        "level": 14,
+        "titleName": "Card Shark",
+        "levelUpExp": 4500
+    },
+    {
+        "level": 15,
+        "titleName": "Genius",
+        "levelUpExp": 6700
+    },
+    {
+        "level": 16,
+        "titleName": "Master",
+        "levelUpExp": 6900
+    },
+    {
+        "level": 17,
+        "titleName": "Superstar",
+        "levelUpExp": 9000
+    },
+    {
+        "level": 18,
+        "titleName": "Ace",
+        "levelUpExp": 13400
+    },
+    {
+        "level": 19,
+        "titleName": "Champion",
+        "levelUpExp": 13800
+    },
+    {
+        "level": 20,
+        "titleName": "Legend",
+        "levelUpExp": 18000
+    },
+    {
+        "level": 21,
+        "titleName": "Grandmaster",
+        "levelUpExp": 26800
+    }
+]
