@@ -1,5 +1,9 @@
-using AppsFlyerSDK;
+//#define USE_FIREBASE //gengch
+
+#if USE_FIREBASE
 using Firebase.Analytics;
+#endif
+using AppsFlyerSDK;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +33,7 @@ namespace GameFramework
 
 		private static void LogFirebaseEvent(string stringName, Dictionary<string, object> dict)
 		{
+#if USE_FIREBASE
 			var paramList = new List<Parameter>();
 			foreach (KeyValuePair<string, object> kv in dict)
 			{
@@ -46,6 +51,7 @@ namespace GameFramework
 
 			if (EventUtils.Instance.IsTypeLogEnabled()) Debug.LogError($"==> [EventUtils] LogFirebaseEvent 1: {stringName}, {JsonConvert.SerializeObject(dict)}");
 			FirebaseAnalytics.LogEvent(stringName, paramList.ToArray());
+#endif
 		}
 
 		private static void LogAppsFlyerEvent(string stringName, Dictionary<string, object> dict)

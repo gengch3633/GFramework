@@ -26,7 +26,6 @@ namespace GameFramework
             
             this.RegisterSystem<IAdsSystem>(new AdsSystem());
 
-            this.RegisterSystem<IPurchaseSystem>(new PurchaseSystem());
             this.RegisterSystem<IFirebaseSystem>(new FirebaseSystem());
             this.RegisterSystem<ISdkSystem>(new SdkSystem());
             this.RegisterSystem<IDailyBonusSystem>(new DailyBonusSystem());
@@ -34,13 +33,9 @@ namespace GameFramework
 
             this.RegisterModel<ISettingModel>(new SettingModel());
             this.RegisterModel<IUserModel>(new UserModel());
-            //this.RegisterModel<ITutorialModel>(new TutorialModel());
 
 
-            //this.RegisterSystem<ICardSystem>(new CardSystem());
             this.RegisterSystem<IDailyTaskSystem>(new DailyTaskSystem());
-            //this.RegisterSystem<IThemeSystem>(new ThemeSystem());
-
             this.RegisterModel<IStatisticsModel>(new StatisticsModel());
         }
     }

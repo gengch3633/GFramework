@@ -1,4 +1,4 @@
-//#define USE_FIREBASE
+//#define USE_FIREBASE //gengch
 
 #if USE_FIREBASE
 using Firebase;
