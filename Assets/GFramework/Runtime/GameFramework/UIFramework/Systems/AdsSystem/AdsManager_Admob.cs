@@ -1,9 +1,7 @@
 
 using Cysharp.Threading.Tasks;
-#if USE_ADMOB
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
-#endif
 using System;
 using UnityEngine;
 
@@ -11,11 +9,9 @@ namespace GameFramework
 {
     public partial class AdsManager_Admob : IAdsManager
     {
-#if USE_ADMOB
         private BannerView bannerView;
         private InterstitialAd interstitialAd;
         private RewardedAd rewardedAd;
-#endif
 
         private Action<bool> interstitialAdCallBack;
         private Action<bool> rewardedAdCallBack;
@@ -88,6 +84,4 @@ namespace GameFramework
         }
     }
 }
-
-#endif
 
