@@ -105,12 +105,12 @@ namespace GameFramework
 
         public void OpenPrivacyPage()
         {
-            Application.OpenURL(SDKConst.privacyPolicyPage);
+            Application.OpenURL(SDKConst.sdkConfig.privacyPage);
         }
 
         public void OpenContactEmailPage()
         {
-            string email = SDKConst.supportEmail;
+            string email = SDKConst.sdkConfig.supportEmail;
             string subject = MyEscapeURL(this.subject);
             string body = MyEscapeURL(this.body);
             Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);

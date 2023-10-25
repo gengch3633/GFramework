@@ -35,7 +35,7 @@ namespace GameFramework
         protected override void OnInit()
         {
             var resourceSystem = this.GetSystem<IResourceSystem>();
-            var dailyBonusList = resourceSystem.GetConfigInfos<DailyBonus>();
+            var dailyBonusList = GameUtils.GetConfigInfos<DailyBonus>();
             initBonusGroup = new DailyBonusGroup { 
                 lastDailyBonusTime = DateTime.Today, 
                 dailyBonusList = dailyBonusList 

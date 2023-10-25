@@ -9,9 +9,6 @@ namespace GameFramework
 {
     public partial interface IResourceSystem : ISystem
     {
-        T CreateItem<T>(Transform parent, string suffix = "") where T : Component;
-        List<T> GetConfigInfos<T>(string suffix = "") where T : class, new();
-        
         Sprite GetSpriteFromAtlas(string atlasName, string spriteName);
         Sprite GetSpriteFromResource(string parentFolder, string spriteName);
         List<Sprite> GetSpritesFromAtlas(string atlasName);
@@ -66,32 +63,6 @@ namespace GameFramework
                 spriteAtlastDict.Add(atlasName, spriteDict);
             }
         }
-
-        public T CreateItem<T>(Transform parent, string suffix = "") where T : Component
-        {
-            var itemName = typeof(T).Name;
-            var itemPrafabPath = suffix == ""? $"Prefabs/Items/{itemName}": $"Prefabs/Items/{itemName}_{suffix}";
-
-            var scoreItemPrefab = Resources.Load<GameObject>(itemPrafabPath);
-            var tempScoreItem = GameObject.Instantiate(scoreItemPrefab).GetComponent<T>();
-            tempScoreItem.transform.SetParent(parent);
-            tempScoreItem.transform.localPosition = Vector3.zero;
-            tempScoreItem.transform.localScale = Vector3.one;
-            return tempScoreItem;
-        }
-
-        public List<T> GetConfigInfos<T>(string suffix = "") where T : class, new()
-        {
-            var itemName = typeof(T).Name;
-            var itemPrafabPath = suffix == "" ? $"Data/{itemName}" : $"Data/{itemName}_{suffix}";
-            var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
-            var textAssetString = textAsset.text;
-            var result = JsonConvert.DeserializeObject<List<T>>(textAssetString);
-
-            return result;
-        }
-
-
     }
 }
 

@@ -26,14 +26,14 @@ namespace GameFramework
 
             debugSystem.GetAllTypeLogNames().ForEach(typeFullName =>
             {
-                var toggleItem = resourceSystem.CreateItem<ToggleItem>(typeLogContainerScrollView.content);
+                var toggleItem = typeLogContainerScrollView.content.CreateItem<ToggleItem>();
                 var isOn = debugSystem.IsTypeLogEnabled(typeFullName);
                 toggleItem.Init(typeFullName, isOn);
             });
 
             debugSystem.GetAllDebugFeatureNames().ForEach(debugFeatureName =>
             {
-                var toggleItem = resourceSystem.CreateItem<ToggleItem>(debugFeatureContainerScrollView.content);
+                var toggleItem = debugFeatureContainerScrollView.content.CreateItem<ToggleItem>();
                 var isOn = debugSystem.IsDebugFeatureEnabled(debugFeatureName);
                 toggleItem.Init(debugFeatureName, isOn);
             });

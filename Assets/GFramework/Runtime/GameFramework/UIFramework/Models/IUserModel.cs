@@ -38,7 +38,7 @@ namespace GameFramework
             Name.RegisterOnValueChanged(v => SaveInfo(this));
 
             resourceSystem = GameApp.Interface.GetSystem<IResourceSystem>();
-            levelInfos = resourceSystem.GetConfigInfos<LevelInfo>();
+            levelInfos = GameUtils.GetConfigInfos<LevelInfo>();
         }
 
         public List<LevelInfo> GetLevelInfos()

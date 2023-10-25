@@ -58,7 +58,7 @@ namespace GameFramework
         {
             if (IsTypeLogEnabled()) Debug.LogError($"==> [LocalNotificationManager] BackgroundLogic Ê±¼ä:{DateTime.Now}");
             var resourceSystem = this.GetSystem<IResourceSystem>();
-            var notificationInfos = resourceSystem.GetConfigInfos<NotificationInfo>();
+            var notificationInfos = GameUtils.GetConfigInfos<NotificationInfo>();
             notificationInfos = notificationInfos.FindAll(item => item.notificationType == ENotificationType.Normal);
             var randomId = UnityEngine.Random.Range(0, notificationInfos.Count);
             var notificationInfo = notificationInfos[randomId];

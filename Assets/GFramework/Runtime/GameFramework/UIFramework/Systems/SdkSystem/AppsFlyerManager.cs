@@ -29,7 +29,7 @@ namespace GameFramework
                 // These fields are set from the editor so do not modify!
                 //******************************//
                 AppsFlyer.setIsDebug(false);
-                AppsFlyer.initSDK(SDKConst.SDK_APPSFLYER_KEY, SDKConst.SDK_APPSFLYER_IOS_APPID, this);
+                AppsFlyer.initSDK(SDKConst.sdkConfig.appsFlyerKey, SDKConst.SDK_APPSFLYER_IOS_APPID, this);
                 //******************************//
 
                 AppsFlyer.startSDK();

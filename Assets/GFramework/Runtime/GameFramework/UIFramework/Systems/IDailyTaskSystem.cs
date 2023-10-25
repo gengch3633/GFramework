@@ -37,7 +37,7 @@ namespace GameFramework
         {
             this.resourceSystem = this.GetSystem<IResourceSystem>();
             this.languageSystem = this.GetSystem<ILanguageSystem>();
-            this.initDailyTasks = this.resourceSystem.GetConfigInfos<TaskInfo>();
+            this.initDailyTasks = GameUtils.GetConfigInfos<TaskInfo>();
             this.dailyTaskGroup = ReadInfoWithReturnNull<TaskGroup>();
         }
 

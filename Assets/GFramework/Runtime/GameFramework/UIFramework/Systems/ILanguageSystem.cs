@@ -24,7 +24,7 @@ namespace GameFramework
         protected override void OnInit()
         {
             var resourceSystem = this.GetSystem<IResourceSystem>();
-            languageInfos = resourceSystem.GetConfigInfos<LanguageInfo>();
+            languageInfos = GameUtils.GetConfigInfos<LanguageInfo>();
 
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();

@@ -44,7 +44,7 @@ namespace GameFramework
             ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
             var resourceSystem = this.GetSystem<IResourceSystem>();
-            var purchaseInfos = resourceSystem.GetConfigInfos<PurchaseInfo>();
+            var purchaseInfos = GameUtils.GetConfigInfos<PurchaseInfo>();
             purchaseInfos.ForEach(item => builder.AddProduct(item.productId, item.productType));
 
             UnityPurchasing.Initialize(this, builder);
@@ -80,7 +80,7 @@ namespace GameFramework
         public List<PurchaseInfo> GetPuchaseInfos()
         {
             var resourceSystem = this.GetSystem<IResourceSystem>();
-            var purchaseInfos = resourceSystem.GetConfigInfos<PurchaseInfo>();
+            var purchaseInfos = GameUtils.GetConfigInfos<PurchaseInfo>();
             return purchaseInfos;
         }
 

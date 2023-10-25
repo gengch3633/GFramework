@@ -7,6 +7,19 @@ namespace GameFramework
 {
     public static class UnityExtention
     {
+        public static T CreateItem<T>(this Transform parent, string suffix = "") where T : Component
+        {
+            var itemName = typeof(T).Name;
+            var itemPrafabPath = suffix == "" ? $"Prefabs/Items/{itemName}" : $"Prefabs/Items/{itemName}_{suffix}";
+            var scoreItemPrefab = Resources.Load<GameObject>(itemPrafabPath);
+            var tempScoreItem = GameObject.Instantiate(scoreItemPrefab).GetComponent<T>();
+            tempScoreItem.transform.SetParent(parent);
+            tempScoreItem.transform.localPosition = Vector3.zero;
+            tempScoreItem.transform.localScale = Vector3.one;
+            return tempScoreItem;
+        }
+
+
         public static void SetLocalPositionX(this Transform t, float localPositionX)
         {
             var localPosition = t.localPosition;
