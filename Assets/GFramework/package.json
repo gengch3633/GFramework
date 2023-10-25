@@ -21,6 +21,7 @@
     },
     "relatedPackages": {},
     "dependencies": {
+        "com.unity.purchasing": "4.8.0",
         "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
         "com.unity.nuget.newtonsoft-json": "3.0.2"
     }
