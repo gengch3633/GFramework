@@ -1,15 +1,13 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class SDKConst
 {
-    public static string supportEmail = "PJGameStudio@outlook.com";
-    public static string privacyPolicyPage = "https://sites.google.com/view/pjgame/privacypolicy";
-    public static string termsOfServicePage = "http://sites.google.com/view/pjoygames-termsofservice";
+    public static string supportEmail = "daily_joy@outlook.com";
+    public static string privacyPolicyPage = "https://www.dailyjoy.co.in/privacy_policy.html";
 
-    public const string SDK_APPSFLYER_KEY = "ax6bY5957HVALFEZWJZcL8";
+    public const string SDK_APPSFLYER_KEY = "vt7s3k2W3cAe9he5vbSiwm";
     public const string SDK_APPSFLYER_LINKID = "";
     public const string SDK_APPSFLYER_IOS_APPID = "";
 
@@ -22,8 +20,8 @@ public static class SDKConst
     public const string SDK_ADMOB_AD_UNIT_ID_BANNER = "";
 #else
     // Admob Mediation
-    public const string SDK_ADMOB_AD_UNIT_ID_REWARDED = "ca-app-pub-4624434356190386/2210123185";
-    public const string SDK_ADMOB_AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-4624434356190386/7348530108";
-    public const string SDK_ADMOB_AD_UNIT_ID_BANNER = "ca-app-pub-4624434356190386/7406609543";
+    public const string SDK_ADMOB_AD_UNIT_ID_REWARDED = "ca-app-pub-2862865501975840/2672704330";
+    public const string SDK_ADMOB_AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-2862865501975840/3227276093";
+    public const string SDK_ADMOB_AD_UNIT_ID_BANNER = "ca-app-pub-2862865501975840/1151777099";
 #endif
 }
