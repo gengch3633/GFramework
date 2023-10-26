@@ -38,7 +38,7 @@ namespace GameFramework
             body = string.Format("Hello {0} Team, \n", Application.productName);
 
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] publishUrl: " + publishUrl);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] supportEmail: " + SDKConst.supportEmail);
+            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] supportEmail: " + SDKConst.SdkConfigProduction.supportEmail);
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] subject: " + subject);
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] body: " + body);
 
@@ -105,12 +105,12 @@ namespace GameFramework
 
         public void OpenPrivacyPage()
         {
-            Application.OpenURL(SDKConst.sdkConfig.privacyPage);
+            Application.OpenURL(SDKConst.SdkConfigProduction.privacyPage);
         }
 
         public void OpenContactEmailPage()
         {
-            string email = SDKConst.sdkConfig.supportEmail;
+            string email = SDKConst.SdkConfigProduction.supportEmail;
             string subject = MyEscapeURL(this.subject);
             string body = MyEscapeURL(this.body);
             Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);

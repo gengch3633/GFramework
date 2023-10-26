@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using GameFramework;
 using Newtonsoft.Json;
+using Facebook.Unity.Editor;
 
 [InitializeOnLoad]
 public class KeystoreSetter
@@ -74,5 +75,7 @@ public class KeystoreSetter
         EditorUtility.SetDirty(facebookAsset);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+
+        ManifestMod.GenerateManifest();
     }
 }
