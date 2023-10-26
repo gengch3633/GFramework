@@ -59,7 +59,7 @@ namespace GameFramework
             debugSystem.SetTypeLogEnabled(evt.itemName, evt.value);
             debugSystem.SetDebugFeatureEnabled(evt.itemName, evt.value);
 
-            if (evt.itemName == EDebugFeature.NoAdsEditor.ToString())
+            if (evt.itemName == EDebugFeature.NoAds.ToString())
                 adsSystem.SetAdsManager(new AdsManager_Editor());
 
             if (evt.itemName == EDebugFeature.TimeScaleDown.ToString())
