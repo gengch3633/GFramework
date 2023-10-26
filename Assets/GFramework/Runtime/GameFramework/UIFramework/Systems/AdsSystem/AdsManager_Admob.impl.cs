@@ -77,7 +77,7 @@ namespace GameFramework
         {
             if(IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] RequestAndLoadRewardedAd Start");
             rewardedAd?.Destroy();
-            string adUnitId = SDKConst.SdkConfigProduction.admobRewardAdId;
+            string adUnitId = sdkConfig.admobRewardAdId;
             RewardedAd.Load(adUnitId, CreateAdRequest(), async (RewardedAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)
@@ -109,7 +109,7 @@ namespace GameFramework
         {
             if(IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] RequestBannerAd Start");
             bannerView?.Destroy();
-            string adUnitId = SDKConst.SdkConfigProduction.admobBannerAdId;
+            string adUnitId = sdkConfig.admobBannerAdId;
             bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
             bannerView.OnBannerAdLoaded += () => { };
@@ -127,7 +127,7 @@ namespace GameFramework
         {
             if(IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] RequestAndLoadInterstitialAd Start");
             interstitialAd?.Destroy();
-            string adUnitId = SDKConst.SdkConfigProduction.admobInterAdId;
+            string adUnitId = sdkConfig.admobInterAdId;
             InterstitialAd.Load(adUnitId, CreateAdRequest(), async (InterstitialAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)

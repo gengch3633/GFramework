@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
@@ -19,11 +20,13 @@ namespace GameFramework
         private int interstitialAdRetryAttempt;
         private int rewardedAdRetryAttempt;
         private bool isShowingAd = false;
+        private SdkConfig sdkConfig;
 
-        public AdsManager_Admob()
+        public AdsManager_Admob(bool isProduction)
         {
             Init();
-
+            sdkConfig = isProduction ? SDKConst.SdkConfigProduction : SDKConst.SdkConfigDevelopment;
+            if (IsTypeLogEnabled()) Debug.LogError($"==> [AdsManager_Admob] sdkConfig: {JsonConvert.SerializeObject(sdkConfig)}");
             Application.focusChanged += OnApplicationFocus;
         }
 

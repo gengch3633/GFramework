@@ -19,7 +19,6 @@ namespace GameFramework
         bool IsDebugFeatureEnabled(string debugFeatureName);
         void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled);
         bool IsDebugFeatureEnabled(EDebugFeature debugFeature);
-        void Test();
         void RecoverGameDataFromFile();
         void CopyGameData();
     }
@@ -47,13 +46,6 @@ namespace GameFramework
 
             //SetDebugFeatureEnabled(EDebugFeature.WatchRivalCard, true);
             //SetDebugFeatureEnabled(EDebugFeature.TestTutorial3, true);
-        }
-
-        public void Test()
-        {
-            var allTypes = GetFileSaverTypes();
-            UnityEngine.Debug.LogError($"==> [DebugSystem] Test:\n{JsonConvert.SerializeObject(allTypes.ConvertAll(item=> item.FullName))}");
-            CopyGameData();
         }
 
         private List<Type> GetLogTypes()
