@@ -18,14 +18,12 @@ namespace GameFramework
     public class LanguageSystem : AbstractSystem, ILanguageSystem, ITypeLog
     {
         private List<LanguageInfo> languageInfos;
-        private static readonly string Key = "LANGUAGE_SYSTEM";
+        private static string Key = "LANGUAGE_SYSTEM";
         private LanguageType languageType = LanguageType.English;
 
         protected override void OnInit()
         {
-            var resourceSystem = this.GetSystem<IResourceSystem>();
             languageInfos = GameUtils.GetConfigInfos<LanguageInfo>();
-
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);

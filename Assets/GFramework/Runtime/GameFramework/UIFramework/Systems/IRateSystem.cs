@@ -25,26 +25,24 @@ namespace GameFramework
     public class RateSystem : AbstractSystem, IRateSystem, ITypeLog
     {
         private static readonly string Key = "RATE_SYSTEM";
-        private string publishUrl;
-        private string subject;
-        private string body;
+        private string publishUrl = string.Format("https://play.google.com/store/apps/details?id={0}", Application.identifier);
+        private string subject = string.Format("Suggestion about {0}", Application.productName);
+        private string body = string.Format("Hello {0} Team, \n", Application.productName);
 
+        public DateTime lastActionTime = DateTime.MinValue;
+        public bool isRated = false;
+        public int lastActionLevel = 0;
+        public int completedLevels = 0;
 
-        private RateRecord rateRecord;
         protected override void OnInit()
         {
-            publishUrl = string.Format("https://play.google.com/store/apps/details?id={0}", Application.identifier);
-            subject = string.Format("Suggestion about {0}", Application.productName);
-            body = string.Format("Hello {0} Team, \n", Application.productName);
+            var rateRecord = new RateSystem();
+            CopyBindableClass(this, rateRecord);
 
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] publishUrl: " + publishUrl);
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] supportEmail: " + SDKConst.SdkConfigProduction.supportEmail);
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] subject: " + subject);
             if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] body: " + body);
-
-            rateRecord = new RateRecord();
-            if (PlayerPrefs.HasKey(Key))
-                rateRecord = JsonConvert.DeserializeObject<RateRecord>(PlayerPrefs.GetString(Key));
         }
 
         public bool IsTypeLogEnabled()
@@ -57,15 +55,15 @@ namespace GameFramework
         public bool IsGoodTimeForRate()
         {
             //已经投票5个星星了
-            if (rateRecord.isRated)
+            if (this.isRated)
                 return false;
 
-            int passLevels = rateRecord.completedLevels;
+            int passLevels = this.completedLevels;
             //第一次弹出
-            if (passLevels - rateRecord.lastActionLevel >= 6)
+            if (passLevels - this.lastActionLevel >= 6)
                 return true;
             // 每6关，或弹屏超过24小时
-            if ((rateRecord.lastActionTime > DateTime.MinValue) && (DateTime.Now - rateRecord.lastActionTime).TotalHours >= 24)
+            if ((this.lastActionTime > DateTime.MinValue) && (DateTime.Now - this.lastActionTime).TotalHours >= 24)
                 return true;
 
             return false;
@@ -73,29 +71,23 @@ namespace GameFramework
 
         public void OnRate(int starCount)
         {
-            rateRecord.lastActionTime = DateTime.Now;
-            rateRecord.lastActionLevel = rateRecord.completedLevels;
+            this.lastActionTime = DateTime.Now;
+            this.lastActionLevel = this.completedLevels;
             if (starCount >= 5)
             {
-                rateRecord.isRated = true;
+                this.isRated = true;
                 OpenGooglePlayPage();
             }
             else
                 OpenContactEmailPage();
-            SaveInfo();
+            SaveInfo(this);
         }
 
         public void OnNoRate()
         {
-            rateRecord.lastActionTime = DateTime.Now;
-            rateRecord.lastActionLevel = rateRecord.completedLevels;
-            SaveInfo();
-        }
-
-        private void SaveInfo()
-        {
-            PlayerPrefs.SetString(Key, JsonConvert.SerializeObject(rateRecord));
-            //DebugUtility.LogError("==> rateRecord: " + JsonConvert.SerializeObject(rateRecord));
+            this.lastActionTime = DateTime.Now;
+            this.lastActionLevel = this.completedLevels;
+            SaveInfo(this);
         }
 
         public void OpenGooglePlayPage()
@@ -123,19 +115,9 @@ namespace GameFramework
 
         public void IncreaseLevel()
         {
-            rateRecord.completedLevels += 1;
-            SaveInfo();
+            this.completedLevels += 1;
+            SaveInfo(this);
         }
-
-        
-    }
-
-    public class RateRecord
-    {
-        public DateTime lastActionTime = DateTime.MinValue;
-        public bool isRated = false;
-        public int lastActionLevel = 0;
-        public int completedLevels = 0;
     }
 }
 

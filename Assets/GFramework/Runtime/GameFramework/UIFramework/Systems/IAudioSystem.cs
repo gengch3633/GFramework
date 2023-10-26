@@ -15,8 +15,10 @@ namespace GameFramework
 
     public class AudioSystem : AbstractSystem, IAudioSystem, ITypeLog
     {
-        protected List<AudioSource> _audioSources = new List<AudioSource>();
-        protected GameObject audioObj;
+        private List<AudioSource> _audioSources = new List<AudioSource>();
+        private GameObject audioObj;
+        public BindableProperty<bool> IsSoundOn { get; } = new BindableProperty<bool>() { Value = true };
+        public BindableProperty<bool> IsMusicOn { get; } = new BindableProperty<bool>() { Value = true };
 
         public bool IsTypeLogEnabled()
         {
@@ -35,8 +37,7 @@ namespace GameFramework
             GameObject.DontDestroyOnLoad(audioObj);
         }
 
-        public BindableProperty<bool> IsSoundOn { get; } = new BindableProperty<bool>() { Value = true };
-        public BindableProperty<bool> IsMusicOn { get; } = new BindableProperty<bool>() { Value = true };
+      
 
         public void StopBGM()
         {
@@ -67,7 +68,6 @@ namespace GameFramework
             var clip = Resources.Load<AudioClip>($"Audios/{bgName}");
             PlaySound(clip, true);
         }
-
 
         private void PlaySound(AudioClip clip, bool loop)
         {

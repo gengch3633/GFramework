@@ -1,7 +1,4 @@
 using Framework;
-using GameFramework;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +28,8 @@ namespace GameFramework
     {
         private TaskGroup dailyTaskGroup;
         private List<TaskInfo> initDailyTasks;
-        private IResourceSystem resourceSystem;
-        private ILanguageSystem languageSystem;
         protected override void OnInit()
         {
-            this.resourceSystem = this.GetSystem<IResourceSystem>();
-            this.languageSystem = this.GetSystem<ILanguageSystem>();
             this.initDailyTasks = GameUtils.GetConfigInfos<TaskInfo>();
             this.dailyTaskGroup = ReadInfoWithReturnNull<TaskGroup>();
         }
@@ -58,14 +51,10 @@ namespace GameFramework
 
                 var tasks = initDailyTasks.GetRange(0, 3);
                 dailyTaskGroup = new TaskGroup(DateTime.Today, tasks);
-                SaveTaskInfo();
+                SaveInfo(dailyTaskGroup);
             }
         }
 
-        private void SaveTaskInfo()
-        {
-            SaveInfo(dailyTaskGroup);
-        }
 
         public void CompleteTask(int taskId)
         {
@@ -77,7 +66,7 @@ namespace GameFramework
             dailyTask.taskCompleteCount += 1;
 
             dailyTask.taskCompleteCount = Mathf.Min(dailyTask.taskCompleteCount, dailyTask.taskExpectCount);
-            SaveTaskInfo();
+            SaveInfo(dailyTaskGroup);
         }
 
         public bool IsTaskCanRewarded(int taskId)
@@ -102,7 +91,7 @@ namespace GameFramework
         {
             TaskInfo dailyTask = GetTaskInfo(taskId);
             dailyTask.isRewardClaimed = true;
-            SaveTaskInfo();
+            SaveInfo(dailyTaskGroup);
         }
 
         public List<TaskInfo> GetAllDailyTasks()

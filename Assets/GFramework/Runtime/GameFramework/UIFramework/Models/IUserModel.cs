@@ -13,20 +13,24 @@ namespace GameFramework
         bool IsCoinEnough(int coins);
 
         bool IsCanLevelUp();
-        float GetLevelProgress();
+        float GetCurrentLevelProgress();
 
-        LevelInfo GetLevelInfo();
-        int GetLevelEndScore();
+        LevelInfo GetCurrentLevelInfo();
+        int GetCurrentLevelEndScore();
 
-        int GetLevelStartScore();
+        int GetCurrentLevelStartScore();
 
         List<LevelInfo> GetLevelInfos();
     }
 
     public partial class UserModel : AbstractModel, IUserModel
     {
-        protected IResourceSystem resourceSystem;
         private List<LevelInfo> levelInfos;
+
+        public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
+        public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
+        public BindableProperty<string> Name { get; } = new BindableProperty<string>() { Value = "YOU" };
+        public BindableProperty<int> Score { get; } = new BindableProperty<int>();
         protected override void OnInit()
         {
             base.OnInit();
@@ -37,7 +41,6 @@ namespace GameFramework
             Score.RegisterOnValueChanged(v => SaveInfo(this));
             Name.RegisterOnValueChanged(v => SaveInfo(this));
 
-            resourceSystem = GameApp.Interface.GetSystem<IResourceSystem>();
             levelInfos = GameUtils.GetConfigInfos<LevelInfo>();
         }
 
@@ -46,44 +49,44 @@ namespace GameFramework
             return levelInfos;
         }
 
-        public LevelInfo GetLevelInfo()
-        {
-            var levelInfo = levelInfos.Find(item => item.level == Level.Value);
-            return levelInfo;
-        }
-
         public bool IsCoinEnough(int coins)
         {
             var ret = Coins.Value >= coins;
             return ret;
         }
 
-        public float GetLevelProgress()
+        public bool IsCanLevelUp()
         {
-            var levelStartScore = GetLevelStartScore();
-            var levelEndScore = GetLevelEndScore();
+            return Score.Value >= GetCurrentLevelEndScore();
+        }
+
+        public LevelInfo GetCurrentLevelInfo()
+        {
+            var levelInfo = levelInfos.Find(item => item.level == Level.Value);
+            return levelInfo;
+        }
+
+        public float GetCurrentLevelProgress()
+        {
+            var levelStartScore = GetCurrentLevelStartScore();
+            var levelEndScore = GetCurrentLevelEndScore();
             var levelCollectScore = Score.Value - levelStartScore;
             var levelNeedScore = levelEndScore - levelStartScore;
             var toProgress = 1.0f * levelCollectScore / levelNeedScore;
             return toProgress;
         }
 
-        public int GetLevelStartScore()
+        public int GetCurrentLevelStartScore()
         {
             var levelId = Level.Value - 1;
             int targetScore = GetLevelFullScore(levelId);
             return targetScore;
         }
-        public int GetLevelEndScore()
+        public int GetCurrentLevelEndScore()
         {
             var levelId = Level.Value;
             int targetScore = GetLevelFullScore(levelId);
             return targetScore;
-        }
-
-        public bool IsCanLevelUp()
-        {
-            return Score.Value >= GetLevelEndScore();
         }
 
         private int GetLevelFullScore(int levelId)
@@ -97,10 +100,5 @@ namespace GameFramework
 
             return targetScore;
         }
-
-        public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
-        public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
-        public BindableProperty<string> Name { get; } = new BindableProperty<string>() { Value = "YOU" };
-        public BindableProperty<int> Score { get; } = new BindableProperty<int>();
     }
 }
