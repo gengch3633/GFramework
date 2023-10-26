@@ -2,9 +2,8 @@
     "name": "GFramework.Editor",
     "rootNamespace": "",
     "references": [
-        "YooAsset",
-        "Unity.ScriptableBuildPipeline",
-        "Unity.ScriptableBuildPipeline.Editor"
+        "GFramework",
+        "GoogleMobileAds.Editor"
     ],
     "includePlatforms": [
         "Editor"
