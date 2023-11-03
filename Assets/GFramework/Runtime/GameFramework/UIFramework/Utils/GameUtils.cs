@@ -8,6 +8,16 @@ namespace GameFramework
 {
     public class GameUtils
     {
+        public static bool IsEditor()
+        {
+            var isEditor = false;
+#if UNITY_EDITOR
+            isEditor = true;
+#endif
+
+            return isEditor;
+        }
+
         public static List<T> GetConfigInfos<T>(string suffix = "") where T : class, new()
         {
             var itemName = typeof(T).Name;

@@ -4,30 +4,27 @@ using YooAsset;
 
 namespace GameFramework
 {
-    public partial class IAssetBundleSystem
+    public class GameDecryptionServices : IDecryptionServices
     {
-        public class GameDecryptionServices : IDecryptionServices
+        public ulong LoadFromFileOffset(DecryptFileInfo fileInfo)
         {
-            public ulong LoadFromFileOffset(DecryptFileInfo fileInfo)
-            {
-                return 32;
-            }
+            return 32;
+        }
 
-            public byte[] LoadFromMemory(DecryptFileInfo fileInfo)
-            {
-                throw new NotImplementedException();
-            }
+        public byte[] LoadFromMemory(DecryptFileInfo fileInfo)
+        {
+            throw new NotImplementedException();
+        }
 
-            public FileStream LoadFromStream(DecryptFileInfo fileInfo)
-            {
-                BundleStream bundleStream = new BundleStream(fileInfo.FilePath, FileMode.Open);
-                return bundleStream;
-            }
+        public FileStream LoadFromStream(DecryptFileInfo fileInfo)
+        {
+            BundleStream bundleStream = new BundleStream(fileInfo.FilePath, FileMode.Open);
+            return bundleStream;
+        }
 
-            public uint GetManagedReadBufferSize()
-            {
-                return 1024;
-            }
+        public uint GetManagedReadBufferSize()
+        {
+            return 1024;
         }
     }
 }

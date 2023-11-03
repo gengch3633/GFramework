@@ -6,24 +6,28 @@ using YooAsset;
 
 namespace GameFramework
 {
-    public partial class IAssetBundleSystem
+    public class AssetBundleManager:MonoSingleton<AssetBundleManager>
     {
-        private string packageName = "BgResources";
+        private bool logInfo = false;
         private EPlayMode PlayMode = EPlayMode.OfflinePlayMode;
-        private string packageVersion;
-
         private string remoteServerIP = "https://www.trumpgamestudio.com/bg";
-        public async UniTask OnInitAsync()
+        private List<string> allPackageNames = new List<string>() { "card" };
+        public async UniTask InitAsync(bool logInfo = false)
         {
+            this.logInfo = logInfo;
+            this.PlayMode = GameUtils.IsEditor() ? EPlayMode.EditorSimulateMode : PlayMode;
             BetterStreamingAssets.Initialize();
             YooAssets.Initialize();
             YooAssets.SetOperationSystemMaxTimeSlice(30);
-            var status = await InitPackageAsync();
-            status = await GetStaticVersionAsync();
-            status = await UpdateManifestAsync();
+            for (int i = 0; i < allPackageNames.Count; i++)
+            {
+                var packageName = allPackageNames[i];
+                await InitializePackageAsync(packageName);
+                await UpdateManifestAsync(packageName);
+            }
         }
         
-        public PatchDownloaderOperation GetBundleDownloader(string bgName)
+        public PatchDownloaderOperation GetBundleDownloader(string packageName, string bgName)
         {
             var package = YooAssets.GetAssetsPackage(packageName);
             var assetInfo = package.GetAssetInfo(bgName);
@@ -33,7 +37,7 @@ namespace GameFramework
             return downloader;
         }
 
-        private async UniTask<EOperationStatus> InitPackageAsync()
+        private async UniTask<EOperationStatus> InitializePackageAsync(string packageName)
         {
             // 创建默认的资源包
             var package = YooAssets.TryGetAssetsPackage(packageName);
@@ -72,7 +76,6 @@ namespace GameFramework
             }
 
             await initializationOperation.ToUniTask();
-
             return package.InitializeStatus;
         }
 
@@ -83,28 +86,25 @@ namespace GameFramework
             string resVersion = "1.0.0";
 
             var serverUrl = $"{hostServerIP}/CDN/{runTimePlatform}/{resVersion}";
-
-            Debug.LogError("==> serverUrl:" + serverUrl);
+            if (this.logInfo) Debug.LogError("==> serverUrl:" + serverUrl);
             return serverUrl;
         }
 
-
-        private async UniTask<EOperationStatus> GetStaticVersionAsync()
+        private async UniTask UpdateManifestAsync(string packageName)
         {
             var package = YooAssets.GetAssetsPackage(packageName);
-            var operation = package.UpdatePackageVersionAsync();
-            await operation.ToUniTask();
-            packageVersion = operation.PackageVersion;
-            if (logInfo) Debug.LogError("=> GetStaticVersion 1111: " + operation.PackageVersion);
-            return operation.Status;
+            var updateVersionOperation = package.UpdatePackageVersionAsync();
+            await updateVersionOperation.ToUniTask();
+            if (this.logInfo) Debug.LogError("==> [IAssetBundleSystem] updateVersionOperation: " + updateVersionOperation.Status);
+            var packageVersion = updateVersionOperation.PackageVersion;
+            var updateManefistOperation = package.UpdatePackageManifestAsync(packageVersion);
+            await updateManefistOperation.ToUniTask();
+            if (this.logInfo) Debug.LogError("==> [IAssetBundleSystem] updateManefistOperation: " + updateManefistOperation.Status);
         }
 
-        private async UniTask<EOperationStatus> UpdateManifestAsync()
+        public bool IsTypeLogEnabled()
         {
-            var package = YooAssets.GetAssetsPackage(packageName);
-            var operation = package.UpdatePackageManifestAsync(packageVersion);
-            await operation.ToUniTask();
-            return operation.Status;
+            throw new System.NotImplementedException();
         }
     }
 }
