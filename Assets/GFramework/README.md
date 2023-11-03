@@ -1,8 +1,13 @@
-**YooAsset**是一套用于Unity3D的资源管理系统，用于帮助研发团队快速部署和交付游戏。
+**GFramework**是一套用于Unity3D的游戏框架。
+**安装YooAssets包**
+1.  打开管理界面 Edit/Project Settings/Package Manager
+    // 输入以下内容（国际版）
+    Name: package.openupm.com
+    URL: https://package.openupm.com
+    Scope(s): com.tuyoogame.yooasset
 
-它可以满足商业化游戏的各类需求，并且经历多款百万DAU游戏产品的验证。
-
-更多信息请了解官方主页：https://github.com/tuyoogame/YooAsset
+2. 打开管理界面 Edit/Windows/Package Manager
+    在My Registries中安装YooAssets v1.5.1版本
 
 **发布UPM包**
 1. git subtree split --prefix=Assets/GFramework --branch upm
