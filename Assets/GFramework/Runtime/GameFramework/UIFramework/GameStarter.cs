@@ -13,7 +13,8 @@ namespace GameFramework
 
             Loom.Initialize();
             CheckForDebug();
-            uiSystem.OpenPopup<DebugPopup>();
+            //uiSystem.OpenPopup<DebugPopup>();
+            uiSystem.OpenPopup<DailyBonusPopup>();
         }
 
         private void CheckForDebug()

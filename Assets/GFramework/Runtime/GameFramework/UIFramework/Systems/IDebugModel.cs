@@ -7,6 +7,17 @@ using UnityEngine;
 
 namespace GameFramework
 {
+    public enum EDebugFeature
+    {
+        MobileTestAds,
+        NoAds,
+        TimeScaleDown,
+        OpenBackDoor
+    }
+    public interface ITypeLog
+    {
+        bool IsTypeLogEnabled();
+    }
     public interface IDebugModel : IModel
     {
         void RecoverGameDataFromFile();

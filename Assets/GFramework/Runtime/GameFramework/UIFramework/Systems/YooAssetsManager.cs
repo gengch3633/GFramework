@@ -6,7 +6,7 @@ using YooAsset;
 
 namespace GameFramework
 {
-    public class AssetBundleManager:MonoSingleton<AssetBundleManager>
+    public class YooAssetsManager:MonoSingleton<YooAssetsManager>
     {
         private bool logInfo = false;
         private EPlayMode PlayMode = EPlayMode.OfflinePlayMode;

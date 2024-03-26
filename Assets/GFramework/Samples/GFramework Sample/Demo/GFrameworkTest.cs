@@ -17,7 +17,7 @@ public class GFrameworkTest : MonoBehaviour
 
     private async void OnBtnTestClick()
     {
-        await AssetBundleManager.Instance.InitAsync(true);
+        await YooAssetsManager.Instance.InitAsync(true);
         var handle = YooAssets.LoadAssetAsync<Sprite>("2");
         await handle.ToUniTask(this);
         bundleImage.sprite = handle.AssetObject as Sprite;
