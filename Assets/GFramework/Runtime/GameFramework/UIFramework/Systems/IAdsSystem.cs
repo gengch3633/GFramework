@@ -104,23 +104,23 @@ namespace GameFramework
             var languageSystem = this.GetSystem<ILanguageSystem>();
             var uiSystem = this.GetSystem<IUISystem>();
 
-            uiSystem.OpenPopup(PopupType.AdLoadingPopup);
-            for (int i = 0; i < 5; i++)
-            {
-                if (IsRewardAdReady())
-                {
-                    EventUtils.LogAdRewardLoadingYesEvent();
-                    ShowRewardAd(place, (ret) =>
-                    {
-                        uiSystem.ClosePopup(PopupType.AdLoadingPopup);
-                        callBack?.Invoke(ret);
-                    });
-                    return;
-                }
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-            }
+            //uiSystem.OpenPopup(PopupType.AdLoadingPopup);
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    if (IsRewardAdReady())
+            //    {
+            //        EventUtils.LogAdRewardLoadingYesEvent();
+            //        ShowRewardAd(place, (ret) =>
+            //        {
+            //            uiSystem.ClosePopup(PopupType.AdLoadingPopup);
+            //            callBack?.Invoke(ret);
+            //        });
+            //        return;
+            //    }
+            //    await UniTask.Delay(TimeSpan.FromSeconds(1));
+            //}
 
-            uiSystem.ClosePopup(PopupType.AdLoadingPopup);
+            //uiSystem.ClosePopup(PopupType.AdLoadingPopup);
             EventUtils.LogAdRewardLoadingNoEvent();
 
             if (IsInterstitialAdReady())
@@ -135,7 +135,7 @@ namespace GameFramework
             {
                 EventUtils.LogAdRewardLoadingReplaceNoEvent();
                 var info = languageSystem.GetLanguangeText("message_no_reward_ad");
-                uiSystem.OpenMessage(MessageType.NormalMessage, new MessageInfo(info, true));
+                uiSystem.OpenMessage<NormalMessage>(new MessageInfo(info, true));
             }
         }
 

@@ -57,7 +57,7 @@ namespace GameFramework
             Purchase(productId, (product, isSuccess, msg) => { 
                 onCompleted.Invoke(isSuccess, msg);
                 if (!isSuccess)
-                    uiSystem.OpenMessage(MessageType.NormalMessage, new MessageInfo(msg, true));
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo(msg, true));
             });
         }
 

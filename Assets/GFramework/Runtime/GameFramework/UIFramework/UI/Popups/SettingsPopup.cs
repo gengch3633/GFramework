@@ -11,7 +11,7 @@ namespace GameFramework
         {
             if (debugSystem.IsDebugFeatureEnabled(EDebugFeature.OpenBackDoor))
             {
-                uiSystem.OpenPopup(PopupType.DebugPopup);
+                uiSystem.OpenPopup<DebugPopup>();
                 return;
             }
 
@@ -22,7 +22,7 @@ namespace GameFramework
                 clickBackDoorCount++;
                 if (clickBackDoorCount >= 10)
                 {
-                    uiSystem.OpenPopup(PopupType.DebugPopup);
+                    uiSystem.OpenPopup<DebugPopup>();
                     debugSystem.SetDebugFeatureEnabled(EDebugFeature.OpenBackDoor, true);
                 }
             }

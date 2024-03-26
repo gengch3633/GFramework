@@ -16,7 +16,7 @@ namespace GameFramework
         {
             if(int.TryParse(lvString, out lv))
             {
-                uiSystem.OpenMessage(MessageType.NormalMessage, new MessageInfo($"TrumpGameBot SetLv: {lv}, Success", true));
+                uiSystem.OpenMessage<NormalMessage>(new MessageInfo($"TrumpGameBot SetLv: {lv}, Success", true));
             }
         }
 
