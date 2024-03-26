@@ -14,10 +14,7 @@ namespace GameFramework
 
         private void InitSystemsWithThirdParty()
         {
-            this.RegisterSystem<INotificationSystem>(new NotificationSystem());
             this.RegisterSystem<IAdsSystem>(new AdsSystem());
-            this.RegisterSystem<IFirebaseSystem>(new FirebaseSystem());
-            this.RegisterSystem<ISdkSystem>(new SdkSystem());
         }
 
         private void InitBaseSystems()

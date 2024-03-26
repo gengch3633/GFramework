@@ -18,13 +18,7 @@ namespace GameFramework
 
         private void CheckForDebug()
         {
-            if (debugSystem.IsDebugFeatureEnabled(EDebugFeature.NoAds))
-                adsSystem.SetAdsManager(new AdsManager_Editor());
-            else
-            {
-                var isProdutionAds = !debugSystem.IsDebugFeatureEnabled(EDebugFeature.MobileTestAds);
-                adsSystem.SetAdsManager(new AdsManager_Admob(isProdutionAds));
-            }
+            adsSystem.SetAdsManager(new AdsManager_Editor());
 
             if (debugSystem.IsDebugFeatureEnabled(EDebugFeature.TimeScaleDown))
                 Time.timeScale = 0.2f;

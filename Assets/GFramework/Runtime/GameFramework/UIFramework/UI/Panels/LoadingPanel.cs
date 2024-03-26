@@ -23,37 +23,13 @@ namespace GameFramework
 			adsSystem.ShowBanner();
 		}
 
-        private bool IsAnalysisSdkInited()
-		{
-            var isFirebaseInited = firebaseSystem.IsFirebaseInitialized();
-            var isAfInited = AppsFlyerManager.ConversionSuccessFlag;
-            var isInited = isFirebaseInited && isAfInited;
-
-            //Debug.LogError($"==> [LoadingPanel], isAfInited: {isAfInited}, isAfInited: {isAfInited}");
-            return isInited;
-		}
+       
 
 		private async UniTask LoadingSceneAsync()
 		{
 			loadingBarVar.fillAmount = 0.0f;
 			var waitSeconds = 10;
 			var startTime = Time.time;
-
-
-			while (!IsAnalysisSdkInited() && Time.time - startTime < waitSeconds)
-			{
-				loadingBarVar.fillAmount += 0.01f;
-				await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
-			}
-
-            if (firebaseSystem.IsFirebaseInitialized())
-            {
-				Debug.LogError($"==> [LoadingPanel], LogALoadingSceneEvent 1");
-				var isNetNotAvailable = Application.internetReachability == NetworkReachability.NotReachable;
-				var net = !isNetNotAvailable ? "Y" : "N";
-				EventUtils.LogALoadingSceneEvent(net);
-				Debug.LogError($"==> [LoadingPanel], LogALoadingSceneEvent 2");
-			}
 
 			while (this.loadingBarVar.fillAmount < 1f)
 			{

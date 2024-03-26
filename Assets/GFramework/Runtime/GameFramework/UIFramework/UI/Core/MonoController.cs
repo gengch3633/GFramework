@@ -20,8 +20,6 @@ namespace GameFramework
         protected IFreeCoinSystem freeCoinSystem;
         protected IDebugSystem debugSystem;
         protected IAdsSystem adsSystem;
-        protected ISdkSystem sdkSystem;
-        protected IFirebaseSystem firebaseSystem;
         protected IDailyBonusSystem dailyBonusSystem;
         protected ISpinSystem spinSystem;
 
@@ -64,8 +62,6 @@ namespace GameFramework
             debugSystem = this.GetSystem<IDebugSystem>();
             adsSystem = this.GetSystem<IAdsSystem>();
 
-            firebaseSystem = this.GetSystem<IFirebaseSystem>();
-            sdkSystem = this.GetSystem<ISdkSystem>();
             dailyBonusSystem = this.GetSystem<IDailyBonusSystem>();
             spinSystem = this.GetSystem<ISpinSystem>();
 
