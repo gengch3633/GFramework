@@ -1,3 +1,5 @@
+using System;
+
 namespace Framework
 {
     public class FileUtils: Singleton<FileUtils>, IFileSaver
@@ -9,9 +11,9 @@ namespace Framework
             fileSaver.Clear<T>();
         }
 
-        public void CopyBindableClass<T>(T selfModel, T otherModel)
+        public void CopyBindableClass<T>(T selfModel, T otherModel,  Action callback = null)
         {
-            fileSaver.CopyBindableClass(selfModel, otherModel);
+            fileSaver.CopyBindableClass(selfModel, otherModel, callback);
         }
 
         public string GetKey<T>() where T : new()

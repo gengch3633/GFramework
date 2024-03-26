@@ -12,16 +12,20 @@ namespace Framework
             get => mValue;
             set
             {
-                if (mValue == null || !mValue.Equals(value))
+                if (mValue == null || !mValue.Equals(value) || !value.GetType().IsAssignableFrom(typeof(ValueType)))
                 {
                     mValue = value;
                     mOnValueChanged?.Invoke(value);
+                    mOnValueChangedNoParam?.Invoke();
                 }
             }
         }
 
         [JsonIgnore]
         public Action<T> mOnValueChanged = (v) => { };
+
+        [JsonIgnore]
+        public Action mOnValueChangedNoParam = () => { };
 
         public IUnRegister RegisterOnValueChanged(Action<T> onValueChanged, bool fireAction = false)
         {
@@ -34,9 +38,25 @@ namespace Framework
             };
         }
 
+        public IUnRegister RegisterOnValueChangedNoParam(Action onValueChanged, bool fireAction = false)
+        {
+            mOnValueChangedNoParam += onValueChanged;
+            if (fireAction) mOnValueChangedNoParam?.Invoke();
+            return new BindPropertyUnRegister<T>()
+            {
+                BindableProperty = this,
+                OnValueChangedNoParam = onValueChanged
+            };
+        }
+
         public void UnRegisterOnValueChanged(Action<T> onValueChanged)
         {
             mOnValueChanged -= onValueChanged;
+        }
+
+        public void UnRegisterOnValueChangedNoParam(Action onValueChanged)
+        {
+            mOnValueChangedNoParam -= onValueChanged;
         }
     }
 
@@ -45,10 +65,12 @@ namespace Framework
         public BindableProperty<T> BindableProperty { get; set; }
 
         public Action<T> OnValueChanged { get; set; }
+        public Action OnValueChangedNoParam { get; set; }
 
         public void UnRegister()
         {
             BindableProperty.UnRegisterOnValueChanged(OnValueChanged);
+            BindableProperty.UnRegisterOnValueChangedNoParam(OnValueChangedNoParam);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Framework
@@ -40,7 +42,7 @@ namespace Framework
             propertyInfo.SetValue(model, value);
         }
 
-        public void CopyBindableProperties(BindableTypeReflection<T> otherReflection)
+        public void CopyBindableProperties(BindableTypeReflection<T> otherReflection, Action callback = null)
         {
             propertyInfos.ForEach(item =>
             {
@@ -54,6 +56,14 @@ namespace Framework
                     var otherBindableReflection = new BindableTypeReflection<object>(otherPropertyValue);
                     var otherValue = otherBindableReflection.GetPropertyValue("Value");
                     selfBindableReflection.SetPropertyValue("Value", otherValue);
+
+
+                    if(callback != null)
+                    {
+                        var itemValue = item.GetValue(model);
+                        MethodInfo onValueChanged = item.PropertyType.GetMethod("RegisterOnValueChangedNoParam", new Type[] { typeof(Action), typeof(bool) });
+                        onValueChanged.Invoke(itemValue, new object[] { callback, true });
+                    }
                 }
             });
         }
