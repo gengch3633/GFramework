@@ -15,7 +15,7 @@ namespace GameFramework
 		}
 		public bool IsTypeLogEnabled()
 		{
-			var debugSystem = GameApp.Interface.GetSystem<IDebugSystem>();
+			var debugSystem = GameApp.Interface.GetModel<IDebugModel>();
 			var ret = debugSystem.IsTypeLogEnabled(typeof(EventUtils).FullName);
 
 			return ret;

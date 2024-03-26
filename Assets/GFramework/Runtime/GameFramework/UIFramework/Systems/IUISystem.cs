@@ -49,8 +49,8 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = this.GetSystem<IDebugSystem>();
-            return debugSystem.IsTypeLogEnabled(typeof(IDebugSystem).FullName);
+            var debugSystem = this.GetModel<IDebugModel>();
+            return debugSystem.IsTypeLogEnabled(typeof(IDebugModel).FullName);
         }
 
         protected override void OnInit()

@@ -2,50 +2,57 @@ using Framework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 namespace GameFramework
 {
-    public interface IDebugSystem : ISystem
+    public interface IDebugModel : IModel
     {
-        List<string> GetAllTypeLogNames();
-        bool IsTypeLogEnabled(string typeFullName);
-        void SetTypeLogEnabled(string typeFullName, bool enabled);
+        void RecoverGameDataFromFile();
+        void CopyGameData();
 
         List<string> GetAllDebugFeatureNames();
+        List<string> GetAllTypeLogNames();
+
+        bool IsTypeLogEnabled(string typeFullName);
+        void SetTypeLogEnabled(string typeFullName, bool enabled);
+       
         void SetDebugFeatureEnabled(string debugFeatureName, bool enabled);
         bool IsDebugFeatureEnabled(string debugFeatureName);
         void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled);
         bool IsDebugFeatureEnabled(EDebugFeature debugFeature);
-        void RecoverGameDataFromFile();
-        void CopyGameData();
+        BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; }
+        BindableProperty<SwitchGroup> DebugFeatureEnableSwitchGroup { get; }
     }
 
-    public class DebugSystem : AbstractSystem, IDebugSystem
+    public class DebugModel : AbstractModel, IDebugModel
     {
-        public Dictionary<string, bool> typeLogEnableDict = new Dictionary<string, bool>();
-        public Dictionary<string, bool> debugFeatureDict = new Dictionary<string, bool>();
-        private DebugSystem debugRecord;
+        public BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; } = new BindableProperty<SwitchGroup>() { Value = new SwitchGroup() };
+        public BindableProperty<SwitchGroup> DebugFeatureEnableSwitchGroup { get; } = new BindableProperty<SwitchGroup>() { Value = new SwitchGroup() };
 
         protected override void OnInit()
         {
             base.OnInit();
-            debugRecord = ReadInfoWithReturnNew<DebugSystem>();
+            var blockModel = ReadInfoWithReturnNew<DebugModel>();
+            CopyBindableClass(this, blockModel, () => { SaveInfo(this); });
 
-            if(debugRecord.typeLogEnableDict.Count <= 0)
+            CheckInitSwitchGroup();
+        }
+
+        private void CheckInitSwitchGroup()
+        {
+            if (TypeLogEnableSwitchGroup.Value.switchInfos.Count <= 0)
             {
                 foreach (Type item in GetLogTypes())
-                    debugRecord.typeLogEnableDict.Add(item.FullName, false);
+                    TypeLogEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = item.FullName, isOn = false });
 
                 foreach (EDebugFeature item in System.Enum.GetValues(typeof(EDebugFeature)))
-                    debugRecord.debugFeatureDict.Add(item.ToString(), false);
-                SaveInfo(debugRecord);
-            }
+                    DebugFeatureEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = item.ToString(), isOn = false });
 
-            //SetDebugFeatureEnabled(EDebugFeature.WatchRivalCard, true);
-            //SetDebugFeatureEnabled(EDebugFeature.TestTutorial3, true);
+                TypeLogEnableSwitchGroup.Value = TypeLogEnableSwitchGroup.Value;
+                DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
+            }
         }
 
         private List<Type> GetLogTypes()
@@ -87,20 +94,20 @@ namespace GameFramework
 
         public void SetTypeLogEnabled(string typeFullName, bool enabled)
         {
-            debugRecord.typeLogEnableDict[typeFullName] = enabled;
-            SaveInfo(debugRecord);
+            TypeLogEnableSwitchGroup.Value.SetSwitchOn(typeFullName, enabled);
+            SaveInfo(this);
         }
 
         public bool IsTypeLogEnabled(string typeFullName)
         {
-            var ret = debugRecord.typeLogEnableDict.ContainsKey(typeFullName) && debugRecord.typeLogEnableDict[typeFullName];
+            var ret = TypeLogEnableSwitchGroup.Value.IsSwitchOn(typeFullName);
             return ret;
         }
 
         public void SetDebugFeatureEnabled(string debugFeatureName, bool enabled)
         {
-            debugRecord.debugFeatureDict[debugFeatureName] = enabled;
-            SaveInfo(debugRecord);
+            DebugFeatureEnableSwitchGroup.Value.SetSwitchOn(debugFeatureName, enabled);
+            SaveInfo(this);
         }
 
         public void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled)
@@ -116,7 +123,7 @@ namespace GameFramework
 
         public bool IsDebugFeatureEnabled(string debugFeatureName)
         {
-            bool ret = debugRecord.debugFeatureDict.ContainsKey(debugFeatureName) && debugRecord.debugFeatureDict[debugFeatureName];
+            bool ret = DebugFeatureEnableSwitchGroup.Value.IsSwitchOn(debugFeatureName);
             return ret;
         }
 
@@ -165,6 +172,31 @@ namespace GameFramework
         {
             UnityEngine.GUIUtility.systemCopyBuffer = text;
         }
+    }
+
+    public class SwitchGroup
+    {
+        public List<SwitchInfo> switchInfos = new List<SwitchInfo>();
+
+        public bool IsSwitchOn(string switchName)
+        {
+            var switchInfo = switchInfos.Find(item=>item.switchName == switchName);
+            var ret = switchInfo != null && switchInfo.isOn;
+            return ret;
+        }
+
+        public void SetSwitchOn(string switchName, bool isOn)
+        {
+            var switchInfo = switchInfos.Find(item => item.switchName == switchName);
+            if (switchInfo != null)
+                switchInfo.isOn = isOn;
+        }
+    }
+
+    public class SwitchInfo
+    {
+        public string switchName;
+        public bool isOn;
     }
 }
 

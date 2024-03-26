@@ -7,9 +7,9 @@ namespace GameFramework
     {
         protected override void Init()
         {
+            InitModels();
             InitBaseSystems();
             InitSystemsWithThirdParty();
-            InitModels();
         }
 
         private void InitSystemsWithThirdParty()
@@ -19,7 +19,6 @@ namespace GameFramework
 
         private void InitBaseSystems()
         {
-            this.RegisterSystem<IDebugSystem>(new DebugSystem());
             this.RegisterSystem<IResourceSystem>(new ResourceSystem());
             this.RegisterSystem<IAudioSystem>(new AudioSystem());
             this.RegisterSystem<ILanguageSystem>(new LanguageSystem());
@@ -37,6 +36,7 @@ namespace GameFramework
             this.RegisterModel<ISettingModel>(new SettingModel());
             this.RegisterModel<IUserModel>(new UserModel());
             this.RegisterModel<IStatisticsModel>(new StatisticsModel());
+            this.RegisterModel<IDebugModel>(new DebugModel());
         }
     }
 }

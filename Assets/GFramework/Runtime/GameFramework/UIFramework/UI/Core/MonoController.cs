@@ -18,7 +18,7 @@ namespace GameFramework
         protected IAudioSystem audioSystem;
         protected IRateSystem rateSystem;
         protected IFreeCoinSystem freeCoinSystem;
-        protected IDebugSystem debugSystem;
+        protected IDebugModel debugSystem;
         protected IAdsSystem adsSystem;
         protected IDailyBonusSystem dailyBonusSystem;
         protected ISpinSystem spinSystem;
@@ -59,7 +59,7 @@ namespace GameFramework
             audioSystem = this.GetSystem<IAudioSystem>();
             rateSystem = this.GetSystem<IRateSystem>();
             freeCoinSystem = this.GetSystem<IFreeCoinSystem>();
-            debugSystem = this.GetSystem<IDebugSystem>();
+            debugSystem = this.GetModel<IDebugModel>();
             adsSystem = this.GetSystem<IAdsSystem>();
 
             dailyBonusSystem = this.GetSystem<IDailyBonusSystem>();
