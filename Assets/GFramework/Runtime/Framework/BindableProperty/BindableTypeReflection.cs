@@ -62,7 +62,7 @@ namespace Framework
                     {
                         var itemValue = item.GetValue(model);
                         MethodInfo onValueChanged = item.PropertyType.GetMethod("RegisterOnValueChangedNoParam", new Type[] { typeof(Action), typeof(bool) });
-                        onValueChanged.Invoke(itemValue, new object[] { callback, true });
+                        onValueChanged.Invoke(itemValue, new object[] { callback, false });
                     }
                 }
             });
