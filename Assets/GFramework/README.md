@@ -5,6 +5,12 @@
 3. git push origin upm --tags
 
 **安装GFramework包**
-1. 添加Package包 https://github.com/gengch3633/GFramework.git?path=Assets/GFramework
-2. 添加Package包 https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask,
-   添加 UNITASK_DOTWEEN_SUPPORT 到 Scripting Define Symbols 
+1.  安装GFramework包 https://github.com/gengch3633/GFramework.git?path=Assets/GFramework
+2.  安装UniTask包 https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask,
+    添加 UNITASK_DOTWEEN_SUPPORT 到 Scripting Define Symbols
+2.  安装YooAssets包1.4.2-preview
+    打开管理界面 Edit/Project Settings/Package Manager
+    // 输入以下内容（中国版）
+    Name: package.openupm.cn
+    URL: https://package.openupm.cn
+    Scope(s): com.tuyoogame.yooasset
