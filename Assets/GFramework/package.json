@@ -12,7 +12,7 @@
         {
             "displayName": "GFramework Sample",
             "description": "GFramework runtime sample.",
-            "path": "Samples/GFramework Sample"
+            "path": "Samples~/GFramework Sample"
         }
     ],
     "repository": {
