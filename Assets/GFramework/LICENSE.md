@@ -186,8 +186,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright 2018-2021 何冠峰
-   Copyright 2021-2023 TuYoo Games
+   Copyright 2023-2024 GT Games
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
