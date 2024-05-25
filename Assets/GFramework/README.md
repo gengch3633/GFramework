@@ -3,9 +3,6 @@
 1. git subtree split --prefix=Assets/GFramework --branch upm
 2. git tag 1.0.0 upm
 3. git push origin upm --tags
-4. git subtree split
-5. git tag 1.0.1 upm
-6. git push origin upm --tags
 
 **安装GFramework包**
 1. 打开Package Manager Window (menu: Window > Package Manager)
