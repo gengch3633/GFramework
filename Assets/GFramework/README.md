@@ -7,3 +7,4 @@
 **安装GFramework包**
 1. 打开Package Manager Window (menu: Window > Package Manager)
 2. 选择 "Add package from git URL...", 在文本框中输入以下链接: https://github.com/gengch3633/GFramework.git#1.0.0
+2. 添加 UNITASK_DOTWEEN_SUPPORT 到 Scripting Define Symbols
