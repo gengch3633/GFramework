@@ -1,6 +1,5 @@
 using UnityEngine;
 using Framework;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.U2D;
