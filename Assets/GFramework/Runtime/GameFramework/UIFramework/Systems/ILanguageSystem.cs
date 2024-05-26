@@ -17,13 +17,22 @@ namespace GameFramework
 
     public class LanguageSystem : AbstractSystem, ILanguageSystem, ITypeLog
     {
-        private List<LanguageInfo> languageInfos;
-        private static string Key = "LANGUAGE_SYSTEM";
+        private List<LanguageInfo> languageInfos = new List<LanguageInfo>();
+        private static string Key = "LanguageType";
         private LanguageType languageType = LanguageType.English;
 
         protected override void OnInit()
         {
-            languageInfos = GameUtils.GetConfigInfos<LanguageInfo>();
+            var normalConfig = GameUtils.GetConfigInfo<NormalConfig>();
+            for (int i = 0; i < normalConfig.languageInfoKeys.Count; i++)
+            {
+                var languageInfoKey = normalConfig.languageInfoKeys[i];
+                var suffix = languageInfoKey.Replace("LanguageInfo_", "");
+                suffix = suffix.Replace("LanguageInfo", "");
+                languageInfos.AddRange(GameUtils.GetConfigInfos<LanguageInfo>(suffix));
+            }
+
+            if(this.IsTypeLogEnabled()) Debug.LogWarning("==> [LanguageSystem] [OnInit]: " + languageInfos.Count);
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);
@@ -33,7 +42,7 @@ namespace GameFramework
         {
             var debugSystem = this.GetModel<IDebugModel>();
             var ret = debugSystem.IsTypeLogEnabled(typeof(LanguageSystem).FullName);
-            return ret;
+             return ret;
         }
 
         public string FormatLanguageText(string languangeKey, params object[] parameters)

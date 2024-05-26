@@ -128,22 +128,17 @@ namespace Framework
                 mArchitecture.Init();
 
                 OnRegisterPatch?.Invoke(mArchitecture);
+
+                foreach (var architectureModel in mArchitecture.mModels)
+                    architectureModel.Init();
+
+                mArchitecture.mModels.Clear();
+
                 foreach (var architectureSystem in mArchitecture.mSystems) // 新增
-                {
                     architectureSystem.Init();
-                }
 
                 // 清空 System
                 mArchitecture.mSystems.Clear();
-
-                foreach (var architectureModel in mArchitecture.mModels)
-                {
-                    architectureModel.Init();
-                }
-                
-                mArchitecture.mModels.Clear();
-                
-                
                 mArchitecture.mInited = true;
             }
         }

@@ -22,10 +22,20 @@ namespace GameFramework
         {
             var itemName = typeof(T).Name;
             var itemPrafabPath = suffix == "" ? $"Data/{itemName}" : $"Data/{itemName}_{suffix}";
+
             var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
             var textAssetString = textAsset.text;
             var result = JsonConvert.DeserializeObject<List<T>>(textAssetString);
+            return result;
+        }
 
+        public static T GetConfigInfo<T>(string suffix = "") where T : class, new()
+        {
+            var itemName = typeof(T).Name;
+            var itemPrafabPath = suffix == "" ? $"Data/{itemName}" : $"Data/{itemName}_{suffix}";
+            var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
+            var textAssetString = textAsset.text;
+            var result = JsonConvert.DeserializeObject<T>(textAssetString);
             return result;
         }
 

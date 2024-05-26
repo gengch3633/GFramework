@@ -1,0 +1,56 @@
+[
+    {
+        "itemId": 1,
+        "productId": "base.coins.99.99",
+        "productType": "Consumable",
+        "coinCount": 1100000,
+        "price": "$99.99",
+        "purchaseTag": "BestValue",
+        "extraDesc": 1000
+    },
+    {
+        "itemId": 2,
+        "productId": "base.coins.49.99",
+        "productType": "Consumable",
+        "coinCount": 300000,
+        "price": "$49.99",
+        "purchaseTag": "BestValue",
+        "extraDesc": 500
+    },
+    {
+        "itemId": 3,
+        "productId": "base.coins.19.99",
+        "productType": "Consumable",
+        "coinCount": 60000,
+        "price": "$19.99",
+        "purchaseTag": "BestValue",
+        "extraDesc": 200
+    },
+    {
+        "itemId": 4,
+        "productId": "base.coins.9.99",
+        "productType": "Consumable",
+        "coinCount": 20000,
+        "price": "$9.99",
+        "purchaseTag": "MostPopular",
+        "extraDesc": 100
+    },
+    {
+        "itemId": 5,
+        "productId": "base.coins.4.99",
+        "productType": "Consumable",
+        "coinCount": 7500,
+        "price": "$4.99",
+        "purchaseTag": "MostPopular",
+        "extraDesc": 50
+    },
+    {
+        "itemId": 6,
+        "productId": "base.coins.0.99",
+        "productType": "Consumable",
+        "coinCount": 1000,
+        "price": "$0.99",
+        "purchaseTag": "MostPopular",
+        "extraDesc": 0
+    }
+]

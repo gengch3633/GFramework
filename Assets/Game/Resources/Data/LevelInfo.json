@@ -1,0 +1,149 @@
+[
+    {
+        "level": 1,
+        "titleName": "Beginner",
+        "levelUpExp": 110,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 2,
+        "titleName": "Recruit",
+        "levelUpExp": 140,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 3,
+        "titleName": "Enthusiast",
+        "levelUpExp": 210,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 4,
+        "titleName": "Apprentice",
+        "levelUpExp": 235,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 5,
+        "titleName": "Graduate",
+        "levelUpExp": 280,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 6,
+        "titleName": "Aficionado",
+        "levelUpExp": 420,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 7,
+        "titleName": "Talented",
+        "levelUpExp": 470,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 8,
+        "titleName": "Skilled",
+        "levelUpExp": 560,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 9,
+        "titleName": "Seasoned",
+        "levelUpExp": 840,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 10,
+        "titleName": "Specialist",
+        "levelUpExp": 1050,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 11,
+        "titleName": "Expert",
+        "levelUpExp": 1400,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 12,
+        "titleName": "Veteran",
+        "levelUpExp": 2100,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 13,
+        "titleName": "Pro",
+        "levelUpExp": 3450,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 14,
+        "titleName": "Card Shark",
+        "levelUpExp": 4500,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 15,
+        "titleName": "Genius",
+        "levelUpExp": 6700,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 16,
+        "titleName": "Master",
+        "levelUpExp": 6900,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 17,
+        "titleName": "Superstar",
+        "levelUpExp": 9000,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 18,
+        "titleName": "Ace",
+        "levelUpExp": 13400,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 19,
+        "titleName": "Champion",
+        "levelUpExp": 13800,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 20,
+        "titleName": "Legend",
+        "levelUpExp": 18000,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    },
+    {
+        "level": 21,
+        "titleName": "Grandmaster",
+        "levelUpExp": 26800,
+        "levelIncome": 10,
+        "levelUpBonus": 10
+    }
+]
