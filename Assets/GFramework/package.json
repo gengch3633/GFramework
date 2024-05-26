@@ -10,9 +10,9 @@
     },
     "samples": [
         {
-            "displayName": "GFramework Sample",
-            "description": "GFramework runtime sample.",
-            "path": "Samples~/GFramework Sample"
+            "displayName": "MainSample",
+            "description": "GFramework Sample.",
+            "path": "Samples~/MainSample"
         }
     ],
     "repository": {
