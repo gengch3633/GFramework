@@ -3,18 +3,15 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class GameApp : Architecture<GameApp>
+    public partial class GameApp : Architecture<GameApp>
     {
         protected override void Init()
         {
-            InitModels();
+            var ganeAppExt = new GameAppExt();
+            InitBaseModels();
+            ganeAppExt.InitModels();
             InitBaseSystems();
-            InitSystemsWithThirdParty();
-        }
-
-        private void InitSystemsWithThirdParty()
-        {
-            this.RegisterSystem<IAdsSystem>(new AdsSystem());
+            ganeAppExt.InitSystems();
         }
 
         private void InitBaseSystems()
@@ -24,13 +21,15 @@ namespace GameFramework
             this.RegisterSystem<ILanguageSystem>(new LanguageSystem());
             this.RegisterSystem<IUISystem>(new UISystem());
             this.RegisterSystem<IRateSystem>(new RateSystem());
+            this.RegisterSystem<IAdsSystem>(new AdsSystem());
+
             this.RegisterSystem<IFreeCoinSystem>(new FreeCoinSystem());
             this.RegisterSystem<ISpinSystem>(new SpinSystem());
             this.RegisterSystem<IDailyBonusSystem>(new DailyBonusSystem());
             this.RegisterSystem<IDailyTaskSystem>(new DailyTaskSystem());
         }
 
-        private void InitModels()
+        private void InitBaseModels()
         {
             this.RegisterModel<IGameModel>(new GameModel());
             this.RegisterModel<ISettingModel>(new SettingModel());

@@ -7,7 +7,7 @@ namespace GameFramework
 
     }
 
-    public class GameModel : AbstractModel, IGameModel
+    public partial class GameModel : AbstractModel, IGameModel
     {
         protected override void OnInit()
         {

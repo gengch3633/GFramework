@@ -1,14 +1,15 @@
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using Framework;
+using Newtonsoft.Json;
+using UnityEngine;
 
 namespace GameFramework
 {
-	public class EventUtils: Singleton<EventUtils>, ITypeLog
+	public partial class EventUtils: Singleton<EventUtils>, ITypeLog
 	{
-		private static List<int> GetGamePlayCountList()
+
+		private static List<ILogEvent> platformLogEventHelpers = new List<ILogEvent>();
+		private List<int> GetCountList()
 		{
 			List<int> countList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 			return countList;
@@ -20,19 +21,21 @@ namespace GameFramework
 
 			return ret;
 		}
+
+		public void AddLogEventHelper(ILogEvent logHelper)
+        {
+			platformLogEventHelpers.Add(logHelper);
+		}
+
 		private static void LogEvent(string eventName, Dictionary<string, object> paramDict)
 		{
-			LogFirebaseEvent(eventName, paramDict);
-			LogAppsFlyerEvent(eventName, paramDict);
-		}
-
-		private static void LogFirebaseEvent(string stringName, Dictionary<string, object> dict)
-		{
-		}
-
-		private static void LogAppsFlyerEvent(string stringName, Dictionary<string, object> dict)
-		{
-			var stringDict = dict.ToDictionary(item => item.Key, item => item.Value.ToString());
+			if (Instance.IsTypeLogEnabled())
+				Debug.LogWarning($"==> [EventUtils] [LogEvent]: {eventName},{JsonConvert.SerializeObject(paramDict, Formatting.Indented)}");
+            for (int i = 0; i < platformLogEventHelpers.Count; i++)
+            {
+				var logEventHelper = platformLogEventHelpers[i];
+				logEventHelper.LogEvent(eventName, paramDict);
+			}
 		}
 
 		public static void LogAdRewardTrigerEvent(string pos)
@@ -101,104 +104,6 @@ namespace GameFramework
 		{
 			var eventName = "ad_interstitial_yes";
 			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogLocalNofificationScheduledEvent()
-		{
-			var eventName = "Local_Nofification_Scheduled";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogLocalNofificationCancelEvent()
-		{
-			var eventName = "Local_Nofification_Cancel";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogLocalNofificationInvokeAppEvent()
-		{
-			var eventName = "Local_Nofification_Invoke_App";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogALoadingSceneEvent(string network)
-		{
-			var eventName = "a_loading_scene";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("network", network);
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogAGameSceneEvent()
-		{
-			var eventName = "a_game_scene";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogRoundOverEvent(int rounds)
-		{
-			var eventName = "round_over";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("rounds", rounds);
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogGamestartEvent(int gameid)
-		{
-			var eventName = "gamestart";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("gameid", gameid);
-			EventUtils.LogEvent(eventName, paramDict);
-
-			if (!GetGamePlayCountList().Contains(gameid))
-				return;
-
-			var eventName_2 = $"gamestart_{gameid:D3}";
-			Dictionary<string, object> paramDict_2 = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName_2, paramDict_2);
-
-		}
-		public static void LogGameendEvent(int rank)
-		{
-			var eventName = "gameend";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("rank", rank);
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogViewRulesEvent()
-		{
-			var eventName = "view_rules";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogRestartEvent(int round)
-		{
-			var eventName = "restart";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("round", round);
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogScoreNextEvent()
-		{
-			var eventName = "score_next";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogScorePreEvent()
-		{
-			var eventName = "score_pre";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogClickTopsbEvent()
-		{
-			var eventName = "click_topsb";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			EventUtils.LogEvent(eventName, paramDict);
-		}
-		public static void LogStAvatarEvent(int avatar)
-		{
-			var eventName = "st_avatar";
-			Dictionary<string, object> paramDict = new Dictionary<string, object>();
-			paramDict.Add("avatar", avatar);
 			EventUtils.LogEvent(eventName, paramDict);
 		}
 	}

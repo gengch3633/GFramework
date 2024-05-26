@@ -37,7 +37,7 @@ namespace GameFramework
         BindableProperty<SwitchGroup> DebugFeatureEnableSwitchGroup { get; }
     }
 
-    public class DebugModel : AbstractModel, IDebugModel
+    public partial class DebugModel : AbstractModel, IDebugModel
     {
         public BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; } = new BindableProperty<SwitchGroup>() { Value = new SwitchGroup() };
         public BindableProperty<SwitchGroup> DebugFeatureEnableSwitchGroup { get; } = new BindableProperty<SwitchGroup>() { Value = new SwitchGroup() };

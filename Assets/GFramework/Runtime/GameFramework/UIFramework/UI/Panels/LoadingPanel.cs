@@ -39,9 +39,7 @@ namespace GameFramework
 
 			uiSystem.ClosePanel(gameObject);
 
-			EventUtils.LogAGameSceneEvent();
-			//uiSystem.OpenPanel(PanelType.GamePanel);
-			uiSystem.OpenPopup<DebugPopup>();
+            uiSystem.OpenPopup<DebugPopup>();
 		}
 
 		private Image loadingBarVar;
