@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YooAsset;
 
-public class GFrameworkTest : MonoBehaviour
+public class TestScene : MonoBehaviour
 {
     public Button btnTest;
     public Image bundleImage;

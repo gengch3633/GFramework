@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e002fd5bf3360f419482490f0781b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnTest: {fileID: 1579336013}
   bundleImage: {fileID: 537154581}
 --- !u!1 &537154579
 GameObject:
@@ -309,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e002fd5bf3360f419482490f0781b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnTest: {fileID: 0}
   bundleImage: {fileID: 0}
 --- !u!1 &621969217
 GameObject:
