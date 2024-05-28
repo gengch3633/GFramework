@@ -4,7 +4,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public class ToggleItem : MonoController
+    public class ToggleItem : MonoBaseController
     {
         private string lableString;
         public void Init(string lableString, bool isOn)

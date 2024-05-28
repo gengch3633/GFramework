@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class LeftHandElement : MonoController
+    public class LeftHandElement : MonoBaseController
     {
         private void Start()
         {

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace GameFramework
 {
-    public class AudioClick : MonoController, IPointerClickHandler
+    public class AudioClick : MonoBaseController, IPointerClickHandler
     {
         public string soundName = "buttons";
         public void OnPointerClick(PointerEventData eventData)

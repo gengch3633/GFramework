@@ -7,7 +7,7 @@ using TMPro;
 
 namespace GameFramework
 {
-    public class LocalizedText : MonoController
+    public class LocalizedText : MonoBaseController
 	{
 		public string key;
 		public LetterType cap;

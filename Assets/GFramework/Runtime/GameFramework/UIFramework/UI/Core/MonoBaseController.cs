@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    public class MonoController : MonoBehaviour, IController
+    public class MonoBaseController : MonoBehaviour, IController
     {
         protected IGameModel gameModel;
         protected ILanguageSystem languageSystem;
@@ -33,7 +33,6 @@ namespace GameFramework
         private void Awake()
         {
             MonoAwake();
-            MonoAwakePartial();
             OnAddUIListeners();
             OnAdListeners();
             OnInitVars();

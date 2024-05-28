@@ -1,7 +1,7 @@
 
 namespace GameFramework
 {
-    public class MonoVarController : MonoController
+    public class MonoVarController : MonoBaseController
     {
         
     }

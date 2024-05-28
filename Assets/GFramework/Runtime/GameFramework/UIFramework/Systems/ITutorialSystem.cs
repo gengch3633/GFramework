@@ -1,12 +1,11 @@
 using Cysharp.Threading.Tasks;
 using Framework;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SolitaireGame
+namespace GameFramework
 {
     public interface ITutorialSystem : ISystem
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class GameStarter : MonoController
+    public class GameStarter : MonoBaseController
     {
         void Start()
         {

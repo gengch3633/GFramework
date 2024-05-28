@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    public class ClickSound : MonoController
+    public class ClickSound : MonoBaseController
     {
         public string soundName = "buttons";
         private void OnBtnClick()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class FingerItem : MonoController
+    public class FingerItem : MonoBaseController
     {
         public GameObject ring1;
         public GameObject ring2;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    public class UIView : MonoController
+    public class UIView : MonoBaseController
     {
         public virtual void SetUISortingOrder(GameObject go, int order)
         {
