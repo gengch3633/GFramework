@@ -6,7 +6,10 @@ namespace GameFramework
 {
     public class MonoController : MonoBaseController
     {
-        
+        protected override void MonoAwake()
+        {
+            base.MonoAwake();
+        }
     }
 }
 
