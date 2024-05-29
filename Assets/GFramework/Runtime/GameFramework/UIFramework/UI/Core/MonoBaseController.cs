@@ -211,22 +211,10 @@ namespace GameFramework
             CreateBtnListenerMethods();
         }
 
-
-        [ContextMenu("AddButtonClickSound")]
-        private void AddButtonClickSound()
-        {
-            var btns = GetComponentsInChildren<Button>(true).ToList();
-            btns.ForEach(item => {
-                var btnGo = item.gameObject;
-                if (item.GetComponent<ClickSound>() == null)
-                    item.gameObject.AddComponent<ClickSound>();
-            });
-        }
-
-        [ContextMenu("CreateBtnListenerMethods")]
+        [ContextMenu("CreateUIInitMethods")]
         private void CreateBtnListenerMethods()
         {
-            CompCollector.CreateBtnListenerMethods(gameObject);
+            CompCollector.CreateUIInitMethods(gameObject);
         }
 
 

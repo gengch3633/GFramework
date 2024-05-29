@@ -7,11 +7,8 @@ namespace GameFramework
     {
         protected override void Init()
         {
-            var ganeAppExt = new GameAppExt();
             InitBaseModels();
-            ganeAppExt.InitModels();
             InitBaseSystems();
-            ganeAppExt.InitSystems();
         }
 
         private void InitBaseSystems()

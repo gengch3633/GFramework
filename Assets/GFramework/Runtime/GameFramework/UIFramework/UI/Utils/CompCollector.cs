@@ -10,7 +10,7 @@ namespace GameFramework
 {
     public class CompCollector
     {
-        public static void CreateBtnListenerMethods(GameObject rootGameObject)
+        public static void CreateUIInitMethods(GameObject rootGameObject)
         {
             Dictionary<string, List<string>> actionDict = new Dictionary<string, List<string>>();
             CollectActionsStrings<Button>(rootGameObject, actionDict);
@@ -22,6 +22,7 @@ namespace GameFramework
             CollectActionsStrings<Image>(rootGameObject, actionDict);
             CollectActionsStrings<ScrollRect>(rootGameObject, actionDict);
             CollectActionsStrings<ParticleSystem>(rootGameObject, actionDict);
+            CollectActionsStrings<Animation>(rootGameObject, actionDict);
 
             string declareString = string.Join("\n", actionDict["declaration"]);
 
@@ -49,12 +50,6 @@ namespace GameFramework
             btns = btns.FindAll(item => {
                 var pathGameObjects = GetPathGameObjects(item, rootGameObject);
                 var pathMonoControllers = pathGameObjects.FindAll(go => go.GetComponent<MonoVarController>() != null && go != item.gameObject);
-                if(pathMonoControllers.Count > 0)
-                {
-                    //Debug.LogError($"==> {item.name}", item.gameObject);
-                    //Debug.LogError($"==> {item.name}, {pathMonoControllers[0].gameObject.name}", item.gameObject);
-                }
-                
                 return pathMonoControllers.Count <= 0;
             });
 
