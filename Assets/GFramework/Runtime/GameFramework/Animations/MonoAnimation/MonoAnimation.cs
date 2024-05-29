@@ -42,7 +42,7 @@ namespace GameFramework
         {
             Animation animation = this.GetComponent<Animation>();
             animation.playAutomatically = false;
-            AnimationClip animClip = Resources.Load<AnimationClip>($"AnimationClips/{animName}");
+            AnimationClip animClip = Resources.Load<AnimationClip>($"Animations/{animName}");
             animation.AddClip(animClip, animName);
         }
 
