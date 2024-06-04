@@ -1,6 +1,6 @@
 ﻿namespace GameFramework
 {
-    public class LevelInfo
+    public class LevelUpInfo
     {
         public int level;
         public string titleName;

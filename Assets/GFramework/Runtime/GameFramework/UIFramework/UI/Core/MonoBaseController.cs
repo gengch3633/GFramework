@@ -24,7 +24,6 @@ namespace GameFramework
         protected ISpinSystem spinSystem;
 
         protected IUserModel userModel;
-        protected ISettingModel settingModel;
         protected ITutorialModel tutorialModel;
         protected IStatisticsModel statisticsModel;
 
@@ -65,7 +64,6 @@ namespace GameFramework
             spinSystem = this.GetSystem<ISpinSystem>();
 
             userModel = this.GetModel<IUserModel>();
-            settingModel = this.GetModel<ISettingModel>();
             tutorialModel = this.GetModel<ITutorialModel>();
             statisticsModel = this.GetModel<IStatisticsModel>();
 

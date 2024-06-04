@@ -15,17 +15,17 @@ namespace GameFramework
         bool IsCanLevelUp();
         float GetCurrentLevelProgress();
 
-        LevelInfo GetCurrentLevelInfo();
+        LevelUpInfo GetCurrentLevelInfo();
         int GetCurrentLevelEndScore();
 
         int GetCurrentLevelStartScore();
 
-        List<LevelInfo> GetLevelInfos();
+        List<LevelUpInfo> GetLevelInfos();
     }
 
     public partial class UserModel : AbstractModel, IUserModel
     {
-        private List<LevelInfo> levelInfos;
+        private List<LevelUpInfo> levelInfos;
 
         public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
         public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
@@ -41,10 +41,10 @@ namespace GameFramework
             Score.RegisterOnValueChanged(v => SaveInfo(this));
             Name.RegisterOnValueChanged(v => SaveInfo(this));
 
-            levelInfos = GameUtils.GetConfigInfos<LevelInfo>();
+            levelInfos = GameUtils.GetConfigInfos<LevelUpInfo>();
         }
 
-        public List<LevelInfo> GetLevelInfos()
+        public List<LevelUpInfo> GetLevelInfos()
         {
             return levelInfos;
         }
@@ -60,7 +60,7 @@ namespace GameFramework
             return Score.Value >= GetCurrentLevelEndScore();
         }
 
-        public LevelInfo GetCurrentLevelInfo()
+        public LevelUpInfo GetCurrentLevelInfo()
         {
             var levelInfo = levelInfos.Find(item => item.level == Level.Value);
             return levelInfo;

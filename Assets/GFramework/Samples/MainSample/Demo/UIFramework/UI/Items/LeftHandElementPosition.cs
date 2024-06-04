@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class LeftHandElementPosition : MonoBaseController
+    public class LeftHandElementPosition : MonoController
     {
         private Vector2 initAnchoredPosition;
         private RectTransform rectTransform;

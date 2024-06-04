@@ -1,19 +1,29 @@
-
-
 using UnityEngine;
+using Framework;
 
 namespace GameFramework
 {
     public class GameStarter : MonoBaseController
     {
-        void Start()
+        protected override void MonoStart()
         {
-            //½ûÓÃ¶àµã´¥Ãþ
-            Input.multiTouchEnabled = false;
+            base.MonoStart();
+            InitModels();
+            InitSystems();
 
+            Input.multiTouchEnabled = false;
             Loom.Initialize();
             CheckForDebug();
-            uiSystem.OpenPopup<DebugPopup>();
+        }
+
+        private void InitModels()
+        {
+            GameApp.Interface.RegisterModel<ISettingModel>(new SettingModel());
+        }
+
+        private void InitSystems()
+        {
+
         }
 
         private void CheckForDebug()

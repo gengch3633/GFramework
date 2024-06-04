@@ -148,5 +148,15 @@
         "componentName": "ParticleSystem",
         "actionName": "initComponent",
         "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "Animation",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Animation",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
     }
 ]
