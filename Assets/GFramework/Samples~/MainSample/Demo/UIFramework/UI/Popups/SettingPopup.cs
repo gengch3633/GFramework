@@ -2,7 +2,7 @@ using System;
 
 namespace GameFramework
 {
-    public partial class SettingPopup : UIPopup
+    public partial class SettingPopup : UIBasePopup
     {
         private int clickBackDoorCount = 0;
         private DateTime lastClickTime = DateTime.MinValue;

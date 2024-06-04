@@ -17,22 +17,22 @@ namespace GameFramework
 
         #region UIMessage
         void CloseAllMessages();
-        void OpenMessage<T>(MessageInfo messageInfo) where T : UIMessage;
+        void OpenMessage<T>(MessageInfo messageInfo) where T : UIBaseMessage;
         #endregion
 
         #region UIPanel
-        void OpenPanel<T>(object param = null) where T : UIPanel;
+        void OpenPanel<T>(object param = null) where T : UIBasePanel;
         void ClosePanel(GameObject panel, Action onComplete = null);
-        void ClosePanel<T>(Action onComplete = null) where T : UIPanel;
+        void ClosePanel<T>(Action onComplete = null) where T : UIBasePanel;
         #endregion
 
         #region UIPopup
-        bool HasPopup<T>() where T : UIPopup;
-        UIPopup OpenPopup<T>(object param = null) where T: UIPopup;
-        UniTask OpenPopupAsync<T>(object param = null) where T : UIPopup;
-        UniTask<bool> OpenPopupAsyncBool<T>(object param = null) where T : UIPopup;
-        UniTask<object> OpenPopupAsyncObject<T>(object param = null) where T : UIPopup;
-        void ClosePopup<T>(Action onComplete = null, bool showCloseAnim = true) where T : UIPopup;
+        bool HasPopup<T>() where T : UIBasePopup;
+        UIBasePopup OpenPopup<T>(object param = null) where T: UIBasePopup;
+        UniTask OpenPopupAsync<T>(object param = null) where T : UIBasePopup;
+        UniTask<bool> OpenPopupAsyncBool<T>(object param = null) where T : UIBasePopup;
+        UniTask<object> OpenPopupAsyncObject<T>(object param = null) where T : UIBasePopup;
+        void ClosePopup<T>(Action onComplete = null, bool showCloseAnim = true) where T : UIBasePopup;
         void ClosePopup(GameObject popup, Action onComplete, bool showCloseAnim);
         #endregion
     }
@@ -87,13 +87,13 @@ namespace GameFramework
 
 
         #region UIMessage
-        public void OpenMessage<T>(MessageInfo messageInfo) where T:UIMessage
+        public void OpenMessage<T>(MessageInfo messageInfo) where T:UIBaseMessage
         {
             CloseAllMessages();
             var messageViewName = typeof(T).Name;
             GameObject obj = Resources.Load<GameObject>($"Prefabs/Messages/{messageViewName}");
             var messageGo = GameObject.Instantiate(obj, topLayer);
-            messageGo.GetComponent<UIMessage>().Init(messageInfo);
+            messageGo.GetComponent<UIBaseMessage>().Init(messageInfo);
         }
 
         public void CloseAllMessages()
@@ -103,12 +103,12 @@ namespace GameFramework
         #endregion
 
         #region UIPanel
-        public void OpenPanel<T>(object param = null) where T : UIPanel
+        public void OpenPanel<T>(object param = null) where T : UIBasePanel
         {
             var panelName = typeof(T).Name;
             GameObject obj = Resources.Load<GameObject>($"Prefabs/Panels/{panelName}");
             var panel = GameObject.Instantiate(obj, bottomLayer);
-            panel.GetComponent<UIPanel>().Init(param);
+            panel.GetComponent<UIBasePanel>().Init(param);
             panelDict.Add(panel, panelName);
         }
 
@@ -120,7 +120,7 @@ namespace GameFramework
         }
 
 
-        public void ClosePanel<T>(Action onComplete = null) where T : UIPanel
+        public void ClosePanel<T>(Action onComplete = null) where T : UIBasePanel
         {
             var panelName = typeof(T).Name;
             var panel = panelDict.LastOrDefault(x => x.Value == panelName).Key;
@@ -132,17 +132,17 @@ namespace GameFramework
 
         #region UIPopup
 
-        public bool HasPopup<T>() where T: UIPopup
+        public bool HasPopup<T>() where T: UIBasePopup
         {
             var popupName = typeof(T).Name;
             return popupDict.ContainsValue(popupName);
         }
         public void ClosePopup(GameObject popup, Action onComplete = null, bool showCloseAnim = false)
         {
-            popup.GetComponent<UIPopup>().OnClosePopupAsync(showCloseAnim, onComplete).Forget();
+            popup.GetComponent<UIBasePopup>().OnClosePopupAsync(showCloseAnim, onComplete).Forget();
         }
 
-        public void ClosePopup<T>(Action onComplete = null, bool showCloseAnim = true) where T: UIPopup
+        public void ClosePopup<T>(Action onComplete = null, bool showCloseAnim = true) where T: UIBasePopup
         {
             var popupName = typeof(T).Name;
             var popup = popupDict.LastOrDefault(x => x.Value == popupName).Key;
@@ -150,20 +150,20 @@ namespace GameFramework
                 ClosePopup(popup, onComplete, showCloseAnim);
         }
 
-        public UIPopup OpenPopup<T>(object param = null) where T : UIPopup
+        public UIBasePopup OpenPopup<T>(object param = null) where T : UIBasePopup
         {
             var popUpName = typeof(T).Name;
             return OpenPopup(popUpName, param);
         }
 
-        public async UniTask OpenPopupAsync<T>(object param = null) where T : UIPopup
+        public async UniTask OpenPopupAsync<T>(object param = null) where T : UIBasePopup
         {
             var popUpName = typeof(T).Name;
             var popup = OpenPopup(popUpName, param);
             await popup.OnDestroyAsyncObject();
         }
 
-        public async UniTask<bool> OpenPopupAsyncBool<T>(object param = null) where T : UIPopup
+        public async UniTask<bool> OpenPopupAsyncBool<T>(object param = null) where T : UIBasePopup
         {
             var popUpName = typeof(T).Name;
             var popup = OpenPopup(popUpName, param);
@@ -171,7 +171,7 @@ namespace GameFramework
             return (bool)ret;
         }
 
-        public async UniTask<object> OpenPopupAsyncObject<T>(object param = null) where T : UIPopup
+        public async UniTask<object> OpenPopupAsyncObject<T>(object param = null) where T : UIBasePopup
         {
             var popUpName = typeof(T).Name;
             var popup = OpenPopup(popUpName, param);
@@ -179,13 +179,13 @@ namespace GameFramework
             return ret;
         }
 
-        private UIPopup OpenPopup(string popupName, object param)
+        private UIBasePopup OpenPopup(string popupName, object param)
         {
             GameObject obj = Resources.Load<GameObject>($"Prefabs/Popups/{popupName}");
             var popupGo = GameObject.Instantiate(obj, middleLayer);
             popupDict.Add(popupGo, popupName);
 
-            var popup = popupGo.GetComponent<UIPopup>();
+            var popup = popupGo.GetComponent<UIBasePopup>();
             popup.Init(param);
             return popup;
         }

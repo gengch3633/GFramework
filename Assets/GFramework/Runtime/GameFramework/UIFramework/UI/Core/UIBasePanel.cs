@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class UIPanel : UIView
+    public class UIBasePanel : UIView
     {
         protected override void OnBtnCloseClickNoAnim()
         {

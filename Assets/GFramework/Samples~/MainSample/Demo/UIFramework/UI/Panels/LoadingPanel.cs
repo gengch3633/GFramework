@@ -7,7 +7,7 @@ using System;
 
 namespace GameFramework
 {
-    public class LoadingPanel : UIPanel
+    public class LoadingPanel : UIBasePanel
     {
 		protected override void MonoStart()
         {

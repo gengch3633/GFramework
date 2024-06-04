@@ -8,7 +8,7 @@ using TMPro;
 
 namespace GameFramework
 {
-    public class NormalMessage : UIMessage
+    public class NormalMessage : UIBaseMessage
     {
         public override void Init(object param = null)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class UIPopup : UIView
+    public class UIBasePopup : UIView
     {
         public string popupOpenSound = "popup_open";
         public string popupCloseSound = "popup_close";

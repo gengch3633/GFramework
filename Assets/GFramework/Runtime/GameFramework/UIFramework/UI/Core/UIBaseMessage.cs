@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace GameFramework
 {
-    public class UIMessage : UIView
+    public class UIBaseMessage : UIView
     {
         public override void Init(object param = null)
         {
