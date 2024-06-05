@@ -32,7 +32,7 @@ namespace GameFramework
                 languageInfos.AddRange(GameUtils.GetConfigInfos<LanguageInfo>(suffix));
             }
 
-            if(this.IsTypeLogEnabled()) Debug.LogWarning("==> [LanguageSystem] [OnInit]: " + languageInfos.Count);
+            if (this.IsTypeLogEnabled()) Debug.LogWarning("==> [LanguageSystem] [OnInit]: " + languageInfos.Count);
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);
@@ -42,7 +42,7 @@ namespace GameFramework
         {
             var debugSystem = this.GetModel<IDebugModel>();
             var ret = debugSystem.IsTypeLogEnabled(typeof(LanguageSystem).FullName);
-             return ret;
+            return ret;
         }
 
         public string FormatLanguageText(string languangeKey, params object[] parameters)
@@ -54,11 +54,11 @@ namespace GameFramework
         {
             var languageInfo = languageInfos.Find(item => item.Key == languangeKey);
 
-            if(IsTypeLogEnabled()) Debug.LogError("==> [GetLanguangeText]: " + languangeKey);
+            if (IsTypeLogEnabled()) Debug.LogError("==> [GetLanguangeText]: " + languangeKey);
 
             if (languageInfo == null)
             {
-                Debug.LogError("==> Data No Set: " + languangeKey);
+                if (this.IsTypeLogEnabled()) Debug.LogError("==> Data No Set: " + languangeKey);
                 return $"{languangeKey}";
             }
             return languageInfo.GetLanaugeText(languageType);
@@ -96,7 +96,7 @@ namespace GameFramework
         {
             switch (languageType)
             {
-                case (LanguageType.English): return English != "None" ? English:$"{English}_{languageType.ToString().Substring(0, 1)}";
+                case (LanguageType.English): return English != "None" ? English : $"{English}_{languageType.ToString().Substring(0, 1)}";
                 case (LanguageType.ChineseSimplified): return ChineseSimplified != "None" ? ChineseSimplified : $"{English}_{languageType.ToString().Substring(0, 1)}";
                 case (LanguageType.ChineseTraditional): return ChineseTraditional != "None" ? ChineseTraditional : $"{English}_{languageType.ToString().Substring(0, 1)}";
                 case (LanguageType.French): return French != "None" ? French : $"{English}_{languageType.ToString().Substring(0, 1)}";
@@ -108,7 +108,7 @@ namespace GameFramework
                 case (LanguageType.Japanese): return Japanese != "None" ? Japanese : $"{English}_{languageType.ToString().Substring(0, 1)}";
                 case (LanguageType.Indonesian): return Indonesian != "None" ? Indonesian : $"{English}_{languageType.ToString().Substring(0, 1)}";
 
-                default:return English;
+                default: return English;
             }
         }
     }
@@ -129,5 +129,5 @@ namespace GameFramework
     }
 }
 
-    
+
 
