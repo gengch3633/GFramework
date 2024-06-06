@@ -17,7 +17,7 @@
     {
         "componentName": "Button",
         "actionName": "clickMethod",
-        "actionString": "private void On{btnName2}Click(){}"
+        "actionString": "private void On{btnName2}Click()\\n{\\n\\n}"
     },
     {
         "componentName": "Button",
@@ -42,7 +42,7 @@
     {
         "componentName": "Toggle",
         "actionName": "clickMethod",
-        "actionString": "private void On{btnName2}Changed(bool value){}"
+        "actionString": "private void On{btnName2}Changed(bool value)\\n{\\n\\n}"
     },
     {
         "componentName": "Toggle",
@@ -67,7 +67,7 @@
     {
         "componentName": "TMP_InputField",
         "actionName": "clickMethod",
-        "actionString": "private void On{btnName2}Changed(string value){}"
+        "actionString": "private void On{btnName2}Changed(string value)\\n{\\n\\n}"
     },
     {
         "componentName": "TMP_InputField",
@@ -92,7 +92,7 @@
     {
         "componentName": "InputField",
         "actionName": "clickMethod",
-        "actionString": "private void On{btnName2}Changed(string value){}"
+        "actionString": "private void On{btnName2}Changed(string value)\\n{\\n\\n}"
     },
     {
         "componentName": "InputField",

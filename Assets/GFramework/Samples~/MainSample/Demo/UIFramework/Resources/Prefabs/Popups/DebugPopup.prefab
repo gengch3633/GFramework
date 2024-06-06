@@ -5000,6 +5000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa128b8cd2099ac4f8c44ecaaebf4f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tmpFontAssetName: 
+  tmpFontMaterialName: 
   popupOpenSound: popup_open
   popupCloseSound: popup_close
   usePopupAdapter: 0

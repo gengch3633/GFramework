@@ -11,6 +11,11 @@ namespace GameFramework
 {
     public class MonoBaseController : MonoBehaviour, IController
     {
+        [SerializeField]
+        private string tmpFontAssetName;
+        [SerializeField]
+        private string tmpFontMaterialName;
+
         protected IGameModel gameModel;
         protected ILanguageSystem languageSystem;
         protected IUISystem uiSystem;
@@ -149,29 +154,14 @@ namespace GameFramework
 
         }
 
-        [ContextMenu("GetLocalizedText")]
-        private void GetLocalizedText()
-        {
-            var textList = GetComponentsInChildren<LocalizedText>(true).ToList();
-            textList = textList.FindAll(item => !string.IsNullOrEmpty(item.key) && item != null);
-            Dictionary<string, string> itemDict = new Dictionary<string, string>();
-            Func<LocalizedText, string> getText = (item) =>
-            {
-                var textComponent = item.GetComponent<Text>();
-                var tmpTextComponent = item.GetComponent<TextMeshProUGUI>();
-                if (textComponent != null) return textComponent.text.Replace("\r", "");
-                if (tmpTextComponent != null) return tmpTextComponent.text.Replace("\r", "");
-                return "None";
-
-            };
-            textList.ForEach(item => itemDict[item.key] = getText(item));
-
-            Debug.LogError("==> itemDict:\n" + JsonConvert.SerializeObject(itemDict));
-        }
-
         [ContextMenu("ChangeBtnTextToTmp")]
         private void ChangeBtnTextToTmp()
         {
+            if (string.IsNullOrEmpty(tmpFontAssetName))
+                return;
+            if (string.IsNullOrEmpty(tmpFontMaterialName))
+                return;
+
             var btns = GetComponentsInChildren<Button>().ToList();
             var tmpBtns = btns.FindAll(item => item.GetComponentInChildren<Text>() != null);
             var tmpTexts = tmpBtns.ConvertAll(item => item.GetComponentInChildren<Text>());
@@ -189,39 +179,24 @@ namespace GameFramework
                 tmpText.verticalAlignment = VerticalAlignmentOptions.Middle;
                 tmpText.GetComponent<RectTransform>().sizeDelta = item.GetComponent<RectTransform>().rect.size;
 
-                TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>("Roboto-Bold SDF");
-                Material material = Resources.Load<Material>("Roboto-Bold SDF Material_Btn_Green");
+                TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>(tmpFontAssetName);
+                Material material = Resources.Load<Material>(tmpFontMaterialName);
                 tmpText.font = fontAsset;
                 tmpText.fontSharedMaterial = material;
             });
         }
 
-        [ContextMenu("AddButtonAnim")]
-        private void AddButtonAnim()
-        {
-            var btns = GetComponentsInChildren<Button>().ToList();
-            btns.ForEach(item => {
-                var btnGo = item.gameObject;
-                DestroyImmediate(btnGo.GetComponent<Button>());
-
-                btnGo.AddComponent<ClickBtnAni_Small>();
-            });
-            CreateBtnListenerMethods();
-        }
-
         [ContextMenu("CreateUIInitMethods")]
-        private void CreateBtnListenerMethods()
+        private void CreateUIInitMethods()
         {
             CompCollector.CreateUIInitMethods(gameObject);
         }
-
 
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
         }
     }
-
 }
 
 

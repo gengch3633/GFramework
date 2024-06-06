@@ -40,14 +40,16 @@ namespace GameFramework
 
         private static Dictionary<string, List<string>> CollectActionsStrings<T>(GameObject rootGameObject, Dictionary<string, List<string>> actionDict) where T : Component
         {
-            var btns = rootGameObject.GetComponentsInChildren<T>(true).ToList();
+            var components = rootGameObject.GetComponentsInChildren<T>(true).ToList();
+            components = components.FindAll(item => (typeof(T).Name != typeof(Animation).Name)
+                || (typeof(T).Name == typeof(Animation).Name) && (rootGameObject.GetComponent<UIPopAnim>() == null));
             var endString = "_Var";
             var isTextComp = new List<string>() { typeof(Image).Name, typeof(Text).Name, typeof(TextMeshProUGUI).Name }.Contains(typeof(T).Name);
             if (isTextComp)
-                btns = btns.FindAll(item => item.name.Contains(endString));
+                components = components.FindAll(item => item.name.Contains(endString));
 
 
-            btns = btns.FindAll(item => {
+            components = components.FindAll(item => {
                 var pathGameObjects = GetPathGameObjects(item, rootGameObject);
                 var pathMonoControllers = pathGameObjects.FindAll(go => go.GetComponent<MonoVarController>() != null && go != item.gameObject);
                 return pathMonoControllers.Count <= 0;
@@ -62,10 +64,10 @@ namespace GameFramework
                 if (compCollector != null)
                 {
                     List<string> actionStrings = new List<string> { };
-                    btns.ForEach(item =>
+                    components.ForEach(item =>
                     {
                         var compPath = GetCompPath(item, rootGameObject);
-                        var actionString = compCollector.CreateString(item.gameObject.name, compPath);
+                        var actionString = compCollector.CreateString(item.gameObject.name, compPath, compCollector.actionName == "clickMethod");
                         actionStrings.Add(actionString);
                     });
 
@@ -104,7 +106,7 @@ namespace GameFramework
         public string actionName;
         public string actionString;
 
-        public string CreateString(string gameObjectName, string compPath)
+        public string CreateString(string gameObjectName, string compPath, bool isClickMethod)
         {
             CompCollecorInfo copyCompCollecor = JsonConvert.DeserializeObject<CompCollecorInfo>(JsonConvert.SerializeObject(this));
 
@@ -116,6 +118,7 @@ namespace GameFramework
             newActionString = newActionString.Replace("{btnName2}", btnName2);
             newActionString = newActionString.Replace("{componentName}", componentName);
             newActionString = newActionString.Replace("{compPath}", compPath);
+            newActionString = newActionString.Replace("\\n", "\n");
             return newActionString;
         }
     }
