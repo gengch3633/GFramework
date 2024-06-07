@@ -24,17 +24,17 @@ namespace GameFramework
         {
             base.Init(param);
 
-            debugSystem.GetAllTypeLogNames().ForEach(typeFullName =>
+            debugModel.GetAllTypeLogNames().ForEach(typeFullName =>
             {
                 var toggleItem = typeLogContainerScrollView.content.CreateItem<ToggleItem>();
-                var isOn = debugSystem.IsTypeLogEnabled(typeFullName);
+                var isOn = debugModel.IsTypeLogEnabled(typeFullName);
                 toggleItem.Init(typeFullName, isOn);
             });
 
-            debugSystem.GetAllDebugFeatureNames().ForEach(debugFeatureName =>
+            debugModel.GetAllDebugFeatureNames().ForEach(debugFeatureName =>
             {
                 var toggleItem = debugFeatureContainerScrollView.content.CreateItem<ToggleItem>();
-                var isOn = debugSystem.IsDebugFeatureEnabled(debugFeatureName);
+                var isOn = debugModel.IsDebugFeatureEnabled(debugFeatureName);
                 toggleItem.Init(debugFeatureName, isOn);
             });
 
@@ -56,8 +56,8 @@ namespace GameFramework
 
         private void OnToggleItemValueChangedEvent(ToggleItemValueChangedEvent evt)
         {
-            debugSystem.SetTypeLogEnabled(evt.itemName, evt.value);
-            debugSystem.SetDebugFeatureEnabled(evt.itemName, evt.value);
+            debugModel.SetTypeLogEnabled(evt.itemName, evt.value);
+            debugModel.SetDebugFeatureEnabled(evt.itemName, evt.value);
 
             if (evt.itemName == EDebugFeature.NoAds.ToString())
                 adsSystem.SetAdsManager(new AdsManager_Editor());

@@ -8,6 +8,7 @@ namespace GameFramework
         BindableProperty<int> Level { get; }
         BindableProperty<int> Coins { get; }
         BindableProperty<int> Score { get; }
+        BindableProperty<int> Diamonds { get; }
         BindableProperty<string> Name { get; }
 
         bool IsCoinEnough(int coins);
@@ -29,6 +30,7 @@ namespace GameFramework
 
         public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
         public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
+        public BindableProperty<int> Diamonds { get; } = new BindableProperty<int>() { Value = 200 };
         public BindableProperty<string> Name { get; } = new BindableProperty<string>() { Value = "YOU" };
         public BindableProperty<int> Score { get; } = new BindableProperty<int>();
         protected override void OnInit()
@@ -38,6 +40,7 @@ namespace GameFramework
             CopyBindableClass(this, userRecord);
             Level.RegisterOnValueChanged(v => SaveInfo(this));
             Coins.RegisterOnValueChanged(v => SaveInfo(this));
+            Diamonds.RegisterOnValueChanged(v => SaveInfo(this));
             Score.RegisterOnValueChanged(v => SaveInfo(this));
             Name.RegisterOnValueChanged(v => SaveInfo(this));
 

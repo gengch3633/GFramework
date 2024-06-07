@@ -15,23 +15,19 @@ namespace GameFramework
         private string tmpFontAssetName;
         [SerializeField]
         private string tmpFontMaterialName;
+        protected IUserModel userModel;
+        protected IDebugModel debugModel;
 
-        protected IGameModel gameModel;
         protected ILanguageSystem languageSystem;
         protected IUISystem uiSystem;
         protected IResourceSystem resourceSystem;
         protected IAudioSystem audioSystem;
         protected IRateSystem rateSystem;
-        protected IFreeCoinSystem freeCoinSystem;
-        protected IDebugModel debugSystem;
         protected IAdsSystem adsSystem;
+
+        protected IFreeCoinSystem freeCoinSystem;
         protected IDailyBonusSystem dailyBonusSystem;
         protected ISpinSystem spinSystem;
-
-        protected IUserModel userModel;
-        protected ITutorialModel tutorialModel;
-        protected IStatisticsModel statisticsModel;
-
         protected IDailyTaskSystem dailyTaskSystem;
 
         private void Awake()
@@ -54,24 +50,19 @@ namespace GameFramework
 
         protected virtual void MonoAwake()
         {
-            gameModel = this.GetModel<IGameModel>();
+            userModel = this.GetModel<IUserModel>();
+            debugModel = this.GetModel<IDebugModel>();
 
-            languageSystem = this.GetSystem<ILanguageSystem>();
             uiSystem = this.GetSystem<IUISystem>();
-            resourceSystem = this.GetSystem<IResourceSystem>();
-            audioSystem = this.GetSystem<IAudioSystem>();
+            audioSystem = this.GetSystem<IAudioSystem>(); 
             rateSystem = this.GetSystem<IRateSystem>();
-            freeCoinSystem = this.GetSystem<IFreeCoinSystem>();
-            debugSystem = this.GetModel<IDebugModel>();
+            resourceSystem = this.GetSystem<IResourceSystem>();
+            languageSystem = this.GetSystem<ILanguageSystem>();
             adsSystem = this.GetSystem<IAdsSystem>();
 
+            freeCoinSystem = this.GetSystem<IFreeCoinSystem>();
             dailyBonusSystem = this.GetSystem<IDailyBonusSystem>();
             spinSystem = this.GetSystem<ISpinSystem>();
-
-            userModel = this.GetModel<IUserModel>();
-            tutorialModel = this.GetModel<ITutorialModel>();
-            statisticsModel = this.GetModel<IStatisticsModel>();
-
             dailyTaskSystem = this.GetSystem<IDailyTaskSystem>();
         }
 

@@ -63,10 +63,10 @@ namespace GameFramework
             levelIdInput.onEndEdit.RemoveListener(OnLevelIdInputChanged);
         }
         private void OnBtnSaveGameDataClick() {
-            debugSystem.CopyGameData();
+            debugModel.CopyGameData();
         }
         private void OnBtnRecoverGameDataClick() {
-            debugSystem.RecoverGameDataFromFile();
+            debugModel.RecoverGameDataFromFile();
         }
 
 

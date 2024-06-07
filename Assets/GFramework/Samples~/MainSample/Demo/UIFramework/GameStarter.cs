@@ -19,6 +19,8 @@ namespace GameFramework
         private void InitModels()
         {
             GameApp.Interface.RegisterModel<ISettingModel>(new SettingModel());
+            GameApp.Interface.RegisterModel<IGameModel>(new GameModel());
+            GameApp.Interface.RegisterModel<IStatisticsModel>(new StatisticsModel());
         }
 
         private void InitSystems()
@@ -29,7 +31,7 @@ namespace GameFramework
         private void CheckForDebug()
         {
             adsSystem.SetAdsManager(new AdsManager_Editor());
-            if (debugSystem.IsDebugFeatureEnabled(EDebugFeature.TimeScaleDown))
+            if (debugModel.IsDebugFeatureEnabled(EDebugFeature.TimeScaleDown))
                 Time.timeScale = 0.2f;
         }
     }
