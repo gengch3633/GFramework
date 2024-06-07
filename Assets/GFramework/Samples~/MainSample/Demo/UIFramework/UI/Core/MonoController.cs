@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public class MonoController : MonoBaseController
+    public class MonoController : MonoVarController
     {
         protected IGameModel gameModel;
         protected ISettingModel settingModel;
