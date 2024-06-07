@@ -10,7 +10,7 @@ using TMPro;
 
 namespace GameFramework
 {
-    public class SpinPopup : UIBasePopup
+    public class SpinPopup : UIPopup
     {
         private int radius = 200;
         private List<int> coinCountList = new List<int>() { 10, 500, 20, 300, 30, 250, 50, 200, 100, 150 };
