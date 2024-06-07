@@ -28,7 +28,7 @@ namespace GameFramework
 
         private void InitBaseModels()
         {
-            this.RegisterModel<IGameModel>(new GameModel());
+
             this.RegisterModel<IDebugModel>(new DebugModel());
         }
     }
