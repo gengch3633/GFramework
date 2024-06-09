@@ -7,8 +7,6 @@ namespace GameFramework
 {
     public partial interface ISettingModel : IModel
     {
-        BindableProperty<bool> IsSoundOn { get; }
-        BindableProperty<bool> IsMusicOn { get; }
         BindableProperty<bool> IsLeftHandOn { get; }
         BindableProperty<bool> IsNotificationOn { get; }
     }
@@ -21,8 +19,6 @@ namespace GameFramework
             CopyBindableClass(this, settingRecord, ()=> SaveInfo(this));
         }
 
-        public BindableProperty<bool> IsSoundOn { get; } = new BindableProperty<bool>() { Value = true };
-        public BindableProperty<bool> IsMusicOn { get; } = new BindableProperty<bool>() { Value = true };
         public BindableProperty<bool> IsLeftHandOn { get; } = new BindableProperty<bool>();
         public BindableProperty<bool> IsNotificationOn { get; } = new BindableProperty<bool>() { Value = true };
     }
