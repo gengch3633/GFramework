@@ -16,7 +16,7 @@ namespace GameFramework
         {
             base.OnInit();
             tutorialRecord = ReadInfoWithReturnNew<TutorialModel>();
-            CopyBindableClass(this, tutorialRecord);
+            CopyBindableClass(this, tutorialRecord, ()=> SaveInfo(this));
         }
     }
 }

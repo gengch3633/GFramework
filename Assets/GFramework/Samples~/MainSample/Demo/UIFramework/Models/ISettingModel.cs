@@ -18,12 +18,7 @@ namespace GameFramework
         protected override void OnInit()
         {
             var settingRecord = ReadInfoWithReturnNew<SettingModel>();
-            CopyBindableClass(this, settingRecord);
-
-            IsSoundOn.RegisterOnValueChanged((v) => SaveInfo(this));
-            IsMusicOn.RegisterOnValueChanged((v) => SaveInfo(this));
-            IsLeftHandOn.RegisterOnValueChanged((v) => SaveInfo(this));
-            IsNotificationOn.RegisterOnValueChanged((v) => SaveInfo(this));
+            CopyBindableClass(this, settingRecord, ()=> SaveInfo(this));
         }
 
         public BindableProperty<bool> IsSoundOn { get; } = new BindableProperty<bool>() { Value = true };

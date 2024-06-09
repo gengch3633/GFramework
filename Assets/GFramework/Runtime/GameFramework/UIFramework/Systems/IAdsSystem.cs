@@ -37,8 +37,7 @@ namespace GameFramework
         {
             base.OnInit();
             var userRecord = ReadInfoWithReturnNew<AdsSystem>();
-            CopyBindableClass(this, userRecord);
-            InterstitialAdsEnabled.RegisterOnValueChanged(v => SaveInfo(this));
+            CopyBindableClass(this, userRecord, ()=> SaveInfo(this));
 
             var isEditor = false;
 

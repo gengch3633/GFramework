@@ -13,9 +13,7 @@ namespace GameFramework
         {
             base.OnInit();
             var userRecord = ReadInfoWithReturnNew<StatisticsModel>();
-            CopyBindableClass(this, userRecord);
-
-            FirstPlaceCount.RegisterOnValueChanged(v => SaveInfo(this));
+            CopyBindableClass(this, userRecord,()=>  SaveInfo(this));
         }
 
         public BindableProperty<int> FirstPlaceCount { get; } = new BindableProperty<int>();

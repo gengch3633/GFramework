@@ -106,7 +106,7 @@ namespace GameFramework
         public void SetTypeLogEnabled(string typeFullName, bool enabled)
         {
             TypeLogEnableSwitchGroup.Value.SetSwitchOn(typeFullName, enabled);
-            SaveInfo(this);
+            TypeLogEnableSwitchGroup.Value = TypeLogEnableSwitchGroup.Value;
         }
 
         public bool IsTypeLogEnabled(string typeFullName)
@@ -118,7 +118,7 @@ namespace GameFramework
         public void SetDebugFeatureEnabled(string debugFeatureName, bool enabled)
         {
             DebugFeatureEnableSwitchGroup.Value.SetSwitchOn(debugFeatureName, enabled);
-            SaveInfo(this);
+            DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
         }
 
         public void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled)

@@ -37,12 +37,7 @@ namespace GameFramework
         {
             base.OnInit();
             var userRecord = ReadInfoWithReturnNew<UserModel>();
-            CopyBindableClass(this, userRecord);
-            Level.RegisterOnValueChanged(v => SaveInfo(this));
-            Coins.RegisterOnValueChanged(v => SaveInfo(this));
-            Diamonds.RegisterOnValueChanged(v => SaveInfo(this));
-            Score.RegisterOnValueChanged(v => SaveInfo(this));
-            Name.RegisterOnValueChanged(v => SaveInfo(this));
+            CopyBindableClass(this, userRecord, ()=> SaveInfo(this));
 
             levelInfos = GameUtils.GetConfigInfos<LevelUpInfo>();
         }

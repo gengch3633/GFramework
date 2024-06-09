@@ -31,7 +31,7 @@ namespace GameFramework
         {
             base.OnInit();
             var audioSystem = ReadInfoWithReturnNew<AudioSystem>();
-            CopyBindableClass(this, audioSystem);
+            CopyBindableClass(this, audioSystem, ()=> SaveInfo(this));
 
             audioObj = new GameObject(typeof(AudioSystem).FullName);
             GameObject.DontDestroyOnLoad(audioObj);
