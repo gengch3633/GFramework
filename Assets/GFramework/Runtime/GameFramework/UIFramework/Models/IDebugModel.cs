@@ -2,6 +2,7 @@ using Framework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -68,21 +69,24 @@ namespace GameFramework
 
         private List<Type> GetLogTypes()
         {
-            var currentNameSpaceTypes = Assembly.GetExecutingAssembly().GetTypes();
             var allTypes = new List<Type>();
-            allTypes.AddRange(currentNameSpaceTypes);
-            allTypes = allTypes.FindAll(item => item.FullName.StartsWith("GameFramework.") || item.FullName.StartsWith("Framework.") || item.FullName.StartsWith("Hearts."));
-            allTypes = allTypes.FindAll(item => item.GetInterface(typeof(ITypeLog).Name) != null);
-
-            var childClasses = new List<Type>();
-            allTypes.ForEach(childClass =>
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+            assemblies.ForEach(assembly =>
             {
-                var parentClasses = allTypes.FindAll(item => childClass.IsSubclassOf(item));
-                if (parentClasses.Count > 0)
-                    childClasses.Add(childClass);
-            });
+                var currentNameSpaceTypes = assembly.GetTypes();
+                allTypes.AddRange(currentNameSpaceTypes);
+                allTypes = allTypes.FindAll(item => item.GetInterface(typeof(ITypeLog).Name) != null);
 
-            childClasses.ForEach(item => allTypes.Remove(item));
+                var childClasses = new List<Type>();
+                allTypes.ForEach(childClass =>
+                {
+                    var parentClasses = allTypes.FindAll(item => childClass.IsSubclassOf(item));
+                    if (parentClasses.Count > 0)
+                        childClasses.Add(childClass);
+                });
+
+                childClasses.ForEach(item => allTypes.Remove(item));
+            });
 
             return allTypes;
         }
