@@ -31,7 +31,7 @@ namespace GameFramework
         }
         private void OnToggleItemChanged(bool value) 
         {
-            userModel.SendEvent(new ToggleItemValueChangedEvent(lableString, value));
+            debugModel.SendEvent(new ToggleItemValueChangedEvent(lableString, value));
         }
     }
 }

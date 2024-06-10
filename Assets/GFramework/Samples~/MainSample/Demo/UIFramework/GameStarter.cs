@@ -14,6 +14,7 @@ namespace GameFramework
             Input.multiTouchEnabled = false;
             Loom.Initialize();
             CheckForDebug();
+            uiSystem.OpenPopup<DebugPopup>();
         }
 
         private void InitModels()
