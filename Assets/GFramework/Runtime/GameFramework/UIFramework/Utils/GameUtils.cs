@@ -18,6 +18,25 @@ namespace GameFramework
             return isEditor;
         }
 
+        public T CreateItem<T>(Transform parent, string suffix = "") where T : Component
+        {
+            var itemName = typeof(T).Name;
+            var itemPrafabPath = suffix == "" ? $"Prefabs/Items/{itemName}" : $"Prefabs/Items/{itemName}_{suffix}";
+
+            var itemPrefab = Resources.Load<GameObject>(itemPrafabPath);
+            var tempScoreItem = GameObject.Instantiate(itemPrefab).GetComponent<T>();
+            tempScoreItem.transform.SetParent(parent);
+            tempScoreItem.transform.localPosition = Vector3.zero;
+            tempScoreItem.transform.localScale = Vector3.one;
+            return tempScoreItem;
+        }
+
+        public Color ParseColor(string colorString)
+        {
+            ColorUtility.TryParseHtmlString(colorString, out Color color);
+            return color;
+        }
+
         public static List<T> GetConfigInfos<T>(string suffix = "") where T : class, new()
         {
             var itemName = typeof(T).Name;
