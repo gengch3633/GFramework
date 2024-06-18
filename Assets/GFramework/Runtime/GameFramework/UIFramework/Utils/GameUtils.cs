@@ -18,7 +18,7 @@ namespace GameFramework
             return isEditor;
         }
 
-        public T CreateItem<T>(Transform parent, string suffix = "") where T : Component
+        public static T CreateItem<T>(Transform parent, string suffix = "") where T : Component
         {
             var itemName = typeof(T).Name;
             var itemPrafabPath = suffix == "" ? $"Prefabs/Items/{itemName}" : $"Prefabs/Items/{itemName}_{suffix}";
@@ -31,7 +31,7 @@ namespace GameFramework
             return tempScoreItem;
         }
 
-        public Color ParseColor(string colorString)
+        public static Color ParseColor(string colorString)
         {
             ColorUtility.TryParseHtmlString(colorString, out Color color);
             return color;
