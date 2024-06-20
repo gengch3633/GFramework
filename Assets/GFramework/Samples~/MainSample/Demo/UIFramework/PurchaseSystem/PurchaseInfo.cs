@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine.Purchasing;
 
 namespace GameFramework
@@ -9,9 +11,13 @@ namespace GameFramework
         public string productId;
         public ProductType productType;
         public string price;
-        public int coinCount;
-        public EPurchaseTag purchaseTag;
-        public int extraDesc;
+        public string itemCountArrayString;
+
+        public List<int> GetItemCountList()
+        {
+            var intList = JsonConvert.DeserializeObject<List<int>>(itemCountArrayString);
+            return intList;
+        }
 
         public string GetPrice(IStoreController storeController)
         {
