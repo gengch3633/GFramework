@@ -158,5 +158,30 @@
         "componentName": "Animation",
         "actionName": "initComponent",
         "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "Dropdown",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "Dropdown",
+        "actionName": "addListener",
+        "actionString": "{btnName1}.onValueChanged.AddListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "Dropdown",
+        "actionName": "removeListener",
+        "actionString": "{btnName1}.onValueChanged.RemoveListener(On{btnName2}Changed);"
+    },
+    {
+        "componentName": "Dropdown",
+        "actionName": "clickMethod",
+        "actionString": "private void On{btnName2}Changed(int value)\\n{\\n\\n}"
+    },
+    {
+        "componentName": "Dropdown",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
     }
 ]

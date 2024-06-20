@@ -23,6 +23,7 @@ namespace GameFramework
             CollectActionsStrings<ScrollRect>(rootGameObject, actionDict);
             CollectActionsStrings<ParticleSystem>(rootGameObject, actionDict);
             CollectActionsStrings<Animation>(rootGameObject, actionDict);
+            CollectActionsStrings<Dropdown>(rootGameObject, actionDict);
 
             string declareString = string.Join("\n", actionDict["declaration"]);
 
