@@ -11,10 +11,6 @@ namespace GameFramework
 {
     public class MonoBaseController : MonoBehaviour, IController
     {
-        [SerializeField]
-        private string tmpFontAssetName;
-        [SerializeField]
-        private string tmpFontMaterialName;
         protected IUserModel userModel;
         protected IDebugModel debugModel;
 
@@ -145,37 +141,37 @@ namespace GameFramework
 
         }
 
-        [ContextMenu("ChangeBtnTextToTmp")]
-        private void ChangeBtnTextToTmp()
-        {
-            if (string.IsNullOrEmpty(tmpFontAssetName))
-                return;
-            if (string.IsNullOrEmpty(tmpFontMaterialName))
-                return;
+        //[ContextMenu("ChangeBtnTextToTmp")]
+        //private void ChangeBtnTextToTmp()
+        //{
+        //    if (string.IsNullOrEmpty(tmpFontAssetName))
+        //        return;
+        //    if (string.IsNullOrEmpty(tmpFontMaterialName))
+        //        return;
 
-            var btns = GetComponentsInChildren<Button>().ToList();
-            var tmpBtns = btns.FindAll(item => item.GetComponentInChildren<Text>() != null);
-            var tmpTexts = tmpBtns.ConvertAll(item => item.GetComponentInChildren<Text>());
-            tmpTexts.ForEach(item => {
-                var itemGo = new GameObject($"{item.name}_TMP", typeof(TextMeshProUGUI));
-                itemGo.transform.SetParent(item.transform.parent);
-                itemGo.transform.localScale = Vector3.one;
-                itemGo.transform.position = item.transform.position;
+        //    var btns = GetComponentsInChildren<Button>().ToList();
+        //    var tmpBtns = btns.FindAll(item => item.GetComponentInChildren<Text>() != null);
+        //    var tmpTexts = tmpBtns.ConvertAll(item => item.GetComponentInChildren<Text>());
+        //    tmpTexts.ForEach(item => {
+        //        var itemGo = new GameObject($"{item.name}_TMP", typeof(TextMeshProUGUI));
+        //        itemGo.transform.SetParent(item.transform.parent);
+        //        itemGo.transform.localScale = Vector3.one;
+        //        itemGo.transform.position = item.transform.position;
 
-                var tmpText = itemGo.GetComponent<TextMeshProUGUI>();
-                tmpText.text = item.text;
-                tmpText.fontSize = item.fontSize;
-                tmpText.fontStyle = FontStyles.Bold;
-                tmpText.horizontalAlignment = HorizontalAlignmentOptions.Center;
-                tmpText.verticalAlignment = VerticalAlignmentOptions.Middle;
-                tmpText.GetComponent<RectTransform>().sizeDelta = item.GetComponent<RectTransform>().rect.size;
+        //        var tmpText = itemGo.GetComponent<TextMeshProUGUI>();
+        //        tmpText.text = item.text;
+        //        tmpText.fontSize = item.fontSize;
+        //        tmpText.fontStyle = FontStyles.Bold;
+        //        tmpText.horizontalAlignment = HorizontalAlignmentOptions.Center;
+        //        tmpText.verticalAlignment = VerticalAlignmentOptions.Middle;
+        //        tmpText.GetComponent<RectTransform>().sizeDelta = item.GetComponent<RectTransform>().rect.size;
 
-                TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>(tmpFontAssetName);
-                Material material = Resources.Load<Material>(tmpFontMaterialName);
-                tmpText.font = fontAsset;
-                tmpText.fontSharedMaterial = material;
-            });
-        }
+        //        TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>(tmpFontAssetName);
+        //        Material material = Resources.Load<Material>(tmpFontMaterialName);
+        //        tmpText.font = fontAsset;
+        //        tmpText.fontSharedMaterial = material;
+        //    });
+        //}
 
         [ContextMenu("CreateUIInitMethods")]
         private void CreateUIInitMethods()
