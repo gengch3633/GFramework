@@ -20,6 +20,7 @@ namespace GameFramework
             this.RegisterSystem<IRateSystem>(new RateSystem());
             this.RegisterSystem<IAdsSystem>(new AdsSystem());
 
+            this.RegisterSystem<ITutorialSystem>(new TutorialSystem());
             this.RegisterSystem<IFreeCoinSystem>(new FreeCoinSystem());
             this.RegisterSystem<ISpinSystem>(new SpinSystem());
             this.RegisterSystem<IDailyBonusSystem>(new DailyBonusSystem());

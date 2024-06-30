@@ -21,6 +21,8 @@ namespace GameFramework
         protected IRateSystem rateSystem;
         protected IAdsSystem adsSystem;
 
+        protected ITutorialSystem tutorialSystem;
+
         protected IFreeCoinSystem freeCoinSystem;
         protected IDailyBonusSystem dailyBonusSystem;
         protected ISpinSystem spinSystem;
@@ -56,6 +58,7 @@ namespace GameFramework
             languageSystem = this.GetSystem<ILanguageSystem>();
             adsSystem = this.GetSystem<IAdsSystem>();
 
+            tutorialSystem = this.GetSystem<ITutorialSystem>();
             freeCoinSystem = this.GetSystem<IFreeCoinSystem>();
             dailyBonusSystem = this.GetSystem<IDailyBonusSystem>();
             spinSystem = this.GetSystem<ISpinSystem>();

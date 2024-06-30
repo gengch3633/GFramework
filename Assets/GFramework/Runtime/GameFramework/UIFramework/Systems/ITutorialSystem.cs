@@ -9,8 +9,8 @@ namespace GameFramework
 {
     public interface ITutorialSystem : ISystem
     {
-        bool IsTutorialCompleted<T>() where T: new();
-        void CompleteTutorial<T>() where T : new();
+        bool IsTutorialCompleted<T>() where T: Tutorial_Base;
+        void CompleteTutorial<T>() where T : Tutorial_Base;
 
         void ShowFingerTutorial(Transform target, bool showUp = true);
         void CloseFingerTutorial();
@@ -18,21 +18,24 @@ namespace GameFramework
 
     public class TutorialSystem : AbstractSystem, ITutorialSystem
     {
-        public BindableProperty<GameTutorialRecord> TypeLogEnableSwitchGroup { get; } = new BindableProperty<GameTutorialRecord>() { Value = new GameTutorialRecord() };
+        public BindableProperty<List<string>> TypeLogEnableSwitchGroup { get; } = new BindableProperty<List<string>>() { Value = new List<string>() };
 
-        public bool IsTutorialCompleted<T>() where T : new()
+        public bool IsTutorialCompleted<T>() where T : Tutorial_Base
         {
-            var tutorialRecord = TypeLogEnableSwitchGroup.Value;
-            return tutorialRecord.IsFingerTutorialCompleted<T>();
+            var tutorialName = typeof(T).FullName;
+            var isCompleted = TypeLogEnableSwitchGroup.Value.Contains(tutorialName);
+            return isCompleted;
         }
 
-        public void CompleteTutorial<T>() where T : new()
+        public void CompleteTutorial<T>() where T : Tutorial_Base
         {
-            var tutorialRecord = TypeLogEnableSwitchGroup.Value;
-            tutorialRecord.CompleteFingerTutorial<T>();
+            var tutorialName = typeof(T).FullName;
+            if (!TypeLogEnableSwitchGroup.Value.Contains(tutorialName))
+            {
+                TypeLogEnableSwitchGroup.Value.Add(tutorialName);
+                SaveInfo(this);
+            }
         }
-
-
         private Dictionary<Transform, Transform> tutorialDict = new Dictionary<Transform, Transform>();
         public void ShowFingerTutorial(Transform target, bool showUp = true)
         {
@@ -93,28 +96,6 @@ namespace GameFramework
             }
 
             tutorialDict.Clear();
-        }
-
-       
-    }
-
-    public class GameTutorialRecord
-    {
-        public bool isFirstTutorialCompleted = false;
-
-        public List<string> completedTutorials = new List<string>();
-
-        public void CompleteFingerTutorial<T>() where T: new()
-        {
-            var tutorialName = typeof(T).FullName;
-            if (!completedTutorials.Contains(tutorialName))
-                completedTutorials.Add(tutorialName);
-        }
-
-        public bool IsFingerTutorialCompleted<T>() where T : new()
-        {
-            var tutorialName = typeof(T).FullName;
-            return completedTutorials.Contains(tutorialName);
         }
     }
 }
