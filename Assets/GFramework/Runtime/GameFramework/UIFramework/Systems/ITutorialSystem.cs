@@ -18,6 +18,12 @@ namespace GameFramework
 
     public class TutorialSystem : AbstractSystem, ITutorialSystem
     {
+        protected override void OnInit()
+        {
+            base.OnInit();
+            var tutorialSystem = ReadInfoWithReturnNew<TutorialSystem>();
+            CopyBindableClass(this, tutorialSystem, () => SaveInfo(this));
+        }
         public BindableProperty<List<string>> TypeLogEnableSwitchGroup { get; } = new BindableProperty<List<string>>() { Value = new List<string>() };
 
         public bool IsTutorialCompleted<T>() where T : Tutorial_Base
