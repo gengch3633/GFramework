@@ -18,6 +18,15 @@ namespace GameFramework
             return isEditor;
         }
 
+        public static void LogElapsedTime(string actionName, Action action)
+        {
+            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+            action.Invoke();
+            stopwatch.Stop();
+            UnityEngine.Debug.LogError($"==> [CalcElapsedTime] [{actionName}]: {stopwatch.ElapsedMilliseconds} ms");
+        }
+
         public static T CreateItem<T>(Transform parent, string suffix = "") where T : Component
         {
             var itemName = typeof(T).Name;
