@@ -70,5 +70,10 @@ namespace Framework
             selfReflection.CopyBindableProperties(otherReflection, action);
             selfReflection.CopyFields(otherReflection);
         }
+
+        public virtual void SaveInfo()
+        {
+            
+        }
     }
 }

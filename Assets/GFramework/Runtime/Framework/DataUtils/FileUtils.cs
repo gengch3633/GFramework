@@ -35,5 +35,10 @@ namespace Framework
         {
             fileSaver.SaveInfo(t);
         }
+
+        public virtual void SaveInfo()
+        {
+
+        }
     }
 }

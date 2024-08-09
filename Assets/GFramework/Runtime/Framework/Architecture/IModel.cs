@@ -2,7 +2,7 @@
 
 namespace Framework
 {
-    public interface IModel : IBelongToArchitecture, ICanSetArchitecture, ICanGetUtility, ICanSendEvent
+    public interface IModel : IBelongToArchitecture, ICanSetArchitecture, ICanGetUtility, ICanSendEvent, IFileSaver
     {
         void Init();
     }

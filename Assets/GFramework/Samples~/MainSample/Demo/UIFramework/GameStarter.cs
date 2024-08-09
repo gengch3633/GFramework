@@ -26,7 +26,23 @@ namespace GameFramework
 
         private void InitSystems()
         {
+            
+        }
 
+        void OnApplicationQuit()
+        {
+            SaveInfo();
+        }
+
+        void OnApplicationPause(bool pause)
+        {
+            if (pause) SaveInfo();
+        }
+
+        private void SaveInfo()
+        {
+            GameApp.Interface.Systems.ForEach(item => item.SaveInfo());
+            GameApp.Interface.Models.ForEach(item => item.SaveInfo());
         }
 
         private void CheckForDebug()

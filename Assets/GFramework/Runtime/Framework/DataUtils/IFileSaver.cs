@@ -13,5 +13,6 @@ namespace Framework
         T ReadInfoWithReturnNew<T>() where T : new();
         T ReadInfoWithReturnNull<T>() where T : new();
         void SaveInfo<T>(T t) where T : new();
+        void SaveInfo();
     }
 }

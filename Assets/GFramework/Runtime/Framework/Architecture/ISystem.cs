@@ -1,6 +1,6 @@
 ﻿namespace Framework
 {
-    public interface ISystem : IBelongToArchitecture, ICanSetArchitecture, ICanGetModel, ICanGetUtility, ICanSendEvent, ICanGetSystem
+    public interface ISystem : IBelongToArchitecture, ICanSetArchitecture, ICanGetModel, ICanGetUtility, ICanSendEvent, ICanGetSystem, IFileSaver
     {
         void Init();
     }

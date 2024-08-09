@@ -25,6 +25,8 @@ namespace Framework
         IUnRegister RegisterEvent<T>(Action<T> onEvent);
 
         void UnRegisterEvent<T>(Action<T> onEvent);
+        List<ISystem> Systems { get; }
+        List<IModel> Models { get; }
     }
 
     public abstract class Architecture<T1> : IArchitecture where T1 : Architecture<T1>, new()
@@ -34,6 +36,8 @@ namespace Framework
         private List<ISystem> mSystems = new List<ISystem>();
 
         private List<IModel> mModels = new List<IModel>();
+        public List<ISystem> Systems { get { return mSystems; } }
+        public List<IModel> Models { get { return mModels; } }
 
         /// <summary>
         /// 注册System
@@ -132,13 +136,9 @@ namespace Framework
                 foreach (var architectureModel in mArchitecture.mModels)
                     architectureModel.Init();
 
-                mArchitecture.mModels.Clear();
-
-                foreach (var architectureSystem in mArchitecture.mSystems) // 新增
+                foreach (var architectureSystem in mArchitecture.mSystems)
                     architectureSystem.Init();
 
-                // 清空 System
-                mArchitecture.mSystems.Clear();
                 mArchitecture.mInited = true;
             }
         }
