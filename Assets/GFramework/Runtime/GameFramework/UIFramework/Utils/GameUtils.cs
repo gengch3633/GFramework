@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace GameFramework
 {
@@ -25,6 +26,44 @@ namespace GameFramework
             action.Invoke();
             stopwatch.Stop();
             UnityEngine.Debug.LogError($"==> [CalcElapsedTime] [{actionName}]: {stopwatch.ElapsedMilliseconds} ms");
+        }
+        public static void ForEachListWithAction<T>(List<T> cardList, Action<T> action, bool forward = true)
+        {
+            if (forward)
+            {
+                for (int i = 0; i < cardList.Count; i++)
+                    action.Invoke(cardList[i]);
+            }
+            else
+            {
+                for (int i = cardList.Count - 1; i >= 0; i--)
+                    action.Invoke(cardList[i]);
+            }
+        }
+
+        public static void LogElapsedTime(string actionName, Action action, bool isInProfiler = false)
+        {
+            System.Diagnostics.Stopwatch stopwatch = null;
+            if (isInProfiler)
+            {
+                stopwatch = new System.Diagnostics.Stopwatch();
+                stopwatch.Start();
+                Profiler.BeginSample(actionName);
+            }
+               
+            action.Invoke();
+            if (isInProfiler)
+            {
+                Profiler.EndSample();
+                stopwatch.Stop();
+                UnityEngine.Debug.LogError($"==> [LogElapsedTime] [{actionName}]: {stopwatch.ElapsedMilliseconds} ms");
+            }
+        }
+
+        public static void AddListRange<T>(List<T> toList, List<T> fromList)
+        {
+            for (int i = 0; i < fromList.Count; i++)
+                toList.Add(fromList[i]);
         }
 
         public static T CreateItem<T>(Transform parent, string suffix = "") where T : Component
