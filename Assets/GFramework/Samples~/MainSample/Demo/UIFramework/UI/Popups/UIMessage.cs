@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public class UIMessage : UIBaseMessage
+    public partial class UIMessage : UIBaseMessage
     {
         protected IGameModel gameModel;
         protected ISettingModel settingModel;

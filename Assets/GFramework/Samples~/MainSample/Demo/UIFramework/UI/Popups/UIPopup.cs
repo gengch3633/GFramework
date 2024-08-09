@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public class UIPopup : UIBasePopup
+    public partial class UIPopup : UIBasePopup
     {
         protected IGameModel gameModel;
         protected ISettingModel settingModel;

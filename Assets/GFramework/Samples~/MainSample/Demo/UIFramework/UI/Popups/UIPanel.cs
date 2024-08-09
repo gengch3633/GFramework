@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public class UIPanel : UIBasePanel
+    public partial class UIPanel : UIBasePanel
     {
         protected IGameModel gameModel;
         protected ISettingModel settingModel;

@@ -19,14 +19,6 @@ namespace GameFramework
             return isEditor;
         }
 
-        public static void LogElapsedTime(string actionName, Action action)
-        {
-            System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-            stopwatch.Start();
-            action.Invoke();
-            stopwatch.Stop();
-            UnityEngine.Debug.LogError($"==> [CalcElapsedTime] [{actionName}]: {stopwatch.ElapsedMilliseconds} ms");
-        }
         public static void ForEachListWithAction<T>(List<T> cardList, Action<T> action, bool forward = true)
         {
             if (forward)

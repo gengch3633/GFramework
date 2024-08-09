@@ -31,8 +31,11 @@ namespace GameFramework
         private void Awake()
         {
             MonoAwake();
+            MonoAwakePartial();
+
             OnAddUIListeners();
             OnAdListeners();
+
             OnInitVars();
         }
 
