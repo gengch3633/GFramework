@@ -49,7 +49,8 @@ namespace GameFramework
         public bool IsTypeLogEnabled()
         {
             var debugSystem = this.GetModel<IDebugModel>();
-            return debugSystem.IsTypeLogEnabled(this);
+            var ret = debugSystem.IsTypeLogEnabled(this);
+            return ret;
         }
 
         protected override void OnInit()
@@ -91,8 +92,11 @@ namespace GameFramework
             CloseAllMessages();
             var messageViewName = typeof(T).Name;
             GameObject obj = Resources.Load<GameObject>($"Prefabs/Messages/{messageViewName}");
-            var messageGo = GameObject.Instantiate(obj, topLayer);
-            messageGo.GetComponent<UIBaseMessage>().Init(messageInfo);
+            GameUtils.LogElapsedTime($"==> [OpenMessage]: [{messageViewName}]", () =>
+            {
+                var messageGo = GameObject.Instantiate(obj, topLayer);
+                messageGo.GetComponent<UIBaseMessage>().Init(messageInfo);
+            }, IsTypeLogEnabled());
         }
         public void CloseAllMessages()
         {
@@ -104,10 +108,13 @@ namespace GameFramework
         public void OpenPanel<T>(object param = null) where T : UIBasePanel
         {
             var panelName = typeof(T).Name;
-            GameObject obj = Resources.Load<GameObject>($"Prefabs/Panels/{panelName}");
-            var panel = GameObject.Instantiate(obj, bottomLayer);
-            panel.GetComponent<UIBasePanel>().Init(param);
-            panelDict.Add(panel, panelName);
+            GameUtils.LogElapsedTime($"==> [OpenPanel]: [{panelName}]", () =>
+            {
+                GameObject obj = Resources.Load<GameObject>($"Prefabs/Panels/{panelName}");
+                var panel = GameObject.Instantiate(obj, bottomLayer);
+                panel.GetComponent<UIBasePanel>().Init(param);
+                panelDict.Add(panel, panelName);
+            }, IsTypeLogEnabled());
         }
         public void ClosePanel(GameObject panel, Action onComplete = null)
         {
@@ -161,11 +168,15 @@ namespace GameFramework
         private UIBasePopup OpenPopup(string popupName, object param)
         {
             GameObject obj = Resources.Load<GameObject>($"Prefabs/Popups/{popupName}");
-            var popupGo = GameObject.Instantiate(obj, middleLayer);
-            popupDict.Add(popupGo, popupName);
+            UIBasePopup popup = null;
+            GameUtils.LogElapsedTime($"==> [OpenPopup]: [{popupName}]", () =>
+            {
+                var popupGo = GameObject.Instantiate(obj, middleLayer);
+                popupDict.Add(popupGo, popupName);
 
-            var popup = popupGo.GetComponent<UIBasePopup>();
-            popup.Init(param);
+                popup = popupGo.GetComponent<UIBasePopup>();
+                popup.Init(param);
+            }, IsTypeLogEnabled());
             return popup;
         }
         #endregion
