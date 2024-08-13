@@ -87,8 +87,10 @@ namespace GameFramework
 
                 childClasses.ForEach(item => allTypes.Remove(item));
             });
+            var logNames = allTypes.ConvertAll(item => item.FullName);
+            logNames.Sort();
 
-            return allTypes.ConvertAll(item => item.FullName);
+            return logNames;
         }
 
         public void SetTypeLogEnabled(string typeFullName, bool enabled)
