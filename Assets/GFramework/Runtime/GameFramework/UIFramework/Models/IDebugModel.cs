@@ -8,17 +8,6 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public enum EDebugFeature
-    {
-        MobileTestAds,
-        NoAds,
-        TimeScaleDown,
-        OpenBackDoor
-    }
-    public interface ITypeLog
-    {
-        bool IsTypeLogEnabled();
-    }
     public interface IDebugModel : IModel
     {
         void RecoverGameDataFromFile();
@@ -28,12 +17,14 @@ namespace GameFramework
         List<string> GetAllTypeLogNames();
 
         bool IsTypeLogEnabled(string typeFullName);
+        bool IsTypeLogEnabled<T>(T t);
+        bool IsTypeLogEnabled<T>();
         void SetTypeLogEnabled(string typeFullName, bool enabled);
-       
-        void SetDebugFeatureEnabled(string debugFeatureName, bool enabled);
+
         bool IsDebugFeatureEnabled(string debugFeatureName);
-        void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled);
-        bool IsDebugFeatureEnabled(EDebugFeature debugFeature);
+        bool IsDebugFeatureEnabled<T>();
+        void SetDebugFeatureEnabled(string debugFeatureName, bool enabled);
+
         BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; }
         BindableProperty<SwitchGroup> DebugFeatureEnableSwitchGroup { get; }
     }
@@ -56,18 +47,27 @@ namespace GameFramework
         {
             if (TypeLogEnableSwitchGroup.Value.switchInfos.Count <= 0)
             {
-                foreach (Type item in GetLogTypes())
-                    TypeLogEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = item.FullName, isOn = false });
+                foreach (var logTypeName in GetAllTypeLogNames())
+                    TypeLogEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = logTypeName, isOn = false });
 
-                foreach (EDebugFeature item in System.Enum.GetValues(typeof(EDebugFeature)))
-                    DebugFeatureEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = item.ToString(), isOn = false });
+                foreach (var item in GetAllDebugFeatureNames())
+                    DebugFeatureEnableSwitchGroup.Value.switchInfos.Add(new SwitchInfo() { switchName = item, isOn = false });
 
                 TypeLogEnableSwitchGroup.Value = TypeLogEnableSwitchGroup.Value;
                 DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
             }
         }
 
-        private List<Type> GetLogTypes()
+        private List<Type> GetFileSaverTypes()
+        {
+            var currentNameSpaceTypes = Assembly.GetExecutingAssembly().GetTypes();
+            var allTypes = new List<Type>();
+            allTypes.AddRange(currentNameSpaceTypes);
+            allTypes = allTypes.FindAll(item => item.IsSubclassOf(typeof(FileSaver)));
+            return allTypes;
+        }
+
+        public List<string> GetAllTypeLogNames()
         {
             var allTypes = new List<Type>();
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -88,23 +88,7 @@ namespace GameFramework
                 childClasses.ForEach(item => allTypes.Remove(item));
             });
 
-            return allTypes;
-        }
-
-        private List<Type> GetFileSaverTypes()
-        {
-            var currentNameSpaceTypes = Assembly.GetExecutingAssembly().GetTypes();
-            var allTypes = new List<Type>();
-            allTypes.AddRange(currentNameSpaceTypes);
-            allTypes = allTypes.FindAll(item => item.IsSubclassOf(typeof(FileSaver)));
-            return allTypes;
-        }
-
-
-        public List<string> GetAllTypeLogNames()
-        {
-            var allTyoes = GetLogTypes();
-            return allTyoes.ConvertAll(item => item.FullName);
+            return allTypes.ConvertAll(item => item.FullName);
         }
 
         public void SetTypeLogEnabled(string typeFullName, bool enabled)
@@ -119,36 +103,54 @@ namespace GameFramework
             return ret;
         }
 
+        public bool IsTypeLogEnabled<T>(T t)
+        {
+            return IsTypeLogEnabled<T>();
+        }
+
+        public bool IsTypeLogEnabled<T>()
+        {
+            var typeFullName = typeof(T).FullName;
+            var ret = TypeLogEnableSwitchGroup.Value.IsSwitchOn(typeFullName);
+            return ret;
+        }
+
         public void SetDebugFeatureEnabled(string debugFeatureName, bool enabled)
         {
             DebugFeatureEnableSwitchGroup.Value.SetSwitchOn(debugFeatureName, enabled);
             DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
         }
 
-        public void SetDebugFeatureEnabled(EDebugFeature debugFeature, bool enabled)
+        public bool IsDebugFeatureEnabled<T>()
         {
-            SetDebugFeatureEnabled(debugFeature.ToString(), enabled);
-        }
-
-        public bool IsDebugFeatureEnabled(EDebugFeature debugFeature)
-        {
-            bool ret = IsDebugFeatureEnabled(debugFeature.ToString());
+            var debugFeatureName = typeof(T).FullName;
+            bool ret = IsDebugFeatureEnabled(debugFeatureName);
             return ret;
         }
-
         public bool IsDebugFeatureEnabled(string debugFeatureName)
         {
             bool ret = DebugFeatureEnableSwitchGroup.Value.IsSwitchOn(debugFeatureName);
             return ret;
         }
-
         public List<string> GetAllDebugFeatureNames()
         {
-            var allFeatures = new List<string>();
-            foreach (EDebugFeature item in Enum.GetValues(typeof(EDebugFeature)))
-                allFeatures.Add(item.ToString());
+            var subTypeList = new List<Type>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+            assemblies.ForEach(assembly =>
+            {
+                var assemblyAllTypes = assembly.GetTypes();
+                foreach (var itemType in assemblyAllTypes)
+                {
+                    var baseType = itemType.BaseType;
+                    if (baseType != null)
+                    {
+                        if (baseType.FullName == typeof(DebugFeature_Base).FullName)
+                            subTypeList.Add(itemType);
+                    }
+                }
+            });
 
-            return allFeatures;
+            return subTypeList.ConvertAll(item=>item.FullName);
         }
 
         public void CopyGameData()
@@ -187,31 +189,6 @@ namespace GameFramework
         {
             UnityEngine.GUIUtility.systemCopyBuffer = text;
         }
-    }
-
-    public class SwitchGroup
-    {
-        public List<SwitchInfo> switchInfos = new List<SwitchInfo>();
-
-        public bool IsSwitchOn(string switchName)
-        {
-            var switchInfo = switchInfos.Find(item=>item.switchName == switchName);
-            var ret = switchInfo != null && switchInfo.isOn;
-            return ret;
-        }
-
-        public void SetSwitchOn(string switchName, bool isOn)
-        {
-            var switchInfo = switchInfos.Find(item => item.switchName == switchName);
-            if (switchInfo != null)
-                switchInfo.isOn = isOn;
-        }
-    }
-
-    public class SwitchInfo
-    {
-        public string switchName;
-        public bool isOn;
     }
 }
 

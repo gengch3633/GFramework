@@ -58,16 +58,8 @@ namespace GameFramework
         {
             debugModel.SetTypeLogEnabled(evt.itemName, evt.value);
             debugModel.SetDebugFeatureEnabled(evt.itemName, evt.value);
-
-            if (evt.itemName == EDebugFeature.NoAds.ToString())
+            if (evt.itemName == typeof(EditAds).FullName)
                 adsSystem.SetAdsManager(new AdsManager_Editor());
-
-            if (evt.itemName == EDebugFeature.TimeScaleDown.ToString())
-            {
-                var isOn = evt.value;
-                var timeScale = isOn ? 0.2f : 1.0f;
-                Time.timeScale = timeScale;
-            }
         }
     }
 }

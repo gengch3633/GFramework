@@ -49,7 +49,7 @@ namespace GameFramework
         public bool IsTypeLogEnabled()
         {
             var debugSystem = this.GetModel<IDebugModel>();
-            return debugSystem.IsTypeLogEnabled(typeof(IDebugModel).FullName);
+            return debugSystem.IsTypeLogEnabled(this);
         }
 
         protected override void OnInit()

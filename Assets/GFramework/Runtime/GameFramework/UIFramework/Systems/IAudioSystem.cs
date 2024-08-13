@@ -23,7 +23,7 @@ namespace GameFramework
         public bool IsTypeLogEnabled()
         {
             var debugSystem = this.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled(typeof(AudioSystem).FullName);
+            var ret = debugSystem.IsTypeLogEnabled(this);
             return ret;
         }
 

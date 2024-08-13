@@ -13,8 +13,8 @@ namespace GameFramework
 
             Input.multiTouchEnabled = false;
             Loom.Initialize();
-            CheckForDebug();
             uiSystem.OpenPopup<DebugPopup>();
+            CheckForDebug();
         }
 
         private void InitModels()
@@ -47,9 +47,8 @@ namespace GameFramework
 
         private void CheckForDebug()
         {
-            adsSystem.SetAdsManager(new AdsManager_Editor());
-            if (debugModel.IsDebugFeatureEnabled(EDebugFeature.TimeScaleDown))
-                Time.timeScale = 0.2f;
+            if(debugModel.IsDebugFeatureEnabled<EditAds>())
+                adsSystem.SetAdsManager(new AdsManager_Editor());
         }
     }
 }
