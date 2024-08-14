@@ -22,7 +22,7 @@ namespace GameFramework
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
             base.DoStateTransition(state, instant);
-            interactableObjects.ForEach(item => item.SetActive(state == SelectionState.Normal));
+            interactableObjects.ForEach(item => item.SetActive(state != SelectionState.Disabled));
             notInteractableObjects.ForEach(item => item.SetActive(state == SelectionState.Disabled));
         }
     }
