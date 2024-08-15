@@ -14,6 +14,9 @@ namespace GameFramework
         {
             base.Init(param);
             if (usePopupAdapter) gameObject.AddComponent<PopupAdapter>();
+            var waitFrameCount = userModel.OpenPopupAnimWaitFrameCount.Value;
+            if (waitFrameCount > 0)
+                await UniTask.DelayFrame(waitFrameCount);
             await OnOpenPopupAsync();
         }
 

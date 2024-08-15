@@ -10,6 +10,7 @@ namespace GameFramework
         BindableProperty<int> Score { get; }
         BindableProperty<int> Diamonds { get; }
         BindableProperty<string> Name { get; }
+        BindableProperty<int> OpenPopupAnimWaitFrameCount { get; }
 
         bool IsCoinEnough(int coins);
 
@@ -30,9 +31,11 @@ namespace GameFramework
 
         public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
         public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
+        public BindableProperty<int> Score { get; } = new BindableProperty<int>();
         public BindableProperty<int> Diamonds { get; } = new BindableProperty<int>() { Value = 200 };
         public BindableProperty<string> Name { get; } = new BindableProperty<string>() { Value = "YOU" };
-        public BindableProperty<int> Score { get; } = new BindableProperty<int>();
+        public BindableProperty<int> OpenPopupAnimWaitFrameCount { get; } = new BindableProperty<int>();
+        
         protected override void OnInit()
         {
             base.OnInit();
