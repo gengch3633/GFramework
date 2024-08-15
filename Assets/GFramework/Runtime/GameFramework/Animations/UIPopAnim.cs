@@ -106,6 +106,15 @@ namespace GameFramework
             PlayAnim(animName, functionName);
         }
 
+        public void ResetPopinAim()
+        {
+            var animName = GetPopInAnimName();
+            anim.Play(animName);
+            anim[animName].time = 0;
+            anim.Sample();
+            anim[animName].enabled = false;
+        }
+
         private Action popOutAnimCompleteEvent;
 
         private void OnPopOutAnimCompleteEvent()

@@ -29,7 +29,7 @@ namespace GameFramework
 
         private void InitBaseModels()
         {
-
+            this.RegisterModel<IUserModel>(new UserModel());
             this.RegisterModel<IDebugModel>(new DebugModel());
         }
     }
