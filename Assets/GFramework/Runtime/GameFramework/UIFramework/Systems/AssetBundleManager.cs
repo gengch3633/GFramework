@@ -8,7 +8,7 @@ using YooAsset;
 
 namespace GameFramework
 {
-    public class BundleManager: MonoSingleton<BundleManager>
+    public class AssetBundleManager: MonoSingleton<AssetBundleManager>
     {
 		private string packageVersion;
 		public bool IsYooAssetInitSuccess = false;
