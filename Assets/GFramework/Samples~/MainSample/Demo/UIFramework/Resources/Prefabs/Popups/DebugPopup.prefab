@@ -607,6 +607,85 @@ MonoBehaviour:
   - {fileID: 8853473987910596538}
   onObjects:
   - {fileID: 7973786350767733705}
+--- !u!1 &827182361102522522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7213249991597423567}
+  - component: {fileID: 4578779195871518920}
+  - component: {fileID: 7102662156342638727}
+  m_Layer: 5
+  m_Name: BtnText_NotInt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &7213249991597423567
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827182361102522522}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8620692944705826234}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -50, y: -30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4578779195871518920
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827182361102522522}
+  m_CullTransparentMesh: 1
+--- !u!114 &7102662156342638727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827182361102522522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 70
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 0
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u6E05\u9664\u6570\u636E"
 --- !u!1 &869019888515899217
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,7 +2380,7 @@ GameObject:
   - component: {fileID: 8620692944705826234}
   - component: {fileID: 8212216263034534259}
   - component: {fileID: 4164745835185592635}
-  - component: {fileID: 4216580924794681408}
+  - component: {fileID: 898225510197384459}
   m_Layer: 5
   m_Name: BtnClearData
   m_TagString: Untagged
@@ -2321,6 +2400,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4166449636483517852}
+  - {fileID: 7213249991597423567}
   m_Father: {fileID: 1213279436787727760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2367,7 +2447,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4216580924794681408
+--- !u!114 &898225510197384459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2376,7 +2456,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3763174353599526310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: dd4158c0e59d9f342bc3df44e5353227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2411,6 +2491,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  interactableObjects:
+  - {fileID: 7329009888263048613}
+  notInteractableObjects:
+  - {fileID: 827182361102522522}
 --- !u!1 &3844459386982491489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4690,7 +4774,7 @@ GameObject:
   - component: {fileID: 6207087313904922050}
   - component: {fileID: 3118305939630719330}
   m_Layer: 5
-  m_Name: BtnText
+  m_Name: BtnText_Int
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5693,7 +5777,6 @@ MonoBehaviour:
   popupOpenSound: popup_open
   popupCloseSound: popup_close
   usePopupAdapter: 0
-  needPauseTimeDown: 0
 --- !u!111 &7038132427892887407
 Animation:
   m_ObjectHideFlags: 0

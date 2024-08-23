@@ -17,9 +17,6 @@ public class TestScene : MonoBehaviour
 
     private async void OnBtnTestClick()
     {
-        await YooAssetsManager.Instance.InitAsync(true);
-        var handle = YooAssets.LoadAssetAsync<Sprite>("2");
-        await handle.ToUniTask(this);
-        bundleImage.sprite = handle.AssetObject as Sprite;
+        
     }
 }

@@ -9,6 +9,17 @@ namespace GameFramework
 {
     public class GameUtils
     {
+        public static bool IsIosPlatform()
+        {
+            var ret = false;
+#if UNITY_IOS
+            ret = true;
+#else
+            ret = false;
+#endif
+            return ret;
+        }
+
         public static bool IsEditor()
         {
             var isEditor = false;
