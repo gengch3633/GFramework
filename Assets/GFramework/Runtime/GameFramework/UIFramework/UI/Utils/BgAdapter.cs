@@ -17,9 +17,8 @@ namespace GameFramework
                 UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        protected override void MonoStart()
+        private void OnRectTransformDimensionsChange()
         {
-            base.MonoStart();
             UpdateImage();
         }
 
