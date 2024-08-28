@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Framework
+namespace GameFramework
 {
     public class PopupAdapter : MonoBehaviour
     {
