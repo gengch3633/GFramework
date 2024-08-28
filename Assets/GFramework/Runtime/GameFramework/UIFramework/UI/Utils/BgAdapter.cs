@@ -4,6 +4,7 @@ using GameFramework;
 using UnityEngine;
 using UnityEngine.UI;
 using Framework;
+using Cysharp.Threading.Tasks;
 
 namespace GameFramework
 {
@@ -17,9 +18,10 @@ namespace GameFramework
                 UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        protected override void MonoStart()
+        protected async override void MonoStart()
         {
             base.MonoStart();
+            await UniTask.DelayFrame(2);
             UpdateImage();
         }
 
