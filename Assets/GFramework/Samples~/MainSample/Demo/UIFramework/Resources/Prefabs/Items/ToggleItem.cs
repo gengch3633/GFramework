@@ -1,18 +1,22 @@
 
 using UnityEngine.UI;
 using Framework;
+using Cysharp.Threading.Tasks;
+using System;
 
 namespace GameFramework
 {
     public class ToggleItem : MonoBaseController
     {
         private string lableString;
-        public void Init(string lableString, bool isOn)
+        public void Init(string lableString, bool isOn, bool isDebugFeature)
         {
             this.lableString = lableString;
             lableTextVar.text = lableString;
-            toggleItem.SetIsOnWithoutNotify(isOn);
-
+            if (isDebugFeature)
+                toggleItem.isOn = isOn;
+            else
+                toggleItem.SetIsOnWithoutNotify(isOn);
         }
 
         private Toggle toggleItem;

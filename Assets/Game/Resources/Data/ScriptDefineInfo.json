@@ -1,0 +1,12 @@
+[
+    {
+        "defineId": 1,
+        "scriptDefineSymble": "ENABLE_INPUT_SYSTEM",
+        "isToAdded": false
+    },
+    {
+        "defineId": 2,
+        "scriptDefineSymble": "UNITASK_DOTWEEN_SUPPORT",
+        "isToAdded": true
+    }
+]

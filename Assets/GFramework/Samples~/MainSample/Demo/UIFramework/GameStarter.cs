@@ -1,5 +1,6 @@
 using UnityEngine;
 using Framework;
+using IngameDebugConsole;
 
 namespace GameFramework
 {
@@ -47,7 +48,11 @@ namespace GameFramework
 
         private void CheckForDebug()
         {
-            if(debugModel.IsDebugFeatureEnabled<EditAds>())
+            var isDebugConsoleEnabled = debugModel.IsDebugFeatureEnabled<DebugConsoleEnabled>();
+            var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
+            debugConsoleGo?.gameObject.SetActive(isDebugConsoleEnabled);
+
+            if (debugModel.IsDebugFeatureEnabled<EditAds>())
                 adsSystem.SetAdsManager(new AdsManager_Editor());
         }
     }

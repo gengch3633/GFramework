@@ -1,4 +1,5 @@
 using Framework;
+using IngameDebugConsole;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,14 +29,14 @@ namespace GameFramework
             {
                 var toggleItem = typeLogContainerScrollView.content.CreateItem<ToggleItem>();
                 var isOn = debugModel.IsTypeLogEnabled(typeFullName);
-                toggleItem.Init(typeFullName, isOn);
+                toggleItem.Init(typeFullName, isOn, false);
             });
 
             debugModel.GetAllDebugFeatureNames().ForEach(debugFeatureName =>
             {
                 var toggleItem = debugFeatureContainerScrollView.content.CreateItem<ToggleItem>();
                 var isOn = debugModel.IsDebugFeatureEnabled(debugFeatureName);
-                toggleItem.Init(debugFeatureName, isOn);
+                toggleItem.Init(debugFeatureName, isOn, true);
             });
 
             var toggleGroup = toggleDebugFeature.transform.parent.gameObject.AddComponent<ToggleGroup>();
@@ -60,6 +61,14 @@ namespace GameFramework
             debugModel.SetDebugFeatureEnabled(evt.itemName, evt.value);
             if (evt.itemName == typeof(EditAds).FullName)
                 adsSystem.SetAdsManager(new AdsManager_Editor());
+            else
+                adsSystem.SetAdsManager(new AdsManager_Editor());
+
+            if (evt.itemName == typeof(DebugConsoleEnabled).FullName)
+            {
+                var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
+                debugConsoleGo?.gameObject.SetActive(evt.value);
+            }
         }
     }
 }

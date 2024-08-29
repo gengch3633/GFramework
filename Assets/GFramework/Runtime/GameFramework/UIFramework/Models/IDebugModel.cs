@@ -22,7 +22,7 @@ namespace GameFramework
         void SetTypeLogEnabled(string typeFullName, bool enabled);
 
         bool IsDebugFeatureEnabled(string debugFeatureName);
-        bool IsDebugFeatureEnabled<T>();
+        bool IsDebugFeatureEnabled<T>() where T: DebugFeature_Base;
         void SetDebugFeatureEnabled(string debugFeatureName, bool enabled);
 
         BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; }
@@ -123,7 +123,7 @@ namespace GameFramework
             DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
         }
 
-        public bool IsDebugFeatureEnabled<T>()
+        public bool IsDebugFeatureEnabled<T>() where T: DebugFeature_Base
         {
             var debugFeatureName = typeof(T).FullName;
             bool ret = IsDebugFeatureEnabled(debugFeatureName);
