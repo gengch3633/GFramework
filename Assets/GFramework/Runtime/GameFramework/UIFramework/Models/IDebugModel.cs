@@ -17,8 +17,8 @@ namespace GameFramework
         List<string> GetAllTypeLogNames();
 
         bool IsTypeLogEnabled(string typeFullName);
-        bool IsTypeLogEnabled<T>(T t);
-        bool IsTypeLogEnabled<T>();
+        bool IsTypeLogEnabled<T>(T t) where T:ITypeLog;
+        bool IsTypeLogEnabled<T>() where T : ITypeLog;
         void SetTypeLogEnabled(string typeFullName, bool enabled);
 
         bool IsDebugFeatureEnabled(string debugFeatureName);
@@ -105,12 +105,12 @@ namespace GameFramework
             return ret;
         }
 
-        public bool IsTypeLogEnabled<T>(T t)
+        public bool IsTypeLogEnabled<T>(T t) where T : ITypeLog
         {
             return IsTypeLogEnabled<T>();
         }
 
-        public bool IsTypeLogEnabled<T>()
+        public bool IsTypeLogEnabled<T>() where T : ITypeLog
         {
             var typeFullName = typeof(T).FullName;
             var ret = TypeLogEnableSwitchGroup.Value.IsSwitchOn(typeFullName);

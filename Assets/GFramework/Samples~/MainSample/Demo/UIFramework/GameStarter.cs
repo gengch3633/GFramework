@@ -22,7 +22,6 @@ namespace GameFramework
         {
             GameApp.Interface.RegisterModel<ISettingModel>(new SettingModel());
             GameApp.Interface.RegisterModel<IGameModel>(new GameModel());
-            GameApp.Interface.RegisterModel<IStatisticsModel>(new StatisticsModel());
         }
 
         private void InitSystems()

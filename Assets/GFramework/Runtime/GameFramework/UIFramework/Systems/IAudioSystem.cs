@@ -7,8 +7,8 @@ namespace GameFramework
     public interface IAudioSystem : ISystem
     {
         void PlaySound(string soundName);
-        void PlayBGM(string musicName);
-        void StopBGM();
+        void PlayMusic(string musicName);
+        void StopMusic();
         public BindableProperty<bool> IsSoundOn { get; }
         public BindableProperty<bool> IsMusicOn { get; }
     }
@@ -39,7 +39,7 @@ namespace GameFramework
 
       
 
-        public void StopBGM()
+        public void StopMusic()
         {
             foreach (var VARIABLE in _audioSources)
                 VARIABLE.Stop();
@@ -48,23 +48,21 @@ namespace GameFramework
 
         public void PlaySound(string soundName)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> PlaySound 1: {soundName}");
+            if(IsTypeLogEnabled()) Debug.LogError($"==> [PlaySound]: {soundName}");
 
             if (!IsSoundOn.Value)
                 return;
 
-            if (IsTypeLogEnabled()) Debug.LogError($"==> PlaySound 2: {soundName}");
             var clip = Resources.Load<AudioClip>($"Audios/{soundName}");
             PlaySound(clip, false);
         }
 
-        public void PlayBGM(string bgName)
+        public void PlayMusic(string bgName)
         {
-            if (IsTypeLogEnabled()) Debug.LogError($"==> PlayBGM 1: {bgName}");
+            if (IsTypeLogEnabled()) Debug.LogError($"==> [PlayMusic]: {bgName}");
             if (!IsMusicOn.Value)
                 return;
 
-            if (IsTypeLogEnabled()) Debug.LogError($"==> PlayBGM 2: {bgName}");
             var clip = Resources.Load<AudioClip>($"Audios/{bgName}");
             PlaySound(clip, true);
         }
