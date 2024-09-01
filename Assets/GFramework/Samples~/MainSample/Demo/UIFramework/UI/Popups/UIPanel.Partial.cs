@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public partial class UIPanel : UIBasePanel
+    public partial class UIPanel
     {
         protected override void MonoAwakePartial()
         {

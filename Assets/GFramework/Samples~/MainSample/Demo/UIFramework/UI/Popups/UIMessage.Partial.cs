@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public partial class UIMessage : UIBaseMessage
+    public partial class UIMessage
     {
         protected override void MonoAwakePartial()
         {

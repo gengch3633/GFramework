@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public partial class UIPopup : UIBasePopup
+    public partial class UIPopup
     {
         protected override void MonoAwakePartial()
         {
