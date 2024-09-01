@@ -9,6 +9,11 @@ namespace GameFramework
 {
     public class GameUtils
     {
+        public static string GetTimeFormatString(int seconds)
+        {
+            var timeString = string.Format("{0:00}:{1:00}", seconds / 60, seconds % 60);
+            return timeString;
+        }
         public static bool IsIosPlatform()
         {
             var ret = false;
@@ -30,17 +35,30 @@ namespace GameFramework
             return isEditor;
         }
 
-        public static void ForEachListWithAction<T>(List<T> cardList, Action<T> action, bool forward = true)
+        public static void ForEachListWithAction<T>(List<T> actionItemList, Action<T> action, bool forward = true)
         {
             if (forward)
             {
-                for (int i = 0; i < cardList.Count; i++)
-                    action.Invoke(cardList[i]);
+                for (int i = 0; i < actionItemList.Count; i++)
+                    action.Invoke(actionItemList[i]);
             }
             else
             {
-                for (int i = cardList.Count - 1; i >= 0; i--)
-                    action.Invoke(cardList[i]);
+                for (int i = actionItemList.Count - 1; i >= 0; i--)
+                    action.Invoke(actionItemList[i]);
+            }
+        }
+        public static void AddListRange<T>(List<T> toList, List<T> fromList, bool forward = true)
+        {
+            if (forward)
+            {
+                for (int i = 0; i < fromList.Count; i++)
+                    toList.Add(fromList[i]);
+            }
+            else
+            {
+                for (int i = fromList.Count - 1; i >= 0; i--)
+                    toList.Add(fromList[i]);
             }
         }
 
@@ -61,12 +79,6 @@ namespace GameFramework
                 stopwatch.Stop();
                 UnityEngine.Debug.LogError($"==> [LogElapsedTime] [{actionName}]: {stopwatch.ElapsedMilliseconds} ms");
             }
-        }
-
-        public static void AddListRange<T>(List<T> toList, List<T> fromList)
-        {
-            for (int i = 0; i < fromList.Count; i++)
-                toList.Add(fromList[i]);
         }
 
         public static T CreateItem<T>(Transform parent, string suffix = "") where T : Component
