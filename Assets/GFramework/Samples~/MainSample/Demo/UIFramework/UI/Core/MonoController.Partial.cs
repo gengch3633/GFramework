@@ -5,7 +5,7 @@ using Framework;
 
 namespace GameFramework
 {
-    public partial class MonoController : MonoVarController
+    public partial class MonoController
     {
         protected override void MonoAwakePartial()
         {
