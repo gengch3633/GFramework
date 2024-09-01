@@ -10,7 +10,7 @@ namespace GameFramework
         public override void Init(object param = null)
         {
             base.Init(param);
-            OnShowAsync().Forget();
+            OnShowAndCloseAsync().Forget();
         }
 
         protected override void OnAdListeners()

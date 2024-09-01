@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Threading;
 using TMPro;
+using System;
 
 namespace GameFramework
 {
@@ -13,8 +14,16 @@ namespace GameFramework
         public override void Init(object param = null)
         {
             var messageInfo = (MessageInfo)param;
-            var languageInfo = messageInfo.GetFormatText(languageSystem);
-            infoTextVar.text = languageInfo;
+            try
+            {
+                var languageInfo = messageInfo.GetFormatText(languageSystem);
+                infoTextVar.text = languageInfo;
+            }
+            catch(Exception e)
+            {
+               Debug.LogError($"==> [NormalMessage] [Init] Exception:\n{e.StackTrace}");
+            }
+            
             bgVar.gameObject.AddComponent<CanvasGroup>().alpha = 0;
             base.Init(param);
         }
