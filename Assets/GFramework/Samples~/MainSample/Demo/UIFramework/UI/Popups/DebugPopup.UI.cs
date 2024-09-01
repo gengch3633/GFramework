@@ -119,7 +119,7 @@ namespace GameFramework
         private void OnBtnClearCoinClick() {
 
             userModel.Coins.Value -= userModel.Coins.Value;
-            userModel.Diamonds.Value -= userModel.Coins.Value;
+            userModel.Diamonds.Value -= userModel.Diamonds.Value;
         }
         private void OnBtnChangeLevelClick() {
             ChangeDifficultyLevelClick();
