@@ -4,33 +4,43 @@ using UnityEngine.UI;
 using Framework;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Linq;
 
 namespace GameFramework
 {
     public class ItemCollectContainer : MonoVarController
     {
-        public async UniTask CollectItems(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount, bool initWithStartSize = false)
+
+        public async UniTask CollectItemsAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount, bool initWithStartSize = false)
         {
-            await PlayItemCollectFlyAsync(startTransform, initWithStartSize);
+            bindProperty.UnRegisterOnValueChanged(OnUpdateItemCount);
+            bindProperty.RegisterOnValueChanged(OnUpdateItemCount)
+               .UnRegisterWhenGameObjectDestroyed(gameObject);
+            await PlayItemCollectFlyAsync(startTransform);
             audioSystem.PlaySound("framework/item_collect");
             var toValue = bindProperty.Value + addItemCount;
             await DOTween.To(() => bindProperty.Value, (v) => bindProperty.Value = v, toValue, 0.5f);
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         }
 
-        public async UniTask PlayItemCollectFlyAsync(Transform startTransform, bool initWithSrcTransformStartSize = false)
+        public async UniTask PlayItemCollectFlyAsync(Transform startTransform)
         {
             var targetTransform = itemIconVar.transform;
+            var itemIcons = itemContainerVar.GetComponentsInChildren<Image>(true).ToList().FindAll(item => item.gameObject != itemContainerVar.gameObject);
             var itemCount = 5;
+            var moveTime = 0.5f;
+            Vector3[] _path = GetBezierPoints(startTransform, targetTransform);
             for (int i = 0; i < itemCount; i++)
             {
-                GameObject imageGo = CreateCoin(startTransform, targetTransform, initWithSrcTransformStartSize);
-                Vector3[] _path = GetBezierPoints(startTransform, targetTransform);
-                var targetRectTransform = targetTransform.GetComponent<RectTransform>();
-                var targetSize = targetRectTransform.sizeDelta;
-                var moveTime = 0.5f;
-                DOTween.To(() => targetRectTransform.sizeDelta, (v) => targetRectTransform.sizeDelta = v, targetSize, moveTime).ToUniTask().Forget();
-                imageGo.transform.DOPath(_path, moveTime).ToUniTask().Forget();
+                GameUtils.LogElapsedTime("FlyCoin", () => {
+                    var itemCoin = itemIcons[i];
+                    GameObject imageGo = itemCoin.gameObject;
+                    imageGo.gameObject.SetActive(true);
+                    InitCoin(itemIcons[i], startTransform, targetTransform);
+                    var targetRectTransform = targetTransform.GetComponent<RectTransform>();
+                    var targetSize = targetRectTransform.sizeDelta;
+                    imageGo.transform.DOPath(_path, moveTime).ToUniTask().Forget();
+                }, true);
                 await UniTask.Delay(TimeSpan.FromSeconds(0.08f));
             }
         }
@@ -53,18 +63,12 @@ namespace GameFramework
             return _path;
         }
 
-        private GameObject CreateCoin(Transform startTransform, Transform targetTransform, bool initWithSrcTransformStartSize = false)
+        private void InitCoin(Image iconImage, Transform startTransform, Transform targetTransform)
         {
-            var startSize = initWithSrcTransformStartSize ? startTransform.GetComponent<RectTransform>().sizeDelta : targetTransform.GetComponent<RectTransform>().sizeDelta;
-            var imageGo = new GameObject("Item", typeof(Image));
-            imageGo.AddComponent<CanvasRenderer>();
-            imageGo.transform.SetParent(targetTransform);
-            imageGo.transform.localScale = Vector3.one;
-            imageGo.GetComponent<Image>().sprite = targetTransform.GetComponent<Image>().sprite;
-            imageGo.GetComponent<RectTransform>().sizeDelta = startSize;
-
-            imageGo.transform.position = startTransform.position;
-            return imageGo;
+            var startSize = targetTransform.GetComponent<RectTransform>().sizeDelta;
+            iconImage.sprite = targetTransform.GetComponent<Image>().sprite;
+            iconImage.GetComponent<RectTransform>().sizeDelta = startSize;
+            iconImage.transform.position = startTransform.position;
         }
 
         private Vector3 GetBezierPoint(float t, Vector3 start, Vector3 center, Vector3 end)
@@ -72,21 +76,20 @@ namespace GameFramework
             return (1 - t) * (1 - t) * start + 2 * t * (1 - t) * center + t * t * end;
         }
 
-        protected override void OnAdListeners()
+        private void OnUpdateItemCount(int itemCount)
         {
-            base.OnAdListeners();
-            itemCountTextVar.text = $"{userModel.Coins.Value}";
-            userModel.Coins.RegisterOnValueChanged(v => itemCountTextVar.text = $"{userModel.Coins.Value}")
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            itemCountTextVar.text = $"{itemCount}";
         }
 
         private Text itemCountTextVar;
         private Image itemIconVar;
+        private Image itemContainerVar;
         protected override void OnAddUIListeners()
         {
             base.OnAddUIListeners();
             itemCountTextVar = transform.Find("ItemCountText_Var").GetComponent<Text>();
             itemIconVar = transform.Find("ItemIcon_Var").GetComponent<Image>();
+            itemContainerVar = transform.Find("ItemContainer_Var").GetComponent<Image>();
 
         }
         protected override void OnRemoveUIListeners()

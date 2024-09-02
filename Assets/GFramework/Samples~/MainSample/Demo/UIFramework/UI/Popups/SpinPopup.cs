@@ -83,7 +83,7 @@ namespace GameFramework
 
             Debug.LogError("==> OnSpinCompleted: " + coinCount);
             coinContainerVar.gameObject.SetActive(true);
-            await coinContainerVar.GetComponent<ItemCollectContainer>().CollectItems(wheelSpinVar.transform, userModel.Coins, coinCount);
+            await coinContainerVar.GetComponent<ItemCollectContainer>().CollectItemsAsync(wheelSpinVar.transform, userModel.Coins, coinCount);
             coinContainerVar.gameObject.SetActive(false);
 
             btnClose.interactable = true;

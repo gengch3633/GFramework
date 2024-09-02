@@ -41,7 +41,7 @@ namespace GameFramework
                 coinContainerVar.gameObject.SetActive(true);
                 InitItems();
                 var startTransform = signItem.coinIcons[0].transform;
-                await coinContainerVar.GetComponent<ItemCollectContainer>().CollectItems(startTransform, userModel.Coins, rewardCount);
+                await coinContainerVar.GetComponent<ItemCollectContainer>().CollectItemsAsync(startTransform, userModel.Coins, rewardCount);
                 coinContainerVar.gameObject.SetActive(false);
             }
             btnClose.interactable = true;
