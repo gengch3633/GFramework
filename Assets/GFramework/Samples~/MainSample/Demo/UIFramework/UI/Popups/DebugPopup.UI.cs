@@ -86,7 +86,6 @@ namespace GameFramework
             levelIdInput.onEndEdit.RemoveListener(OnLevelIdInputChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
-        
         private void OnBtnClearDataClick()
         {
         }

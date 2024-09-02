@@ -20,7 +20,7 @@ namespace GameFramework
 
         public async UniTask PlayItemCollectFlyAsync(Transform startTransform, bool initWithSrcTransformStartSize = false)
         {
-            var targetTransform = coinEndVar.transform;
+            var targetTransform = itemIconVar.transform;
             var itemCount = 5;
             for (int i = 0; i < itemCount; i++)
             {
@@ -75,18 +75,18 @@ namespace GameFramework
         protected override void OnAdListeners()
         {
             base.OnAdListeners();
-            coinCountTextVar.text = $"{userModel.Coins.Value}";
-            userModel.Coins.RegisterOnValueChanged(v => coinCountTextVar.text = $"{userModel.Coins.Value}")
+            itemCountTextVar.text = $"{userModel.Coins.Value}";
+            userModel.Coins.RegisterOnValueChanged(v => itemCountTextVar.text = $"{userModel.Coins.Value}")
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        private Text coinCountTextVar;
-        private Image coinEndVar;
+        private Text itemCountTextVar;
+        private Image itemIconVar;
         protected override void OnAddUIListeners()
         {
             base.OnAddUIListeners();
-            coinCountTextVar = transform.Find("CoinCountText_Var").GetComponent<Text>();
-            coinEndVar = transform.Find("CoinEnd_Var").GetComponent<Image>();
+            itemCountTextVar = transform.Find("ItemCountText_Var").GetComponent<Text>();
+            itemIconVar = transform.Find("ItemIcon_Var").GetComponent<Image>();
 
         }
         protected override void OnRemoveUIListeners()

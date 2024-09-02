@@ -5,14 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using Newtonsoft.Json;
 using UnityEngine.EventSystems;
+using System;
 
 namespace GameFramework
 {
-    public class CompCollector
+    public class ComponentCollector
     {
         public static void CreateUIInitMethods(GameObject rootGameObject)
         {
             Dictionary<string, List<string>> actionDict = new Dictionary<string, List<string>>();
+            CollectActionsStrings<MonoVarController>(rootGameObject, actionDict);
             CollectActionsStrings<Button>(rootGameObject, actionDict);
             CollectActionsStrings<Toggle>(rootGameObject, actionDict);
             CollectActionsStrings<TMP_InputField>(rootGameObject, actionDict);
@@ -42,33 +44,34 @@ namespace GameFramework
         private static Dictionary<string, List<string>> CollectActionsStrings<T>(GameObject rootGameObject, Dictionary<string, List<string>> actionDict) where T : Component
         {
             var components = rootGameObject.GetComponentsInChildren<T>(true).ToList();
+            components = components.FindAll(item => item.gameObject != rootGameObject);
             components = components.FindAll(item => (typeof(T).Name != typeof(Animation).Name)
                 || (typeof(T).Name == typeof(Animation).Name) && (rootGameObject.GetComponent<UIPopAnim>() == null));
             var endString = "_Var";
-            var isTextComp = new List<string>() { typeof(Image).Name, typeof(Text).Name, typeof(TextMeshProUGUI).Name }.Contains(typeof(T).Name);
+            var isTextComp = new List<string>() { typeof(Image).Name, typeof(Text).Name, typeof(TextMeshProUGUI).Name, typeof(MonoVarController).Name }.Contains(typeof(T).Name);
             if (isTextComp)
                 components = components.FindAll(item => item.name.Contains(endString));
 
-
-            components = components.FindAll(item => {
-                var pathGameObjects = GetPathGameObjects(item, rootGameObject);
-                var pathMonoControllers = pathGameObjects.FindAll(go => go.GetComponent<MonoVarController>() != null && go != item.gameObject);
-                return pathMonoControllers.Count <= 0;
-            });
-
-            var textString = Resources.Load<TextAsset>("Data/CompCollector").text;
+            components = components.FindAll(item => IsComponentCanBeCollected(rootGameObject, item.gameObject));
+            var textString = Resources.Load<TextAsset>("Data/ComponentCollector").text;
             List<CompCollecorInfo> compCollecors = JsonConvert.DeserializeObject<List<CompCollecorInfo>>(textString);
             var actionNames = new List<string>() { "declaration", "addListener", "removeListener", "clickMethod", "initComponent" };
             actionNames.ForEach(actionName =>
             {
-                var compCollector = compCollecors.Find(item => item.componentName == typeof(T).Name && item.actionName == actionName);
+                var compCollector = compCollecors.Find(item => (item.componentName == typeof(T).Name) && item.actionName == actionName);
                 if (compCollector != null)
                 {
                     List<string> actionStrings = new List<string> { };
                     components.ForEach(item =>
                     {
                         var compPath = GetCompPath(item, rootGameObject);
-                        var actionString = compCollector.CreateString(item.gameObject.name, compPath, compCollector.actionName == "clickMethod");
+                        var replaceComponentName = "";
+                        if (typeof(T) == typeof(MonoVarController))
+                        {
+                            var monoVarController = item.GetComponent<MonoVarController>();
+                            replaceComponentName = monoVarController.replaceComponentName;
+                        }
+                        var actionString = compCollector.CreateString(item.gameObject.name, compPath, replaceComponentName);
                         actionStrings.Add(actionString);
                     });
 
@@ -78,6 +81,14 @@ namespace GameFramework
                 }
             });
             return actionDict;
+        }
+
+        private static bool IsComponentCanBeCollected(GameObject rootGo, GameObject componentGo)
+        {
+            var monoVar = componentGo.GetComponent<MonoVarController>();
+            var parentMonoVar = componentGo.GetComponentInParent<MonoVarController>();
+            var isParentMonoVar = parentMonoVar == null || rootGo == parentMonoVar.gameObject || monoVar == parentMonoVar;
+            return isParentMonoVar;
         }
 
         private static string GetCompPath(Component item, GameObject rootGameObject)
@@ -107,7 +118,7 @@ namespace GameFramework
         public string actionName;
         public string actionString;
 
-        public string CreateString(string gameObjectName, string compPath, bool isClickMethod)
+        public string CreateString(string gameObjectName, string compPath, string replaceComponentName = "")
         {
             CompCollecorInfo copyCompCollecor = JsonConvert.DeserializeObject<CompCollecorInfo>(JsonConvert.SerializeObject(this));
 
@@ -117,7 +128,8 @@ namespace GameFramework
             var newActionString = copyCompCollecor.actionString;
             newActionString = newActionString.Replace("{btnName1}", btnName1);
             newActionString = newActionString.Replace("{btnName2}", btnName2);
-            newActionString = newActionString.Replace("{componentName}", componentName);
+            var realComponentName = string.IsNullOrEmpty(replaceComponentName) ? componentName : replaceComponentName;
+            newActionString = newActionString.Replace("{componentName}", realComponentName);
             newActionString = newActionString.Replace("{compPath}", compPath);
             newActionString = newActionString.Replace("\\n", "\n");
             return newActionString;

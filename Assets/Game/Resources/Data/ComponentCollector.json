@@ -183,5 +183,15 @@
         "componentName": "Dropdown",
         "actionName": "initComponent",
         "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
+    },
+    {
+        "componentName": "MonoVarController",
+        "actionName": "declaration",
+        "actionString": "private {componentName} {btnName1};"
+    },
+    {
+        "componentName": "MonoVarController",
+        "actionName": "initComponent",
+        "actionString": "{btnName1} = transform.Find(\"{compPath}\").GetComponent<{componentName}>();"
     }
 ]

@@ -2493,6 +2493,9 @@ MonoBehaviour:
       m_Calls: []
   interactableObjects:
   - {fileID: 7329009888263048613}
+  - {fileID: 7329009888263048613}
+  - {fileID: 7329009888263048613}
+  - {fileID: 7329009888263048613}
   notInteractableObjects:
   - {fileID: 827182361102522522}
 --- !u!1 &3844459386982491489
@@ -4374,6 +4377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089148761d7ff504d8369271bd8b3dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  replaceComponentName: MonoVarController
 --- !u!1 &6603741335181188333
 GameObject:
   m_ObjectHideFlags: 0

@@ -182,7 +182,7 @@ namespace GameFramework
         [ContextMenu("CreateUIInitMethods")]
         private void CreateUIInitMethods()
         {
-            CompCollector.CreateUIInitMethods(gameObject);
+            ComponentCollector.CreateUIInitMethods(gameObject);
         }
 
         public IArchitecture GetArchitecture()
