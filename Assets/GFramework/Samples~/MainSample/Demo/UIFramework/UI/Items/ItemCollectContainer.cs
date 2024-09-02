@@ -81,14 +81,12 @@ namespace GameFramework
         }
 
         private Text coinCountTextVar;
-        private Image itemCollectContainerVar;
         private Image coinEndVar;
         protected override void OnAddUIListeners()
         {
             base.OnAddUIListeners();
-            coinCountTextVar = transform.Find("Bg/result_coin_progress_bg/CoinCountText_Var").GetComponent<Text>();
-            itemCollectContainerVar = transform.Find("").GetComponent<Image>();
-            coinEndVar = transform.Find("Bg/result_coin_progress_bg/CoinEnd_Var").GetComponent<Image>();
+            coinCountTextVar = transform.Find("CoinCountText_Var").GetComponent<Text>();
+            coinEndVar = transform.Find("CoinEnd_Var").GetComponent<Image>();
 
         }
         protected override void OnRemoveUIListeners()
