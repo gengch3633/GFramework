@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 5059733285941412455}
   - component: {fileID: 1771180835217460132}
   m_Layer: 5
-  m_Name: CoinContainer_Var
+  m_Name: ItemCollectContainer_Var
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6f83cec8a4af94093e8e84ebbcf2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 0
 --- !u!1 &5584805931128683984
 GameObject:
   m_ObjectHideFlags: 0

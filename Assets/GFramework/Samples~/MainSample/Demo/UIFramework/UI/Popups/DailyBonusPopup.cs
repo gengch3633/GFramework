@@ -40,7 +40,8 @@ namespace GameFramework
                 var signItem = signItemList[loginDayNum % signItemList.Count];
                 coinContainerVar.gameObject.SetActive(true);
                 InitItems();
-                await coinContainerVar.GetComponent<CoinContainer>().DoFlyCoinTokens(signItem.coinIcons[0].transform, rewardCount);
+                var startTransform = signItem.coinIcons[0].transform;
+                await coinContainerVar.GetComponent<ItemCollectContainer>().CollectItems(startTransform, userModel.Coins, rewardCount);
                 coinContainerVar.gameObject.SetActive(false);
             }
             btnClose.interactable = true;
