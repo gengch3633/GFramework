@@ -10,7 +10,6 @@ namespace GameFramework
 {
     public class ItemCollectContainer : MonoVarController
     {
-
         public async UniTask CollectItemsAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount, bool initWithStartSize = false)
         {
             bindProperty.UnRegisterOnValueChanged(OnUpdateItemCount);
@@ -32,15 +31,13 @@ namespace GameFramework
             Vector3[] _path = GetBezierPoints(startTransform, targetTransform);
             for (int i = 0; i < itemCount; i++)
             {
-                GameUtils.LogElapsedTime("FlyCoin", () => {
-                    var itemCoin = itemIcons[i];
-                    GameObject imageGo = itemCoin.gameObject;
-                    imageGo.gameObject.SetActive(true);
-                    InitCoin(itemIcons[i], startTransform, targetTransform);
-                    var targetRectTransform = targetTransform.GetComponent<RectTransform>();
-                    var targetSize = targetRectTransform.sizeDelta;
-                    imageGo.transform.DOPath(_path, moveTime).ToUniTask().Forget();
-                }, true);
+                var itemCoin = itemIcons[i];
+                GameObject imageGo = itemCoin.gameObject;
+                imageGo.gameObject.SetActive(true);
+                InitCoin(itemIcons[i], startTransform, targetTransform);
+                var targetRectTransform = targetTransform.GetComponent<RectTransform>();
+                var targetSize = targetRectTransform.sizeDelta;
+                imageGo.transform.DOPath(_path, moveTime).ToUniTask().Forget();
                 await UniTask.Delay(TimeSpan.FromSeconds(0.08f));
             }
         }
