@@ -15,6 +15,12 @@ namespace GameFramework
             gameModel = this.GetModel<IGameModel>();
             settingModel = this.GetModel<ISettingModel>();
         }
+
+        protected string GetParamString(object param)
+        {
+            var openFrom = param == null ? "no_param" : (string)param;
+            return openFrom;
+        }
     }
 }
 
