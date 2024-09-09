@@ -4,7 +4,7 @@ using GameFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Solitaire
+namespace GameFramework
 {
     public class AdLoadingPopup : UIBasePopup
     {

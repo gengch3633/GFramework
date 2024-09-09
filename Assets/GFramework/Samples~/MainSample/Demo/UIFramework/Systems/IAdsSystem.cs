@@ -32,12 +32,15 @@ namespace GameFramework
     {
         public BindableProperty<bool> InterstitialAdsEnabled { get; } = new BindableProperty<bool>() { Value = false };
         private IAdsManager adsManager;
+        private IEventSystem eventSystem;
+        private int bannerRefreshInterval = 30;
 
         protected override void OnInit()
         {
             base.OnInit();
             var userRecord = ReadInfoWithReturnNew<AdsSystem>();
             CopyBindableClass(this, userRecord, ()=> SaveInfo(this));
+            eventSystem = this.GetSystem<IEventSystem>();
 
             var isEditor = false;
 
@@ -68,19 +71,15 @@ namespace GameFramework
 
         public void CheckShowRewardAd(string place, Action<bool> callBack = null)
         {
-            EventUtils.LogAdRewardTrigerEvent(place);
+            eventSystem.LogAdRewardShowEvent(place);
             if (IsRewardAdReady())
                 ShowRewardAd(place, (ret) => {
                     callBack?.Invoke(ret);
-                    //StaticModule.RewardCompleted();
-                    //StaticModule.RewardCancel();
+                    if(ret)  eventSystem.LogAdRewardShowSuccessEvent(place);
+                    else eventSystem.LogAdRewardShowFailedEvent(place);
                 });
             else
-            {
-                EventUtils.LogAdRewardLoadingEvent();
-                //moreRewardADTryCount = 0;
-                CheckMoreRewardADState(place, callBack).Forget();
-            }
+                CheckLoadMoreRewardAdAsync(place, callBack).Forget();
         }
 
         public void CheckShowInterstitialAd(string pos, Action<bool> callBack = null)
@@ -88,51 +87,50 @@ namespace GameFramework
             if (!InterstitialAdsEnabled.Value)
                 return;
 
-            EventUtils.LogAdInterstitialTrigerEvent(pos);
+            eventSystem.LogAdIntShowEvent(pos);
             if (IsInterstitialAdReady())
             {
-                EventUtils.LogAdInterstitialYesEvent();
+                eventSystem.LogAdIntShowSuccessEvent(pos);
                 ShowInterstitialAd(pos, callBack);
             }
             else
-                EventUtils.LogAdInterstitialNoEvent();
+                eventSystem.LogAdIntShowFailedEvent(pos);
         }
      
-        private async UniTask CheckMoreRewardADState(string place, Action<bool> callBack = null)
+        private async UniTask CheckLoadMoreRewardAdAsync(string place, Action<bool> callBack = null)
         {
+            eventSystem.LogAdRewardLoadEvent(place);
             var languageSystem = this.GetSystem<ILanguageSystem>();
             var uiSystem = this.GetSystem<IUISystem>();
 
-            //uiSystem.OpenPopup(PopupType.AdLoadingPopup);
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    if (IsRewardAdReady())
-            //    {
-            //        EventUtils.LogAdRewardLoadingYesEvent();
-            //        ShowRewardAd(place, (ret) =>
-            //        {
-            //            uiSystem.ClosePopup(PopupType.AdLoadingPopup);
-            //            callBack?.Invoke(ret);
-            //        });
-            //        return;
-            //    }
-            //    await UniTask.Delay(TimeSpan.FromSeconds(1));
-            //}
+            uiSystem.OpenPopup<AdLoadingPopup>();
+            for (int i = 0; i < 5; i++)
+            {
+                if (IsRewardAdReady())
+                {
+                    eventSystem.LogAdRewardLoadYesEvent(place);
+                    ShowRewardAd(place, (ret) =>
+                    {
+                        uiSystem.ClosePopup<AdLoadingPopup>();
+                        callBack?.Invoke(ret);
+                    });
+                    return;
+                }
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
 
-            //uiSystem.ClosePopup(PopupType.AdLoadingPopup);
-            EventUtils.LogAdRewardLoadingNoEvent();
+            uiSystem.ClosePopup<AdLoadingPopup>();
+            eventSystem.LogAdRewardLoadNoEvent(place);
+            eventSystem.LogAdRewardLoadReplaceEvent(place);
 
             if (IsInterstitialAdReady())
             {
-                EventUtils.LogAdRewardLoadingReplaceEvent();
-                ShowInterstitialAd(place, (ret) =>
-                {
-                    callBack?.Invoke(ret);
-                });
+                eventSystem.LogAdRewardLoadReplaceYesEvent(place);
+                ShowInterstitialAd(place, (ret) => callBack?.Invoke(ret));
             }
             else
             {
-                EventUtils.LogAdRewardLoadingReplaceNoEvent();
+                eventSystem.LogAdRewardLoadReplaceNoEvent(place);
                 var info = languageSystem.GetLanguangeText("message_no_reward_ad");
                 uiSystem.OpenMessage<NormalMessage>(new MessageInfo(info, true));
             }
@@ -155,6 +153,7 @@ namespace GameFramework
         public void ShowBanner()
         {
             if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowBanner]");
+            eventSystem.LogAdBannerShowEvent(bannerRefreshInterval);
             adsManager?.ShowBanner();
         }
 
@@ -167,7 +166,6 @@ namespace GameFramework
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
         {
             if (IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowInterstitialAd]: InterstitialAdsEnabled: {InterstitialAdsEnabled.Value}");
-
             if(InterstitialAdsEnabled.Value)
                 adsManager?.ShowInterstitialAd(place, showCompletedCallback);
         }
@@ -175,16 +173,8 @@ namespace GameFramework
         public void ShowRewardAd(string place, Action<bool> showCompletedCallback)
         {
             if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowRewardAd]");
-            adsManager?.ShowRewardAd(place, (ret) => {
-                showCompletedCallback?.Invoke(ret);
-                if (ret)
-                    EventUtils.LogAdRewardWatchCompletedEvent();
-                else
-                    EventUtils.LogAdRewardWatchCancelEvent();
-            });
+            adsManager?.ShowRewardAd(place, (ret) => showCompletedCallback?.Invoke(ret));
         }
-
-        
     }
 }
 
