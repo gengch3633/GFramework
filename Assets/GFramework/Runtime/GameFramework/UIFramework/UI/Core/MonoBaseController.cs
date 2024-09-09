@@ -19,7 +19,6 @@ namespace GameFramework
         protected IResourceSystem resourceSystem;
         protected IAudioSystem audioSystem;
         protected IRateSystem rateSystem;
-        protected IAdsSystem adsSystem;
 
         protected ITutorialSystem tutorialSystem;
 
@@ -59,7 +58,6 @@ namespace GameFramework
             rateSystem = this.GetSystem<IRateSystem>();
             resourceSystem = this.GetSystem<IResourceSystem>();
             languageSystem = this.GetSystem<ILanguageSystem>();
-            adsSystem = this.GetSystem<IAdsSystem>();
 
             tutorialSystem = this.GetSystem<ITutorialSystem>();
             freeCoinSystem = this.GetSystem<IFreeCoinSystem>();

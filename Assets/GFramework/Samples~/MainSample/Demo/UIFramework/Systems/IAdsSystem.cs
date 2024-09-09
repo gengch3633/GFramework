@@ -23,7 +23,7 @@ namespace GameFramework
         void ShowBanner();
         void HideBanner();
         void CheckShowInterstitialAd(string pos, Action<bool> callBack = null);
-        void CheckShowRewardAdAndRetry(string place, Action<bool> callBack = null);
+        void CheckShowRewardAd(string place, Action<bool> callBack = null);
         void SetAdsManager(IAdsManager adsSystem);
         BindableProperty<bool> InterstitialAdsEnabled { get; } // 插屏，新手保护开关
     }
@@ -66,7 +66,7 @@ namespace GameFramework
             this.adsManager = adsManager;
         }
 
-        public void CheckShowRewardAdAndRetry(string place, Action<bool> callBack = null)
+        public void CheckShowRewardAd(string place, Action<bool> callBack = null)
         {
             EventUtils.LogAdRewardTrigerEvent(place);
             if (IsRewardAdReady())

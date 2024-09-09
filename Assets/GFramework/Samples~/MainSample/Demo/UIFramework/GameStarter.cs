@@ -4,7 +4,7 @@ using IngameDebugConsole;
 
 namespace GameFramework
 {
-    public class GameStarter : MonoBaseController
+    public class GameStarter : MonoController
     {
         protected override void MonoStart()
         {
@@ -26,7 +26,8 @@ namespace GameFramework
 
         private void InitSystems()
         {
-            
+            GameApp.Interface.RegisterSystem<IAdsSystem>(new AdsSystem());
+            GameApp.Interface.RegisterSystem<IEventSystem>(new EventSystem());
         }
 
         void OnApplicationQuit()

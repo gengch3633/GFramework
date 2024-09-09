@@ -18,7 +18,6 @@ namespace GameFramework
             this.RegisterSystem<ILanguageSystem>(new LanguageSystem());
             this.RegisterSystem<IUISystem>(new UISystem());
             this.RegisterSystem<IRateSystem>(new RateSystem());
-            this.RegisterSystem<IAdsSystem>(new AdsSystem());
 
             this.RegisterSystem<ITutorialSystem>(new TutorialSystem());
             this.RegisterSystem<IFreeCoinSystem>(new FreeCoinSystem());
@@ -29,8 +28,8 @@ namespace GameFramework
 
         private void InitBaseModels()
         {
-            this.RegisterModel<IUserModel>(new UserModel());
             this.RegisterModel<IDebugModel>(new DebugModel());
+            this.RegisterModel<IUserModel>(new UserModel());
         }
     }
 }

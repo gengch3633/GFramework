@@ -7,9 +7,13 @@ namespace GameFramework
 {
     public partial class UIPopup
     {
+        protected IAdsSystem adsSystem;
+        protected IEventSystem eventSystem;
         protected override void MonoAwakePartial()
         {
             base.MonoAwakePartial();
+            adsSystem = this.GetSystem<IAdsSystem>();
+            eventSystem = this.GetSystem<IEventSystem>();
         }
     }
 }
