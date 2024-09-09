@@ -132,7 +132,7 @@ namespace GameFramework
             {
                 eventSystem.LogAdRewardLoadReplaceNoEvent(place);
                 var info = languageSystem.GetLanguangeText("message_no_reward_ad");
-                uiSystem.OpenMessage<NormalMessage>(new MessageInfo(info, true));
+                uiSystem.OpenMessage<NormalMessage>(new MessageInfo(info));
             }
         }
 

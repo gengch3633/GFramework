@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Framework;
+using Solitaire;
 using System;
 using System.Collections.Generic;
 using Unity.Services.Core;
@@ -10,23 +11,25 @@ using UnityEngine.Purchasing.Security;
 
 namespace GameFramework
 {
-    public interface IPurchaseSystem : ISystem
+    public partial interface IPurchaseSystem : ISystem
     {
         string GetPrice(PurchaseInfo purchaseInfo);
         List<PurchaseInfo> GetPuchaseInfos();
         void Purchase(string productId, Action<bool, string> onCompleted);
     }
 
-    public class PurchaseSystem : AbstractSystem, IPurchaseSystem, IStoreListener, ITypeLog
+    public partial class PurchaseSystem : AbstractSystem, IPurchaseSystem, IStoreListener, ITypeLog
     {
         private string environment = "production";
         private IStoreController storeController;
         private IExtensionProvider extensionProvider;
         private Action<Product, bool, string> purchaseCallback;
+        private IUISystem uiSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
+            uiSystem = this.GetSystem<IUISystem>();
             InitAsync().Forget();
         }
 
@@ -46,22 +49,22 @@ namespace GameFramework
             var resourceSystem = this.GetSystem<IResourceSystem>();
             var purchaseInfos = GameUtils.GetConfigInfos<PurchaseInfo>();
             purchaseInfos.ForEach(item => builder.AddProduct(item.productId, item.productType));
-
             UnityPurchasing.Initialize(this, builder);
         }
 
         public void Purchase(string productId, Action<bool,string> onCompleted)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 1: {productId}");
-            var uiSystem = this.GetSystem<IUISystem>();
+            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 1: {productId}");
+            uiSystem.OpenPopup<PurchaseLoadingPopup>();
             Purchase(productId, (product, isSuccess, msg) => { 
                 onCompleted.Invoke(isSuccess, msg);
+                uiSystem.ClosePopup<PurchaseLoadingPopup>();
                 if (!isSuccess)
-                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo(msg, true));
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo(msg));
             });
         }
 
-        public void Purchase(string productId, Action<Product, bool, string> callBack)
+        private void Purchase(string productId, Action<Product, bool, string> callBack)
         {
             purchaseCallback = callBack;
             if (storeController != null)
@@ -79,7 +82,6 @@ namespace GameFramework
 
         public List<PurchaseInfo> GetPuchaseInfos()
         {
-            var resourceSystem = this.GetSystem<IResourceSystem>();
             var purchaseInfos = GameUtils.GetConfigInfos<PurchaseInfo>();
             return purchaseInfos;
         }
@@ -91,9 +93,21 @@ namespace GameFramework
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized");
+            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 1");
             this.storeController = controller;
             this.extensionProvider = extensions;
+            this.appleExtensions = extensionProvider.GetExtension<IAppleExtensions>();
+            this.googlePlayStoreExtensions = extensionProvider.GetExtension<IGooglePlayStoreExtensions>();
+
+            // On Apple platforms we need to handle deferred purchases caused by Apple's Ask to Buy feature.
+            // On non-Apple platforms this will have no effect; OnDeferred will never be called.
+            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 2");
+            appleExtensions.RegisterPurchaseDeferredListener((item)=> {
+                if(IsTypeLogEnabled()) Debug.LogError("==> [PurchaseSystem] Purchase deferred: " + item.definition.id);
+            });
+
+            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 3");
+            CheckRestoreSubscription();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
@@ -146,18 +160,15 @@ namespace GameFramework
                     // On Apple stores, receipts contain multiple products.
                     var result = validator.Validate(receipt);
                     // For informational purposes, we list the receipt(s)
-                    Debug.Log("Receipt is valid. Contents:");
+                    if(IsTypeLogEnabled()) Debug.Log("Receipt is valid. Contents:");
                     foreach (IPurchaseReceipt productReceipt in result)
                     {
-                        Debug.Log(productReceipt.productID);
-                        Debug.Log(productReceipt.purchaseDate);
-                        Debug.Log(productReceipt.transactionID);
+                        if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSysten], productID: {productReceipt.productID}, purchaseDate: {productReceipt.purchaseDate}, transactionID: {productReceipt.transactionID}");
                     }
                 }
                 catch (IAPSecurityException)
                 {
                     if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] ValidateReceipt 1, [Invalid receipt, not unlocking content]");
-                    if (IsTypeLogEnabled()) Debug.LogError("");
                     validPurchase = false;
                 }
             }
