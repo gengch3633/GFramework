@@ -12,6 +12,7 @@ class Utils():
 		projectPath = __file__[0:__file__.index("Assets")]
 		self.assetPath = f"{projectPath}Assets"
 		self.dataPath = f"{self.assetPath}/Game/Resources/Data"
+		self.fontTextFile = f"{self.assetPath}/Game/FontText.txt"
 
 	def createConfigs(self):
 		excelFiles = FileUtils.getFiles(self.assetPath, ".xls")
@@ -55,6 +56,24 @@ class Utils():
 		normalConfigFile = f"{self.dataPath}/NormalConfig.json"
 		FileUtils.writeFile(normalConfigFile, json.dumps(itemMap, indent = 4, ensure_ascii=False))
 		print(f"==> [Utils] [createNormalConfig]: {FileUtils.getFileName(normalConfigFile)}")
+
+	def createFontText(self):
+		excelFiles = FileUtils.getFiles(self.assetPath, ".xls")
+		excelFiles = [item for item in excelFiles if("LanguageInfo" in item)]
+		fontTexts = []
+		for excelFile in excelFiles:
+			excelName = FileUtils.getFileName(excelFile, False)
+			jsonFile = os.path.join(self.dataPath, f"{excelName}.json")
+			jsonConfigs = FileUtils.readConfigExcel(excelFile, [])
+			for jsonConfig in jsonConfigs:
+				for key, value in jsonConfig.items():
+					if(key == "id"):
+						continue
+					fontTexts.extend(value)
+		
+		fontTexts = list(set(fontTexts))
+		fontString = "".join(fontTexts)
+		FileUtils.writeFile(self.fontTextFile, fontString)
 
 
 
