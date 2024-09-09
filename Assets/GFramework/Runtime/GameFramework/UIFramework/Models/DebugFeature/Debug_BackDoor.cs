@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class DebugFeature_Base { }
+    public class Debug_BackDoor : Debug_Base 
+    { 
+
+    }
 }
 

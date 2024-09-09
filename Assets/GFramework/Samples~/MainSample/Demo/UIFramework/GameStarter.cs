@@ -47,11 +47,11 @@ namespace GameFramework
 
         private void CheckForDebug()
         {
-            var isDebugConsoleEnabled = debugModel.IsDebugFeatureEnabled<DebugConsoleEnabled>();
+            var isDebugConsoleEnabled = debugModel.IsDebugFeatureEnabled<Debug_LogConsole>();
             var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
             debugConsoleGo?.gameObject.SetActive(isDebugConsoleEnabled);
 
-            if (debugModel.IsDebugFeatureEnabled<EditAds>())
+            if (debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
                 adsSystem.SetAdsManager(new AdsManager_Editor());
         }
     }

@@ -22,7 +22,7 @@ namespace GameFramework
         void SetTypeLogEnabled(string typeFullName, bool enabled);
 
         bool IsDebugFeatureEnabled(string debugFeatureName);
-        bool IsDebugFeatureEnabled<T>() where T: DebugFeature_Base;
+        bool IsDebugFeatureEnabled<T>() where T: Debug_Base;
         void SetDebugFeatureEnabled(string debugFeatureName, bool enabled);
 
         BindableProperty<SwitchGroup> TypeLogEnableSwitchGroup { get; }
@@ -123,7 +123,7 @@ namespace GameFramework
             DebugFeatureEnableSwitchGroup.Value = DebugFeatureEnableSwitchGroup.Value;
         }
 
-        public bool IsDebugFeatureEnabled<T>() where T: DebugFeature_Base
+        public bool IsDebugFeatureEnabled<T>() where T: Debug_Base
         {
             var debugFeatureName = typeof(T).FullName;
             bool ret = IsDebugFeatureEnabled(debugFeatureName);
@@ -146,7 +146,7 @@ namespace GameFramework
                     var baseType = itemType.BaseType;
                     if (baseType != null)
                     {
-                        if (baseType.FullName == typeof(DebugFeature_Base).FullName)
+                        if (baseType.FullName == typeof(Debug_Base).FullName)
                             subTypeList.Add(itemType);
                     }
                 }

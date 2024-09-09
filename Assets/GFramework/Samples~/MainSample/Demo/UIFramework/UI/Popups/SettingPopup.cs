@@ -9,7 +9,7 @@ namespace GameFramework
 
         private void OnClickBackDoor()
         {
-            if (debugModel.IsDebugFeatureEnabled<OpenBackDoor>())
+            if (debugModel.IsDebugFeatureEnabled<Debug_BackDoor>())
             {
                 uiSystem.OpenPopup<DebugPopup>();
                 return;
@@ -23,7 +23,7 @@ namespace GameFramework
                 if (clickBackDoorCount >= 10)
                 {
                     uiSystem.OpenPopup<DebugPopup>();
-                    debugModel.SetDebugFeatureEnabled(typeof(OpenBackDoor).FullName ,true);
+                    debugModel.SetDebugFeatureEnabled(typeof(Debug_BackDoor).FullName ,true);
                 }
             }
             else

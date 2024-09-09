@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class NoAds : DebugFeature_Base 
-    { 
-
-    }
+    public class Debug_LogConsole : Debug_Base { }
 }
 

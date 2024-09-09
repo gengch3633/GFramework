@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class OpenBackDoor : DebugFeature_Base 
-    { 
-
-    }
+    public class Debug_Base { }
 }
 
