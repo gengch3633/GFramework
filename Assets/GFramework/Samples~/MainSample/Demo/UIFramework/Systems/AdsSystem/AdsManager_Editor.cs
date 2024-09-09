@@ -6,6 +6,9 @@ namespace GameFramework
 {
     public class AdsManager_Editor : IAdsManager, ITypeLog
     {
+        private int rewardCheckFailedCount = 0;
+        private bool isIntAdReturnSuccess = true;
+        private bool isRewardAdReturnSuccess = true;
         public bool IsTypeLogEnabled()
         {
             var debugSystem = GameApp.Interface.GetModel<IDebugModel>();
@@ -24,9 +27,10 @@ namespace GameFramework
 
         public bool IsInterstitialAdReady()
         {
-            var ret = true;
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsInterstitialAdAvailable]: " + ret);
-            return ret;
+            var ret = isIntAdReturnSuccess;
+            isIntAdReturnSuccess = !isIntAdReturnSuccess;
+            if (IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsInterstitialAdAvailable]: " + ret);
+            return isIntAdReturnSuccess;
         }
 
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
@@ -38,8 +42,21 @@ namespace GameFramework
 
         public bool IsRewardAdReady()
         {
-            var ret = true;
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsRewardAdAvailable]: " + ret);
+            var ret = isRewardAdReturnSuccess;
+
+            if (isRewardAdReturnSuccess)
+                isRewardAdReturnSuccess = !isRewardAdReturnSuccess;
+            else
+            {
+                rewardCheckFailedCount++;
+                if (rewardCheckFailedCount >= 6)
+                {
+                    rewardCheckFailedCount = 0;
+                    isRewardAdReturnSuccess = !isRewardAdReturnSuccess;
+                }
+            }
+
+            if (IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsRewardAdAvailable]: " + ret);
             return ret;
         }
         
