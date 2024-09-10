@@ -30,30 +30,15 @@ namespace GameFramework
             GameApp.Interface.RegisterSystem<IAdsSystem>(new AdsSystem());
         }
 
-        void OnApplicationQuit()
-        {
-            SaveInfo();
-        }
-
-        void OnApplicationPause(bool pause)
-        {
-            if (pause) SaveInfo();
-        }
-
-        private void SaveInfo()
-        {
-            GameApp.Interface.Systems.ForEach(item => item.SaveInfo());
-            GameApp.Interface.Models.ForEach(item => item.SaveInfo());
-        }
-
         private void CheckForDebug()
         {
+            adsSystem = this.GetSystem<IAdsSystem>();
             var isDebugConsoleEnabled = debugModel.IsDebugFeatureEnabled<Debug_LogConsole>();
             var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
             debugConsoleGo?.gameObject.SetActive(isDebugConsoleEnabled);
 
-            if (debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
-                adsSystem.SetAdsManager(new AdsManager_Editor());
+            if (!debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
+                adsSystem.SetAdsManager(new AdsManager_Admob());
         }
     }
 }

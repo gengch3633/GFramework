@@ -66,6 +66,7 @@ namespace GameFramework
 
         public void SetAdsManager(IAdsManager adsManager)
         {
+            if(IsTypeLogEnabled()) Debug.LogError($"==> [{GetType().Name}] [SetAdsManager]: {adsManager.GetType().FullName}");
             this.adsManager = adsManager;
         }
 
@@ -84,7 +85,7 @@ namespace GameFramework
 
         public void CheckShowInterstitialAd(string pos, Action<bool> callBack = null)
         {
-            if (!InterstitialAdsEnabled.Value)
+            if (pos != "AdsTest" && !InterstitialAdsEnabled.Value)
                 return;
 
             eventSystem.LogAdIntShowEvent(pos);
@@ -165,8 +166,7 @@ namespace GameFramework
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
         {
             if (IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowInterstitialAd]: InterstitialAdsEnabled: {InterstitialAdsEnabled.Value}");
-            if(InterstitialAdsEnabled.Value)
-                adsManager?.ShowInterstitialAd(place, showCompletedCallback);
+            adsManager?.ShowInterstitialAd(place, showCompletedCallback);
         }
 
         public void ShowRewardAd(string place, Action<bool> showCompletedCallback)

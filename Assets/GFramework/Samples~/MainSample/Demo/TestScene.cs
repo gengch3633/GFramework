@@ -9,13 +9,13 @@ public class TestScene : MonoBehaviour
     public Button btnTest;
     public Image bundleImage;
 
-    async void Start()
+     void Start()
     {
         GFramework.GFramework.TestPrint();
         btnTest.onClick.AddListener(OnBtnTestClick);
     }
 
-    private async void OnBtnTestClick()
+    private void OnBtnTestClick()
     {
         
     }

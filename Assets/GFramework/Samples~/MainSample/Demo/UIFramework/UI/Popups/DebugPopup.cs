@@ -59,12 +59,10 @@ namespace GameFramework
         {
             debugModel.SetTypeLogEnabled(evt.itemName, evt.value);
             debugModel.SetDebugFeatureEnabled(evt.itemName, evt.value);
-            if (evt.itemName == typeof(Debug_EditorAds).FullName)
-                adsSystem.SetAdsManager(new AdsManager_Editor());
-            else
+            if (evt.itemName == typeof(Debug_EditorAds).FullName && evt.value)
                 adsSystem.SetAdsManager(new AdsManager_Editor());
 
-            if (evt.itemName == typeof(Debug_LogConsole).FullName)
+            if (evt.itemName == typeof(Debug_LogConsole).FullName && evt.value)
             {
                 var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
                 debugConsoleGo?.gameObject.SetActive(evt.value);

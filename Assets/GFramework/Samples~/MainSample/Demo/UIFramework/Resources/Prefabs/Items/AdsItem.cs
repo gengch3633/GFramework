@@ -56,7 +56,7 @@ namespace GameFramework
         }
         private void OnBtnShowBannerAdClick()
         {
-            Debug.LogError($"==> [OnBtnShowInterstitialAdClick] 1");
+            Debug.LogError($"==> [OnBtnShowBannerAdClick] 1");
             adsSystem.ShowBanner();
         }
         private void OnBtnCloseAdContainerClick()

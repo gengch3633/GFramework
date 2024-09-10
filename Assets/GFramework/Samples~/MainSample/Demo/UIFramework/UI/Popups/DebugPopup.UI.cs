@@ -116,7 +116,7 @@ namespace GameFramework
             var languageName = languageNames[value];
             System.Enum.TryParse(languageName, out LanguageType languageType);
 
-            Debug.LogError($"==> OnLanguageDropdownChanged: {languageType}");
+            Debug.LogError($"==> [OnLanguageDropdownChanged]: {languageType}");
             languageSystem.SetLanguageType(languageType);
         }
         private void OnBtnSaveGameDataClick() {
