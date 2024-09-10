@@ -4,7 +4,7 @@ namespace GameFramework
 {
     public class PopupAdapter : MonoBehaviour
     {
-        private async void Start()
+        private void Start()
         {
             var canvasTransform = transform.parent;
             while(canvasTransform.GetComponent<Canvas>() == null)
