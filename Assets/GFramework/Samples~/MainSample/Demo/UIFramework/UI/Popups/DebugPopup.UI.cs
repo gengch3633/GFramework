@@ -23,6 +23,7 @@ namespace GameFramework
         private Button btnClearData;
         private Button btnAddCoin;
         private Button btnClearCoin;
+        private Button btnOpenAdContainer;
         private Button btnSaveGameData;
         private Button btnRecoverGameData;
         private Toggle toggleDebugFeature;
@@ -30,6 +31,7 @@ namespace GameFramework
         private Toggle toggleNormal;
         private Toggle item;
         private TMP_InputField levelIdInput;
+        private Image containerVar;
         private ScrollRect debugFeatureContainerScrollView;
         private ScrollRect typeLogContainerScrollView;
         private ScrollRect normalContainerScrollView;
@@ -39,27 +41,30 @@ namespace GameFramework
         {
             base.OnAddUIListeners();
             btnClose = transform.Find("Pop/Container/TopContainer/BtnClose").GetComponent<Button>();
-            btnChangeLevel = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnChangeLevel").GetComponent<Button>();
-            btnClearData = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearData").GetComponent<Button>();
-            btnAddCoin = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnAddCoin").GetComponent<Button>();
-            btnClearCoin = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearCoin").GetComponent<Button>();
-            btnSaveGameData = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnSaveGameData").GetComponent<Button>();
-            btnRecoverGameData = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnRecoverGameData").GetComponent<Button>();
-            toggleDebugFeature = transform.Find("Pop/Container/MiddleContainer/ToggleDebugFeature").GetComponent<Toggle>();
-            toggleTypeLog = transform.Find("Pop/Container/MiddleContainer/ToggleTypeLog").GetComponent<Toggle>();
-            toggleNormal = transform.Find("Pop/Container/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
-            item = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template/Viewport/Content/Item").GetComponent<Toggle>();
-            levelIdInput = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LevelIdInput").GetComponent<TMP_InputField>();
-            debugFeatureContainerScrollView = transform.Find("Pop/Container/BottomContainer/DebugFeatureContainerScrollView").GetComponent<ScrollRect>();
-            typeLogContainerScrollView = transform.Find("Pop/Container/BottomContainer/TypeLogContainerScrollView").GetComponent<ScrollRect>();
-            normalContainerScrollView = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView").GetComponent<ScrollRect>();
-            template = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template").GetComponent<ScrollRect>();
-            languageDropdown = transform.Find("Pop/Container/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown").GetComponent<Dropdown>();
+            btnChangeLevel = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnChangeLevel").GetComponent<Button>();
+            btnClearData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearData").GetComponent<Button>();
+            btnAddCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnAddCoin").GetComponent<Button>();
+            btnClearCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearCoin").GetComponent<Button>();
+            btnOpenAdContainer = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnOpenAdContainer").GetComponent<Button>();
+            btnSaveGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnSaveGameData").GetComponent<Button>();
+            btnRecoverGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnRecoverGameData").GetComponent<Button>();
+            toggleDebugFeature = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleDebugFeature").GetComponent<Toggle>();
+            toggleTypeLog = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleTypeLog").GetComponent<Toggle>();
+            toggleNormal = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
+            item = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template/Viewport/Content/Item").GetComponent<Toggle>();
+            levelIdInput = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LevelIdInput").GetComponent<TMP_InputField>();
+            containerVar = transform.Find("Pop/Container/Container_Var").GetComponent<Image>();
+            debugFeatureContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/DebugFeatureContainerScrollView").GetComponent<ScrollRect>();
+            typeLogContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/TypeLogContainerScrollView").GetComponent<ScrollRect>();
+            normalContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView").GetComponent<ScrollRect>();
+            template = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template").GetComponent<ScrollRect>();
+            languageDropdown = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown").GetComponent<Dropdown>();
             btnClose.onClick.AddListener(OnBtnCloseClick);
             btnChangeLevel.onClick.AddListener(OnBtnChangeLevelClick);
             btnClearData.onClick.AddListener(OnBtnClearDataClick);
             btnAddCoin.onClick.AddListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.AddListener(OnBtnClearCoinClick);
+            btnOpenAdContainer.onClick.AddListener(OnBtnOpenAdContainerClick);
             btnSaveGameData.onClick.AddListener(OnBtnSaveGameDataClick);
             btnRecoverGameData.onClick.AddListener(OnBtnRecoverGameDataClick);
             toggleDebugFeature.onValueChanged.AddListener(OnToggleDebugFeatureChanged);
@@ -77,6 +82,7 @@ namespace GameFramework
             btnClearData.onClick.RemoveListener(OnBtnClearDataClick);
             btnAddCoin.onClick.RemoveListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.RemoveListener(OnBtnClearCoinClick);
+            btnOpenAdContainer.onClick.RemoveListener(OnBtnOpenAdContainerClick);
             btnSaveGameData.onClick.RemoveListener(OnBtnSaveGameDataClick);
             btnRecoverGameData.onClick.RemoveListener(OnBtnRecoverGameDataClick);
             toggleDebugFeature.onValueChanged.RemoveListener(OnToggleDebugFeatureChanged);
@@ -86,6 +92,15 @@ namespace GameFramework
             levelIdInput.onEndEdit.RemoveListener(OnLevelIdInputChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
+        private void OnBtnOpenAdContainerClick()
+        {
+            var adsItem = GameUtils.CreateItem<AdsItem>(containerVar.transform);
+            var adsItemRectTransform = adsItem.GetComponent<RectTransform>();
+            adsItemRectTransform.offsetMin = Vector2.zero;
+            adsItemRectTransform.offsetMax = Vector2.zero;
+        }
+
+
         private void OnBtnClearDataClick()
         {
         }

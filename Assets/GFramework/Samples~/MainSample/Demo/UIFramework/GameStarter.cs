@@ -26,8 +26,8 @@ namespace GameFramework
 
         private void InitSystems()
         {
-            GameApp.Interface.RegisterSystem<IAdsSystem>(new AdsSystem());
             GameApp.Interface.RegisterSystem<IEventSystem>(new EventSystem());
+            GameApp.Interface.RegisterSystem<IAdsSystem>(new AdsSystem());
         }
 
         void OnApplicationQuit()
