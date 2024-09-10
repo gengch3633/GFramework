@@ -82,10 +82,12 @@ public class Text2TMP : MonoBehaviour
 
     private void SetFontAsset(TextMeshProUGUI tmpText)
     {
+#if UNITY_EDITOR
         var fontAsset = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(GetAssetPath(FontAssetName));
         var material = AssetDatabase.LoadAssetAtPath<Material>(GetAssetPath(FontMaterialName));
         tmpText.font = fontAsset;
         tmpText.fontSharedMaterial = material;
+#endif
     }
 
     [Button(ButtonSizes.Medium)]

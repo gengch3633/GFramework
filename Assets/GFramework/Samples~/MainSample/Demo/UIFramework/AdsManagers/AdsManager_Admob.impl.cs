@@ -65,8 +65,7 @@ namespace GameFramework
             if (resetAttemptCount) rewardedAdRetryAttemptCount = 0;
             LogError($"==> [RequestAndLoadRewardedAd] Load: {rewardedAdRetryAttemptCount}");
             rewardedAd?.Destroy();
-            string adUnitId = "";
-            RewardedAd.Load(adUnitId, CreateAdRequest(), async (RewardedAd ad, LoadAdError loadError) =>
+            RewardedAd.Load(adsConfig.rewardAdId, CreateAdRequest(), async (RewardedAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)
                 {
@@ -96,31 +95,12 @@ namespace GameFramework
             });
         }
 
-        private void RequestBannerAd()
-        {
-            LogError($"[RequestBannerAd] Load");
-            bannerView?.Destroy();
-            string adUnitId = "";
-            bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
-
-            bannerView.OnBannerAdLoaded += ()=> { LogError($"[RequestBannerAd] Loaded"); };
-            bannerView.OnBannerAdLoadFailed += (LoadAdError error) => { LogError($"[RequestBannerAd] LoadFailed Error: {error.GetMessage()}"); };
-            bannerView.OnAdFullScreenContentOpened += () => { LogError($"[RequestAndLoadRewardedAd] Opened"); };
-            bannerView.OnAdFullScreenContentClosed += () => { LogError($"[RequestAndLoadRewardedAd] Closed"); };
-            bannerView.OnAdPaid += (AdValue adValue) => { LogError($"[RequestAndLoadRewardedAd] OnAdPaid"); };
-            bannerView.OnAdClicked += () => { isShowingAd = true; };
-
-            bannerView.LoadAd(CreateAdRequest());
-            HideBanner();
-        }
-
         private void RequestAndLoadInterstitialAd(bool resetAttemptCount)
         {
             if (resetAttemptCount) interstitialAdRetryAttemptCount = 0;
             LogError($"==> [RequestAndLoadInterstitialAd] Load: {resetAttemptCount}");
             interstitialAd?.Destroy();
-            string adUnitId = "";
-            InterstitialAd.Load(adUnitId, CreateAdRequest(), async (InterstitialAd ad, LoadAdError loadError) =>
+            InterstitialAd.Load(adsConfig.interstitialAdId, CreateAdRequest(), async (InterstitialAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)
                 {
@@ -155,6 +135,23 @@ namespace GameFramework
                 };
                 ad.OnAdPaid += (AdValue adValue) => { };
             });
+        }
+
+        private void RequestBannerAd()
+        {
+            LogError($"[RequestBannerAd] Load");
+            bannerView?.Destroy();
+            bannerView = new BannerView(adsConfig.bannerAdId, AdSize.Banner, AdPosition.Bottom);
+
+            bannerView.OnBannerAdLoaded += () => { LogError($"[RequestBannerAd] Loaded"); };
+            bannerView.OnBannerAdLoadFailed += (LoadAdError error) => { LogError($"[RequestBannerAd] LoadFailed Error: {error.GetMessage()}"); };
+            bannerView.OnAdFullScreenContentOpened += () => { LogError($"[RequestAndLoadRewardedAd] Opened"); };
+            bannerView.OnAdFullScreenContentClosed += () => { LogError($"[RequestAndLoadRewardedAd] Closed"); };
+            bannerView.OnAdPaid += (AdValue adValue) => { LogError($"[RequestAndLoadRewardedAd] OnAdPaid"); };
+            bannerView.OnAdClicked += () => { isShowingAd = true; };
+
+            bannerView.LoadAd(CreateAdRequest());
+            HideBanner();
         }
 
         private AdRequest CreateAdRequest()

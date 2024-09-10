@@ -19,12 +19,23 @@ namespace GameFramework
         private int interstitialAdRetryAttemptCount;
         private int rewardedAdRetryAttemptCount;
         private bool isShowingAd = false;
-
+        private AdsConfig adsConfig;
         public AdsManager_Admob()
         {
             LogError($"[Create]");
             Application.focusChanged += OnApplicationFocus;
+            InitAdsConfig();
             Init();
+        }
+
+        private void InitAdsConfig()
+        {
+            var adsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
+            var adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOS : EAdsType.AdmobAndroid;
+            var debugModel = GameApp.Interface.GetModel<IDebugModel>();
+            if (debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
+                adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOSTest : EAdsType.AdmobAndroidTest;
+            adsConfig = adsConfigs.Find(item => item.adsType == adsType);
         }
 
         private async void OnApplicationFocus(bool focus)

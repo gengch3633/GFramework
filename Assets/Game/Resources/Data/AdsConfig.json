@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1001,
+        "adsType": "AdmobAndroidTest",
+        "rewardAdId": "ca-app-pub-3940256099942544/5224354917",
+        "interstitialAdId": "ca-app-pub-3940256099942544/1033173712",
+        "bannerAdId": "ca-app-pub-3940256099942544/6300978111",
+        "splashAdId": "ca-app-pub-3940256099942544/9257395921"
+    },
+    {
+        "id": 1002,
+        "adsType": "AdmobIOSTest",
+        "rewardAdId": "ca-app-pub-3940256099942544/1712485313",
+        "interstitialAdId": "ca-app-pub-3940256099942544/4411468910",
+        "bannerAdId": "ca-app-pub-3940256099942544/2934735716",
+        "splashAdId": "ca-app-pub-3940256099942544/5575463023"
+    },
+    {
+        "id": 1003,
+        "adsType": "AdmobAndroid",
+        "rewardAdId": "ca-app-pub-2862865501975840/2672704330",
+        "interstitialAdId": "ca-app-pub-2862865501975840/3227276093",
+        "bannerAdId": "ca-app-pub-2862865501975840/1151777099",
+        "splashAdId": "ca-app-pub-2862865501975840/3426464873"
+    },
+    {
+        "id": 1004,
+        "adsType": "AdmobIOS",
+        "rewardAdId": "ca-app-pub-2862865501975840/3164355393",
+        "interstitialAdId": "ca-app-pub-2862865501975840/8747854564",
+        "bannerAdId": "ca-app-pub-2862865501975840/1990874527",
+        "splashAdId": "ca-app-pub-2862865501975840/3426464873"
+    }
+]
