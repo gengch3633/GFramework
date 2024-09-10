@@ -59,8 +59,6 @@ namespace GameFramework
             Purchase(productId, (product, isSuccess, msg) => { 
                 onCompleted.Invoke(isSuccess, msg);
                 uiSystem.ClosePopup<PurchaseLoadingPopup>();
-                if (!isSuccess)
-                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo(msg));
             });
         }
 
@@ -75,6 +73,7 @@ namespace GameFramework
             else
             {
                 if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 12: {productId}");
+                uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_network_error"));
                 InitAsync().Forget();
                 purchaseCallback?.Invoke(null, false, "Please check the network and try again");
             }

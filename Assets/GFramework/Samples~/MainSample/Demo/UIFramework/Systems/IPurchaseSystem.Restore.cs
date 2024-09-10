@@ -23,21 +23,27 @@ namespace GameFramework
         private IAppleExtensions appleExtensions;
         private IGooglePlayStoreExtensions googlePlayStoreExtensions;
         private Dictionary<string, SubscriptionInfo> allSubscriptionInfo = new Dictionary<string, SubscriptionInfo>();
-        private Action<bool> onRestoreCompleted;
         public void RestoreTransactions(Action<bool> onCompleted)
         {
             uiSystem.OpenPopup<PurchaseLoadingPopup>();
-            onRestoreCompleted = onCompleted;
             appleExtensions?.RestoreTransactions((result, msg) => {
                 uiSystem.ClosePopup<PurchaseLoadingPopup>();
-                onRestoreCompleted?.Invoke(true);
-                if(IsTypeLogEnabled())
+                onCompleted?.Invoke(result);
+                if (result)
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_success"));
+                else
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_failed"));
+                if (IsTypeLogEnabled())
                     Debug.LogError($"==> [PurchaseSystem] [RestoreTransactions] Result: {result}, msg: {msg}");
             });
 
             googlePlayStoreExtensions?.RestoreTransactions((result, msg) => {
                 uiSystem.ClosePopup<PurchaseLoadingPopup>();
-                onRestoreCompleted?.Invoke(true);
+                onCompleted?.Invoke(result);
+                if (result)
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_success"));
+                else
+                    uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_failed"));
                 if (IsTypeLogEnabled())
                     Debug.LogError($"==> [PurchaseSystem] [RestoreTransactions] Result: {result}, msg: {msg}");
             });

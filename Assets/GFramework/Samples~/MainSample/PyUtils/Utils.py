@@ -16,6 +16,7 @@ class Utils():
 
 	def createConfigs(self):
 		excelFiles = FileUtils.getFiles(self.assetPath, ".xls")
+		excelFiles = [item for item in excelFiles if("EventTracker" not in item)]
 		repeatFiles = self.getRepeatFiles(excelFiles)
 		if(len(repeatFiles) != 0):
 			for repeatFile in repeatFiles:
