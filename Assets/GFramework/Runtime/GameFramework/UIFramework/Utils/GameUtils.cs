@@ -7,40 +7,8 @@ using System;
 
 namespace GameFramework
 {
-    public class GameUtils
+    public partial class GameUtils
     {
-        public static void LogError(ITypeLog typeLog, object message, UnityEngine.Object context)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.LogError(message, context);
-        }
-        public static void LogError(ITypeLog typeLog, object message)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.LogError(message);
-        }
-
-        public static void Log(ITypeLog typeLog, object message, UnityEngine.Object context)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.Log(message, context);
-        }
-        public static void Log(ITypeLog typeLog, object message)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.Log(message);
-        }
-        public static void LogWarning(ITypeLog typeLog, object message, UnityEngine.Object context)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.LogWarning(message, context);
-        }
-        public static void LogWarning(ITypeLog typeLog, object message)
-        {
-            if (typeLog.IsTypeLogEnabled())
-                Debug.LogWarning(message);
-        }
-
         public static string GetAssetPath(string fullPath)
         {
             var assetPath = fullPath.Substring(fullPath.IndexOf("Assets"));

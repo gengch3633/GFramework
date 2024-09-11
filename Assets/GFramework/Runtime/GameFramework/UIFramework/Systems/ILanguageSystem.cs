@@ -53,12 +53,10 @@ namespace GameFramework
         public string GetLanguangeText(string languangeKey)
         {
             var languageInfo = languageInfos.Find(item => item.Key == languangeKey);
-
-            if (IsTypeLogEnabled()) Debug.LogError("==> [GetLanguangeText]: " + languangeKey);
-
+            GameUtils.Log(this, $"languangeKey: {languangeKey}");
             if (languageInfo == null)
             {
-                if (this.IsTypeLogEnabled()) Debug.LogError("==> Data No Set: " + languangeKey);
+                GameUtils.Log(this, $"Data No Set: {languangeKey}");
                 return $"{languangeKey}";
             }
             return languageInfo.GetLanaugeText(languageType);

@@ -66,7 +66,7 @@ namespace GameFramework
 
         public void SetAdsManager(IAdsManager adsManager)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [{GetType().Name}] [SetAdsManager]: {adsManager.GetType().FullName}");
+            GameUtils.Log(this, $"{adsManager.GetType().FullName}");
             this.adsManager = adsManager;
         }
 
@@ -139,39 +139,39 @@ namespace GameFramework
         public bool IsRewardAdReady()
         {
             var ret = adsManager != null && adsManager.IsRewardAdReady();
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [IsRewardAdReady]: {ret}");
+            GameUtils.Log(this, $"ret: {ret}");
             return ret;
         }
 
         public bool IsInterstitialAdReady()
         {
             var ret = adsManager != null && adsManager.IsInterstitialAdReady();
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [IsInterstitialAdReady]: {ret}");
+            GameUtils.Log(this, $"ret: {ret}");
             return ret;
         }
 
         public void ShowBanner()
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowBanner]");
+            GameUtils.Log(this);
             eventSystem.LogAdBannerShowEvent(bannerRefreshInterval);
             adsManager?.ShowBanner();
         }
 
         public void HideBanner()
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [CloseBanner]");
+            GameUtils.Log(this);
             adsManager?.HideBanner();
         }
 
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
         {
-            if (IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowInterstitialAd]: InterstitialAdsEnabled: {InterstitialAdsEnabled.Value}");
+            GameUtils.Log(this, $"place: {place}");
             adsManager?.ShowInterstitialAd(place, showCompletedCallback);
         }
 
         public void ShowRewardAd(string place, Action<bool> showCompletedCallback)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [AdsSystem] [ShowRewardAd]");
+            GameUtils.Log(this, $"place: {place}");
             adsManager?.ShowRewardAd(place, (ret) => showCompletedCallback?.Invoke(ret));
         }
     }

@@ -48,7 +48,7 @@ namespace GameFramework
 
         public void PlaySound(string soundName)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PlaySound]: {soundName}");
+            GameUtils.Log(this, $"{soundName}");
 
             if (!IsSoundOn.Value)
                 return;
@@ -59,7 +59,7 @@ namespace GameFramework
 
         public void PlayMusic(string bgName)
         {
-            if (IsTypeLogEnabled()) Debug.LogError($"==> [PlayMusic]: {bgName}");
+            GameUtils.Log(this, $"bgName: {bgName}");
             if (!IsMusicOn.Value)
                 return;
 

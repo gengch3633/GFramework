@@ -14,28 +14,27 @@ namespace GameFramework
             var debugSystem = GameApp.Interface.GetModel<IDebugModel>();
             var ret = debugSystem.IsTypeLogEnabled(this);
             return ret;
-
         }
         public void ShowBanner()
         {
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [CloseBanner]");
+            GameUtils.Log(this);
         }
         public void HideBanner()
         {
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [CloseBanner]");
+            GameUtils.Log(this);
         }
 
         public bool IsInterstitialAdReady()
         {
             var ret = isIntAdReturnSuccess;
             isIntAdReturnSuccess = !isIntAdReturnSuccess;
-            if (IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsInterstitialAdAvailable]: " + ret);
+            GameUtils.Log(this, $"ret: {ret}");
             return isIntAdReturnSuccess;
         }
 
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
         {
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [ShowInterstitialAd]: " + place);
+            GameUtils.Log(this, $"place: {place}");
             showCompletedCallback?.Invoke(true);
         }
 
@@ -56,13 +55,13 @@ namespace GameFramework
                 }
             }
 
-            if (IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [IsRewardAdAvailable]: " + ret);
+            GameUtils.Log(this, $"ret: {ret}");
             return ret;
         }
         
         public void ShowRewardAd(string place, Action<bool> showCompletedCallback)
         {
-            if(IsTypeLogEnabled()) Debug.LogError("==> [EditorAdsManager] [ShowRewardAd]: " + place);
+            GameUtils.Log(this, $"place: {place}");
             showCompletedCallback?.Invoke(true);
         }
 

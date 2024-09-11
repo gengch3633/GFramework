@@ -14,24 +14,25 @@ namespace GameFramework
 		public bool IsYooAssetInitSuccess = false;
 		public async UniTask InitAsync(EPlayMode playMode, string packageName)
 		{
+			GameUtils.Log(this, $"packageName: {packageName}");
 			BetterStreamingAssets.Initialize();
 			YooAssets.Initialize();
 			YooAssets.SetOperationSystemMaxTimeSlice(30);
 			var initPackageStatus = await InitPackageAsync(playMode, packageName);
-			if (IsTypeLogEnabled()) Debug.LogError($"==> [PatchSystem] InitPackageAsync: {initPackageStatus}");
+			GameUtils.Log(this, $"initPackageStatus: {initPackageStatus}");
 
 			var getStaticVersionStatus = await GetStaticVersionAsync(packageName);
-			if (IsTypeLogEnabled()) Debug.LogError($"==> [PatchSystem] GetStaticVersionAsync: {getStaticVersionStatus}");
+			GameUtils.Log(this, $"getStaticVersionStatus: {getStaticVersionStatus}");
 
 			var updateManefistStatus = await UpdateManifestAsync(packageName);
-			if (IsTypeLogEnabled()) Debug.LogError($"==> [PatchSystem] UpdateManifestAsync: {updateManefistStatus}");
+			GameUtils.Log(this, $"updateManefistStatus: {updateManefistStatus}");
 
 			IsYooAssetInitSuccess = initPackageStatus == EOperationStatus.Succeed && getStaticVersionStatus == EOperationStatus.Succeed && updateManefistStatus == EOperationStatus.Succeed;
 		}
 
 		private async UniTask<EOperationStatus> InitPackageAsync(EPlayMode playMode, string packageName)
 		{
-			if (IsTypeLogEnabled()) Debug.LogError($"==> [PatchSystem] playMode: {playMode}");
+			GameUtils.Log(this, $"playMode: {playMode}, packageName: {packageName}");
 			// 创建默认的资源包
 			var package = YooAssets.TryGetAssetsPackage(packageName);
 			if (package == null)
@@ -80,7 +81,7 @@ namespace GameFramework
 			var versionName = "V120";
 			var platformName = GameUtils.IsIosPlatform() ? "IOS" : "Android";
 			var serverUrl = $"{hostServerIP}/{gameName}/{versionName}/{platformName}";
-			if(IsTypeLogEnabled()) Debug.LogError("==> [PatchSystem] serverUrl:" + serverUrl);
+			GameUtils.Log(this, "serverUrl:" + serverUrl);
 			return serverUrl;
 		}
 
@@ -90,7 +91,7 @@ namespace GameFramework
 			var operation = package.UpdatePackageVersionAsync();
 			await operation.ToUniTask();
 			packageVersion = operation.PackageVersion;
-			if (IsTypeLogEnabled()) Debug.LogError("=> [PatchSystem] GetStaticVersion: " + operation.PackageVersion);
+			GameUtils.Log(this, $"packageVersion: {packageVersion}");
 			return operation.Status;
 		}
 

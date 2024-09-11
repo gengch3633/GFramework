@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    public class AdsItem : MonoController
+    public class AdsItem : MonoController, ITypeLog
     {
         private Button btnShowSplashAd;
         private Button btnShowRewardAd;
@@ -42,26 +42,32 @@ namespace GameFramework
         }
         private void OnBtnShowRewardAdClick()
         {
-            Debug.LogError($"==> [OnBtnShowRewardAdClick] 1");
+            GameUtils.Log(this, $"[OnBtnShowRewardAdClick] 1");
             adsSystem.CheckShowRewardAd("AdsTest", (success)=> {
-                Debug.LogError($"==> [OnBtnShowRewardAdClick] 2, Show Result: {success}");
+                GameUtils.Log(this, $"[OnBtnShowRewardAdClick] 2, Show Result: {success}");
             });
         }
         private void OnBtnShowInterstitialAdClick()
         {
-            Debug.LogError($"==> [OnBtnShowInterstitialAdClick] 1");
+            GameUtils.Log(this, $"[OnBtnShowInterstitialAdClick] 1");
             adsSystem.CheckShowInterstitialAd("AdsTest", (success) => {
-                Debug.LogError($"==> [OnBtnShowInterstitialAdClick] 2, Show Result: {success}");
+                GameUtils.Log(this, $"[OnBtnShowInterstitialAdClick] 2, Show Result: {success}");
             });
         }
         private void OnBtnShowBannerAdClick()
         {
-            Debug.LogError($"==> [OnBtnShowBannerAdClick] 1");
+            GameUtils.Log(this, $"[OnBtnShowBannerAdClick] 1");
             adsSystem.ShowBanner();
         }
         private void OnBtnCloseAdContainerClick()
         {
             GameObject.Destroy(gameObject);
+        }
+
+        public bool IsTypeLogEnabled()
+        {
+            var ret = debugModel.IsTypeLogEnabled(this);
+            return ret;
         }
     }
 }

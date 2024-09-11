@@ -22,7 +22,7 @@ namespace GameFramework
         private AdsConfig adsConfig;
         public AdsManager_Admob()
         {
-            LogError($"[Create]");
+            GameUtils.Log(this, $"[Create]");
             Application.focusChanged += OnApplicationFocus;
             InitAdsConfig();
             Init();
@@ -84,13 +84,13 @@ namespace GameFramework
         public void ShowRewardAd(string place, Action<bool> showCompletedCallback)
         {
             isShowingAd = true;
-            if (IsTypeLogEnabled()) Debug.LogError("==> [ShowRewardAd] Start");
+            GameUtils.Log(this, "[ShowRewardAd] Start");
             rewardedAdCallBack = showCompletedCallback;
             rewardedAd.Show((Reward reward) =>
             {
                 Loom.QueueOnMainThread(() =>
                 {
-                    if (IsTypeLogEnabled()) Debug.LogError("==> [ShowRewardAd] Rewarded");
+                    GameUtils.Log(this, "[ShowRewardAd] Rewarded");
                     rewardedAdCallBack?.Invoke(true);
                 });
             });

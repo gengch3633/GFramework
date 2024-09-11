@@ -54,7 +54,7 @@ namespace GameFramework
 
         public void Purchase(string productId, Action<bool,string> onCompleted)
         {
-            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 1: {productId}");
+            GameUtils.Log(this, $"Purchase 11: {productId}");
             uiSystem.OpenPopup<PurchaseLoadingPopup>();
             Purchase(productId, (product, isSuccess, msg) => { 
                 onCompleted.Invoke(isSuccess, msg);
@@ -67,12 +67,12 @@ namespace GameFramework
             purchaseCallback = callBack;
             if (storeController != null)
             {
-                if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 11: {productId}");
+                GameUtils.Log(this, $"Purchase 21: {productId}");
                 storeController.InitiatePurchase(productId);
             }
             else
             {
-                if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] Purchase 12: {productId}");
+                GameUtils.Log(this, $"Purchase 22: {productId}");
                 uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_network_error"));
                 InitAsync().Forget();
                 purchaseCallback?.Invoke(null, false, "Please check the network and try again");
@@ -92,7 +92,7 @@ namespace GameFramework
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 1");
+            GameUtils.Log(this, $"1");
             this.storeController = controller;
             this.extensionProvider = extensions;
             this.appleExtensions = extensionProvider.GetExtension<IAppleExtensions>();
@@ -100,34 +100,34 @@ namespace GameFramework
 
             // On Apple platforms we need to handle deferred purchases caused by Apple's Ask to Buy feature.
             // On non-Apple platforms this will have no effect; OnDeferred will never be called.
-            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 2");
+            GameUtils.Log(this, $"2");
             appleExtensions.RegisterPurchaseDeferredListener((item)=> {
-                if(IsTypeLogEnabled()) Debug.LogError("==> [PurchaseSystem] Purchase deferred: " + item.definition.id);
+                GameUtils.Log(this, "[OnInitialized] Purchase deferred: " + item.definition.id);
             });
 
-            if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitialized 3");
+            GameUtils.Log(this, $"3");
             CheckRestoreSubscription();
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitializeFailed 1,  error: {error}");
+            GameUtils.Log(this, $"error: {error}");
         }
 
         public void OnInitializeFailed(InitializationFailureReason error, string message)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnInitializeFailed 1,  error: {error}, message: {message}");
+            GameUtils.Log(this, $"error: {error}, message: {message}");
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] OnPurchaseFailed, product: {product.definition.id}, failureReason: {failureReason}");
+            GameUtils.Log(this, $"product: {product.definition.id}, failureReason: {failureReason}");
             purchaseCallback?.Invoke(product, false, $"{failureReason}");
         }
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] ProcessPurchase, purchaseEvent£º{purchaseEvent.purchasedProduct.definition.id}");
+            GameUtils.Log(this, $"purchaseEvent£º{purchaseEvent.purchasedProduct.definition.id}");
             var product = purchaseEvent.purchasedProduct;
             bool validPurchase = ValidateReceipt(product.receipt);
             purchaseCallback?.Invoke(product, validPurchase, "ProcessPurchase");
@@ -162,17 +162,17 @@ namespace GameFramework
                     if(IsTypeLogEnabled()) Debug.Log("Receipt is valid. Contents:");
                     foreach (IPurchaseReceipt productReceipt in result)
                     {
-                        if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSysten], productID: {productReceipt.productID}, purchaseDate: {productReceipt.purchaseDate}, transactionID: {productReceipt.transactionID}");
+                        GameUtils.Log(this, $"productID: {productReceipt.productID}, purchaseDate: {productReceipt.purchaseDate}, transactionID: {productReceipt.transactionID}");
                     }
                 }
                 catch (IAPSecurityException)
                 {
-                    if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] ValidateReceipt 1, [Invalid receipt, not unlocking content]");
+                    GameUtils.Log(this, $"ValidateReceipt 1, [Invalid receipt, not unlocking content]");
                     validPurchase = false;
                 }
             }
 #endif
-            if(IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] ValidateReceipt 2, validPurchase£º{validPurchase}");
+            GameUtils.Log(this, $"ValidateReceipt 2, validPurchase£º{validPurchase}");
             return validPurchase;
         }
     }

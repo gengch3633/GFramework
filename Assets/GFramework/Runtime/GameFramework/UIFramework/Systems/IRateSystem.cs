@@ -39,10 +39,10 @@ namespace GameFramework
             var rateRecord = new RateSystem();
             CopyBindableClass(this, rateRecord);
 
-            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] publishUrl: " + publishUrl);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] supportEmail: " + SDKConst.SdkConfigProduction.supportEmail);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] subject: " + subject);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [RateSystem] body: " + body);
+            GameUtils.Log(this, "publishUrl: " + publishUrl);
+            GameUtils.Log(this, "supportEmail: " + SDKConst.SdkConfigProduction.supportEmail);
+            GameUtils.Log(this, "subject: " + subject);
+            GameUtils.Log(this, "body: " + body);
         }
 
         public bool IsTypeLogEnabled()

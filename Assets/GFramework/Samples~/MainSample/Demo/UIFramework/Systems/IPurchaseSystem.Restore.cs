@@ -34,7 +34,7 @@ namespace GameFramework
                 else
                     uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_failed"));
                 if (IsTypeLogEnabled())
-                    Debug.LogError($"==> [PurchaseSystem] [RestoreTransactions] Result: {result}, msg: {msg}");
+                    GameUtils.Log(this, $"[RestoreTransactions] Result: {result}, msg: {msg}");
             });
 
             googlePlayStoreExtensions?.RestoreTransactions((result, msg) => {
@@ -45,7 +45,7 @@ namespace GameFramework
                 else
                     uiSystem.OpenMessage<NormalMessage>(new MessageInfo("message_restore_failed"));
                 if (IsTypeLogEnabled())
-                    Debug.LogError($"==> [PurchaseSystem] [RestoreTransactions] Result: {result}, msg: {msg}");
+                    GameUtils.Log(this, $"[RestoreTransactions] Result: {result}, msg: {msg}");
             });
         }
 
@@ -63,7 +63,7 @@ namespace GameFramework
                         {
                             if (item.receipt != null)
                             {
-                                if (IsTypeLogEnabled()) Debug.LogError($"==> [PurchaseSystem] [CheckRestoreSubscription] 1: {JsonConvert.SerializeObject(item)}");
+                                GameUtils.Log(this, $"[CheckRestoreSubscription] 1: {JsonConvert.SerializeObject(item)}");
                                 if (CheckIfProductIsAvailableForSubscriptionManager(item.receipt))
                                 {
                                     var hasKey = (introductoryInfoDict != null) && introductoryInfoDict.ContainsKey(item.definition.storeSpecificId);
@@ -80,23 +80,16 @@ namespace GameFramework
                                             isSubscribed = true;
                                     }
 
-                                    if (IsTypeLogEnabled())
-                                        LogSubscriptionInfo(info);
+                                    LogSubscriptionInfo(info);
                                 }
                                 else
-                                {
-                                    if (IsTypeLogEnabled())
-                                        Debug.LogError("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
-                                }
+                                    GameUtils.Log(this, "This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
                             }
                             else
-                            {
-                                if (IsTypeLogEnabled())
-                                    Debug.LogError("the product should have a valid receipt");
-                            }
+                                GameUtils.Log(this, "the product should have a valid receipt");
 
                             if (isSubscribed)
-                                Debug.LogError($"==> [PurchaseSystem], isSubscribed: {isSubscribed}");
+                                GameUtils.Log(this, $"isSubscribed: {isSubscribed}");
                         }
                     }
                 }
@@ -105,18 +98,18 @@ namespace GameFramework
 
         private void LogSubscriptionInfo(SubscriptionInfo info)
         {
-            Debug.LogError($"==> [PurchaseSystem] getProductId: " + info.getProductId());
-            Debug.LogError($"==> [PurchaseSystem] getPurchaseDate: " + info.getPurchaseDate());
-            Debug.LogError($"==> [PurchaseSystem] getExpireDate: " + info.getExpireDate());
-            Debug.LogError($"==> [PurchaseSystem] isSubscribed: " + info.isSubscribed());
-            Debug.LogError($"==> [PurchaseSystem] isExpired: " + info.isExpired());
-            Debug.LogError($"==> [PurchaseSystem] isCancelled: " + info.isCancelled());
-            Debug.LogError($"==> [PurchaseSystem] isFreeTrial: " + info.isFreeTrial());
-            Debug.LogError($"==> [PurchaseSystem] isAutoRenewing: " + info.isAutoRenewing());
-            Debug.LogError($"==> [PurchaseSystem] getRemainingTime: " + info.getRemainingTime());
-            Debug.LogError($"==> [PurchaseSystem] isIntroductoryPricePeriod: " + info.isIntroductoryPricePeriod());
-            Debug.LogError($"==> [PurchaseSystem] getIntroductoryPrice: " + info.getIntroductoryPrice());
-            Debug.LogError($"==> [PurchaseSystem] getIntroductoryPricePeriodCycles: " + info.getIntroductoryPricePeriodCycles());
+            GameUtils.Log(this, $"getProductId: " + info.getProductId());
+            GameUtils.Log(this, $"getPurchaseDate: " + info.getPurchaseDate());
+            GameUtils.Log(this, $"getExpireDate: " + info.getExpireDate());
+            GameUtils.Log(this, $"isSubscribed: " + info.isSubscribed());
+            GameUtils.Log(this, $"isExpired: " + info.isExpired());
+            GameUtils.Log(this, $"isCancelled: " + info.isCancelled());
+            GameUtils.Log(this, $"isFreeTrial: " + info.isFreeTrial());
+            GameUtils.Log(this, $"isAutoRenewing: " + info.isAutoRenewing());
+            GameUtils.Log(this, $"getRemainingTime: " + info.getRemainingTime());
+            GameUtils.Log(this, $"isIntroductoryPricePeriod: " + info.isIntroductoryPricePeriod());
+            GameUtils.Log(this, $"getIntroductoryPrice: " + info.getIntroductoryPrice());
+            GameUtils.Log(this, $"getIntroductoryPricePeriodCycles: " + info.getIntroductoryPricePeriodCycles());
         }
 
         private bool CheckIfProductIsAvailableForSubscriptionManager(string receipt)
@@ -124,7 +117,7 @@ namespace GameFramework
             var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
             if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
             {
-                if(IsTypeLogEnabled()) Debug.LogError("The product receipt does not contain enough information");
+                GameUtils.Log(this, "The product receipt does not contain enough information");
                 return false;
             }
             var store = (string)receipt_wrapper["Store"];
@@ -139,13 +132,13 @@ namespace GameFramework
                             var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
                             if (!payload_wrapper.ContainsKey("json"))
                             {
-                                if (IsTypeLogEnabled()) Debug.LogError("The product receipt does not contain enough information, the 'json' field is missing");
+                                GameUtils.Log(this, "The product receipt does not contain enough information, the 'json' field is missing");
                                 return false;
                             }
                             var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
                             if (original_json_payload_wrapper == null || original_json_payload_wrapper["purchaseState"].ToString() != "0")
                             {
-                                if (IsTypeLogEnabled()) Debug.LogError("The product receipt does not contain enough information, the 'developerPayload' field is missing");
+                                GameUtils.Log(this, "The product receipt does not contain enough information, the 'developerPayload' field is missing");
                                 return false;
                             }
 

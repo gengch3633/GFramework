@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    public partial class DebugPopup
+    public partial class DebugPopup: ITypeLog
     {
+        public bool IsTypeLogEnabled()
+        {
+            return debugModel.IsTypeLogEnabled(this);
+        }
         protected override void OnInitVars()
         {
             base.OnInitVars();
@@ -116,7 +120,7 @@ namespace GameFramework
             var languageName = languageNames[value];
             System.Enum.TryParse(languageName, out LanguageType languageType);
 
-            Debug.LogError($"==> [OnLanguageDropdownChanged]: {languageType}");
+            GameUtils.Log(this, $"languageType: {languageType}");
             languageSystem.SetLanguageType(languageType);
         }
         private void OnBtnSaveGameDataClick() {
