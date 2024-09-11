@@ -1,14 +1,52 @@
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
+using System;
 
 namespace GameFramework
 {
     public class GameUtils
     {
+        public static void LogError(ITypeLog typeLog, object message, UnityEngine.Object context)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.LogError(message, context);
+        }
+        public static void LogError(ITypeLog typeLog, object message)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.LogError(message);
+        }
+
+        public static void Log(ITypeLog typeLog, object message, UnityEngine.Object context)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.Log(message, context);
+        }
+        public static void Log(ITypeLog typeLog, object message)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.Log(message);
+        }
+        public static void LogWarning(ITypeLog typeLog, object message, UnityEngine.Object context)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.LogWarning(message, context);
+        }
+        public static void LogWarning(ITypeLog typeLog, object message)
+        {
+            if (typeLog.IsTypeLogEnabled())
+                Debug.LogWarning(message);
+        }
+
+        public static string GetAssetPath(string fullPath)
+        {
+            var assetPath = fullPath.Substring(fullPath.IndexOf("Assets"));
+            return assetPath;
+        }
+
         public static string GetTimeFormatString(int seconds)
         {
             var timeString = string.Format("{0:00}:{1:00}", seconds / 60, seconds % 60);
@@ -62,7 +100,7 @@ namespace GameFramework
             }
         }
 
-        public static void LogElapsedTime(string actionName, Action action, bool isInProfiler = false)
+        public static void LogElapsedTime(string actionName,Action action, bool isInProfiler = false)
         {
             System.Diagnostics.Stopwatch stopwatch = null;
             if (isInProfiler)

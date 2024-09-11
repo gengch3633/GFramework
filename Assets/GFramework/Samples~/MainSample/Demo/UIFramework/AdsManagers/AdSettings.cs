@@ -8,15 +8,15 @@ namespace AudienceNetwork
 
         public static void SetDataProcessingOptions(string[] dataProcessingOptions)
         {
-#if UNITY_ANDROID
-            AndroidJavaClass adSettings = new AndroidJavaClass("com.facebook.ads.AdSettings");
-            adSettings.CallStatic("setDataProcessingOptions", (object)dataProcessingOptions);
-#endif
+//#if UNITY_ANDROID
+//            AndroidJavaClass adSettings = new AndroidJavaClass("com.facebook.ads.AdSettings");
+//            adSettings.CallStatic("setDataProcessingOptions", (object)dataProcessingOptions);
+//#endif
 
-#if UNITY_EDITOR
-#elif UNITY_IOS
-            FBAdSettingsBridgeSetDataProcessingOptions(dataProcessingOptions, dataProcessingOptions.Length);
-#endif
+//#if UNITY_EDITOR
+//#elif UNITY_IOS
+//            FBAdSettingsBridgeSetDataProcessingOptions(dataProcessingOptions, dataProcessingOptions.Length);
+//#endif
         }
 
         public static void SetDataProcessingOptions(string[] dataProcessingOptions, int country, int state)

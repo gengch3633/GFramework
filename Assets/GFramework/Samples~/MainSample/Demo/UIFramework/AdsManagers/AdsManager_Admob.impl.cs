@@ -19,11 +19,11 @@ namespace GameFramework
         public void Init()
         {
             AudienceNetwork.AdSettings.SetDataProcessingOptions(new string[] { });
-            if (IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] Init 1");
+            LogError("[AdsManager_Admob] Init 1");
             MobileAds.SetiOSAppPauseOnBackground(true);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] Init 2");
+            LogError("[AdsManager_Admob] Init 2");
             MobileAds.Initialize(HandleInitCompleteAction);
-            if(IsTypeLogEnabled()) Debug.LogError("==> [AdsManager_Admob] Init 3");
+            LogError("[AdsManager_Admob] Init 3");
         }
 
         private void HandleInitCompleteAction(InitializationStatus initstatus)
@@ -98,13 +98,13 @@ namespace GameFramework
         private void RequestAndLoadInterstitialAd(bool resetAttemptCount)
         {
             if (resetAttemptCount) interstitialAdRetryAttemptCount = 0;
-            LogError($"==> [RequestAndLoadInterstitialAd] Load: {resetAttemptCount}");
+            LogError($"[RequestAndLoadInterstitialAd] Load: {resetAttemptCount}");
             interstitialAd?.Destroy();
             InterstitialAd.Load(adsConfig.interstitialAdId, CreateAdRequest(), async (InterstitialAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)
                 {
-                    LogError($"==> [RequestAndLoadInterstitialAd]  LoadFailed With Error: {loadError.GetMessage()}");
+                    LogError($"[RequestAndLoadInterstitialAd]  LoadFailed With Error: {loadError.GetMessage()}");
                     double retryDelay = Math.Pow(2, Math.Min(6, interstitialAdRetryAttemptCount));
                     interstitialAdRetryAttemptCount++;
                     await UniTask.Delay(TimeSpan.FromSeconds(retryDelay));
@@ -112,7 +112,7 @@ namespace GameFramework
                     return;
                 }
 
-                LogError("==> [RequestAndLoadInterstitialAd] Loaded");
+                LogError("[RequestAndLoadInterstitialAd] Loaded");
                 interstitialAd = ad;
                 interstitialAdRetryAttemptCount = 0;
 
@@ -130,7 +130,7 @@ namespace GameFramework
                 ad.OnAdFullScreenContentFailed += (AdError error) => 
                 {
                     isShowingAd = false;
-                    LogError($"==> [RequestAndLoadInterstitialAd] OnAdFullScreenContentFailed Error: {error.GetMessage()}");
+                    LogError($"[RequestAndLoadInterstitialAd] OnAdFullScreenContentFailed Error: {error.GetMessage()}");
                     RequestAndLoadInterstitialAd(false);
                 };
                 ad.OnAdPaid += (AdValue adValue) => { };
