@@ -74,12 +74,12 @@ namespace GameFramework
                     RequestAndLoadRewardedAd(false);
                     return;
                 }
-                GameUtils.Log(this, $"[RequestAndLoadRewardedAd], Load Success");
+                GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Loaded");
 
                 rewardedAd = ad;
                 rewardedAdRetryAttemptCount = 0;
 
-                ad.OnAdFullScreenContentOpened += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd], Load Opened"); };
+                ad.OnAdFullScreenContentOpened += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Opened"); };
                 ad.OnAdFullScreenContentClosed += () => RequestAndLoadRewardedAd(true);
                 ad.OnAdImpressionRecorded += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Recorded"); };
                 ad.OnAdClicked += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Clicked"); };
@@ -96,13 +96,13 @@ namespace GameFramework
         private void RequestAndLoadInterstitialAd(bool resetAttemptCount)
         {
             if (resetAttemptCount) interstitialAdRetryAttemptCount = 0;
-            GameUtils.Log(this, $"[RequestAndLoadInterstitialAd] Load: {resetAttemptCount}");
+            GameUtils.Log(this, $"[RequestAndLoadInterstitialAd] Load, AttemptCount: {interstitialAdRetryAttemptCount}");
             interstitialAd?.Destroy();
             InterstitialAd.Load(adsConfig.interstitialAdId, CreateAdRequest(), async (InterstitialAd ad, LoadAdError loadError) =>
             {
                 if (loadError != null || ad == null)
                 {
-                    GameUtils.Log(this, $"[RequestAndLoadInterstitialAd]  LoadFailed With Error: {loadError.GetMessage()}");
+                    GameUtils.Log(this, $"[RequestAndLoadInterstitialAd] LoadFailed With Error: {loadError.GetMessage()}");
                     double retryDelay = Math.Pow(2, Math.Min(6, interstitialAdRetryAttemptCount));
                     interstitialAdRetryAttemptCount++;
                     await UniTask.Delay(TimeSpan.FromSeconds(retryDelay));

@@ -66,7 +66,7 @@ namespace GameFramework
             var fileName = typeLog.GetType().Name;
             var methodName = stackFrame.GetMethod().Name;
             var useMethodName = !message.Contains("[");
-            var info = useMethodName ? $"==> [{fileName}] [{methodName}], {message}" : $"==> [{fileName}] {message}";
+            var info = useMethodName ? $"==> [{fileName}] [{methodName}] {message}" : $"==> [{fileName}] {message}";
             return info;
         }
     }

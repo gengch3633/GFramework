@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using Newtonsoft.Json;
 using System;
 using UnityEngine;
 
@@ -33,9 +34,10 @@ namespace GameFramework
             var adsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
             var adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOS : EAdsType.AdmobAndroid;
             var debugModel = GameApp.Interface.GetModel<IDebugModel>();
-            if (debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
+            if (debugModel.IsDebugFeatureEnabled<Debug_TestAds>())
                 adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOSTest : EAdsType.AdmobAndroidTest;
             adsConfig = adsConfigs.Find(item => item.adsType == adsType);
+            GameUtils.Log(this, $"adsConfig: {JsonConvert.SerializeObject(adsConfig)}");
         }
 
         private async void OnApplicationFocus(bool focus)
