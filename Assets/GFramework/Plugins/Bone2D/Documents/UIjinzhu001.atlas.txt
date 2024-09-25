@@ -1,0 +1,55 @@
+
+UIjinzhu001.png
+size: 464,1048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+100
+  rotate: false
+  xy: 127, 68
+  size: 158, 60
+  orig: 158, 60
+  offset: 0, 0
+  index: -1
+AD
+  rotate: false
+  xy: 127, 16
+  size: 110, 50
+  orig: 110, 50
+  offset: 0, 0
+  index: -1
+UIjinzhu001
+  rotate: false
+  xy: 2, 130
+  size: 236, 381
+  orig: 236, 381
+  offset: 0, 0
+  index: -1
+UIjinzhu002
+  rotate: true
+  xy: 2, 513
+  size: 531, 449
+  orig: 531, 449
+  offset: 0, 0
+  index: -1
+UIjinzhu003
+  rotate: false
+  xy: 2, 2
+  size: 123, 126
+  orig: 123, 126
+  offset: 0, 0
+  index: -1
+UIjinzhu004
+  rotate: false
+  xy: 287, 38
+  size: 111, 90
+  orig: 111, 90
+  offset: 0, 0
+  index: -1
+UIjinzhu005
+  rotate: false
+  xy: 240, 130
+  size: 219, 381
+  orig: 219, 381
+  offset: 0, 0
+  index: -1

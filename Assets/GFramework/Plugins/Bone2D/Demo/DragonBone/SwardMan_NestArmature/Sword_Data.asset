@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87a118078440422e9a05ba83f9766be, type: 3}
+  m_Name: Sword_Data
+  m_EditorClassIdentifier: 
+  boneDatas:
+  - x: 0
+    y: 0
+    rotation: 0
+    sx: 1
+    sy: 1
+  - x: 2.671755
+    y: 3.9313688
+    rotation: -89.8043
+    sx: 1
+    sy: 1
+  - x: 0.0047299997
+    y: 0.014932999
+    rotation: 0.019199999
+    sx: 1
+    sy: 1
+  - x: -0.0845
+    y: -0.011
+    rotation: 180.4321
+    sx: 1
+    sy: 1
+  - x: 3.1154997
+    y: -0.25399998
+    rotation: 181.1263
+    sx: 1
+    sy: 1
+  - x: 0.626
+    y: -0.089999996
+    rotation: 2.1427
+    sx: 1
+    sy: 1
+  - x: 0.2685
+    y: -0.040999997
+    rotation: 0.75839996
+    sx: 1
+    sy: 1
+  - x: 3.356792
+    y: 0.27669498
+    rotation: 180.2704
+    sx: 1
+    sy: 1
+  - x: 1.9325
+    y: -0.249
+    rotation: 0
+    sx: 1
+    sy: 1
+  - x: 0.4395
+    y: 0.2045
+    rotation: 1.6832999
+    sx: 1
+    sy: 1
+  - x: -1.4605
+    y: 0
+    rotation: 3.2094998
+    sx: 1
+    sy: 1
+  - x: 0.163885
+    y: -0.15323499
+    rotation: -1.1445
+    sx: 1
+    sy: 1
+  - x: 0.94664097
+    y: -0.002108
+    rotation: -91.1263
+    sx: 1
+    sy: 1
+  - x: 1.2824631
+    y: -0.010861999
+    rotation: 0
+    sx: 1
+    sy: 1
+  slotDatas:
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: -1
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: -1
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    displayIndex: 0
+    zorder: 0
+  displayDatas:
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 3.1323388
+      y: 0.005727
+      rotation: 89.026695
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 1.2006459
+      y: 0.031940997
+      rotation: 89.2416
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.023829998
+      y: -0.0039399997
+      rotation: -90.4853
+      sx: -1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.617897
+      y: -0.008970999
+      rotation: -90.4853
+      sx: -1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.343526
+      y: 0.010090999
+      rotation: 88.316696
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.000081
+      y: 0.013677999
+      rotation: 90
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.2647
+      y: -0.055258002
+      rotation: 87.8573
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.302493
+      y: -0.024628
+      rotation: -91.1263
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.035178002
+      y: 0.0064189998
+      rotation: 0
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.447391
+      y: 0.013885
+      rotation: 89.0018
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.542785
+      y: -0.019772
+      rotation: -90.4321
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.022581
+      y: 0.014678
+      rotation: 90
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.043276
+      y: 0.002258
+      rotation: 86.7905
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.60397094
+      y: -0.012317999
+      rotation: 89.2416
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 0.817683
+      y: 0.027435998
+      rotation: 89.0018
+      sx: 1
+      sy: 1
+    type: 0
+  - color: {r: 1, g: 1, b: 1, a: 1}
+    vertex: []
+    transform:
+      x: 2.483806
+      y: -0.037203
+      rotation: 89.2416
+      sx: 1
+      sy: 1
+    type: 0
