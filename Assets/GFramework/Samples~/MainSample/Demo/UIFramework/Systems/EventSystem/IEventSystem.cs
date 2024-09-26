@@ -10,6 +10,7 @@ namespace GameFramework
     public interface IEventTracker
     {
         void LogEvent(string eventName, Dictionary<string, object> paramDict);
+        void Init();
     }
     public partial interface IEventSystem : ISystem, IEventTracker
     {
@@ -36,7 +37,10 @@ namespace GameFramework
             var eventSystem = ReadInfoWithReturnNew<EventSystem>();
             CopyBindableClass(this, eventSystem, () => SaveInfo(this));
         }
+        public void Init()
+        {
 
+        }
         public void LogEvent(string eventName, Dictionary<string, object> paramDict)
         {
             if (IsTypeLogEnabled())
@@ -46,6 +50,7 @@ namespace GameFramework
         public void AddEventTracker(IEventTracker eventTracker)
         {
             eventTrackerList.Add(eventTracker);
+            eventTracker.Init();
         }
 
         public int GetEventFireCount(string eventName)

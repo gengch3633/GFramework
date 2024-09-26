@@ -8,5 +8,10 @@
         "defineId": 2,
         "scriptDefineSymble": "UNITASK_DOTWEEN_SUPPORT",
         "isToAdded": true
+    },
+    {
+        "defineId": 3,
+        "scriptDefineSymble": "SDK_TD",
+        "isToAdded": true
     }
 ]

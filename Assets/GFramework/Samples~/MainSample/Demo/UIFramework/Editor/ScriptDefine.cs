@@ -41,6 +41,7 @@ namespace GameFramework
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(targetPlatform, newSymbles);
             });
             AssetDatabase.Refresh();
+            AssetDatabase.SaveAssets();
             Debug.LogError($"==> [UpdateScriptDefineSymbles] [End]");
         }
     }

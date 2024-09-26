@@ -16,6 +16,13 @@ namespace GameFramework
             Loom.Initialize();
             uiSystem.OpenPopup<DebugPopup>();
             CheckForDebug();
+            InitEventTrackers();
+        }
+
+        private void InitEventTrackers()
+        {
+            var eventSystem = this.GetSystem<IEventSystem>();
+            eventSystem.AddEventTracker(new EventTracker_TD());
         }
 
         private void InitModels()
