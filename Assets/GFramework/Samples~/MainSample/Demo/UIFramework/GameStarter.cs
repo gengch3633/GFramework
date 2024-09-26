@@ -1,6 +1,7 @@
 using UnityEngine;
 using Framework;
 using IngameDebugConsole;
+using System;
 
 namespace GameFramework
 {
@@ -23,6 +24,7 @@ namespace GameFramework
         {
             var eventSystem = this.GetSystem<IEventSystem>();
             eventSystem.AddEventTracker(new EventTracker_TD());
+            eventSystem.AddEventTracker(new EventTracker_Firebase());
         }
 
         private void InitModels()
@@ -46,6 +48,25 @@ namespace GameFramework
 
             if (!debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
                 adsSystem.SetAdsManager(new AdsManager_Admob());
+        }
+
+        [ContextMenu("Test")]
+        private void Test()
+        {
+            object longT = (int)1;
+            object floatT = 1.2f;
+            object doubleT = 1.2d;
+            object stringT = "111";
+
+            Debug.LogError($"==> longT: {longT}, {longT.GetType().Name}");
+            Debug.LogError($"==> floatT: {floatT}, {floatT.GetType().Name}");
+            Debug.LogError($"==> doubleT: {doubleT}, {doubleT.GetType().Name}");
+            Debug.LogError($"==> stringT: {stringT}, {stringT.GetType().Name}");
+
+            Debug.LogError($"==> long: {typeof(Int32).Name}");
+            Debug.LogError($"==> float: {typeof(Single).Name}");
+            Debug.LogError($"==> double: {typeof(Double).Name}");
+            Debug.LogError($"==> string: {typeof(String).Name}");
         }
     }
 }
