@@ -1,5 +1,7 @@
-﻿using Firebase.Extensions;
+﻿#if SDK_FIRE_BASE
+using Firebase.Extensions;
 using Firebase.RemoteConfig;
+#endif
 using GameFramework;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ public class RemoteConfig_Firebase : ITypeLog
 
     public void Init(bool isFirebaseInited)
     {
+#if SDK_FIRE_BASE
         if (!isFirebaseInited)
             return;
 
@@ -31,21 +34,29 @@ public class RemoteConfig_Firebase : ITypeLog
                 FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaultRemoteValueDict).ContinueWithOnMainThread(task => FetchDataAsync());
             }
         }));
+#endif
     }
 
     private void InitDefaultRemoteValueDict<T>(RemoteConfigValue<T> remoteConfigValue)
     {
+#if SDK_FIRE_BASE
         defaultRemoteValueDict.Add(remoteConfigValue.Key, remoteConfigValue.Value);
+#endif
     }
 
     private Task FetchDataAsync()
     {
+#if SDK_FIRE_BASE
         Task fetchTask = FirebaseRemoteConfig.DefaultInstance.FetchAsync(TimeSpan.Zero);
         return fetchTask.ContinueWithOnMainThread(FetchComplete);
+#else
+    return null;
+#endif
     }
 
     private void FetchComplete(Task fetchTask)
     {
+#if SDK_FIRE_BASE
         ConfigInfo info = FirebaseRemoteConfig.DefaultInstance.Info;
         GameUtils.Log(this, $"fetchTask.IsCanceled: {fetchTask.IsCanceled}, fetchTask.IsFaulted: {fetchTask.IsFaulted}, fetchTask.IsCompleted: {fetchTask.IsCompleted}");
         GameUtils.Log(this, $"info.LastFetchStatus: {info.LastFetchStatus}");
@@ -75,6 +86,7 @@ public class RemoteConfig_Firebase : ITypeLog
             case LastFetchStatus.Pending:
                 break;
         }
+#endif
     }
 
     public bool IsTypeLogEnabled()
@@ -98,6 +110,7 @@ public class RemoteConfigValue<T>
 
     public void SetRemoteValue(ITypeLog typeLog)
     {
+#if SDK_FIRE_BASE
         var remoteConfig = FirebaseRemoteConfig.DefaultInstance;
         if (typeof(T) == typeof(bool))
             Value = (T)(object)remoteConfig.GetValue(this.Key).BooleanValue;
@@ -111,7 +124,8 @@ public class RemoteConfigValue<T>
             UnityEngine.Debug.LogError($"==> [NormalMessage] [Init] Exception:\n{e.StackTrace}");
         }
         else if (typeof(T) == typeof(double))
-            Value = (T)(object)FirebaseRemoteConfig.DefaultInstance.GetValue(this.Key).DoubleValue;
+            Value = (T)(object)remoteConfig.GetValue(this.Key).DoubleValue;
+#endif
 
         GameUtils.Log(typeLog, $"defaultValue: {Value}");
     }

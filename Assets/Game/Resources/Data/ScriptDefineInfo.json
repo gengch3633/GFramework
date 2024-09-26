@@ -13,5 +13,10 @@
         "defineId": 3,
         "scriptDefineSymble": "SDK_TD",
         "isToAdded": true
+    },
+    {
+        "defineId": 4,
+        "scriptDefineSymble": "SDK_FIRE_BASE",
+        "isToAdded": true
     }
 ]
