@@ -1,7 +1,9 @@
 
 using Cysharp.Threading.Tasks;
+#if SDK_ADMOB
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+#endif
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,14 +20,16 @@ namespace GameFramework
         }
         public void Init()
         {
+#if SDK_ADMOB
             AudienceNetwork.AdSettings.SetDataProcessingOptions(new string[] { });
             GameUtils.Log(this, "1");
             MobileAds.SetiOSAppPauseOnBackground(true);
             GameUtils.Log(this, "2");
             MobileAds.Initialize(HandleInitCompleteAction);
             GameUtils.Log(this, "3");
+#endif
         }
-
+#if SDK_ADMOB
         private void HandleInitCompleteAction(InitializationStatus initstatus)
         {
             GameUtils.Log(this, "1");
@@ -156,6 +160,7 @@ namespace GameFramework
         {
             return new AdRequest();
         }
+#endif
     }
 }
 

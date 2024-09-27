@@ -35,7 +35,8 @@ class Utils():
 			print(f"==> [Utils] [createConfigs]: {FileUtils.getFileName(excelName)}")
 
 	def getRepeatFiles(self, excelFiles):
-		excelNames = [FileUtils.getFileName(item) for item in excelFiles]
+		excelNames = [FileUtils.getFileName(item) for item
+		 in excelFiles]
 
 		excelDict = {}
 		for excelName in excelNames:
