@@ -1,7 +1,5 @@
 
 using Cysharp.Threading.Tasks;
-using GoogleMobileAds.Api;
-using GoogleMobileAds.Common;
 using System;
 using UnityEngine;
 
