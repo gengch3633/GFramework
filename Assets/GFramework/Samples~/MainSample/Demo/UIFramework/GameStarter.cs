@@ -17,14 +17,19 @@ namespace GameFramework
             Loom.Initialize();
             uiSystem.OpenPopup<DebugPopup>();
             CheckForDebug();
-            InitEventTrackers();
+            InitSdk();
+        }
+        void OnApplicationPause(bool pause)
+        {
+            Sdk_Tenjin.OnApplicationPause(pause);
         }
 
-        private void InitEventTrackers()
+        private void InitSdk()
         {
             var eventSystem = this.GetSystem<IEventSystem>();
             eventSystem.AddEventTracker(new EventTracker_TD());
             eventSystem.AddEventTracker(new EventTracker_Firebase());
+            Sdk_Tenjin.Init();
         }
 
         private void InitModels()
