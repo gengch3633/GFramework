@@ -7,7 +7,7 @@ public class EventTracker_TD : IEventTracker
 {
     public void Init()
     {
-#if SDK_TD
+#if SDK_TALKING_DATA
         TalkingDataSDK.SetVerboseLogDisable();
         TalkingDataSDK.BackgroundSessionEnabled();
         TalkingDataSDK.InitSDK("EAE937974643492CBC6E6A24AA2E471E", "play.google.com", "your_custom_parameter");
@@ -17,7 +17,7 @@ public class EventTracker_TD : IEventTracker
 
     public void LogEvent(string eventName, Dictionary<string, object> paramDict)
     {
-#if SDK_TD
+#if SDK_TALKING_DATA
         var eventValue = new Dictionary<string, object> { { "key", "value" } };
         TalkingDataSDK.OnEvent(eventName, paramDict, eventValue);
 #endif

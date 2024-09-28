@@ -16,9 +16,9 @@ public class Sdk_Tenjin
     private static void TenjinConnect()
     {
 #if SDK_TENJIN
-        var tenjinSdkKey = "";
+        var tenjinSdkKey = SDKConst.SdkConfigProduction.tenjinSdkKey;
         BaseTenjin instance = Tenjin.getInstance(tenjinSdkKey);
-        if(!GameUtils.IsIosPlatform())
+        if (!GameUtils.IsIosPlatform())
             instance.SetAppStoreType(AppStoreType.googleplay);
         instance.Connect();
 #endif
