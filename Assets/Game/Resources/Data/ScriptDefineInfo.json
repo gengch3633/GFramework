@@ -11,17 +11,27 @@
     },
     {
         "defineId": 3,
-        "scriptDefineSymble": "SDK_TD",
+        "scriptDefineSymble": "SDK_TALKING_DATA",
         "isToAdded": true
     },
     {
         "defineId": 4,
-        "scriptDefineSymble": "SDK_FIRE_BASE",
+        "scriptDefineSymble": "SDK_TENJIN",
+        "isToAdded": true
+    },
+    {
+        "defineId": 6,
+        "scriptDefineSymble": "SDK_ADMOB",
         "isToAdded": false
     },
     {
         "defineId": 5,
-        "scriptDefineSymble": "SDK_ADMOB",
+        "scriptDefineSymble": "SDK_FIRE_BASE",
+        "isToAdded": false
+    },
+    {
+        "defineId": 7,
+        "scriptDefineSymble": "SDK_FB",
         "isToAdded": false
     }
 ]
