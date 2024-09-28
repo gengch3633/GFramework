@@ -37,12 +37,12 @@ namespace GameFramework
         {
             await bgVar.gameObject.GetComponent<CanvasGroup>().DOFade(0, 0.5f).ToUniTask(cancellationToken: cancellationToken);
         }
-        private TextMeshProUGUI infoTextVar;
+        private Text infoTextVar;
         private Image bgVar;
         protected override void OnAddUIListeners()
         {
             base.OnAddUIListeners();
-            infoTextVar = transform.Find("Bg_Var/InfoText_Var").GetComponent<TextMeshProUGUI>();
+            infoTextVar = transform.Find("Bg_Var/InfoText_Var").GetComponent<Text>();
             bgVar = transform.Find("Bg_Var").GetComponent<Image>();
 
         }

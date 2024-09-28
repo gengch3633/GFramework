@@ -11,7 +11,7 @@ namespace GameFramework
         public static SdkConfig SdkConfigProduction { get => sdkConfigProduction; }
         static SDKConst()
         {
-            sdkConfigProduction = GameUtils.GetConfigInfo<SdkConfig>();
+            sdkConfigProduction = GameUtils.GetConfigInfos<SdkConfig>()[0];
         }
     }
 }
