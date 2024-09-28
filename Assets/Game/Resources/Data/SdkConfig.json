@@ -3,6 +3,7 @@
         "id": 1001,
         "supportEmail": "tiny_spark_games@outlook.com",
         "privacyPage": "https://tinysparkgames.netlify.app/pages/privacy",
+        "tenjinSdkKey": "KHXK4ETBRDBNXEVU3SABHPDNLDCIUSVC",
         "appsFlyerKey": "vt7s3k2W3cAe9he5vbSiwm",
         "facebookAppId": 652974903485196,
         "facebookToken": "4f6d71e35a3942adb4a98e27733de285"
