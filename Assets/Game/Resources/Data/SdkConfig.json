@@ -1,28 +1,10 @@
 [
     {
         "id": 1001,
-        "isTest": true,
-        "admobAppId": "ca-app-pub-2862865501975840~4503880508",
-        "admobRewardAdId": "ca-app-pub-3940256099942544/5224354917",
-        "admobInterAdId": "ca-app-pub-3940256099942544/1033173712",
-        "admobBannerAdId": "ca-app-pub-3940256099942544/6300978111",
+        "supportEmail": "tiny_spark_games@outlook.com",
+        "privacyPage": "https://tinysparkgames.netlify.app/pages/privacy",
         "appsFlyerKey": "vt7s3k2W3cAe9he5vbSiwm",
         "facebookAppId": 652974903485196,
-        "facebookToken": "4f6d71e35a3942adb4a98e27733de285",
-        "supportEmail": "daily_joy@outlook.com",
-        "privacyPage": "https://www.dailyjoy.co.in/privacy_policy.html"
-    },
-    {
-        "id": 1002,
-        "isTest": false,
-        "admobAppId": "ca-app-pub-2862865501975840~4503880508",
-        "admobRewardAdId": "ca-app-pub-2862865501975840/2672704330",
-        "admobInterAdId": "ca-app-pub-2862865501975840/3227276093",
-        "admobBannerAdId": "ca-app-pub-2862865501975840/1151777099",
-        "appsFlyerKey": "vt7s3k2W3cAe9he5vbSiwm",
-        "facebookAppId": 652974903485196,
-        "facebookToken": "4f6d71e35a3942adb4a98e27733de285",
-        "supportEmail": "daily_joy@outlook.com",
-        "privacyPage": "https://www.dailyjoy.co.in/privacy_policy.html"
+        "facebookToken": "4f6d71e35a3942adb4a98e27733de285"
     }
 ]
