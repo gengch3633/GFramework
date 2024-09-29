@@ -10,12 +10,14 @@ namespace GameFramework
     [InitializeOnLoad]
     public class Define_ScriptingDefineSymbles
     {
+        private static bool logEnabled = true;
         static Define_ScriptingDefineSymbles()
         {
-            UpdateScriptDefineSymbles(false);
+            logEnabled = false;
+            UpdateScriptDefineSymbles();
         }
         [MenuItem("Tools/2.UpdateScriptDefineSymbles")]
-        private static void UpdateScriptDefineSymbles(bool logEnabled = true)
+        private static void UpdateScriptDefineSymbles()
         {
             if(logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 1, [Start]");
             var scriptDefineInfos = GameUtils.GetConfigInfos<ScriptDefineInfo>();

@@ -14,17 +14,19 @@ namespace GameFramework
     [InitializeOnLoad]
     public class Define_Facebook
     {
+        private static bool logEnabled = true;
         private const string FacebookSettingsFile = "Assets/FacebookSDK/SDK/Resources/FacebookSettings.asset";
         static Define_Facebook()
         {
-            CheckCreateAndSetFacebookSettings(false);
+            logEnabled = false;
+            CheckCreateAndSetFacebookSettings();
         }
 
         [MenuItem("Tools/3.CheckCreateAndSetFacebookSettings")]
-        private static void CheckCreateAndSetFacebookSettings(bool logEnabled = true)
+        private static void CheckCreateAndSetFacebookSettings()
         {
             CreateFacebookSettingsAsset();
-            SetFacebookSettings(logEnabled);
+            SetFacebookSettings();
         }
 
         private static void CreateFacebookSettingsAsset()
@@ -45,7 +47,7 @@ namespace GameFramework
 #endif
         }
 
-        private static void SetFacebookSettings(bool logEnabled = true)
+        private static void SetFacebookSettings()
         {
 #if SDK_FB
             var facebookDefineInfos = GameUtils.GetConfigInfos<FacebookDefineInfo>();

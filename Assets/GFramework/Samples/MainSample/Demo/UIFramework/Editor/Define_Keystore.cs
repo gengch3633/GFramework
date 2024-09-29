@@ -8,13 +8,15 @@ namespace GameFramework
     [InitializeOnLoad]
     public class Define_Keystore
     {
+        private static bool logEnabled = true;
         static Define_Keystore()
         {
-            AutoSetKeyStore(false);
+            logEnabled = false;
+            AutoSetKeyStore();
         }
 
         [MenuItem("Tools/1.AutoSetKeyStore")]
-        private static void AutoSetKeyStore(bool logEnabled = true)
+        private static void AutoSetKeyStore()
         {
             var assetPath = GameUtils.GetAssetPath(Application.dataPath);
             var assetDirInfo = new DirectoryInfo(assetPath);
