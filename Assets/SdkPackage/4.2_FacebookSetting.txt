@@ -1,0 +1,12 @@
+A. OpenSSL not found. Make sure that openssl is installed, and that is in your path.
+	1. set url https://blog.csdn.net/I_m_yang_/article/details/93229178
+	2. openssl download url https://slproweb.com/products/Win32OpenSSL.html
+	3. install 4.1_Win64OpenSSL-3_3_2_ForFacebook.exe
+	4. add system environments "Path" with "C:\Program Files\OpenSSL-Win64\bin"
+	5. add system environments "OPENSSL_CONF" with "C:\Program Files\OpenSSL-Win64\bin\cnf\openssl.cnf" 
+
+B. java is not installed, or the Java executable is not on system path
+	1. set url https://mkyong.com/java/how-to-set-java_home-on-windows-10/
+	2. add system environments "JAVA_HOME" with "C:\Program Files\Unity\Hub\Editor\2022.3.27f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK"
+	3. add system environments "CLASSPATH" with "C:\Program Files\Unity\Hub\Editor\2022.3.27f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK\lib"
+	4. add system environments "Path" with "C:\Program Files\Unity\Hub\Editor\2022.3.27f1\Editor\Data\PlaybackEngines\AndroidPlayer\OpenJDK\bin"
