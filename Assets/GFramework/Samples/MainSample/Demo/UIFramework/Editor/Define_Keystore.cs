@@ -6,9 +6,15 @@ namespace GameFramework
 {
 
     [InitializeOnLoad]
-    public class KeystoreSetter
+    public class Define_Keystore
     {
-        static KeystoreSetter()
+        static Define_Keystore()
+        {
+            AutoSetKeyStore(false);
+        }
+
+        [MenuItem("Tools/1.AutoSetKeyStore")]
+        private static void AutoSetKeyStore(bool logEnabled = true)
         {
             var assetPath = GameUtils.GetAssetPath(Application.dataPath);
             var assetDirInfo = new DirectoryInfo(assetPath);
@@ -16,11 +22,11 @@ namespace GameFramework
             for (int i = 0; i < keystoreFiles.Length; i++)
             {
                 var keystoreFile = keystoreFiles[i];
-                Debug.LogError($"==> [KeystoreSetter] KeyStoreName {i+1}: " + keystoreFile.FullName);
+                if (logEnabled) Debug.LogError($"==> [Define_Keystore] 1, KeyStoreName {i + 1}: {keystoreFile.FullName}");
             }
 
             var keyStoreFile = GameUtils.GetAssetPath(keystoreFiles[0].FullName);
-            Debug.LogError($"==> [KeystoreSetter] keyStoreFile: {keyStoreFile}");
+            if(logEnabled) Debug.LogError($"==> [Define_Keystore] 2, KeyStoreFile: {keyStoreFile}");
             PlayerSettings.Android.useCustomKeystore = true;
             PlayerSettings.Android.keystoreName = keyStoreFile;
             PlayerSettings.Android.keystorePass = "123456";

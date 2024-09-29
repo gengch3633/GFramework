@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "isAndroid": false,
+        "facebookAppName": "Solitaire Fantasy:Card Games",
+        "facebookAppId": "545842204644917",
+        "facebookTokenId": "28c54b70dbe06d3fba21e4f4b5aa76ee"
+    },
+    {
+        "id": 2,
+        "isAndroid": true,
+        "facebookAppName": "Solitaire Fantasy:Card Games",
+        "facebookAppId": "545842204644917_1",
+        "facebookTokenId": "28c54b70dbe06d3fba21e4f4b5aa76ee_1"
+    }
+]

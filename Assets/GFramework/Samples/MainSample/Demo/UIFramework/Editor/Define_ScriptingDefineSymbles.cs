@@ -7,12 +7,17 @@ using UnityEngine;
 
 namespace GameFramework
 {
-    public class ScriptDefine
+    [InitializeOnLoad]
+    public class Define_ScriptingDefineSymbles
     {
-        [MenuItem("Tools/UpdateScriptDefineSymbles")]
-        static void UpdateScriptDefineSymbles()
+        static Define_ScriptingDefineSymbles()
         {
-            Debug.LogError($"==> [UpdateScriptDefineSymbles] [Start]");
+            UpdateScriptDefineSymbles(false);
+        }
+        [MenuItem("Tools/2.UpdateScriptDefineSymbles")]
+        private static void UpdateScriptDefineSymbles(bool logEnabled = true)
+        {
+            if(logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 1, [Start]");
             var scriptDefineInfos = GameUtils.GetConfigInfos<ScriptDefineInfo>();
             var targetPlatforms = new List<BuildTargetGroup>() { BuildTargetGroup.Standalone, BuildTargetGroup.Android, BuildTargetGroup.iOS };
             targetPlatforms.ForEach(targetPlatform => {
@@ -23,17 +28,17 @@ namespace GameFramework
                 {
                     var scriptDefineInfo = scriptDefineInfos[i];
                     var defineSymble = scriptDefineInfo.scriptDefineSymble;
-                    Debug.LogError($"==> [UpdateScriptDefineSymbles] [{targetPlatform}] [Check]: {scriptDefineInfo.scriptDefineSymble}, isToAdded: {scriptDefineInfo.isToAdded}");
+                    if (logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 21, [{targetPlatform}] [Check]: {scriptDefineInfo.scriptDefineSymble}, isToAdded: {scriptDefineInfo.isToAdded}");
                     if (scriptDefineInfo.isToAdded && !origDefines.Contains(defineSymble))
                     {
                         origDefines.Add(scriptDefineInfo.scriptDefineSymble);
-                        Debug.LogError($"==> [UpdateScriptDefineSymbles] [{targetPlatform}] [Add]: {scriptDefineInfo.scriptDefineSymble}");
+                        if (logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 22, [{targetPlatform}] [Add]: {scriptDefineInfo.scriptDefineSymble}");
                     }
 
                     if (!scriptDefineInfo.isToAdded && origDefines.Contains(defineSymble))
                     {
                         origDefines.Remove(scriptDefineInfo.scriptDefineSymble);
-                        Debug.LogError($"==> [UpdateScriptDefineSymbles] [{targetPlatform}] [Remove]: {scriptDefineInfo.scriptDefineSymble}");
+                        if (logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 23, [{targetPlatform}] [Remove]: {scriptDefineInfo.scriptDefineSymble}");
                     }
                 }
 
@@ -42,8 +47,15 @@ namespace GameFramework
             });
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
-            Debug.LogError($"==> [UpdateScriptDefineSymbles] [End]");
+            if (logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 3, [End]");
         }
+    }
+
+    public class ScriptDefineInfo
+    {
+        public int defineId;
+        public string scriptDefineSymble;
+        public bool isToAdded;
     }
 }
 
