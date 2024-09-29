@@ -1,5 +1,7 @@
+#if SDK_FB
 using Facebook.Unity.Editor;
 using Facebook.Unity.Settings;
+#endif
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +29,7 @@ namespace GameFramework
 
         private static void CreateFacebookSettingsAsset()
         {
+#if SDK_FB
 
             var settingFileInfo = new FileInfo(FacebookSettingsFile);
             var facebookSettingsResDir = GameUtils.GetAssetPath(settingFileInfo.DirectoryName);
@@ -39,10 +42,12 @@ namespace GameFramework
                 AssetDatabase.CreateAsset(instance, FacebookSettingsFile);
                 AssetDatabase.SaveAssets();
             }
+#endif
         }
 
         private static void SetFacebookSettings(bool logEnabled = true)
         {
+#if SDK_FB
             var facebookDefineInfos = GameUtils.GetConfigInfos<FacebookDefineInfo>();
             var facebookSettings = AssetDatabase.LoadAssetAtPath<FacebookSettings>(FacebookSettingsFile);
             FacebookSettings.AppLabels.Clear();
@@ -68,6 +73,7 @@ namespace GameFramework
             EditorUtility.SetDirty(facebookSettings);
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
+#endif
         }
     }
 
