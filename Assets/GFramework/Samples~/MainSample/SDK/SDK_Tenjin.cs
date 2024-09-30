@@ -1,6 +1,6 @@
 using GameFramework;
 
-public class Sdk_Tenjin
+public class SDK_Tenjin
 {
     public static void Init()
     {

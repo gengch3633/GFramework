@@ -21,7 +21,7 @@ namespace GameFramework
         }
         void OnApplicationPause(bool pause)
         {
-            Sdk_Tenjin.OnApplicationPause(pause);
+            SDK_Tenjin.OnApplicationPause(pause);
         }
 
         private void InitSdk()
@@ -29,7 +29,8 @@ namespace GameFramework
             var eventSystem = this.GetSystem<IEventSystem>();
             eventSystem.AddEventTracker(new EventTracker_TD());
             eventSystem.AddEventTracker(new EventTracker_Firebase());
-            Sdk_Tenjin.Init();
+            SDK_Tenjin.Init();
+            SDK_FB.Init();
         }
 
         private void InitModels()

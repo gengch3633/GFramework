@@ -20,6 +20,7 @@ namespace GameFramework
         {
             logEnabled = false;
             CheckCreateAndSetFacebookSettings();
+            logEnabled = true;
         }
 
         [MenuItem("Tools/3.CheckCreateAndSetFacebookSettings")]

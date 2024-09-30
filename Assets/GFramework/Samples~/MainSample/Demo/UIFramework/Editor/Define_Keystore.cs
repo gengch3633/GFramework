@@ -13,6 +13,7 @@ namespace GameFramework
         {
             logEnabled = false;
             AutoSetKeyStore();
+            logEnabled = true;
         }
 
         [MenuItem("Tools/1.AutoSetKeyStore")]

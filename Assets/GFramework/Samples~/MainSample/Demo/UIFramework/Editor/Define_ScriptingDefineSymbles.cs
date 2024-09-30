@@ -15,6 +15,7 @@ namespace GameFramework
         {
             logEnabled = false;
             UpdateScriptDefineSymbles();
+            logEnabled = true;
         }
         [MenuItem("Tools/2.UpdateScriptDefineSymbles")]
         private static void UpdateScriptDefineSymbles()
