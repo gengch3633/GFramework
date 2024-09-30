@@ -3,6 +3,7 @@ using Facebook.Unity.Editor;
 using Facebook.Unity.Settings;
 #endif
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace GameFramework
             logEnabled = true;
         }
 
-        [MenuItem("Tools/3.CheckCreateAndSetFacebookSettings")]
+        [MenuItem("Tools/SDK²ÎÊýÅäÖÃ/3.ÅäÖÃFacebook")]
         private static void CheckCreateAndSetFacebookSettings()
         {
             CreateFacebookSettingsAsset();
@@ -63,7 +64,8 @@ namespace GameFramework
                 FacebookSettings.ClientTokens.Add(facebookDefineInfo.facebookTokenId);
             }
 
-            var activeDefineInfo = facebookDefineInfos.Find(item => item.isAndroid);
+            var buildTarget = GameUtils.IsIosPlatform() ? BuildTarget.IOS : BuildTarget.Android;
+            var activeDefineInfo = facebookDefineInfos.Find(item => item.buildTarget == buildTarget);
             var activeIndex = FacebookSettings.AppIds.FindIndex(item => item == activeDefineInfo.facebookAppId);
             FacebookSettings.SelectedAppIndex = activeIndex;
 
@@ -84,7 +86,8 @@ namespace GameFramework
     public class FacebookDefineInfo
     {
         public int id;
-        public bool isAndroid;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public BuildTarget buildTarget;
         public string facebookAppName;
         public string facebookAppId;
         public string facebookTokenId;

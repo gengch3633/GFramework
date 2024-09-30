@@ -9,20 +9,23 @@ namespace GameFramework
     public class AdsConfig
     {
         public int id;
+        public bool useTestAds;
         [JsonConverter(typeof(StringEnumConverter))]
-        public EAdsType adsType;
+        public BuildTarget buildTarget;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public EMediationType mediationType;
+        public string appId;
         public string rewardAdId;
         public string interstitialAdId;
         public string bannerAdId;
         public string splashAdId;
     }
 
-    public enum EAdsType
+    public enum EMediationType
     {
-        AdmobAndroid,
-        AdmobIOS,
-        AdmobAndroidTest,
-        AdmobIOSTest
+        Admob,
+        Max,
+        TopOn
     }
 }
 

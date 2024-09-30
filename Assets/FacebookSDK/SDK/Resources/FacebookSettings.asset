@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: -2115301841, guid: c49f2b3ca212b47fc9cd8ce655177c89, type: 3}
   m_Name: FacebookSettings
   m_EditorClassIdentifier: 
-  selectedAppIndex: 1
+  selectedAppIndex: 0
   clientTokens:
-  - 28c54b70dbe06d3fba21e4f4b5aa76ee
-  - 28c54b70dbe06d3fba21e4f4b5aa76ee_1
+  - 28c54b70dbe06d3fba21e4f4b5aa76ee_Test
+  - 28c54b70dbe06d3fba21e4f4b5aa76ee_Test
   appIds:
-  - 545842204644917
-  - 545842204644917_1
+  - 545842204644917_Test
+  - 545842204644917_Test
   appLabels:
-  - Solitaire Fantasy:Card Games
-  - Solitaire Fantasy:Card Games
+  - Android App Test
+  - IOS App Test
   cookie: 1
   logging: 1
   status: 1

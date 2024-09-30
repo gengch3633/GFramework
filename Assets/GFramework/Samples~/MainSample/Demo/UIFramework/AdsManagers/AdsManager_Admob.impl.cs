@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 #if SDK_ADMOB
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using Newtonsoft.Json;
 #endif
 using System;
 using System.Collections.Generic;

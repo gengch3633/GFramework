@@ -1,8 +1,13 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace GameFramework
 {
     public class SdkConfig
     {
         public int id;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public BuildTarget buildTarget;
         public string supportEmail;
         public string privacyPage;
 

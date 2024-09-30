@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace GameFramework
 {
     public class SDKConst
     {
-        private static SdkConfig sdkConfigProduction;
+        public static SdkConfig sdkConfig;
 
-        public static SdkConfig SdkConfigProduction { get => sdkConfigProduction; }
         static SDKConst()
         {
-            sdkConfigProduction = GameUtils.GetConfigInfos<SdkConfig>()[0];
+            var sdkConfigs = GameUtils.GetConfigInfos<SdkConfig>();
+            var buildTarget = GameUtils.IsIosPlatform() ? BuildTarget.IOS : BuildTarget.Android;
+            sdkConfig = sdkConfigs.Find(item=>item.buildTarget == buildTarget);
+            Debug.Log($"[SDKConst] [Release] sdkConfig: {JsonConvert.SerializeObject(sdkConfig)}");
         }
     }
 }

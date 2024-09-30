@@ -16,7 +16,7 @@ namespace GameFramework
             logEnabled = true;
         }
 
-        [MenuItem("Tools/1.AutoSetKeyStore")]
+        [MenuItem("Tools/SDK≤Œ ˝≈‰÷√/1.…Ë÷√Android Keystore")]
         private static void AutoSetKeyStore()
         {
             var assetPath = GameUtils.GetAssetPath(Application.dataPath);

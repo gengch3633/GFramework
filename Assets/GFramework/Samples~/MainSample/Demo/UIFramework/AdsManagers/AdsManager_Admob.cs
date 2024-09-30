@@ -35,13 +35,12 @@ namespace GameFramework
         }
         private void InitAdsConfig()
         {
-            var adsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
-            var adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOS : EAdsType.AdmobAndroid;
             var debugModel = GameApp.Interface.GetModel<IDebugModel>();
-            if (debugModel.IsDebugFeatureEnabled<Debug_TestAds>())
-                adsType = GameUtils.IsIosPlatform() ? EAdsType.AdmobIOSTest : EAdsType.AdmobAndroidTest;
-            adsConfig = adsConfigs.Find(item => item.adsType == adsType);
-            GameUtils.Log(this, $"adsConfig: {JsonConvert.SerializeObject(adsConfig)}");
+            var useTestAds = debugModel.IsDebugFeatureEnabled<Debug_TestAds>();
+            var adsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
+            var buildTarget = GameUtils.IsIosPlatform() ? BuildTarget.IOS : BuildTarget.Android;
+            adsConfig = adsConfigs.Find(item => item.useTestAds == useTestAds && item.buildTarget == buildTarget && item.mediationType == EMediationType.Admob);
+            GameUtils.Log(this, $"[AdsManager_Admob] [Release] adsConfig: {JsonConvert.SerializeObject(adsConfig)}");
         }
 
         private async void OnApplicationFocus(bool focus)

@@ -23,7 +23,6 @@ namespace GameFramework
         }
 
         private Button btnClose;
-        private Button btnChangeLevel;
         private Button btnClearData;
         private Button btnAddCoin;
         private Button btnClearCoin;
@@ -34,7 +33,6 @@ namespace GameFramework
         private Toggle toggleTypeLog;
         private Toggle toggleNormal;
         private Toggle item;
-        private TMP_InputField levelIdInput;
         private Image containerVar;
         private ScrollRect debugFeatureContainerScrollView;
         private ScrollRect typeLogContainerScrollView;
@@ -45,7 +43,6 @@ namespace GameFramework
         {
             base.OnAddUIListeners();
             btnClose = transform.Find("Pop/Container/TopContainer/BtnClose").GetComponent<Button>();
-            btnChangeLevel = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnChangeLevel").GetComponent<Button>();
             btnClearData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearData").GetComponent<Button>();
             btnAddCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnAddCoin").GetComponent<Button>();
             btnClearCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearCoin").GetComponent<Button>();
@@ -56,7 +53,6 @@ namespace GameFramework
             toggleTypeLog = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleTypeLog").GetComponent<Toggle>();
             toggleNormal = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
             item = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template/Viewport/Content/Item").GetComponent<Toggle>();
-            levelIdInput = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LevelIdInput").GetComponent<TMP_InputField>();
             containerVar = transform.Find("Pop/Container/Container_Var").GetComponent<Image>();
             debugFeatureContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/DebugFeatureContainerScrollView").GetComponent<ScrollRect>();
             typeLogContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/TypeLogContainerScrollView").GetComponent<ScrollRect>();
@@ -64,7 +60,6 @@ namespace GameFramework
             template = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template").GetComponent<ScrollRect>();
             languageDropdown = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown").GetComponent<Dropdown>();
             btnClose.onClick.AddListener(OnBtnCloseClick);
-            btnChangeLevel.onClick.AddListener(OnBtnChangeLevelClick);
             btnClearData.onClick.AddListener(OnBtnClearDataClick);
             btnAddCoin.onClick.AddListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.AddListener(OnBtnClearCoinClick);
@@ -75,14 +70,12 @@ namespace GameFramework
             toggleTypeLog.onValueChanged.AddListener(OnToggleTypeLogChanged);
             toggleNormal.onValueChanged.AddListener(OnToggleNormalChanged);
             item.onValueChanged.AddListener(OnItemChanged);
-            levelIdInput.onEndEdit.AddListener(OnLevelIdInputChanged);
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
         }
         protected override void OnRemoveUIListeners()
         {
             base.OnRemoveUIListeners();
             btnClose.onClick.RemoveListener(OnBtnCloseClick);
-            btnChangeLevel.onClick.RemoveListener(OnBtnChangeLevelClick);
             btnClearData.onClick.RemoveListener(OnBtnClearDataClick);
             btnAddCoin.onClick.RemoveListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.RemoveListener(OnBtnClearCoinClick);
@@ -93,9 +86,9 @@ namespace GameFramework
             toggleTypeLog.onValueChanged.RemoveListener(OnToggleTypeLogChanged);
             toggleNormal.onValueChanged.RemoveListener(OnToggleNormalChanged);
             item.onValueChanged.RemoveListener(OnItemChanged);
-            levelIdInput.onEndEdit.RemoveListener(OnLevelIdInputChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
+       
         private void OnBtnOpenAdContainerClick()
         {
             var adsItem = GameUtils.CreateItem<AdsItem>(containerVar.transform);

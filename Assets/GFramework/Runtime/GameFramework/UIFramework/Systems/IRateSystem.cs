@@ -40,7 +40,7 @@ namespace GameFramework
             CopyBindableClass(this, rateRecord);
 
             GameUtils.Log(this, "publishUrl: " + publishUrl);
-            GameUtils.Log(this, "supportEmail: " + SDKConst.SdkConfigProduction.supportEmail);
+            GameUtils.Log(this, "supportEmail: " + SDKConst.sdkConfig.supportEmail);
             GameUtils.Log(this, "subject: " + subject);
             GameUtils.Log(this, "body: " + body);
         }
@@ -95,12 +95,12 @@ namespace GameFramework
 
         public void OpenPrivacyPage()
         {
-            Application.OpenURL(SDKConst.SdkConfigProduction.privacyPage);
+            Application.OpenURL(SDKConst.sdkConfig.privacyPage);
         }
 
         public void OpenContactEmailPage()
         {
-            string email = SDKConst.SdkConfigProduction.supportEmail;
+            string email = SDKConst.sdkConfig.supportEmail;
             string subject = MyEscapeURL(this.subject);
             string body = MyEscapeURL(this.body);
             Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);

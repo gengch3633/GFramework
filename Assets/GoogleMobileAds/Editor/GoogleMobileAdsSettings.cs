@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Assembly-CSharp-Editor")]
 namespace GoogleMobileAds.Editor
 {
     internal class GoogleMobileAdsSettings : ScriptableObject
