@@ -1,51 +1,6 @@
 [
     {
         "id": 3001,
-        "KEY": "message_restore_success",
-        "English": "Restore success",
-        "ChineseSimplified": "恢复成功",
-        "ChineseTraditional": "恢復成功",
-        "Korean": "복구 성공",
-        "Japanese": "回復成功",
-        "French": "Restauration réussie",
-        "German": "Wiederherstellung erfolgreich",
-        "Russian": "Восстановление выполнено успешно",
-        "Spanish": "Restauración exitosa",
-        "Portuguese": "Restaurar sucesso",
-        "Indonesian": "Pemulihan berhasil"
-    },
-    {
-        "id": 3002,
-        "KEY": "message_restore_failed",
-        "English": "Restore failed, please try again later.",
-        "ChineseSimplified": "恢复失败，请稍后重试。",
-        "ChineseTraditional": "恢復失敗，請稍後重試。",
-        "Korean": "복원하지 못했습니다. 나중에 다시 시도해 주세요.",
-        "Japanese": "復元に失敗しました。後でもう一度試してください。",
-        "French": "La restauration a échoué, veuillez réessayer ultérieurement.",
-        "German": "Wiederherstellung fehlgeschlagen, bitte versuchen Sie es später erneut.",
-        "Russian": "Восстановление не удалось, попробуйте еще раз позже.",
-        "Spanish": "Falló la restauración, inténtelo nuevamente más tarde.",
-        "Portuguese": "Restaurar falhou, por favor, tente novamente mais tarde.",
-        "Indonesian": "Pemulihan gagal, silakan coba lagi nanti."
-    },
-    {
-        "id": 3003,
-        "KEY": "message_restore",
-        "English": "Restore",
-        "ChineseSimplified": "恢复",
-        "ChineseTraditional": "恢復",
-        "Korean": "다시 덮다",
-        "Japanese": "回復する",
-        "French": "Restaurer",
-        "German": "Wiederherstellen",
-        "Russian": "Восстановить",
-        "Spanish": "Restaurar",
-        "Portuguese": "Restaurar",
-        "Indonesian": "Pemulihan"
-    },
-    {
-        "id": 3004,
         "KEY": "message_no_reward_ad",
         "English": "Video not ready, please try again later.",
         "ChineseSimplified": "视频尚未准备好，请稍后重试。",
@@ -60,7 +15,7 @@
         "Indonesian": "Video belum siap, silakan coba lagi nanti."
     },
     {
-        "id": 3005,
+        "id": 3002,
         "KEY": "message_network_error",
         "English": "Please check the network and try again later.",
         "ChineseSimplified": "请检查网络并稍后重试。",
@@ -73,5 +28,50 @@
         "Spanish": "Verifique la red y vuelva a intentarlo más tarde.",
         "Portuguese": "Por favor, verifique a rede e tente novamente mais tarde.",
         "Indonesian": "Periksa jaringan dan coba lagi nanti."
+    },
+    {
+        "id": 3003,
+        "KEY": "message_restore",
+        "English": "Restore",
+        "ChineseSimplified": "恢复购买",
+        "ChineseTraditional": "恢復購買",
+        "Korean": "구매 재개",
+        "Japanese": "購入を再開する",
+        "French": "Restaurer",
+        "German": "Wiederherstellen",
+        "Russian": "Восстановить",
+        "Spanish": "Restaurar",
+        "Portuguese": "Restaurar",
+        "Indonesian": "Pulihkan"
+    },
+    {
+        "id": 3004,
+        "KEY": "message_restore_success",
+        "English": "Restore Success",
+        "ChineseSimplified": "恢复购买成功",
+        "ChineseTraditional": "恢復購買成功",
+        "Korean": "구매를 성공적으로 복원했습니다.",
+        "Japanese": "購入を正常に復元しました",
+        "French": "Restauration réussie",
+        "German": "Wiederherstellung erfolgreich",
+        "Russian": "Восстановить успешно",
+        "Spanish": "Restauración exitosa",
+        "Portuguese": "Restaurar o sucesso",
+        "Indonesian": "Pemulihan Berhasil"
+    },
+    {
+        "id": 3005,
+        "KEY": "message_restore_failed",
+        "English": "Restore failed. Please try again later.",
+        "ChineseSimplified": "恢复购买失败。请稍后重试。",
+        "ChineseTraditional": "恢復購買失敗。請稍後重試。",
+        "Korean": "구매 복원에 실패했습니다. 나중에 다시 시도해 주세요.",
+        "Japanese": "購入の復元に失敗しました。後でもう一度試してください。",
+        "French": "La restauration a échoué. Veuillez réessayer plus tard.",
+        "German": "Wiederherstellung fehlgeschlagen. Bitte versuchen Sie es später erneut.",
+        "Russian": "Восстановить не удалось. Попробуйте еще раз позже.",
+        "Spanish": "Restauración fallida. Inténtalo de nuevo más tarde.",
+        "Portuguese": "Falha na restauração. Por favor, tente mais tarde.",
+        "Indonesian": "Pemulihan gagal. Coba lagi nanti."
     }
 ]

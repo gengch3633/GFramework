@@ -22,16 +22,16 @@
     {
         "defineId": 6,
         "scriptDefineSymble": "SDK_ADMOB",
-        "isToAdded": true
+        "isToAdded": false
     },
     {
         "defineId": 5,
         "scriptDefineSymble": "SDK_FIRE_BASE",
-        "isToAdded": true
+        "isToAdded": false
     },
     {
         "defineId": 7,
         "scriptDefineSymble": "SDK_FB",
-        "isToAdded": true
+        "isToAdded": false
     }
 ]
