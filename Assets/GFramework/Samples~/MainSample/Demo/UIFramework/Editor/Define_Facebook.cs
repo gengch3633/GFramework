@@ -76,6 +76,7 @@ namespace GameFramework
             EditorUtility.SetDirty(facebookSettings);
             AssetDatabase.Refresh();
             AssetDatabase.SaveAssets();
+            ManifestMod.GenerateManifest();
 #endif
         }
     }
