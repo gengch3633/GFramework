@@ -97,11 +97,13 @@ namespace GameFramework
         {
             TypeLogEnableSwitchGroup.Value.SetSwitchOn(typeFullName, enabled);
             TypeLogEnableSwitchGroup.Value = TypeLogEnableSwitchGroup.Value;
+            Debug.LogError($"==> [SetTypeLogEnabled], {typeFullName}: {enabled}");
         }
 
         public bool IsTypeLogEnabled(string typeFullName)
         {
             var ret = TypeLogEnableSwitchGroup.Value.IsSwitchOn(typeFullName);
+            Debug.LogError($"==> [IsTypeLogEnabled], {typeFullName}: {ret}");
             return ret;
         }
 
@@ -113,7 +115,7 @@ namespace GameFramework
         public bool IsTypeLogEnabled<T>() where T : ITypeLog
         {
             var typeFullName = typeof(T).FullName;
-            var ret = TypeLogEnableSwitchGroup.Value.IsSwitchOn(typeFullName);
+            var ret = IsTypeLogEnabled(typeFullName);
             return ret;
         }
 

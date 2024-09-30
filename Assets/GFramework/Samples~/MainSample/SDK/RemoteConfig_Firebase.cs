@@ -91,9 +91,7 @@ public class RemoteConfig_Firebase : ITypeLog
 
     public bool IsTypeLogEnabled()
     {
-        var debugModel = GameApp.Interface.GetModel<IDebugModel>();
-        var ret = debugModel.IsTypeLogEnabled(this);
-        return ret;
+        return GameUtils.IsTypeLogEnabled(this);
     }
 }
 

@@ -32,7 +32,7 @@ namespace GameFramework
                 languageInfos.AddRange(GameUtils.GetConfigInfos<LanguageInfo>(suffix));
             }
 
-            if (this.IsTypeLogEnabled()) Debug.LogWarning("==> [LanguageSystem] [OnInit]: " + languageInfos.Count);
+            GameUtils.Log(this, $"languageInfos.Count: {languageInfos.Count}");
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);
@@ -40,9 +40,7 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = this.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
 
         public string FormatLanguageText(string languangeKey, params object[] parameters)

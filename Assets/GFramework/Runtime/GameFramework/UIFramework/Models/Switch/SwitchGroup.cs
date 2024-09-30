@@ -18,6 +18,11 @@ namespace GameFramework
             var switchInfo = switchInfos.Find(item => item.switchName == switchName);
             if (switchInfo != null)
                 switchInfo.isOn = isOn;
+            else
+            {
+                var info = new SwitchInfo() { switchName = switchName, isOn = isOn };
+                switchInfos.Add(info);
+            }
         }
     }
 }

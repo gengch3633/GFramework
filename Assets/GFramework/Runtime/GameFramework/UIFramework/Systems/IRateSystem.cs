@@ -47,9 +47,7 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = this.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
 
         public bool IsGoodTimeForRate()

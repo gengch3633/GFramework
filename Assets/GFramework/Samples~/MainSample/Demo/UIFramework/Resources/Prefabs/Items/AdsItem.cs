@@ -66,8 +66,7 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var ret = debugModel.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
     }
 }

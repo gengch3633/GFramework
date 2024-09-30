@@ -11,9 +11,7 @@ namespace GameFramework
         private bool isRewardAdReturnSuccess = true;
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = GameApp.Interface.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
         public void ShowBanner()
         {

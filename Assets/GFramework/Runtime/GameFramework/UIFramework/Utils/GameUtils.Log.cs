@@ -9,6 +9,12 @@ namespace GameFramework
 {
     public partial class GameUtils
     {
+        public static bool IsTypeLogEnabled<T>(T t) where T: ITypeLog
+        {
+            var debugModel = GameApp.Interface.GetModel<IDebugModel>();
+            var ret = debugModel.IsTypeLogEnabled(t);
+            return ret;
+        }
         public static void LogError(ITypeLog typeLog, string message, UnityEngine.Object context)
         {
             if (typeLog.IsTypeLogEnabled())

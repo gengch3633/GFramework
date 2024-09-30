@@ -28,7 +28,7 @@ namespace GameFramework
         {
             var eventSystem = this.GetSystem<IEventSystem>();
             eventSystem.AddEventTracker(new EventTracker_TD());
-            eventSystem.AddEventTracker(new EventTracker_Firebase());
+            //eventSystem.AddEventTracker(new EventTracker_Firebase());
             SDK_Tenjin.Init();
             SDK_FB.Init();
         }

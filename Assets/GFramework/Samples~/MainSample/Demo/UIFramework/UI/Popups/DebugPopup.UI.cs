@@ -10,7 +10,7 @@ namespace GameFramework
     {
         public bool IsTypeLogEnabled()
         {
-            return debugModel.IsTypeLogEnabled(this);
+            return GameUtils.IsTypeLogEnabled(this);
         }
         protected override void OnInitVars()
         {

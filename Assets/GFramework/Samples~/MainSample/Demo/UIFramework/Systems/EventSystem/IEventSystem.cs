@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Framework;
@@ -43,14 +44,31 @@ namespace GameFramework
         }
         public void LogEvent(string eventName, Dictionary<string, object> paramDict)
         {
-            if (IsTypeLogEnabled())
-                Debug.Log($"==> [EventSystem] [LogEvent]: {eventName}, {JsonConvert.SerializeObject(paramDict)}");
-            eventTrackerList.ForEach(item => item.LogEvent(eventName, paramDict));
+            GameUtils.Log(this, $"eventName: {eventName}, {JsonConvert.SerializeObject(paramDict)}");
+            for (int i = 0; i < eventTrackerList.Count; i++)
+            {
+                var eventTracker = eventTrackerList[i];
+                try
+                {
+                    eventTracker.LogEvent(eventName, paramDict);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.StackTrace);
+                }
+            }
         }
         public void AddEventTracker(IEventTracker eventTracker)
         {
             eventTrackerList.Add(eventTracker);
-            eventTracker.Init();
+            try
+            {
+                eventTracker.Init();
+            }
+            catch(Exception e)
+            {
+                Debug.LogError(e.StackTrace);
+            }
         }
 
         public int GetEventFireCount(string eventName)
@@ -91,9 +109,7 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var debugModel = this.GetModel<IDebugModel>();
-            var ret = debugModel.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
     }
 }

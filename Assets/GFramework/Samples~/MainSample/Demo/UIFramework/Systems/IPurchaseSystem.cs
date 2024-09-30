@@ -35,9 +35,7 @@ namespace GameFramework
 
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = this.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled(this);
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
 
         public async UniTask InitAsync()
@@ -159,11 +157,9 @@ namespace GameFramework
                     // On Apple stores, receipts contain multiple products.
                     var result = validator.Validate(receipt);
                     // For informational purposes, we list the receipt(s)
-                    if(IsTypeLogEnabled()) Debug.Log("Receipt is valid. Contents:");
+                    GameUtils.Log(this, "Receipt is valid. Contents:");
                     foreach (IPurchaseReceipt productReceipt in result)
-                    {
                         GameUtils.Log(this, $"productID: {productReceipt.productID}, purchaseDate: {productReceipt.purchaseDate}, transactionID: {productReceipt.transactionID}");
-                    }
                 }
                 catch (IAPSecurityException)
                 {

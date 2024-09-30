@@ -14,9 +14,7 @@ namespace GameFramework
     {
         public bool IsTypeLogEnabled()
         {
-            var debugSystem = GameApp.Interface.GetModel<IDebugModel>();
-            var ret = debugSystem.IsTypeLogEnabled("GameFramework.AdsManager_Admob");
-            return ret;
+            return GameUtils.IsTypeLogEnabled(this);
         }
         public void Init()
         {
