@@ -2,6 +2,7 @@
 using GoogleMobileAds.Ump.Api;
 #endif
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,10 +26,21 @@ namespace GameFramework
         public void GatherConsent(Action<string> onComplete)
         {
 #if SDK_ADMOB
-            // TagForUnderAgeOfConsent False means users are not under age.
             var requestParameters = new ConsentRequestParameters {  TagForUnderAgeOfConsent = false };
-            // Combine the callback with an error popup handler.
             onComplete = (onComplete == null) ? UpdateErrorPopup : onComplete + UpdateErrorPopup;
+            if (debugModel.IsDebugFeatureEnabled<Debug_GDPR>())
+            {
+                string testDeviceHashedId = SystemInfo.deviceUniqueIdentifier.ToUpper();
+                var debugSettings = new ConsentDebugSettings { TestDeviceHashedIds = new List<string> { testDeviceHashedId } };
+                Debug.LogError($"==> testDeviceHashedId: {testDeviceHashedId}");
+                debugSettings.DebugGeography = DebugGeography.EEA;
+                requestParameters = new ConsentRequestParameters
+                {
+                    TagForUnderAgeOfConsent = false,
+                    ConsentDebugSettings = debugSettings,
+                };
+            }
+
             ConsentInformation.Update(requestParameters, (FormError updateError) =>
             {
                 UpdatePrivacyButton();
