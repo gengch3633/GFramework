@@ -1,0 +1,42 @@
+[
+    {
+        "dailyTaskId": 1000,
+        "taskDesc": "Tap the hint button to suggest which cards to pass",
+        "taskCompleteCount": 0,
+        "taskExpectCount": 1,
+        "rewardCount": 100,
+        "isRewardClaimed": false
+    },
+    {
+        "dailyTaskId": 1001,
+        "taskDesc": "Tap the hint button to suggest which card to play",
+        "taskCompleteCount": 0,
+        "taskExpectCount": 1,
+        "rewardCount": 100,
+        "isRewardClaimed": false
+    },
+    {
+        "dailyTaskId": 1002,
+        "taskDesc": "Break Hearts(play the first <sprite=\"Suits\" index=3> in a round)",
+        "taskCompleteCount": 0,
+        "taskExpectCount": 1,
+        "rewardCount": 100,
+        "isRewardClaimed": false
+    },
+    {
+        "dailyTaskId": 1003,
+        "taskDesc": "Finish a round with the fewest points",
+        "taskCompleteCount": 0,
+        "taskExpectCount": 1,
+        "rewardCount": 100,
+        "isRewardClaimed": false
+    },
+    {
+        "dailyTaskId": 1004,
+        "taskDesc": "Finish a game in 1st or 2nd place",
+        "taskCompleteCount": 0,
+        "taskExpectCount": 1,
+        "rewardCount": 100,
+        "isRewardClaimed": false
+    }
+]

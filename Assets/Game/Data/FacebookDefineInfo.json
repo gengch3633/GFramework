@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "buildTarget": "Android",
+        "facebookAppName": "Android App Test",
+        "facebookAppId": "545842204644917_Test",
+        "facebookTokenId": "28c54b70dbe06d3fba21e4f4b5aa76ee_Test"
+    },
+    {
+        "id": 2,
+        "buildTarget": "IOS",
+        "facebookAppName": "IOS App Test",
+        "facebookAppId": "545842204644917_Test",
+        "facebookTokenId": "28c54b70dbe06d3fba21e4f4b5aa76ee_Test"
+    }
+]

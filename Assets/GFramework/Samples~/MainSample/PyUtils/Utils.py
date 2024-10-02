@@ -11,7 +11,7 @@ class Utils():
 	def __init__(self):
 		projectPath = __file__[0:__file__.index("Assets")]
 		self.assetPath = f"{projectPath}Assets"
-		self.dataPath = f"{self.assetPath}/Game/Resources/Data"
+		self.dataPath = f"{self.assetPath}/Game/Data"
 		self.fontTextFile = f"{self.assetPath}/Game/FontText.txt"
 
 	def createConfigs(self):
@@ -78,6 +78,6 @@ class Utils():
 		FileUtils.writeFile(self.fontTextFile, fontString)
 
 
-
 utils = Utils()
 utils.createConfigs()
+utils.createFontText()

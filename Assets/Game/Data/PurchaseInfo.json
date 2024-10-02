@@ -1,0 +1,66 @@
+[
+    {
+        "itemId": 1,
+        "productId": "base.coins.0.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[500]",
+        "price": "$0.99",
+        "tagString": "0%"
+    },
+    {
+        "itemId": 2,
+        "productId": "base.coins.2.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[2100]",
+        "price": "$2.99",
+        "tagString": "40%"
+    },
+    {
+        "itemId": 3,
+        "productId": "base.coins.4.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[4000]",
+        "price": "$4.99",
+        "tagString": "60%"
+    },
+    {
+        "itemId": 4,
+        "productId": "base.coins.9.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[10000]",
+        "price": "$9.99",
+        "tagString": "100%"
+    },
+    {
+        "itemId": 5,
+        "productId": "base.diamonds.0.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[500]",
+        "price": "$0.99",
+        "tagString": "0%"
+    },
+    {
+        "itemId": 6,
+        "productId": "base.diamonds.2.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[2100]",
+        "price": "$2.99",
+        "tagString": "40%"
+    },
+    {
+        "itemId": 7,
+        "productId": "base.diamonds.4.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[4000]",
+        "price": "$4.99",
+        "tagString": "60%"
+    },
+    {
+        "itemId": 8,
+        "productId": "base.diamonds.9.99",
+        "productType": "Consumable",
+        "itemCountArrayString": "[10000]",
+        "price": "$9.99",
+        "tagString": "100%"
+    }
+]

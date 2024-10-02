@@ -1,0 +1,37 @@
+[
+    {
+        "dayNum": 0,
+        "rewardCount": 120,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 1,
+        "rewardCount": 140,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 2,
+        "rewardCount": 160,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 3,
+        "rewardCount": 180,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 4,
+        "rewardCount": 200,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 5,
+        "rewardCount": 220,
+        "isClaimed": false
+    },
+    {
+        "dayNum": 6,
+        "rewardCount": 300,
+        "isClaimed": false
+    }
+]
