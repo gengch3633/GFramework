@@ -22,7 +22,7 @@
     {
         "defineId": 6,
         "scriptDefineSymble": "SDK_ADMOB",
-        "isToAdded": false
+        "isToAdded": true
     },
     {
         "defineId": 5,

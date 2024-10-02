@@ -28,7 +28,7 @@ namespace GameFramework
 
         #region UIPopup
         bool HasPopup<T>() where T : UIBasePopup;
-        UIBasePopup OpenPopup<T>(object param = null) where T: UIBasePopup;
+        T OpenPopup<T>(object param = null) where T: UIBasePopup;
         UniTask OpenPopupAsync<T>(object param = null) where T : UIBasePopup;
         UniTask<T2> OpenPopupAsync<T1, T2>(object param = null) where T1 : UIBasePopup;
         void ClosePopup<T>(Action onComplete = null, bool showCloseAnim = true) where T : UIBasePopup;
@@ -145,10 +145,10 @@ namespace GameFramework
             if (popup != null)
                 ClosePopup(popup, onComplete, showCloseAnim);
         }
-        public UIBasePopup OpenPopup<T>(object param = null) where T : UIBasePopup
+        public T OpenPopup<T>(object param = null) where T : UIBasePopup
         {
             var popUpName = typeof(T).Name;
-            return OpenPopup(popUpName, param);
+            return (T)OpenPopup(popUpName, param);
         }
         public async UniTask OpenPopupAsync<T>(object param = null) where T : UIBasePopup
         {

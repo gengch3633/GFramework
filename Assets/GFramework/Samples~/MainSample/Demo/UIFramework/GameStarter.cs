@@ -5,7 +5,7 @@ using System;
 
 namespace GameFramework
 {
-    public class GameStarter : MonoController
+    public class GameStarter : MonoController, ITypeLog
     {
         protected override void MonoStart()
         {
@@ -17,20 +17,12 @@ namespace GameFramework
             Loom.Initialize();
             uiSystem.OpenPopup<DebugPopup>();
             CheckForDebug();
-            InitSdk();
+            SDKHelper.InitGDPR(this);
         }
+       
         void OnApplicationPause(bool pause)
         {
             SDK_Tenjin.OnApplicationPause(pause);
-        }
-
-        private void InitSdk()
-        {
-            var eventSystem = this.GetSystem<IEventSystem>();
-            eventSystem.AddEventTracker(new EventTracker_TD());
-            //eventSystem.AddEventTracker(new EventTracker_Firebase());
-            SDK_Tenjin.Init();
-            SDK_FB.Init();
         }
 
         private void InitModels()
@@ -47,13 +39,10 @@ namespace GameFramework
 
         private void CheckForDebug()
         {
-            adsSystem = this.GetSystem<IAdsSystem>();
+           
             var isDebugConsoleEnabled = debugModel.IsDebugFeatureEnabled<Debug_LogConsole>();
             var debugConsoleGo = GameObject.FindObjectOfType<DebugLogManager>(true);
             debugConsoleGo?.gameObject.SetActive(isDebugConsoleEnabled);
-
-            if (!debugModel.IsDebugFeatureEnabled<Debug_EditorAds>())
-                adsSystem.SetAdsManager(new AdsManager_Admob());
         }
 
         [ContextMenu("Test")]
@@ -73,6 +62,11 @@ namespace GameFramework
             Debug.LogError($"==> float: {typeof(Single).Name}");
             Debug.LogError($"==> double: {typeof(Double).Name}");
             Debug.LogError($"==> string: {typeof(String).Name}");
+        }
+
+        public bool IsTypeLogEnabled()
+        {
+            return GameUtils.IsTypeLogEnabled(this);
         }
     }
 }
