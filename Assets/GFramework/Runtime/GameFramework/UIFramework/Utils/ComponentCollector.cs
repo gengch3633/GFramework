@@ -53,8 +53,7 @@ namespace GameFramework
                 components = components.FindAll(item => item.name.Contains(endString));
 
             components = components.FindAll(item => IsComponentCanBeCollected(rootGameObject, item.gameObject));
-            var textString = Resources.Load<TextAsset>("Data/ComponentCollector").text;
-            List<CompCollecorInfo> compCollecors = JsonConvert.DeserializeObject<List<CompCollecorInfo>>(textString);
+            var compCollecors = GameUtils.GetConfigInfos<ComponentInfo>();
             var actionNames = new List<string>() { "declaration", "addListener", "removeListener", "clickMethod", "initComponent" };
             actionNames.ForEach(actionName =>
             {
@@ -112,7 +111,7 @@ namespace GameFramework
         }
     }
 
-    public class CompCollecorInfo
+    public class ComponentInfo
     {
         public string componentName;
         public string actionName;
@@ -120,7 +119,7 @@ namespace GameFramework
 
         public string CreateString(string gameObjectName, string compPath, string replaceComponentName = "")
         {
-            CompCollecorInfo copyCompCollecor = JsonConvert.DeserializeObject<CompCollecorInfo>(JsonConvert.SerializeObject(this));
+            ComponentInfo copyCompCollecor = JsonConvert.DeserializeObject<ComponentInfo>(JsonConvert.SerializeObject(this));
 
             var btnName = gameObjectName.Replace("_", "").Replace(" ", "").Replace("(", "").Replace(")", "");
             var btnName1 = btnName.Substring(0, 1).ToLower() + btnName.Substring(1, btnName.Length - 1);

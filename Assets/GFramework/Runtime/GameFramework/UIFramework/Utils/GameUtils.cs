@@ -110,7 +110,6 @@ namespace GameFramework
         {
             var itemName = typeof(T).Name;
             var itemPrafabPath = suffix == "" ? $"Data/{itemName}" : $"Data/{itemName}_{suffix}";
-
             var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
             var textAssetString = GameUtils.AESDecrypt(textAsset.text);
             var result = JsonConvert.DeserializeObject<List<T>>(textAssetString);
