@@ -85,7 +85,7 @@ namespace GameFramework
         private static bool IsComponentCanBeCollected(GameObject rootGo, GameObject componentGo)
         {
             var monoVar = componentGo.GetComponent<MonoVarController>();
-            var parentMonoVar = componentGo.GetComponentInParent<MonoVarController>();
+            var parentMonoVar = componentGo.GetComponentInParent<MonoVarController>(true);
             var isParentMonoVar = parentMonoVar == null || rootGo == parentMonoVar.gameObject || monoVar == parentMonoVar;
             return isParentMonoVar;
         }

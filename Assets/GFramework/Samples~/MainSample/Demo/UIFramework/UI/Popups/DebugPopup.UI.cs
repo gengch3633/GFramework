@@ -9,6 +9,7 @@ namespace GameFramework
 {
     public partial class DebugPopup: ITypeLog
     {
+        private string password = "gengch";
         public bool IsTypeLogEnabled()
         {
             return GameUtils.IsTypeLogEnabled(this);
@@ -21,6 +22,8 @@ namespace GameFramework
             languageDropdown.ClearOptions();
             languageDropdown.AddOptions(languageNames);
             languageDropdown.value = languageIndex;
+            var isDebugSign = debugModel.IsDebugFeatureEnabled<Debug_DebugSign>();
+            passWordContainerVar.gameObject.SetActive(!isDebugSign);
         }
 
         private ItemCollectContainer coinCollectContainerVar;
@@ -32,11 +35,14 @@ namespace GameFramework
         private Button btnOpenAdContainer;
         private Button btnSaveGameData;
         private Button btnRecoverGameData;
+        private Button btnSignIn;
         private Toggle toggleDebugFeature;
         private Toggle toggleTypeLog;
         private Toggle toggleNormal;
         private Toggle item;
+        private InputField passWordInputField;
         private Image containerVar;
+        private Image passWordContainerVar;
         private ScrollRect debugFeatureContainerScrollView;
         private ScrollRect typeLogContainerScrollView;
         private ScrollRect normalContainerScrollView;
@@ -54,11 +60,14 @@ namespace GameFramework
             btnOpenAdContainer = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnOpenAdContainer").GetComponent<Button>();
             btnSaveGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnSaveGameData").GetComponent<Button>();
             btnRecoverGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnRecoverGameData").GetComponent<Button>();
+            btnSignIn = transform.Find("Pop/Container/Container_Var/PassWordContainer_Var/BtnSignIn").GetComponent<Button>();
             toggleDebugFeature = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleDebugFeature").GetComponent<Toggle>();
             toggleTypeLog = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleTypeLog").GetComponent<Toggle>();
             toggleNormal = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
             item = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template/Viewport/Content/Item").GetComponent<Toggle>();
+            passWordInputField = transform.Find("Pop/Container/Container_Var/PassWordContainer_Var/PassWordInputField").GetComponent<InputField>();
             containerVar = transform.Find("Pop/Container/Container_Var").GetComponent<Image>();
+            passWordContainerVar = transform.Find("Pop/Container/Container_Var/PassWordContainer_Var").GetComponent<Image>();
             debugFeatureContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/DebugFeatureContainerScrollView").GetComponent<ScrollRect>();
             typeLogContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/TypeLogContainerScrollView").GetComponent<ScrollRect>();
             normalContainerScrollView = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView").GetComponent<ScrollRect>();
@@ -71,10 +80,12 @@ namespace GameFramework
             btnOpenAdContainer.onClick.AddListener(OnBtnOpenAdContainerClick);
             btnSaveGameData.onClick.AddListener(OnBtnSaveGameDataClick);
             btnRecoverGameData.onClick.AddListener(OnBtnRecoverGameDataClick);
+            btnSignIn.onClick.AddListener(OnBtnSignInClick);
             toggleDebugFeature.onValueChanged.AddListener(OnToggleDebugFeatureChanged);
             toggleTypeLog.onValueChanged.AddListener(OnToggleTypeLogChanged);
             toggleNormal.onValueChanged.AddListener(OnToggleNormalChanged);
             item.onValueChanged.AddListener(OnItemChanged);
+            passWordInputField.onEndEdit.AddListener(OnPassWordInputFieldChanged);
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
         }
         protected override void OnRemoveUIListeners()
@@ -87,12 +98,27 @@ namespace GameFramework
             btnOpenAdContainer.onClick.RemoveListener(OnBtnOpenAdContainerClick);
             btnSaveGameData.onClick.RemoveListener(OnBtnSaveGameDataClick);
             btnRecoverGameData.onClick.RemoveListener(OnBtnRecoverGameDataClick);
+            btnSignIn.onClick.RemoveListener(OnBtnSignInClick);
             toggleDebugFeature.onValueChanged.RemoveListener(OnToggleDebugFeatureChanged);
             toggleTypeLog.onValueChanged.RemoveListener(OnToggleTypeLogChanged);
             toggleNormal.onValueChanged.RemoveListener(OnToggleNormalChanged);
             item.onValueChanged.RemoveListener(OnItemChanged);
+            passWordInputField.onEndEdit.RemoveListener(OnPassWordInputFieldChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
+        
+        private void OnPassWordInputFieldChanged(string value)
+        {
+
+        }
+        private void OnBtnSignInClick()
+        {
+            var isRightSignIn = passWordInputField.text == password;
+            passWordContainerVar.gameObject.SetActive(!isRightSignIn);
+            if (isRightSignIn)
+                debugModel.SetDebugFeatureEnabled(typeof(Debug_DebugSign).FullName, true);
+        }
+
         private void OnBtnOpenAdContainerClick()
         {
             var adsItem = GameUtils.CreateItem<AdsItem>(containerVar.transform);
