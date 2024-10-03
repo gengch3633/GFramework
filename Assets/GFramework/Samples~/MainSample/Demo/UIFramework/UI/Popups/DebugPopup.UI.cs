@@ -1,5 +1,6 @@
 
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ namespace GameFramework
             languageDropdown.value = languageIndex;
         }
 
+        private ItemCollectContainer coinCollectContainerVar;
+        private ItemCollectContainer diamondCollectContainerVar;
         private Button btnClose;
         private Button btnClearData;
         private Button btnAddCoin;
@@ -42,6 +45,8 @@ namespace GameFramework
         protected override void OnAddUIListeners()
         {
             base.OnAddUIListeners();
+            coinCollectContainerVar = transform.Find("Pop/Container/CoinCollectContainer_Var").GetComponent<ItemCollectContainer>();
+            diamondCollectContainerVar = transform.Find("Pop/Container/DiamondCollectContainer_Var").GetComponent<ItemCollectContainer>();
             btnClose = transform.Find("Pop/Container/TopContainer/BtnClose").GetComponent<Button>();
             btnClearData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearData").GetComponent<Button>();
             btnAddCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnAddCoin").GetComponent<Button>();
@@ -88,7 +93,6 @@ namespace GameFramework
             item.onValueChanged.RemoveListener(OnItemChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
-       
         private void OnBtnOpenAdContainerClick()
         {
             var adsItem = GameUtils.CreateItem<AdsItem>(containerVar.transform);
@@ -124,11 +128,12 @@ namespace GameFramework
         }
         private void OnBtnAddCoinClick() 
         {
-            userModel.Coins.Value += 10000;
-            userModel.Diamonds.Value += 10000;
+            var addItemCount = 1000;
+            coinCollectContainerVar.CollectItemsAsync(btnAddCoin.transform, userModel.Coins, addItemCount).Forget();
+            diamondCollectContainerVar.CollectItemsAsync(btnAddCoin.transform, userModel.Diamonds, addItemCount).Forget();
         }
-        private void OnBtnClearCoinClick() {
-
+        private void OnBtnClearCoinClick() 
+        {
             userModel.Coins.Value -= userModel.Coins.Value;
             userModel.Diamonds.Value -= userModel.Diamonds.Value;
         }

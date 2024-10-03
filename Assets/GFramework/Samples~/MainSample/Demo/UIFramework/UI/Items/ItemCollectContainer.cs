@@ -10,36 +10,89 @@ namespace GameFramework
 {
     public class ItemCollectContainer : MonoVarController
     {
-        public async UniTask CollectItemsAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount, bool initWithStartSize = false)
+        public ECollectType collectType = ECollectType.GroupCollect;
+        public async UniTask CollectItemsAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount)
         {
+            gameObject.SetActive(true);
             bindProperty.UnRegisterOnValueChanged(OnUpdateItemCount);
             bindProperty.RegisterOnValueChanged(OnUpdateItemCount)
                .UnRegisterWhenGameObjectDestroyed(gameObject);
-            await PlayItemCollectFlyAsync(startTransform);
+
+            if (collectType == ECollectType.GroupCollect)
+                await PlayItemGroupCollectFlyAsync(startTransform, bindProperty, addItemCount);
+            else
+                await PlayItemCollectFlyAsync(startTransform, bindProperty, addItemCount);
+        }
+
+        private async UniTask CollectCoinCountAsync(BindableProperty<int> bindProperty, int addItemCount)
+        {
             audioSystem.PlaySound("framework/item_collect");
             var toValue = bindProperty.Value + addItemCount;
             await DOTween.To(() => bindProperty.Value, (v) => bindProperty.Value = v, toValue, 0.5f);
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         }
 
-        public async UniTask PlayItemCollectFlyAsync(Transform startTransform)
+        #region Group Coin Collect
+        private float spreadRatio = 1.5f;
+        private float minAnimDuration = 0.7f;
+        private float maxAnimDuration = 1.0f;
+        private Ease flyEase = Ease.InOutBack;
+        public float delayTime = 0.5f;
+        private async UniTask PlayItemGroupCollectFlyAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount)
+        {
+            await UniTask.DelayFrame(1);
+            var childCount = itemContainerVar.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+                PlayGroupSingleCoinFlyAsync(startTransform, i).Forget();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
+            await CollectCoinCountAsync(bindProperty, addItemCount);
+        }
+
+        private async UniTask PlayGroupSingleCoinFlyAsync(Transform startTransform, int itemIndex)
         {
             var targetTransform = itemIconVar.transform;
-            var itemIcons = itemContainerVar.GetComponentsInChildren<Image>(true).ToList().FindAll(item => item.gameObject != itemContainerVar.gameObject);
-            var itemCount = 5;
-            var moveTime = 0.5f;
+            var itemCoin = itemContainerVar.transform.GetChild(itemIndex).GetComponent<Image>();
+            itemCoin.gameObject.SetActive(true);
+            InitCoin(itemCoin, startTransform, targetTransform);
+            var coinWidth = targetTransform.GetComponent<RectTransform>().rect.width;
+            var localPositionX = UnityEngine.Random.Range(-spreadRatio, spreadRatio) * coinWidth;
+            var localPositionY = UnityEngine.Random.Range(-spreadRatio, spreadRatio) * coinWidth;
+
+            var localPosition = startTransform.localPosition + new Vector3(localPositionX, localPositionY, 0f);
+            var worldPosition = startTransform.transform.parent.TransformPoint(localPosition);
+            itemCoin.transform.position = worldPosition;
+
+            var duration = UnityEngine.Random.Range(minAnimDuration, maxAnimDuration);
+            var targetPosition = itemIconVar.transform.position;
+            await itemCoin.transform.DOMove(targetPosition, duration).SetEase(flyEase);
+            itemCoin.gameObject.SetActive(false);
+        }
+        #endregion
+
+        #region Single Collect
+        public async UniTask PlayItemCollectFlyAsync(Transform startTransform, BindableProperty<int> bindProperty, int addItemCount)
+        {
+            var targetTransform = itemIconVar.transform;
+            var childCount = itemContainerVar.transform.childCount;
+           
             Vector3[] _path = GetBezierPoints(startTransform, targetTransform);
-            for (int i = 0; i < itemCount; i++)
+            for (int i = 0; i < childCount; i++)
             {
-                var itemCoin = itemIcons[i];
-                GameObject imageGo = itemCoin.gameObject;
-                imageGo.gameObject.SetActive(true);
-                InitCoin(itemIcons[i], startTransform, targetTransform);
-                var targetRectTransform = targetTransform.GetComponent<RectTransform>();
-                var targetSize = targetRectTransform.sizeDelta;
-                imageGo.transform.DOPath(_path, moveTime).ToUniTask().Forget();
+                PlaySingleCoinFlyAsync(startTransform, i, _path, bindProperty, addItemCount).Forget();
                 await UniTask.Delay(TimeSpan.FromSeconds(0.08f));
             }
+        }
+
+        private async UniTask PlaySingleCoinFlyAsync(Transform startTransform, int itemIndex, Vector3[] _path, BindableProperty<int> bindProperty, int addItemCount)
+        {
+            var targetTransform = itemIconVar.transform;
+            var moveTime = 0.5f;
+            var itemCoin = itemContainerVar.transform.GetChild(itemIndex).GetComponent<Image>();
+            GameObject imageGo = itemCoin.gameObject;
+            imageGo.gameObject.SetActive(true);
+            InitCoin(itemCoin, startTransform, targetTransform);
+            await imageGo.transform.DOPath(_path, moveTime);
+            if (itemIndex == 0) await CollectCoinCountAsync(bindProperty, addItemCount);
         }
 
         private Vector3[] GetBezierPoints(Transform startTransform, Transform targetTransform)
@@ -72,6 +125,7 @@ namespace GameFramework
         {
             return (1 - t) * (1 - t) * start + 2 * t * (1 - t) * center + t * t * end;
         }
+        #endregion
 
         private void OnUpdateItemCount(int itemCount)
         {
@@ -94,6 +148,12 @@ namespace GameFramework
             base.OnRemoveUIListeners();
 
         }
+    }
+
+    public enum ECollectType
+    {
+        GroupCollect,
+        SingleCollect
     }
 
     public enum ItemType
