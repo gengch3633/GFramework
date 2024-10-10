@@ -4,8 +4,6 @@
 import json
 import os
 from FileUtils_GTest import FileUtils
-from Modules.CardName import CardName
-from Modules.PictureNameConverter import PictureNameConverter
 
 class Utils():
 	def __init__(self):

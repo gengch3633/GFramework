@@ -19,6 +19,14 @@ namespace GameFramework
         public string interstitialAdId;
         public string bannerAdId;
         public string splashAdId;
+
+        public void SetAdsIds(AdsConfig otherAdsConfig)
+        {
+            this.rewardAdId = otherAdsConfig.rewardAdId;
+            this.interstitialAdId = otherAdsConfig.interstitialAdId;
+            this.bannerAdId = otherAdsConfig.bannerAdId;
+            this.splashAdId = otherAdsConfig.splashAdId;
+        }
     }
 
     public enum EMediationType

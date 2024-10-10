@@ -37,10 +37,20 @@ namespace GameFramework
         {
             var debugModel = GameApp.Interface.GetModel<IDebugModel>();
             var useTestAds = debugModel.IsDebugFeatureEnabled<Debug_TestAds>();
-            var adsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
+            var releaseAdsConfigs = GameUtils.GetConfigInfos<AdsConfig>();
+            var testAdsConfigs = GameUtils.GetConfigInfos<AdsConfig>("Test");
             var buildTarget = GameUtils.IsIosPlatform() ? BuildTarget.IOS : BuildTarget.Android;
-            adsConfig = adsConfigs.Find(item => item.useTestAds == useTestAds && item.buildTarget == buildTarget && item.mediationType == EMediationType.Admob);
-            GameUtils.Log(this, $"[AdsManager_Admob] [Release] adsConfig: {JsonConvert.SerializeObject(adsConfig)}");
+            adsConfig = releaseAdsConfigs.Find(item => item.buildTarget == buildTarget && item.mediationType == EMediationType.Admob);
+            GameUtils.Log(this, $"[AdsManager_Admob] [Release] adsConfig 1: {JsonConvert.SerializeObject(adsConfig)}");
+            if (useTestAds)
+            {
+                var testAdsConfig = testAdsConfigs.Find(item => item.buildTarget == buildTarget && item.mediationType == EMediationType.Admob);
+                adsConfig.SetAdsIds(testAdsConfig);
+                GameUtils.Log(this, $"[AdsManager_Admob] [Release] adsConfig 2: {JsonConvert.SerializeObject(testAdsConfig)}");
+                GameUtils.Log(this, $"[AdsManager_Admob] [Release] testAdsConfig 3: {JsonConvert.SerializeObject(adsConfig)}");
+            }
+
+            GameUtils.Log(this, $"[AdsManager_Admob] [Release] adsConfig 4 End: {JsonConvert.SerializeObject(adsConfig)}");
         }
 
         private async void OnApplicationFocus(bool focus)
