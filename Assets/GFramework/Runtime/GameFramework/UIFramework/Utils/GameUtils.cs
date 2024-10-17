@@ -108,9 +108,10 @@ namespace GameFramework
 
         public static List<T> GetConfigInfos<T>(string suffix = "", string folderName = "") where T : class, new()
         {
-            var itemName = typeof(T).Name;
+            var fileTypeName = typeof(T).Name;
             var fileFolder = string.IsNullOrEmpty(folderName) ? "Data" : $"Data/{folderName}";
-            var itemPrafabPath = suffix == "" ? $"{fileFolder}/{itemName}" : $"{fileFolder}/{itemName}_{suffix}";
+            var fileName = string.IsNullOrEmpty(suffix)? fileTypeName : $"{fileTypeName}_{suffix}";
+            var itemPrafabPath = $"{fileFolder}/{fileName}";
             var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
             var textAssetString = GameUtils.AESDecrypt(textAsset.text);
             var result = JsonConvert.DeserializeObject<List<T>>(textAssetString);
