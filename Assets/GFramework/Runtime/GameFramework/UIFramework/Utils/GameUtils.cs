@@ -106,10 +106,11 @@ namespace GameFramework
             return color;
         }
 
-        public static List<T> GetConfigInfos<T>(string suffix = "") where T : class, new()
+        public static List<T> GetConfigInfos<T>(string suffix = "", string folderName = "") where T : class, new()
         {
             var itemName = typeof(T).Name;
-            var itemPrafabPath = suffix == "" ? $"Data/{itemName}" : $"Data/{itemName}_{suffix}";
+            var fileFolder = string.IsNullOrEmpty(folderName) ? "Data" : $"Data/{folderName}";
+            var itemPrafabPath = suffix == "" ? $"{fileFolder}/{itemName}" : $"{fileFolder}/{itemName}_{suffix}";
             var textAsset = Resources.Load<TextAsset>(itemPrafabPath);
             var textAssetString = GameUtils.AESDecrypt(textAsset.text);
             var result = JsonConvert.DeserializeObject<List<T>>(textAssetString);
