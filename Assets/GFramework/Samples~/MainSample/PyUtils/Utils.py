@@ -3,6 +3,7 @@
 
 import json
 import os
+import sys
 from FileUtils_GTest import FileUtils
 
 class Utils():
@@ -57,25 +58,38 @@ class Utils():
 		FileUtils.writeFile(normalConfigFile, json.dumps(itemMap, indent = 4, ensure_ascii=False))
 		print(f"==> [Utils] [createNormalConfig]: {FileUtils.getFileName(normalConfigFile)}")
 
-	def createFontText(self):
+	def createFontText(self, languageKeysString):
+		languageKeys = languageKeysString.split("-")
+		print(f"==> [createFontText] languageKeys: {languageKeys}")
 		excelFiles = FileUtils.getFiles(self.assetPath, ".xls")
 		excelFiles = [item for item in excelFiles if("LanguageInfo" in item)]
 		fontTexts = []
 		for excelFile in excelFiles:
+			print(f"==> [createFontText] excelFile: {excelFile}")
 			excelName = FileUtils.getFileName(excelFile, False)
 			jsonFile = os.path.join(self.dataPath, f"{excelName}.json")
 			jsonConfigs = FileUtils.readConfigExcel(excelFile, [])
 			for jsonConfig in jsonConfigs:
+				itemKey = jsonConfig["KEY"]
+				isInKeys = itemKey in languageKeys
+				if(not isInKeys):
+					continue
 				for key, value in jsonConfig.items():
 					if(key == "id"):
 						continue
 					fontTexts.extend(value)
 		
+		asciiChars = [chr(item) for item in range(32, 127)]
+		asciiString = ''.join(asciiChars)
+		fontTexts.extend(asciiString)
+		
 		fontTexts = list(set(fontTexts))
+		fontTexts.sort()
 		fontString = "".join(fontTexts)
 		FileUtils.writeFile(self.fontTextFile, fontString)
 
 
+languageKeysString = sys.argv[1]
 utils = Utils()
 utils.createConfigs()
-utils.createFontText()
+utils.createFontText(languageKeysString)

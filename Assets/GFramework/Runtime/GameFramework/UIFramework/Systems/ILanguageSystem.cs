@@ -2,15 +2,21 @@ using Framework;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameFramework
 {
     public interface ILanguageSystem : ISystem
     {
         string GetLanguangeText(string key);
-        string FormatLanguageText(string key, params object[] parameters);
+        string GetFormatLanguageText(string key, params object[] parameters);
         void SetLanguageType(LanguageType languageType);
+        void SetLanguageText(Text t, string key);
+        void SetLanguageText(TextMeshProUGUI t, string key);
+        void SetFormatLanguageText(Text t, string key, params object[] parameters);
+        void SetFormatLanguageText(TextMeshProUGUI t, string key, params object[] parameters);
 
         LanguageType GetLanguageType();
     }
@@ -37,13 +43,32 @@ namespace GameFramework
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);
         }
+        public void SetFormatLanguageText(Text t, string key, params object[] parameters)
+        {
+            t.text = GetFormatLanguageText(key, parameters);
+        }
+
+        public void SetLanguageText(Text t, string key)
+        {
+            t.text = GetFormatLanguageText(key);
+        }
+
+        public void SetFormatLanguageText(TextMeshProUGUI t, string key, params object[] parameters)
+        {
+            t.text = GetFormatLanguageText(key, parameters);
+        }
+
+        public void SetLanguageText(TextMeshProUGUI t, string key)
+        {
+            t.text = GetFormatLanguageText(key);
+        }
 
         public bool IsTypeLogEnabled()
         {
             return GameUtils.IsTypeLogEnabled(this);
         }
 
-        public string FormatLanguageText(string languangeKey, params object[] parameters)
+        public string GetFormatLanguageText(string languangeKey, params object[] parameters)
         {
             return string.Format(GetLanguangeText(languangeKey), parameters);
         }

@@ -12,6 +12,7 @@ namespace GameFramework
         public ProductType productType;
         public string price;
         public string itemCountArrayString;
+        public string tagString;
 
         public List<int> GetItemCountList()
         {

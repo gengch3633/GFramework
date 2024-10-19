@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class RemoteConfig_Firebase : ITypeLog
+public partial class RemoteConfig_Firebase : ITypeLog
 {
     public static bool IsRemoteConfigFetchSuccess = false;
     public static RemoteConfigValue<bool> remoteTestBool = new RemoteConfigValue<bool>("remote_test_bool", true);
@@ -31,6 +31,7 @@ public class RemoteConfig_Firebase : ITypeLog
                 InitDefaultRemoteValueDict(remoteTestLong);
                 InitDefaultRemoteValueDict(remoteTestDouble);
                 InitDefaultRemoteValueDict(remoteTestString);
+                InitConfigValues();
                 FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaultRemoteValueDict).ContinueWithOnMainThread(task => FetchDataAsync());
             }
         }));
@@ -72,6 +73,7 @@ public class RemoteConfig_Firebase : ITypeLog
                     remoteTestLong.SetRemoteValue(this);
                     remoteTestDouble.SetRemoteValue(this);
                     remoteTestString.SetRemoteValue(this);
+                    SetConfigValues();
                 });
                 break;
             case LastFetchStatus.Failure:
@@ -116,13 +118,13 @@ public class RemoteConfigValue<T>
             Value = (T)(object)remoteConfig.GetValue(this.Key).StringValue;
         else if (typeof(T) == typeof(long))
             Value = (T)(object)remoteConfig.GetValue(this.Key).LongValue;
-        else if (typeof(T) == typeof(int))
-        {
-            var e = new Exception("INT TYPE NOT SUPPORTED");
-            UnityEngine.Debug.LogError($"==> [NormalMessage] [Init] Exception:\n{e.StackTrace}");
-        }
         else if (typeof(T) == typeof(double))
             Value = (T)(object)remoteConfig.GetValue(this.Key).DoubleValue;
+        else
+        {
+            var e = new Exception($"{typeof(T)} TYPE NOT SUPPORTED");
+            UnityEngine.Debug.LogError($"==> [NormalMessage] [Init] Exception:\n{e.StackTrace}");
+        }
 #endif
 
         GameUtils.Log(typeLog, $"defaultValue: {Value}");

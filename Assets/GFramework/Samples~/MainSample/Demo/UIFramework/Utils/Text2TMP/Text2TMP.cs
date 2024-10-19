@@ -18,18 +18,16 @@ public class Text2TMP : MonoBehaviour
 
     [ValueDropdown("FontAssetNames")]
     [OnValueChanged("OnFontAssetNameChanged")]
+    [PropertyOrder(2)]
     public string FontAssetName;
     private static IEnumerable FontAssetNames;
 
     [ValueDropdown("FontMaterialNames")]
     [OnValueChanged("OnFontMaterialNameChanged")]
+    [PropertyOrder(3)]
     public string FontMaterialName;
     private static IEnumerable FontMaterialNames;
 
-    private void Awake()
-    {
-        FindAssets();
-    }
     private void OnFontAssetNameChanged()
     {
         var fontAssetGroup = fontAssetGroupDict[FontAssetName];
@@ -91,6 +89,7 @@ public class Text2TMP : MonoBehaviour
     }
 
     [Button(ButtonSizes.Medium)]
+    [PropertyOrder(1)]
     private void FindAssets()
     {
 #if UNITY_EDITOR

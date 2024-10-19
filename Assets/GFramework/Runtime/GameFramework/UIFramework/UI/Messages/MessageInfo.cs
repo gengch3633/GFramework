@@ -16,7 +16,7 @@ namespace GameFramework
 
         public string GetFormatText(ILanguageSystem languageSystem)
         {
-            var message = languageSystem.FormatLanguageText(languageKey, parameters);
+            var message = languageSystem.GetFormatLanguageText(languageKey, parameters);
             return message;
         }
     }

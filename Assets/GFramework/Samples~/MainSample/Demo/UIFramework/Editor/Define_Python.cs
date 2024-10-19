@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,12 +26,14 @@ namespace GameFramework
             var utilsPyFile = fontAssets.Find(item => item.Name == "Utils.py");
                 UnityEngine.Debug.LogError(utilsPyFile);
             Process p = new Process();
-            string path = utilsPyFile.FullName;
-            string sArguments = path;
+            var path = utilsPyFile.FullName;
+            var sArguments = path;
 
+
+            var languageKeys = GetTMPLanguageKeys();
             p.StartInfo.FileName = "python";
             p.StartInfo.UseShellExecute = false;
-            p.StartInfo.Arguments = sArguments;
+            p.StartInfo.Arguments = $"{sArguments} {languageKeys}";
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardError = true;
@@ -38,6 +42,37 @@ namespace GameFramework
             p.BeginOutputReadLine();
             p.OutputDataReceived += new DataReceivedEventHandler(Out_RecvData);
             p.WaitForExit();
+        }
+
+        private static string GetTMPLanguageKeys()
+        {
+            var subFolders = Directory.GetDirectories("Assets");
+            var guids = AssetDatabase.FindAssets("t:Prefab", subFolders).ToList();
+            var assetPaths = guids.ConvertAll(item=> AssetDatabase.GUIDToAssetPath(item));
+            var prefabs = assetPaths.ConvertAll(item => AssetDatabase.LoadAssetAtPath<GameObject>(item));
+            var allHasKeys = new List<string>();
+            var emptyKeys = new List<string>();
+            var gameObjectMapWithoutLocalizedText = new Dictionary<string, List<string>>();
+            prefabs.ForEach(item =>
+            {
+                var allTMPs = item.GetComponentsInChildren<TextMeshProUGUI>().ToList();
+                var tmpLocalizedTexts = allTMPs.FindAll(item => item.GetComponent<LocalizedText>() != null).ConvertAll(item=> item.GetComponent<LocalizedText>());
+                var tmpsWithoutLocalizedText = allTMPs.FindAll(item => item.GetComponent<LocalizedText>() == null);
+                var hasKeyTmps = tmpLocalizedTexts.FindAll(item => !string.IsNullOrEmpty(item.key));
+                //UnityEngine.Debug.LogError($"==> [GetTMPLanguageKeys], prafab: {item.name}, tmpLocalizedTexts 1: {JsonConvert.SerializeObject(tmpLocalizedTexts.ConvertAll(item=>item.name), Formatting.Indented)}");
+                //UnityEngine.Debug.LogError($"==> [GetTMPLanguageKeys], prafab: {item.name}, tmpLocalizedTexts 2: {JsonConvert.SerializeObject(hasKeyTmps.ConvertAll(item => item.name), Formatting.Indented)}");
+                //UnityEngine.Debug.LogError($"==> [GetTMPLanguageKeys], prafab: {item.name}, tmpLocalizedTexts 3: {JsonConvert.SerializeObject(hasKeyTmps.ConvertAll(item => item.key), Formatting.Indented)}");
+                allHasKeys.AddRange(hasKeyTmps.ConvertAll(item=>item.key));
+                var noKeyTmps = tmpLocalizedTexts.FindAll(item => string.IsNullOrEmpty(item.key));
+                emptyKeys.AddRange(noKeyTmps.ConvertAll(item => item.key));
+                if (tmpsWithoutLocalizedText.Count > 0)
+                    gameObjectMapWithoutLocalizedText.Add(item.name, tmpsWithoutLocalizedText.ConvertAll(item=>item.name));
+            });
+
+            UnityEngine.Debug.LogError($"==> [GetTMPLanguageKeys], gameObjectMapWithoutLocalizedText: {JsonConvert.SerializeObject(gameObjectMapWithoutLocalizedText, Formatting.Indented)}");
+            UnityEngine.Debug.LogError($"==> [GetTMPLanguageKeys], emptyKeys: {JsonConvert.SerializeObject(emptyKeys, Formatting.Indented)}");
+
+            return string.Join("-", allHasKeys);
         }
 
         private static void CreateEncryptConfigData()
@@ -58,7 +93,12 @@ namespace GameFramework
                 var encyptDataText = GameUtils.AESEncrypt(simpleDataText);
                 var decryptDataText = GameUtils.AESDecrypt(encyptDataText);
                 var isDecryptSuccess = simpleDataText == decryptDataText;
-                var decryptFile = $"{encryptConfigDataFolder}/{item.Name}";
+                var folderName = new DirectoryInfo(item.DirectoryName).Name;
+                var folder = folderName != "Data" ? $"{encryptConfigDataFolder}/{folderName}": $"{encryptConfigDataFolder}";
+                var subFolder = new DirectoryInfo(folder);
+                if (!subFolder.Exists)
+                    subFolder.Create();
+                var decryptFile =  $"{folder}/{item.Name}";
                 File.WriteAllText(decryptFile, encyptDataText);
                 UnityEngine.Debug.LogError($"==> [Python] [CreateEncryptConfigData]: {item.Name}, isDecryptSuccess: {isDecryptSuccess}");
             });

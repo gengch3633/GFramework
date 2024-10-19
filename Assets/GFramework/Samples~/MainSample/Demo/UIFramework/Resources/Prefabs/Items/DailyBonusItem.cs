@@ -19,7 +19,7 @@ namespace GameFramework
             this.clickAction = clickAction;
             this.dayNum = dayNum;
 
-            dayNumTexts.ForEach(item => item.text = languageSystem.FormatLanguageText("daily_bonus_day_title", (dayNum + 1)));
+            dayNumTexts.ForEach(item => languageSystem.SetFormatLanguageText(item, "daily_bonus_day_title", (dayNum + 1)));
             coinCountTexts.ForEach(item => item.text = $"+{rewardCount}");
             coinIcons.ForEach(item => { item.sprite = Resources.Load<Sprite>($"Sprites/DailyBonus/daily_bonus_coin_{dayNum+1}"); item.SetNativeSize(); });
             toBeSignedVar.gameObject.SetActive(eSign == ESignType.Sign);
