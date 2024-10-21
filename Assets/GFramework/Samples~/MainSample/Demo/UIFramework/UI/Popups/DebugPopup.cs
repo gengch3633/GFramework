@@ -44,7 +44,7 @@ namespace GameFramework
             toggleNormal.group = toggleGroup;
             toggleTypeLog.group = toggleGroup;
 
-            toggleDebugFeature.isOn = true;
+            toggleNormal.isOn = true;
         }
 
         protected override void OnAdListeners()

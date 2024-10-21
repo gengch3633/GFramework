@@ -16,6 +16,15 @@ public partial class RemoteConfig_Firebase : ITypeLog
     public static RemoteConfigValue<string> remoteTestString = new RemoteConfigValue<string>("remote_test_string", "remote_test_string");
     private static Dictionary<string, object> defaultRemoteValueDict = new Dictionary<string, object>();
 
+    public RemoteConfig_Firebase()
+    {
+        InitDefaultRemoteValueDict(remoteTestBool);
+        InitDefaultRemoteValueDict(remoteTestLong);
+        InitDefaultRemoteValueDict(remoteTestDouble);
+        InitDefaultRemoteValueDict(remoteTestString);
+        InitConfigValues();
+    }
+
     public void Init(bool isFirebaseInited)
     {
 #if SDK_FIRE_BASE
@@ -26,14 +35,7 @@ public partial class RemoteConfig_Firebase : ITypeLog
         FirebaseRemoteConfig.DefaultInstance.SetConfigSettingsAsync(configSettings).ContinueWithOnMainThread((Action<Task>)(task =>
         {
             if (task.IsCompleted && task.Exception == null)
-            {
-                InitDefaultRemoteValueDict(remoteTestBool);
-                InitDefaultRemoteValueDict(remoteTestLong);
-                InitDefaultRemoteValueDict(remoteTestDouble);
-                InitDefaultRemoteValueDict(remoteTestString);
-                InitConfigValues();
                 FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaultRemoteValueDict).ContinueWithOnMainThread(task => FetchDataAsync());
-            }
         }));
 #endif
     }
@@ -97,7 +99,7 @@ public partial class RemoteConfig_Firebase : ITypeLog
     }
 }
 
-public class RemoteConfigValue<T>
+public class RemoteConfigValue<T>: IRemoteGetValue
 {
     public string Key;
     public T Value;
@@ -107,6 +109,16 @@ public class RemoteConfigValue<T>
         this.Key = configKey;
         this.Value = defaultValue;
     }
+
+    public string GetValue()
+    {
+        return Value.ToString();
+    }
+    public string GetKey()
+    {
+        return Key.ToString();
+    }
+
 
     public void SetRemoteValue(ITypeLog typeLog)
     {
@@ -129,4 +141,9 @@ public class RemoteConfigValue<T>
 
         GameUtils.Log(typeLog, $"defaultValue: {Value}");
     }
+}
+public interface IRemoteGetValue
+{
+    string GetValue();
+    string GetKey();
 }

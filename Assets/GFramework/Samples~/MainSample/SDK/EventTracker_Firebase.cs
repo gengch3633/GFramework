@@ -13,11 +13,11 @@ public class EventTracker_Firebase : IEventTracker
     private RemoteConfig_Firebase remoteConfig;
     public void Init()
     {
+        remoteConfig = new RemoteConfig_Firebase();
 #if SDK_FIRE_BASE
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             isFirebaseInited = task.Result == DependencyStatus.Available;
-            remoteConfig = new RemoteConfig_Firebase();
             remoteConfig.Init(isFirebaseInited);
         });
 #endif

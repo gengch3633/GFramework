@@ -43,7 +43,7 @@ namespace GameFramework
         private void OnBtnShowRewardAdClick()
         {
             GameUtils.Log(this, $"[OnBtnShowRewardAdClick] 1");
-            adsSystem.CheckShowRewardAd("AdsTest", (success)=> {
+            adsSystem.CheckShowRewardAd("test_video", (success)=> {
                 GameUtils.Log(this, $"[OnBtnShowRewardAdClick] 2, Show Result: {success}");
             });
         }

@@ -9,7 +9,7 @@ namespace GameFramework
 {
     public partial class DebugPopup: ITypeLog
     {
-        private string password = "gengch";
+        private string password = "asdf";
         public bool IsTypeLogEnabled()
         {
             return GameUtils.IsTypeLogEnabled(this);

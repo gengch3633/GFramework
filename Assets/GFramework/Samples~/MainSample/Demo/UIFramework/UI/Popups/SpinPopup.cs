@@ -122,9 +122,10 @@ namespace GameFramework
         private void OnBtnVideoClick()
         {
             UpdateBtnState();
-            adsSystem.CheckShowRewardAd("spin_video", (ret) =>
+            adsSystem.CheckShowRewardAd("spin_video", (success) =>
             {
-                if (ret) OnSpin();
+                if (!success) return;
+                OnSpin();
             });
         }
         private void OnBtnFreeClick()
