@@ -10,6 +10,7 @@ namespace GameFramework
 {
     public interface ILanguageSystem : ISystem
     {
+        string GetLanguageText(LanguageType languageType, string languageKey = "setting_language_country");
         string GetLanguangeText(string key);
         string GetFormatLanguageText(string key, params object[] parameters);
         void SetLanguageType(LanguageType languageType);
@@ -42,6 +43,22 @@ namespace GameFramework
             var languageTypeString = PlayerPrefs.GetString(Key, "");
             languageTypeString = languageTypeString != "" ? languageTypeString : Application.systemLanguage.ToString();
             Enum.TryParse(languageTypeString, out languageType);
+        }
+
+        public string GetLanguageText(LanguageType languageType, string languageKey = "setting_language_country")
+        {
+            var languageInfo = languageInfos.Find(item => item.Key == languageKey);
+            var props = languageInfo.GetType().GetProperties();
+            var languageDict = new Dictionary<string, string>();
+            foreach (var item in props)
+            {
+                var key = item.Name;
+                var value = languageInfo.GetType().GetProperty(key).GetValue(languageInfo, null).ToString();
+                languageDict.Add(key, value);
+            }
+            var valueString = languageDict.ContainsKey(languageType.ToString()) ? languageDict[languageType.ToString()]: languageKey;
+            GameUtils.Log(this, $"languangeKey: {languageKey}, valueString: {valueString}");
+            return valueString;
         }
         public void SetFormatLanguageText(Text t, string key, params object[] parameters)
         {
