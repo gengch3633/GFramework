@@ -48,7 +48,7 @@ namespace GameFramework
         public string GetLanguageText(LanguageType languageType, string languageKey = "setting_language_country")
         {
             var languageInfo = languageInfos.Find(item => item.Key == languageKey);
-            var props = languageInfo.GetType().GetProperties();
+            var props = languageInfo.GetType().GetFields();
             var languageDict = new Dictionary<string, string>();
             foreach (var item in props)
             {
