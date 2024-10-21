@@ -53,7 +53,7 @@ namespace GameFramework
             foreach (var item in props)
             {
                 var key = item.Name;
-                var value = languageInfo.GetType().GetProperty(key).GetValue(languageInfo, null).ToString();
+                var value = languageInfo.GetType().GetField(key).GetValue(languageInfo).ToString();
                 languageDict.Add(key, value);
             }
             var valueString = languageDict.ContainsKey(languageType.ToString()) ? languageDict[languageType.ToString()]: languageKey;
