@@ -57,7 +57,7 @@ namespace GameFramework
                 languageDict.Add(key, value);
             }
             var valueString = languageDict.ContainsKey(languageType.ToString()) ? languageDict[languageType.ToString()]: languageKey;
-            GameUtils.Log(this, $"languangeKey: {languageKey}, valueString: {valueString}");
+            GameUtils.Log(this, $"languangeKey: {languageKey}, valueString: {valueString}, languageDict: {JsonConvert.SerializeObject(languageDict)}");
             return valueString;
         }
         public void SetFormatLanguageText(Text t, string key, params object[] parameters)
