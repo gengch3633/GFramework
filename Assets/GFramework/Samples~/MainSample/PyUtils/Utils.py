@@ -88,8 +88,7 @@ class Utils():
 		fontString = "".join(fontTexts)
 		FileUtils.writeFile(self.fontTextFile, fontString)
 
-
-languageKeysString = sys.argv[1]
+languageKeysString = sys.argv[1] if(len(sys.argv) > 1) else ""
 utils = Utils()
 utils.createConfigs()
 utils.createFontText(languageKeysString)
