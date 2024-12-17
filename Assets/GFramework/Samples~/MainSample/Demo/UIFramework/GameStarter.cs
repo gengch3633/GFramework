@@ -13,6 +13,8 @@ namespace GameFramework
             InitModels();
             InitSystems();
 
+            Application.targetFrameRate = 60;
+
             Input.multiTouchEnabled = false;
             Loom.Initialize();
             uiSystem.OpenPopup<DebugPopup>();
