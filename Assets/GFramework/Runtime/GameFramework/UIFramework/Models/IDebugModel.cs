@@ -92,7 +92,7 @@ namespace GameFramework
             logNames.Sort((item1, item2) => {
                 var item1Value = IsTypeLogEnabled(item1) ? 1 : -1;   
                 var item2Value = IsTypeLogEnabled(item2) ? 1 : -1;
-                return item1Value - item2Value;
+                return item2Value - item1Value;
             });
 
             return logNames;
@@ -161,7 +161,7 @@ namespace GameFramework
             allDebugFeatureNames.Sort((item1, item2) => {
                 var item1Value = IsDebugFeatureEnabled(item1) ? 1 : -1;
                 var item2Value = IsDebugFeatureEnabled(item2) ? 1 : -1;
-                return item1Value - item2Value;
+                return item2Value - item1Value;
             });
 
             return allDebugFeatureNames;
