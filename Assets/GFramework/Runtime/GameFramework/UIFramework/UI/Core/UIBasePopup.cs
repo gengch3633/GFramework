@@ -9,6 +9,7 @@ namespace GameFramework
     {
         public string popupOpenSound = "popup_open";
         public string popupCloseSound = "popup_close";
+        public string popupCloseSoundNoAnim = "popup_close_no_anim";
         public bool usePopupAdapter = false;
         public override async void Init(object param = null)
         {
@@ -38,13 +39,17 @@ namespace GameFramework
 
         public async UniTask OnClosePopupAsync(bool showCloseAnim, Action onComplete = null)
         {
-            audioSystem.PlaySound(popupCloseSound);
+            
             UIPopAnim popAnim = GetComponent<UIPopAnim>();
             if (popAnim != null && showCloseAnim)
+            {
+                audioSystem.PlaySound(popupCloseSound);
                 popAnim.PlayPopoutAim(() => uiSystem.OnCloseView(gameObject, onComplete));
+            }
             else
             {
                 await PlayClosePopAnim();
+                audioSystem.PlaySound(popupCloseSoundNoAnim);
                 uiSystem.OnCloseView(gameObject, onComplete);
             }
         }
