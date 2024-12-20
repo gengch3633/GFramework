@@ -12,6 +12,14 @@ namespace Framework
             return ret;
         }
 
+        public string GetInfo<T>(T t) where T : new()
+        {
+            string key = GetKey<T>();
+
+            var infoString = JsonConvert.SerializeObject(t);
+            return infoString;
+        }
+
         public void SaveInfo<T>(T t) where T : new()
         {
             string key = GetKey<T>();

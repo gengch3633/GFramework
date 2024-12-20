@@ -13,26 +13,28 @@ namespace GameFramework
 
         bool IsGoodTimeForRate();
 
-        void OnRate(int starCount);
+        void OnRate(int starCount, Action gotoEmailAciton = null, Action gotoGooglePlayPageAction = null);
 
         void OnNoRate();
 
         void OpenGooglePlayPage();
         void OpenContactEmailPage();
         void OpenPrivacyPage();
+
+        BindableProperty<bool> IsRated { get; }
+        BindableProperty<DateTime> LastActionTime { get; }
+        BindableProperty<int> LastActionLevel { get; }
+        BindableProperty<int> CompletedLevels { get; }
     }
 
     public class RateSystem : AbstractSystem, IRateSystem, ITypeLog
     {
-        private static readonly string Key = "RATE_SYSTEM";
-        private string publishUrl = string.Format("https://play.google.com/store/apps/details?id={0}", Application.identifier);
-        private string subject = string.Format("Suggestion about {0}", Application.productName);
-        private string body = string.Format("Hello {0} Team, \n", Application.productName);
-
-        public DateTime lastActionTime = DateTime.MinValue;
-        public bool isRated = false;
-        public int lastActionLevel = 0;
-        public int completedLevels = 0;
+        private string publishUrl = $"https://play.google.com/store/apps/details?id={Application.identifier}";
+        private string subject = $"Suggestion about {Application.productName}";
+        public BindableProperty<bool> IsRated { get; } = new BindableProperty<bool>() { Value = false };
+        public BindableProperty<DateTime> LastActionTime { get; } = new BindableProperty<DateTime>() { Value = DateTime.MinValue };
+        public BindableProperty<int> LastActionLevel { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> CompletedLevels { get; } = new BindableProperty<int>() { Value = 0 };
 
         protected override void OnInit()
         {
@@ -42,7 +44,8 @@ namespace GameFramework
             GameUtils.Log(this, "publishUrl: " + publishUrl);
             GameUtils.Log(this, "supportEmail: " + SDKConst.sdkConfig.supportEmail);
             GameUtils.Log(this, "subject: " + subject);
-            GameUtils.Log(this, "body: " + body);
+
+            GameUtils.Log(this, "RateSystem 1: " + GetInfo(this));
         }
 
         public bool IsTypeLogEnabled()
@@ -53,39 +56,43 @@ namespace GameFramework
         public bool IsGoodTimeForRate()
         {
             //已经投票5个星星了
-            if (this.isRated)
+            if (this.IsRated.Value)
                 return false;
 
-            int passLevels = this.completedLevels;
+            int passLevels = this.CompletedLevels.Value;
             //第一次弹出
-            if (passLevels - this.lastActionLevel >= 6)
+            if (passLevels - this.LastActionLevel.Value >= 6)
                 return true;
             // 每6关，或弹屏超过24小时
-            if ((this.lastActionTime > DateTime.MinValue) && (DateTime.Now - this.lastActionTime).TotalHours >= 24)
+            if ((this.LastActionTime.Value > DateTime.MinValue) && (DateTime.Now - this.LastActionTime.Value).TotalHours >= 24)
                 return true;
 
             return false;
         }
 
-        public void OnRate(int starCount)
+        public void OnRate(int starCount, Action gotoEmailAciton = null, Action gotoGooglePlayPageAction = null)
         {
-            this.lastActionTime = DateTime.Now;
-            this.lastActionLevel = this.completedLevels;
+            this.LastActionTime.Value = DateTime.Now;
+            this.LastActionLevel.Value= this.CompletedLevels.Value;
             if (starCount >= 5)
             {
-                this.isRated = true;
+                this.IsRated.Value = true;
                 OpenGooglePlayPage();
+                gotoGooglePlayPageAction?.Invoke();
             }
             else
+            {
                 OpenContactEmailPage();
-            SaveInfo(this);
+                gotoEmailAciton?.Invoke();
+            }
+            GameUtils.Log(this, "RateSystem 2: " + GetInfo(this));
         }
 
         public void OnNoRate()
         {
-            this.lastActionTime = DateTime.Now;
-            this.lastActionLevel = this.completedLevels;
-            SaveInfo(this);
+            this.LastActionTime.Value = DateTime.Now;
+            this.LastActionLevel.Value = this.CompletedLevels.Value;
+            GameUtils.Log(this, "RateSystem 3: " + GetInfo(this));
         }
 
         public void OpenGooglePlayPage()
@@ -102,8 +109,17 @@ namespace GameFramework
         {
             string email = SDKConst.sdkConfig.supportEmail;
             string subject = MyEscapeURL(this.subject);
-            string body = MyEscapeURL(this.body);
+            var suggestionString = string.Format("My problem/suggestion is:", Application.productName);
+            var gapString = "*************************";
+            var dontDeleteString = "Please don't delete the important info below!";
+            var applicationInfo = $"Platform: {Application.platform}\nVersion: {Application.version}\nPackageName: {Application.identifier}";
+            var deviveInfo = $"DeviceModel: {SystemInfo.deviceModel}\nOSVersion: {Environment.OSVersion}\nScreenSize: {Screen.currentResolution}\nLanguage: {Application.systemLanguage}";
+            var infoString = $"{gapString}\n{dontDeleteString}\n{applicationInfo}\n{deviveInfo}";
+            var oriBody = $"{suggestionString}\n\n\n\n{infoString}";
+            string body = MyEscapeURL(oriBody);
             Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);
+
+            GameUtils.Log(this, "body: " + body);
         }
 
         private string MyEscapeURL(string url)
@@ -113,8 +129,8 @@ namespace GameFramework
 
         public void IncreaseLevel()
         {
-            this.completedLevels += 1;
-            SaveInfo(this);
+            this.CompletedLevels.Value += 1;
+            GameUtils.Log(this, "RateSystem 4: " + GetInfo(this));
         }
     }
 }
