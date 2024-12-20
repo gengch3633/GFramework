@@ -89,6 +89,11 @@ namespace GameFramework
             });
             var logNames = allTypes.ConvertAll(item => item.FullName);
             logNames.Sort();
+            logNames.Sort((item1, item2) => {
+                var item1Value = IsTypeLogEnabled(item1) ? 1 : -1;   
+                var item2Value = IsTypeLogEnabled(item2) ? 1 : -1;
+                return item1Value - item2Value;
+            });
 
             return logNames;
         }
@@ -152,7 +157,14 @@ namespace GameFramework
                 }
             });
 
-            return subTypeList.ConvertAll(item=>item.FullName);
+            var allDebugFeatureNames = subTypeList.ConvertAll(item => item.FullName);
+            allDebugFeatureNames.Sort((item1, item2) => {
+                var item1Value = IsDebugFeatureEnabled(item1) ? 1 : -1;
+                var item2Value = IsDebugFeatureEnabled(item2) ? 1 : -1;
+                return item1Value - item2Value;
+            });
+
+            return allDebugFeatureNames;
         }
 
         public void CopyGameData()
