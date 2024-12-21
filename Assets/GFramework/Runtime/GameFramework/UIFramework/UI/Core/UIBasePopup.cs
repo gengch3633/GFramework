@@ -48,7 +48,6 @@ namespace GameFramework
             else
             {
                 await PlayClosePopAnim();
-                audioSystem.PlaySound(popupCloseSoundNoAnim);
                 uiSystem.OnCloseView(gameObject, onComplete);
             }
         }
