@@ -9,7 +9,6 @@ namespace GameFramework
     {
         public string popupOpenSound = "popup_open";
         public string popupCloseSound = "popup_close";
-        public string popupCloseSoundNoAnim = "popup_close_no_anim";
         public bool usePopupAdapter = false;
         public override async void Init(object param = null)
         {
