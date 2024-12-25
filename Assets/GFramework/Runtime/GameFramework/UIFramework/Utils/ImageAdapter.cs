@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 namespace GameFramework
 {
-    [RequireComponent(typeof(Image))]
+    [RequireComponent(typeof(ImageExt))]
     public class ImageAdapter : MonoBehaviour
     {
         public EImageFitType matchType = EImageFitType.Width;
-        void Start()
+
+        private void Start()
         {
             UpdateBgSize();
+            var imageExt  = GetComponent<ImageExt>();
+            imageExt.Init(this);
         }
         public void UpdateBgSize()
         {
