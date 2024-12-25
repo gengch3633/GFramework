@@ -12,24 +12,26 @@ namespace GameFramework
     {
         public static void InitGDPR(GameStarter gameStarter)
         {
-#if SDK_ADMOB
-            var uiSystem = GameApp.Interface.GetSystem<IUISystem>();
-            var gdprPopup = uiSystem.OpenPopup<GDPRPopup>();
-            gdprPopup.GatherConsent((error) =>
+            var debugModel = GameApp.Interface.GetModel<IDebugModel>();
+            if (!debugModel.IsDebugFeatureEnabled<Debug_NoGDPR>())
             {
-                GameUtils.Log(gameStarter, $"InitGDPR 1, error: {error}, ConsentInformation.ConsentStatus: {ConsentInformation.ConsentStatus}");
-                GameUtils.Log(gameStarter, $"InitGDPR 2, GDPRPopup.CanRequestAds: {GDPRPopup.CanRequestAds}");
-
-                if (GDPRPopup.CanRequestAds)
+                var uiSystem = GameApp.Interface.GetSystem<IUISystem>();
+                var gdprPopup = uiSystem.OpenPopup<GDPRPopup>();
+                gdprPopup.GatherConsent((error) =>
                 {
-                    InitSdk();
-                    RequestAuthorizationTracking();
-                    uiSystem.ClosePopup<GDPRPopup>();
-                }
-            });
-#else
-            InitSdk();
-#endif
+                    GameUtils.Log(gameStarter, $"InitGDPR 1, error: {error}, ConsentInformation.ConsentStatus: {ConsentInformation.ConsentStatus}");
+                    GameUtils.Log(gameStarter, $"InitGDPR 2, GDPRPopup.CanRequestAds: {GDPRPopup.CanRequestAds}");
+
+                    if (GDPRPopup.CanRequestAds)
+                    {
+                        InitSdk();
+                        RequestAuthorizationTracking();
+                        uiSystem.ClosePopup<GDPRPopup>();
+                    }
+                });
+            }
+            else
+                InitSdk();
         }
         private static void InitSdk()
         {

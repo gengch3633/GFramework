@@ -7,7 +7,7 @@ public class TextSpacing : BaseMeshEffect
 {
     [SerializeField]
     private float spacing_x;
-    //[SerializeField]
+    [SerializeField]
     private float spacing_y = 0;
     private const int VERTEXT_RANGE = 6;
 

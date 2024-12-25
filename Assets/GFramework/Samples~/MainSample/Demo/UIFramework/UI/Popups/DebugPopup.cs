@@ -1,3 +1,4 @@
+using System.Linq;
 using Framework;
 using IngameDebugConsole;
 using TMPro;
@@ -9,9 +10,27 @@ namespace GameFramework
     public partial class DebugPopup : UIPopup
     {
         private int lv = 1;
+        private string password = "qwas";
         private void ChangeDifficultyLevelClick()
         {
+
         }
+        public bool IsTypeLogEnabled()
+        {
+            return GameUtils.IsTypeLogEnabled(this);
+        }
+        protected override void OnInitVars()
+        {
+            base.OnInitVars();
+            var languageNames = System.Enum.GetNames(typeof(LanguageType)).ToList();
+            var languageIndex = languageNames.IndexOf(languageSystem.GetLanguageType().ToString());
+            languageDropdown.ClearOptions();
+            languageDropdown.AddOptions(languageNames);
+            languageDropdown.value = languageIndex;
+            var isDebugSign = debugModel.IsDebugFeatureEnabled<Debug_DebugSign>();
+            passWordContainerVar.gameObject.SetActive(!isDebugSign);
+        }
+
 
         private void TrySetDiffLv(string lvString)
         {

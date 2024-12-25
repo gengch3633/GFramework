@@ -9,23 +9,6 @@ namespace GameFramework
 {
     public partial class DebugPopup: ITypeLog
     {
-        private string password = "qwas";
-        public bool IsTypeLogEnabled()
-        {
-            return GameUtils.IsTypeLogEnabled(this);
-        }
-        protected override void OnInitVars()
-        {
-            base.OnInitVars();
-            var languageNames = System.Enum.GetNames(typeof(LanguageType)).ToList();
-            var languageIndex = languageNames.IndexOf(languageSystem.GetLanguageType().ToString());
-            languageDropdown.ClearOptions();
-            languageDropdown.AddOptions(languageNames);
-            languageDropdown.value = languageIndex;
-            var isDebugSign = debugModel.IsDebugFeatureEnabled<Debug_DebugSign>();
-            passWordContainerVar.gameObject.SetActive(!isDebugSign);
-        }
-
         private ItemCollectContainer coinCollectContainerVar;
         private ItemCollectContainer diamondCollectContainerVar;
         private Button btnClose;

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameFramework
 {
@@ -144,7 +145,7 @@ namespace GameFramework
             bannerView?.Destroy();
             bannerView = new BannerView(adsConfig.bannerAdId, AdSize.Banner, AdPosition.Bottom);
 
-            bannerView.OnBannerAdLoaded += () => { GameUtils.Log(this, $"[RequestBannerAd] Loaded"); };
+            bannerView.OnBannerAdLoaded += () => { GameUtils.Log(this, $"[RequestBannerAd] Loaded"); UpdateBannerHeight(); };
             bannerView.OnBannerAdLoadFailed += (LoadAdError error) => { GameUtils.Log(this, $"[RequestBannerAd] LoadFailed Error: {error.GetMessage()}"); };
             bannerView.OnAdFullScreenContentOpened += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Opened"); };
             bannerView.OnAdFullScreenContentClosed += () => { GameUtils.Log(this, $"[RequestAndLoadRewardedAd] Closed"); };
@@ -153,6 +154,20 @@ namespace GameFramework
 
             bannerView.LoadAd(CreateAdRequest());
             HideBanner();
+        }
+
+        public void UpdateBannerHeight()
+        {
+            var settingModel = GameApp.Interface.GetModel<IUserModel>();
+            var bannerPixelHeight = bannerView.GetHeightInPixels();
+            var heightPx = Screen.height;
+            var heightPxRatio = bannerPixelHeight / heightPx;
+
+            var canvasScaler = GameObject.Find("UISystem/Bottom").GetComponent<CanvasScaler>();
+            var bannerHeight = canvasScaler.referenceResolution.y * heightPxRatio;
+            settingModel.BannerHeight.Value = bannerHeight;
+            GameUtils.Log(this, $"canvasScaler: {canvasScaler.gameObject.name}", canvasScaler.gameObject);
+            GameUtils.Log(this, $"settingModel.BannerHeight.Value: {settingModel.BannerHeight.Value}");
         }
 
         private AdRequest CreateAdRequest()

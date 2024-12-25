@@ -5,6 +5,7 @@ namespace GameFramework
 {
     public partial interface IUserModel : IModel
     {
+        BindableProperty<float> BannerHeight { get; }
         BindableProperty<int> Level { get; }
         BindableProperty<int> Coins { get; }
         BindableProperty<int> Score { get; }
@@ -29,6 +30,7 @@ namespace GameFramework
     {
         private List<LevelUpInfo> levelInfos;
 
+        public BindableProperty<float> BannerHeight { get; } = new BindableProperty<float>() { Value = 0 };
         public BindableProperty<int> Level { get; } = new BindableProperty<int>() { Value = 1 };
         public BindableProperty<int> Coins { get; } = new BindableProperty<int>() { Value = 200 };
         public BindableProperty<int> Score { get; } = new BindableProperty<int>();
