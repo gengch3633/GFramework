@@ -158,16 +158,16 @@ namespace GameFramework
 
         public void UpdateBannerHeight()
         {
-            var settingModel = GameApp.Interface.GetModel<IUserModel>();
+            var userModel = GameApp.Interface.GetModel<IUserModel>();
             var bannerPixelHeight = bannerView.GetHeightInPixels();
             var heightPx = Screen.height;
             var heightPxRatio = bannerPixelHeight / heightPx;
 
             var canvasScaler = GameObject.Find("UISystem/Bottom").GetComponent<CanvasScaler>();
             var bannerHeight = canvasScaler.referenceResolution.y * heightPxRatio;
-            settingModel.BannerHeight.Value = bannerHeight;
+            userModel.BannerHeight.Value = bannerHeight;
             GameUtils.Log(this, $"canvasScaler: {canvasScaler.gameObject.name}", canvasScaler.gameObject);
-            GameUtils.Log(this, $"settingModel.BannerHeight.Value: {settingModel.BannerHeight.Value}");
+            GameUtils.Log(this, $"settingModel.BannerHeight.Value: {userModel.BannerHeight.Value}");
         }
 
         private AdRequest CreateAdRequest()
