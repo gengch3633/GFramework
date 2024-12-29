@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,10 @@ namespace GameFramework
     {
         public List<GameObject> interactableObjects = new List<GameObject>();
         public List<GameObject> notInteractableObjects = new List<GameObject>();
-        protected override void Awake()
+        protected override async void Awake()
         {
             base.Awake();
+            await UniTask.DelayFrame(1);
             var childTransforms = GetComponentsInChildren<Transform>().ToList();
             var intTransforms = childTransforms.FindAll(item => item.name.Contains("_Int"));
             var notIntTransforms = childTransforms.FindAll(item => item.name.Contains("_NotInt"));
