@@ -14,7 +14,7 @@ namespace GameFramework
         protected override void Awake()
         {
             base.Awake();
-            var childTransforms = GetComponentsInChildren<Transform>().ToList();
+            var childTransforms = GetComponentsInChildren<Transform>(true).ToList();
             var intTransforms = childTransforms.FindAll(item => item.name.Contains("_Int"));
             var notIntTransforms = childTransforms.FindAll(item => item.name.Contains("_NotInt"));
             interactableObjects.AddRange(intTransforms.ConvertAll(item=>item.gameObject));
