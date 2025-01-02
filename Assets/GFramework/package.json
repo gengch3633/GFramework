@@ -22,7 +22,7 @@
     "relatedPackages": {},
     "dependencies": {
         "com.unity.mobile.notifications": "1.4.3",
-        "com.unity.purchasing": "4.8.0",
+        "com.unity.purchasing": "4.12.2",
         "com.unity.nuget.newtonsoft-json": "3.0.2"
     }
 }
