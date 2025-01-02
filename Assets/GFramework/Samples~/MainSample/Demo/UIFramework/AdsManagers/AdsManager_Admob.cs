@@ -16,12 +16,14 @@ namespace GameFramework
         private BannerView bannerView;
         private InterstitialAd interstitialAd;
         private RewardedAd rewardedAd;
+        private AppOpenAd splashAd;
 #endif
         private Action<bool> interstitialAdCallBack;
         private Action<bool> rewardedAdCallBack;
 
         private int interstitialAdRetryAttemptCount;
         private int rewardedAdRetryAttemptCount;
+        private int splashAdRetryAttemptCount;
         private bool isShowingAd = false;
         private AdsConfig adsConfig;
         public AdsManager_Admob()
@@ -74,7 +76,7 @@ namespace GameFramework
 #endif
         }
 
-        public void HideBanner()
+        public void CloseBanner()
         {
 #if SDK_ADMOB
             bannerView?.Hide();
@@ -124,6 +126,25 @@ namespace GameFramework
                     rewardedAdCallBack?.Invoke(true);
                 });
             });
+#endif
+        }
+
+        public bool IsSplashAdReady()
+        {
+#if SDK_ADMOB
+            var ret = splashAd != null && splashAd.CanShowAd();
+            return ret;
+#else
+            return false;
+#endif
+        }
+
+        public void ShowSplashAd(string place = "default")
+        {
+#if SDK_ADMOB
+            isShowingAd = true;
+            GameUtils.Log(this, "[ShowSplashAd] Start");
+            splashAd.Show();
 #endif
         }
     }

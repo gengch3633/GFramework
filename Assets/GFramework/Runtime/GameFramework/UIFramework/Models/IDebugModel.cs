@@ -10,9 +10,7 @@ namespace GameFramework
 {
     public interface IDebugModel : IModel
     {
-        void RecoverGameDataFromFile();
-        void CopyGameData();
-
+        void SaveDataToSystemBuffer(string text);
         List<string> GetAllDebugFeatureNames();
         List<string> GetAllTypeLogNames();
 
@@ -166,40 +164,7 @@ namespace GameFramework
 
             return allDebugFeatureNames;
         }
-
-        public void CopyGameData()
-        {
-            var allFileSaverClasses = GetFileSaverTypes();
-            Dictionary<string, string> fileSaverDict = new Dictionary<string, string>();
-            allFileSaverClasses.ForEach(item =>
-            {
-                var playerPrefsKey = item.FullName;
-                if (PlayerPrefs.HasKey(playerPrefsKey))
-                {
-                    var tempData = PlayerPrefs.GetString(playerPrefsKey);
-                    fileSaverDict.Add(playerPrefsKey, tempData);
-                }
-            });
-
-            CopyDataToSystemBuffer(JsonConvert.SerializeObject(fileSaverDict));
-        }
-
-        public void RecoverGameDataFromFile()
-        {
-            var testAsset = Resources.Load<TextAsset>("Data/GameDataRecovery");
-            if (testAsset != null)
-            {
-                var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(testAsset.text);
-                foreach (var item in dict)
-                {
-                    var prefKey = item.Key;
-                    var prefValue = item.Value;
-                    PlayerPrefs.SetString(prefKey, prefValue);
-                }
-            }
-        }
-
-        public void CopyDataToSystemBuffer(string text)
+        public void SaveDataToSystemBuffer(string text)
         {
             UnityEngine.GUIUtility.systemCopyBuffer = text;
         }

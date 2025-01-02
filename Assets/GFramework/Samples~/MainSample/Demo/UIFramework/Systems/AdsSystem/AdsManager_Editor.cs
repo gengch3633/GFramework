@@ -9,6 +9,7 @@ namespace GameFramework
         private int rewardCheckFailedCount = 0;
         private bool isIntAdReturnSuccess = true;
         private bool isRewardAdReturnSuccess = true;
+        private bool isSplashAdReturnSuccess = true;
         public bool IsTypeLogEnabled()
         {
             return GameUtils.IsTypeLogEnabled(this);
@@ -17,7 +18,7 @@ namespace GameFramework
         {
             GameUtils.Log(this);
         }
-        public void HideBanner()
+        public void CloseBanner()
         {
             GameUtils.Log(this);
         }
@@ -27,7 +28,7 @@ namespace GameFramework
             var ret = isIntAdReturnSuccess;
             isIntAdReturnSuccess = !isIntAdReturnSuccess;
             GameUtils.Log(this, $"ret: {ret}");
-            return isIntAdReturnSuccess;
+            return ret;
         }
 
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)
@@ -66,6 +67,19 @@ namespace GameFramework
         public bool IsApplicationFocusFromAds()
         {
             return false;
+        }
+
+        public bool IsSplashAdReady()
+        {
+            var ret = isSplashAdReturnSuccess;
+            isSplashAdReturnSuccess = !isSplashAdReturnSuccess;
+            GameUtils.Log(this, $"ret: {ret}");
+            return ret;
+        }
+
+        public void ShowSplashAd(string place = "default")
+        {
+            GameUtils.Log(this, $"place: {place}");
         }
     }
 }

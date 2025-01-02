@@ -8,29 +8,36 @@ namespace GameFramework
     public interface IAdsManager
     {
         void ShowBanner();
-        void HideBanner();
+        void CloseBanner();
 
         bool IsInterstitialAdReady();
         void ShowInterstitialAd(string place, Action<bool> showCompletedCallback = null);
         bool IsRewardAdReady();
         void ShowRewardAd(string place, Action<bool> showCompletedCallback);
+        bool IsSplashAdReady();
+        void ShowSplashAd(string place = "default");
 
         bool IsApplicationFocusFromAds();
     }
 
     public interface IAdsSystem : ISystem
     {
+        void ShowSplashAd(string place = "default");
         void ShowBanner();
-        void HideBanner();
+        void CloseBanner();
         void CheckShowInterstitialAd(string pos, Action<bool> callBack = null);
         void CheckShowRewardAd(string place, Action<bool> callBack = null);
         void SetAdsManager(IAdsManager adsSystem);
         BindableProperty<bool> InterstitialAdsEnabled { get; } // 插屏，新手保护开关
+        BindableProperty<int> InterstitialAdsCheckShowCount { get; }
+        BindableProperty<int> InterstitialAdsEnabledCheckShowCount { get; }
     }
 
     public class AdsSystem : AbstractSystem, IAdsSystem, ITypeLog
     {
         public BindableProperty<bool> InterstitialAdsEnabled { get; } = new BindableProperty<bool>() { Value = false };
+        public BindableProperty<int> InterstitialAdsCheckShowCount { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> InterstitialAdsEnabledCheckShowCount { get; } = new BindableProperty<int>() { Value = 3 };
         private IAdsManager adsManager;
         private IEventSystem eventSystem;
         private int bannerRefreshInterval = 30;
@@ -54,7 +61,12 @@ namespace GameFramework
         private void OnApplicationFocus(bool focus)
         {
             if (focus && !adsManager.IsApplicationFocusFromAds())
-                CheckShowInterstitialAd("app_focus");
+            {
+                if(adsManager.IsSplashAdReady())
+                    ShowSplashAd();
+                else
+                    CheckShowInterstitialAd("app_focus");
+            }
         }
 
         public bool IsTypeLogEnabled()
@@ -66,6 +78,11 @@ namespace GameFramework
         {
             GameUtils.Log(this, $"{adsManager.GetType().FullName}");
             this.adsManager = adsManager;
+        }
+
+        public void ShowSplashAd(string place = "default")
+        {
+            adsManager.ShowSplashAd(place);
         }
 
         public void CheckShowRewardAd(string place, Action<bool> callBack = null)
@@ -83,6 +100,10 @@ namespace GameFramework
 
         public void CheckShowInterstitialAd(string pos, Action<bool> callBack = null)
         {
+            InterstitialAdsCheckShowCount.Value++;
+            if (InterstitialAdsCheckShowCount.Value > InterstitialAdsEnabledCheckShowCount.Value)
+                InterstitialAdsEnabled.Value = true;
+
             if (pos != "AdsTest" && !InterstitialAdsEnabled.Value)
                 return;
 
@@ -155,10 +176,10 @@ namespace GameFramework
             adsManager?.ShowBanner();
         }
 
-        public void HideBanner()
+        public void CloseBanner()
         {
             GameUtils.Log(this);
-            adsManager?.HideBanner();
+            adsManager?.CloseBanner();
         }
 
         public void ShowInterstitialAd(string place, Action<bool> showCompletedCallback)

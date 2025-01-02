@@ -12,16 +12,16 @@ namespace GameFramework
         private ItemCollectContainer coinCollectContainerVar;
         private ItemCollectContainer diamondCollectContainerVar;
         private Button btnClose;
+        private Button btnRecoverGameData;
+        private Button btnSaveGameData;
         private Button btnClearData;
         private Button btnAddCoin;
         private Button btnClearCoin;
         private Button btnOpenAdContainer;
-        private Button btnSaveGameData;
-        private Button btnRecoverGameData;
         private Button btnSignIn;
+        private Toggle toggleNormal;
         private Toggle toggleDebugFeature;
         private Toggle toggleTypeLog;
-        private Toggle toggleNormal;
         private Toggle item;
         private InputField passWordInputField;
         private Image containerVar;
@@ -37,16 +37,16 @@ namespace GameFramework
             coinCollectContainerVar = transform.Find("Pop/Container/CoinCollectContainer_Var").GetComponent<ItemCollectContainer>();
             diamondCollectContainerVar = transform.Find("Pop/Container/DiamondCollectContainer_Var").GetComponent<ItemCollectContainer>();
             btnClose = transform.Find("Pop/Container/TopContainer/BtnClose").GetComponent<Button>();
+            btnRecoverGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnRecoverGameData").GetComponent<Button>();
+            btnSaveGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnSaveGameData").GetComponent<Button>();
             btnClearData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearData").GetComponent<Button>();
             btnAddCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnAddCoin").GetComponent<Button>();
             btnClearCoin = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnClearCoin").GetComponent<Button>();
             btnOpenAdContainer = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnOpenAdContainer").GetComponent<Button>();
-            btnSaveGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnSaveGameData").GetComponent<Button>();
-            btnRecoverGameData = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/BtnRecoverGameData").GetComponent<Button>();
             btnSignIn = transform.Find("Pop/Container/Container_Var/PassWordContainer_Var/BtnSignIn").GetComponent<Button>();
+            toggleNormal = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
             toggleDebugFeature = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleDebugFeature").GetComponent<Toggle>();
             toggleTypeLog = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleTypeLog").GetComponent<Toggle>();
-            toggleNormal = transform.Find("Pop/Container/Container_Var/MiddleContainer/ToggleNormal").GetComponent<Toggle>();
             item = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template/Viewport/Content/Item").GetComponent<Toggle>();
             passWordInputField = transform.Find("Pop/Container/Container_Var/PassWordContainer_Var/PassWordInputField").GetComponent<InputField>();
             containerVar = transform.Find("Pop/Container/Container_Var").GetComponent<Image>();
@@ -57,16 +57,16 @@ namespace GameFramework
             template = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown/Template").GetComponent<ScrollRect>();
             languageDropdown = transform.Find("Pop/Container/Container_Var/BottomContainer/NormalContainerScrollView/Viewport/Content/ActionItem/LanguageDropdown").GetComponent<Dropdown>();
             btnClose.onClick.AddListener(OnBtnCloseClick);
+            btnRecoverGameData.onClick.AddListener(OnBtnRecoverGameDataClick);
+            btnSaveGameData.onClick.AddListener(OnBtnSaveGameDataClick);
             btnClearData.onClick.AddListener(OnBtnClearDataClick);
             btnAddCoin.onClick.AddListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.AddListener(OnBtnClearCoinClick);
             btnOpenAdContainer.onClick.AddListener(OnBtnOpenAdContainerClick);
-            btnSaveGameData.onClick.AddListener(OnBtnSaveGameDataClick);
-            btnRecoverGameData.onClick.AddListener(OnBtnRecoverGameDataClick);
             btnSignIn.onClick.AddListener(OnBtnSignInClick);
+            toggleNormal.onValueChanged.AddListener(OnToggleNormalChanged);
             toggleDebugFeature.onValueChanged.AddListener(OnToggleDebugFeatureChanged);
             toggleTypeLog.onValueChanged.AddListener(OnToggleTypeLogChanged);
-            toggleNormal.onValueChanged.AddListener(OnToggleNormalChanged);
             item.onValueChanged.AddListener(OnItemChanged);
             passWordInputField.onEndEdit.AddListener(OnPassWordInputFieldChanged);
             languageDropdown.onValueChanged.AddListener(OnLanguageDropdownChanged);
@@ -75,21 +75,28 @@ namespace GameFramework
         {
             base.OnRemoveUIListeners();
             btnClose.onClick.RemoveListener(OnBtnCloseClick);
+            btnRecoverGameData.onClick.RemoveListener(OnBtnRecoverGameDataClick);
+            btnSaveGameData.onClick.RemoveListener(OnBtnSaveGameDataClick);
             btnClearData.onClick.RemoveListener(OnBtnClearDataClick);
             btnAddCoin.onClick.RemoveListener(OnBtnAddCoinClick);
             btnClearCoin.onClick.RemoveListener(OnBtnClearCoinClick);
             btnOpenAdContainer.onClick.RemoveListener(OnBtnOpenAdContainerClick);
-            btnSaveGameData.onClick.RemoveListener(OnBtnSaveGameDataClick);
-            btnRecoverGameData.onClick.RemoveListener(OnBtnRecoverGameDataClick);
             btnSignIn.onClick.RemoveListener(OnBtnSignInClick);
+            toggleNormal.onValueChanged.RemoveListener(OnToggleNormalChanged);
             toggleDebugFeature.onValueChanged.RemoveListener(OnToggleDebugFeatureChanged);
             toggleTypeLog.onValueChanged.RemoveListener(OnToggleTypeLogChanged);
-            toggleNormal.onValueChanged.RemoveListener(OnToggleNormalChanged);
             item.onValueChanged.RemoveListener(OnItemChanged);
             passWordInputField.onEndEdit.RemoveListener(OnPassWordInputFieldChanged);
             languageDropdown.onValueChanged.RemoveListener(OnLanguageDropdownChanged);
         }
-        
+        private void OnBtnRecoverGameDataClick()
+        {
+
+        }
+        private void OnBtnSaveGameDataClick()
+        {
+            debugModel.SaveDataToSystemBuffer("OnBtnSaveGameDataClick");
+        }
         private void OnPassWordInputFieldChanged(string value)
         {
 
@@ -128,12 +135,6 @@ namespace GameFramework
 
             GameUtils.Log(this, $"languageType: {languageType}");
             languageSystem.SetLanguageType(languageType);
-        }
-        private void OnBtnSaveGameDataClick() {
-            debugModel.CopyGameData();
-        }
-        private void OnBtnRecoverGameDataClick() {
-            debugModel.RecoverGameDataFromFile();
         }
         private void OnBtnAddCoinClick() 
         {
