@@ -1,6 +1,8 @@
 
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 using UnityEngine.Purchasing;
 
 namespace GameFramework
@@ -23,6 +25,7 @@ namespace GameFramework
         public string GetPrice(IStoreController storeController)
         {
             try { price = storeController.products.WithID(productId).metadata.localizedPriceString; }
+            catch(Exception e) { Debug.LogError($"GetPriceException: {e.StackTrace}");  }
             finally { }
             return price;
         }

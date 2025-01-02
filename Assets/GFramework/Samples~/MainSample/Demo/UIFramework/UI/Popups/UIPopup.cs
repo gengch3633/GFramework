@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Framework;
+using UnityEngine.UI;
+using System.Linq;
+using UnityEditor.UIElements;
 
 namespace GameFramework
 {
@@ -20,6 +23,12 @@ namespace GameFramework
         {
             var openFrom = param == null ? "no_param" : (string)param;
             return openFrom;
+        }
+
+        protected void SetAllBtnsInteractable(bool state)
+        {
+            var allBtns = GetComponentsInChildren<Button>().ToList();
+            allBtns.ForEach(button => { button.enabled = state; });
         }
     }
 }
