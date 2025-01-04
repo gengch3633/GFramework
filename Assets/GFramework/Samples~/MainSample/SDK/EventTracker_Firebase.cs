@@ -34,7 +34,8 @@ public class EventTracker_Firebase : IEventTracker
         {
             if (item.Value.GetType().Name == typeof(Int32).Name)
             {
-                var parameter = new Parameter(item.Key, (long)item.Value);
+                var itemValue = (int)item.Value;
+                var parameter = new Parameter(item.Key, Convert.ToInt64(itemValue));
                 paramList.Add(parameter);
             }
 
