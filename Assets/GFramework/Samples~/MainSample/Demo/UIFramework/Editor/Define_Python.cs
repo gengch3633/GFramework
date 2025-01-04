@@ -12,7 +12,7 @@ namespace GameFramework
 {
     public class Define_Python
     {
-        [MenuItem("Tools/SDK参数配置/5.Python生成配置文件")]
+        [MenuItem("Tools/SDK参数配置/1.Python生成配置文件")]
 
         private static void CreateConfig()
         {

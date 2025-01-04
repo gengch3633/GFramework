@@ -12,7 +12,7 @@ namespace GameFramework
 {
     public class Define_BuildSettings
     {
-        [MenuItem("Tools/SdkSetter/5.1 Set GradlePath")]
+        [MenuItem("Tools/SDK参数配置/6.1 Set GradlePath")]
 
         private static void SetAndroidGradlePath()
         {
@@ -22,7 +22,7 @@ namespace GameFramework
             EditorPrefs.SetString("GradlePath", path);
         }
 
-        [MenuItem("Tools/SdkSetter/5.2 Set GlobalEnv")]
+        [MenuItem("Tools/SDK参数配置/6.2 Set GlobalEnv")]
 
         private static void ToolsSettings()
         {

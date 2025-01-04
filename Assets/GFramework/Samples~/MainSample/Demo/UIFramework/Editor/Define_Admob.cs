@@ -22,7 +22,7 @@ namespace GameFramework
             logEnabled = true;
         }
 
-        [MenuItem("Tools/SDK参数配置/4.1 设置GoogleMobileAdsSetting可读")]
+        [MenuItem("Tools/SDK参数配置/5.1 设置GoogleMobileAdsSetting可读")]
         private static void AddInternalVisableToGoogleMobileAdsSettings()
         {
             Debug.LogError($"==> [Define_Admob] [AddInternalVisableToGoogleMobileAdsSettings] Start");
@@ -47,7 +47,7 @@ namespace GameFramework
             Debug.LogError($"==> [Define_Admob] [AddInternalVisableToGoogleMobileAdsSettings] End");
         }
 
-        [MenuItem("Tools/SDK参数配置/4.2 配置Admob")]
+        [MenuItem("Tools/SDK参数配置/5.2 配置Admob")]
         private static void SetAdmobSetting()
         {
 #if SDK_ADMOB

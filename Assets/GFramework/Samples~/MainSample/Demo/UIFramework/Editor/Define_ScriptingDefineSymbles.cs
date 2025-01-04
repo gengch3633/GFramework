@@ -17,7 +17,7 @@ namespace GameFramework
             UpdateScriptDefineSymbles();
             logEnabled = true;
         }
-        [MenuItem("Tools/SDK参数配置/2.设置宏定义参数")]
+        [MenuItem("Tools/SDK参数配置/3.设置宏定义参数")]
         private static void UpdateScriptDefineSymbles()
         {
             if(logEnabled) Debug.LogError($"==> [Define_ScriptingDefineSymbles] 1, [Start]");

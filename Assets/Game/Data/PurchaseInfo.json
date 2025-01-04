@@ -3,64 +3,80 @@
         "itemId": 1,
         "productId": "base.coins.0.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[500]",
+        "itemCountArrayString": "[500,0]",
+        "productName": "500 Coins",
+        "productDesc": "500 Coins",
         "price": "$0.99",
-        "tagString": "0%"
+        "tagString": "+0%"
     },
     {
         "itemId": 2,
         "productId": "base.coins.2.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[2100]",
+        "itemCountArrayString": "[2100,0]",
+        "productName": "2100 Coins",
+        "productDesc": "2100 Coins",
         "price": "$2.99",
-        "tagString": "40%"
+        "tagString": "+40%"
     },
     {
         "itemId": 3,
         "productId": "base.coins.4.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[4000]",
+        "itemCountArrayString": "[4000,0]",
+        "productName": "4000 Coins",
+        "productDesc": "4000 Coins",
         "price": "$4.99",
-        "tagString": "60%"
+        "tagString": "+60%"
     },
     {
         "itemId": 4,
         "productId": "base.coins.9.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[10000]",
+        "itemCountArrayString": "[10000,0]",
+        "productName": "10000 Coins",
+        "productDesc": "10000 Coins",
         "price": "$9.99",
-        "tagString": "100%"
+        "tagString": "+100%"
     },
     {
         "itemId": 5,
         "productId": "base.diamonds.0.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[500]",
+        "itemCountArrayString": "[0,500]",
+        "productName": "500 Diamonds",
+        "productDesc": "500 Diamonds",
         "price": "$0.99",
-        "tagString": "0%"
+        "tagString": "+0%"
     },
     {
         "itemId": 6,
         "productId": "base.diamonds.2.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[2100]",
+        "itemCountArrayString": "[0,2100]",
+        "productName": "2100 Diamonds",
+        "productDesc": "2100 Diamonds",
         "price": "$2.99",
-        "tagString": "40%"
+        "tagString": "+40%"
     },
     {
         "itemId": 7,
         "productId": "base.diamonds.4.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[4000]",
+        "itemCountArrayString": "[0,4000]",
+        "productName": "4000 Diamonds",
+        "productDesc": "4000 Diamonds",
         "price": "$4.99",
-        "tagString": "60%"
+        "tagString": "+60%"
     },
     {
         "itemId": 8,
         "productId": "base.diamonds.9.99",
         "productType": "Consumable",
-        "itemCountArrayString": "[10000]",
+        "itemCountArrayString": "[0,10000]",
+        "productName": "10000 Diamonds",
+        "productDesc": "10000 Diamonds",
         "price": "$9.99",
-        "tagString": "100%"
+        "tagString": "+100%"
     }
 ]

@@ -24,7 +24,7 @@ namespace GameFramework
             logEnabled = true;
         }
 
-        [MenuItem("Tools/SDK参数配置/3.配置Facebook")]
+        [MenuItem("Tools/SDK参数配置/4.配置Facebook")]
         private static void CheckCreateAndSetFacebookSettings()
         {
             CreateFacebookSettingsAsset();

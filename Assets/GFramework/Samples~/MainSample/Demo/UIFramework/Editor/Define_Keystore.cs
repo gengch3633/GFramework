@@ -16,7 +16,7 @@ namespace GameFramework
             logEnabled = true;
         }
 
-        [MenuItem("Tools/SDK参数配置/1.设置Android Keystore")]
+        [MenuItem("Tools/SDK参数配置/2.设置Android Keystore")]
         private static void AutoSetKeyStore()
         {
             var assetPath = GameUtils.GetAssetPath(Application.dataPath);
