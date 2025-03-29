@@ -3,6 +3,7 @@ using Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.U2D;
+using UnityEngine.UI;
 
 namespace GameFramework
 {
@@ -12,11 +13,24 @@ namespace GameFramework
         Sprite GetSpriteFromResource(string parentFolder, string spriteName);
         List<Sprite> GetSpritesFromAtlas(string atlasName);
         Sprite GetThemeSpriteFromResource(string themeSpriteNameWithIndex, int themeId);
+
+        void SetResourceSprite(Image image, string imagePath);
+        void SetAtlasSprite(Image image, string atlasName, string spriteName);
     }
 
     public partial class ResourceSystem : AbstractSystem, IResourceSystem
     {
         private Dictionary<string, Dictionary<string, Sprite>> spriteAtlastDict = new Dictionary<string, Dictionary<string, Sprite>>();
+        public void SetResourceSprite(Image image, string imagePath)
+        {
+            var sprite = Resources.Load<Sprite>($"Sprites/{imagePath}");
+            image.sprite = sprite;
+        }
+        public void SetAtlasSprite(Image image, string atlasName, string spriteName)
+        {
+            var sprite = GetSpriteFromAtlas(atlasName, spriteName);
+            image.sprite = sprite;
+        }
         public List<Sprite> GetSpritesFromAtlas(string atlasName)
         {
             TryLoadSpriteAtlas(atlasName);
