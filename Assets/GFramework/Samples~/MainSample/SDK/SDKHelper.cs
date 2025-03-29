@@ -12,6 +12,7 @@ namespace GameFramework
     {
         public static void InitGDPR(GameStarter gameStarter)
         {
+#if SDK_ADMOB
             var debugModel = GameApp.Interface.GetModel<IDebugModel>();
             if (!debugModel.IsDebugFeatureEnabled<Debug_NoGDPR>())
             {
@@ -32,6 +33,10 @@ namespace GameFramework
             }
             else
                 InitSdk();
+#else
+            InitSdk();
+#endif
+
         }
         private static void InitSdk()
         {
