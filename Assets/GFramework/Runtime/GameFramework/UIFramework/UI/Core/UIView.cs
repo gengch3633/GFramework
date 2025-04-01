@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,17 @@ namespace GameFramework
             canvas.overrideSorting = true;
             canvas.sortingOrder = parentCanvas.sortingOrder + order;
 
+            var particleSystems = GetComponentsInChildren<ParticleSystem>().ToList();
+            particleSystems.ForEach(p => 
+            {
+                p.shape.meshRenderer.sortingLayerID = parentCanvas.sortingLayerID;
+                p.shape.meshRenderer.sortingLayerID = parentCanvas.sortingOrder + order;
+            });
+
             //Debug.LogError("==> SetUISortingOrder: " + go.name + ", " + order, go);
         }
+
+
 
         public virtual void Init(object param = null)
         {
