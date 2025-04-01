@@ -19,19 +19,18 @@ namespace GameFramework
                     go.AddComponent<GraphicRaycaster>();
             }
             canvas.overrideSorting = true;
+            canvas.sortingLayerName = parentCanvas.sortingLayerName;
             canvas.sortingOrder = parentCanvas.sortingOrder + order;
 
-            var particleSystems = GetComponentsInChildren<ParticleSystem>().ToList();
+            var particleSystems = go.GetComponentsInChildren<ParticleSystem>().ToList();
             particleSystems.ForEach(p => 
             {
-                p.shape.meshRenderer.sortingLayerID = parentCanvas.sortingLayerID;
-                p.shape.meshRenderer.sortingLayerID = parentCanvas.sortingOrder + order;
+                var particleRender = p.GetComponent<ParticleSystemRenderer>();
+                particleRender.sortingLayerName = parentCanvas.sortingLayerName;
+                particleRender.sortingOrder = parentCanvas.sortingOrder + order;
             });
-
             //Debug.LogError("==> SetUISortingOrder: " + go.name + ", " + order, go);
         }
-
-
 
         public virtual void Init(object param = null)
         {
